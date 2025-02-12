@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dtn5thjr7fpjk"
+path="res://.godot/imported/The Legend of Zelda Cartoon Sound Effects Enemy Zapped.wav-9ab6e40dff86509172ef3d9e6d70b85b.sample"
+
+[deps]
+
+source_file="res://sound/sfx/The Legend of Zelda Cartoon Sound Effects Enemy Zapped.wav"
+dest_files=["res://.godot/imported/The Legend of Zelda Cartoon Sound Effects Enemy Zapped.wav-9ab6e40dff86509172ef3d9e6d70b85b.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=true
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -1,0 +1,56 @@
+[gd_scene load_steps=8 format=3 uid="uid://bleifp0lssfek"]
+
+[ext_resource type="Script" path="res://scripts/tektite.gd" id="1_x8nh4"]
+[ext_resource type="Texture2D" uid="uid://7uv75ywip144" path="res://images/enemies.png" id="2_1mp0t"]
+[ext_resource type="AudioStream" uid="uid://dtn5thjr7fpjk" path="res://sound/sfx/The Legend of Zelda Cartoon Sound Effects Enemy Zapped.wav" id="3_vpptp"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dh51p"]
+radius = 7.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vcolw"]
+atlas = ExtResource("2_1mp0t")
+region = Rect2(162, 90, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5vtgo"]
+atlas = ExtResource("2_1mp0t")
+region = Rect2(179, 90, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_k8inr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vcolw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5vtgo")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Tektite" type="Area2D" groups=["Enemy"]]
+position = Vector2(-37, -29)
+collision_layer = 4
+collision_mask = 11
+input_pickable = false
+script = ExtResource("1_x8nh4")
+jump_move_speed = 2.0
+collision_layers_bitmask = 11
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["Enemy"]]
+position = Vector2(8, 8)
+shape = SubResource("CircleShape2D_dh51p")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_k8inr")
+autoplay = "default"
+frame_progress = 0.676841
+centered = false
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_vpptp")
+bus = &"SFX"
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://ck4r0re6ubxd8"
+path="res://.godot/imported/The Legend of Zelda Cartoon Sound Effects Item Received.wav-7e6a4fe8594ce15df898c39e15302d58.sample"
+
+[deps]
+
+source_file="res://sound/sfx/The Legend of Zelda Cartoon Sound Effects Item Received.wav"
+dest_files=["res://.godot/imported/The Legend of Zelda Cartoon Sound Effects Item Received.wav-7e6a4fe8594ce15df898c39e15302d58.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=true
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

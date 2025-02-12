@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bvbakpgvqxoua"
+path="res://.godot/imported/The Legend of Zelda Cartoon Sound Effects Bomb Apearance and Selfdrestruction.wav-a0af1b0016e4e97e7daa7f8f8f7bd616.sample"
+
+[deps]
+
+source_file="res://sound/sfx/The Legend of Zelda Cartoon Sound Effects Bomb Apearance and Selfdrestruction.wav"
+dest_files=["res://.godot/imported/The Legend of Zelda Cartoon Sound Effects Bomb Apearance and Selfdrestruction.wav-a0af1b0016e4e97e7daa7f8f8f7bd616.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=true
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

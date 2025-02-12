@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://fjrvc5n5ami1"
+path="res://.godot/imported/02 Overworld BGM.wav-1bbbbf3a2214f1f81efa538fd3d05246.sample"
+
+[deps]
+
+source_file="res://sound/music/02 Overworld BGM.wav"
+dest_files=["res://.godot/imported/02 Overworld BGM.wav-1bbbbf3a2214f1f81efa538fd3d05246.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=true
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=true
+edit/loop_mode=2
+edit/loop_begin=282035
+edit/loop_end=1690668
+compress/mode=0

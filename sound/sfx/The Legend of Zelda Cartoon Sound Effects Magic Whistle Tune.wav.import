@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://llgx3dbrrwkp"
+path="res://.godot/imported/The Legend of Zelda Cartoon Sound Effects Magic Whistle Tune.wav-cec01ca4872c45a929702d2960e18d32.sample"
+
+[deps]
+
+source_file="res://sound/sfx/The Legend of Zelda Cartoon Sound Effects Magic Whistle Tune.wav"
+dest_files=["res://.godot/imported/The Legend of Zelda Cartoon Sound Effects Magic Whistle Tune.wav-cec01ca4872c45a929702d2960e18d32.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=true
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://bm82dcwhs04ti"]
+
+[ext_resource type="Script" path="res://scripts/enemy_spawner.gd" id="1_hkpij"]
+[ext_resource type="Texture2D" uid="uid://u1i1trqicn2k" path="res://images/weapons.png" id="2_uc2o6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nh2rg"]
+atlas = ExtResource("2_uc2o6")
+region = Rect2(135, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g4olp"]
+atlas = ExtResource("2_uc2o6")
+region = Rect2(152, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uvvdk"]
+atlas = ExtResource("2_uc2o6")
+region = Rect2(169, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_usb0o"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nh2rg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g4olp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uvvdk")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Enemy Spawner" type="Node2D"]
+script = ExtResource("1_hkpij")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_usb0o")
+centered = false
+
+[connection signal="animation_looped" from="Sprite2D" to="." method="_on_sprite_2d_animation_looped"]
