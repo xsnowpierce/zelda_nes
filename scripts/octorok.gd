@@ -51,7 +51,7 @@ func move() -> void:
 		print("wtf is going on")
 
 func check_if_move_is_valid(target_direction : Vector2) -> bool:
-	if(is_target_direction_out_of_bounds(target_direction)):
+	if(Utils.is_out_of_bounds(get_target_position_from_direction(target_direction), camera)):
 		return false
 	
 	match target_direction:
@@ -71,23 +71,8 @@ func check_if_move_is_valid(target_direction : Vector2) -> bool:
 
 func get_target_position_from_direction(target_direction : Vector2) -> Vector2:
 	var target_position = (target_direction * 16) + position
-	target_position.x = snappedi(target_position.x, 16)
-	target_position.y = snappedi(target_position.y, 16)
+	target_position = Utils.align_to_grid(target_position)
 	return target_position
-
-func is_target_direction_out_of_bounds(target_direction : Vector2) -> bool:
-	var target_position = get_target_position_from_direction(target_direction)
-	var relative_position = target_position - camera.position
-	if(relative_position.x <= GameSettings.screen_boundaries.x):
-		return true
-	elif(relative_position.x >= GameSettings.screen_boundaries.y - 16):
-		return true
-	if(relative_position.y <= GameSettings.screen_boundaries.z):
-		return true
-	elif(relative_position.y >= GameSettings.screen_boundaries.w - 16):
-		return true
-	
-	return false
 
 func move_to_direction(target_direction : Vector2) -> void:
 	rotate_octorok(target_direction)

@@ -33,12 +33,16 @@ func _on_sprite_2d_animation_looped() -> void:
 		$Sprite2D.visible = false
 		match enemy_type:
 			ENUM.ENEMY_TYPE.TEKTITE:
-				enemy_scene = get_parent().enemy_tektite_scene.instantiate()
+				enemy_scene = get_parent().get_parent().enemy_tektite_scene.instantiate()
 			ENUM.ENEMY_TYPE.OCTOROK:
-				enemy_scene = get_parent().enemy_octorok_scene.instantiate()
+				enemy_scene = get_parent().get_parent().enemy_octorok_scene.instantiate()
+			ENUM.ENEMY_TYPE.ZORA:
+				enemy_scene = get_parent().get_parent().enemy_zora_scene.instantiate()
+			ENUM.ENEMY_TYPE.LEEVER:
+				enemy_scene = get_parent().get_parent().enemy_leever_scene.instantiate()
 		
 		enemy_scene.position = position
-		get_parent().add_child(enemy_scene)
+		get_parent().get_parent().add_child(enemy_scene)
 		enemy_scene.connect("has_died", Callable(self, "spawned_enemy_has_died"))
 		$Sprite2D.stop()
 

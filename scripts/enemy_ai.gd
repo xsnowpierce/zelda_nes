@@ -19,7 +19,6 @@ func _process(delta: float) -> void:
 	current_attacked_iframes -= delta
 	
 func _on_area_entered(area: Area2D) -> void:
-	print(area.get_groups())
 	if(area.is_in_group("Player_Attack")):
 		attacked()
 

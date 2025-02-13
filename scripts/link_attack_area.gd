@@ -5,8 +5,8 @@ extends Area2D
 @export var left_position : Vector2 = Vector2(-14, 0)
 @export var right_position : Vector2 = Vector2(14, 0)
 
-func _on_link_move_velocity(velocity: Vector2) -> void:
-	match velocity.normalized():
+func set_direction(direction : Vector2) -> void:
+	match direction.normalized():
 		Vector2.UP:
 			position = up_position
 		Vector2.DOWN:

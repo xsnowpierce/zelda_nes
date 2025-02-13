@@ -91,10 +91,10 @@ animations = [{
 size = Vector2(15, 15)
 
 [node name="Octorok" type="Area2D" groups=["Enemy"]]
-collision_layer = 4
-collision_mask = 9
+collision_layer = 8
+collision_mask = 18
 script = ExtResource("1_2nf78")
-collision_layers_bitmask = 1
+collision_layers_bitmask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(8, 8)
@@ -112,7 +112,8 @@ stream = ExtResource("3_giqny")
 bus = &"SFX"
 
 [node name="TopCollider" type="Area2D" parent="."]
-collision_layer = 32
+collision_layer = 64
+collision_mask = 3
 script = ExtResource("4_xo5wr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TopCollider"]
@@ -120,7 +121,8 @@ position = Vector2(8, -8)
 shape = SubResource("RectangleShape2D_1cueu")
 
 [node name="BottomCollider" type="Area2D" parent="."]
-collision_layer = 32
+collision_layer = 64
+collision_mask = 3
 script = ExtResource("4_xo5wr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BottomCollider"]
@@ -128,7 +130,8 @@ position = Vector2(8, 24)
 shape = SubResource("RectangleShape2D_1cueu")
 
 [node name="LeftCollider" type="Area2D" parent="."]
-collision_layer = 32
+collision_layer = 64
+collision_mask = 3
 script = ExtResource("4_xo5wr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LeftCollider"]
@@ -136,7 +139,8 @@ position = Vector2(-8, 8)
 shape = SubResource("RectangleShape2D_1cueu")
 
 [node name="RightCollider" type="Area2D" parent="."]
-collision_layer = 32
+collision_layer = 64
+collision_mask = 3
 script = ExtResource("4_xo5wr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightCollider"]

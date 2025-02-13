@@ -270,8 +270,8 @@ autoplay = "down"
 script = ExtResource("3_1avva")
 
 [node name="Link Hitbox" type="Area2D" parent="." groups=["Player"]]
-collision_layer = 2
-collision_mask = 20
+collision_layer = 4
+collision_mask = 40
 
 [node name="Link Collider" type="CollisionShape2D" parent="Link Hitbox"]
 position = Vector2(0, 3)
@@ -280,8 +280,8 @@ one_way_collision_margin = 0.0
 
 [node name="Attack Area" type="Area2D" parent="." groups=["Player_Attack"]]
 position = Vector2(0, -14)
-collision_layer = 8
-collision_mask = 4
+collision_layer = 16
+collision_mask = 8
 monitoring = false
 monitorable = false
 script = ExtResource("4_piqjp")

@@ -74,11 +74,12 @@ attack={
 [layer_names]
 
 2d_physics/layer_1="Ground"
-2d_physics/layer_2="Player"
-2d_physics/layer_3="Enemy"
-2d_physics/layer_4="Player Attacks"
-2d_physics/layer_5="Enemy Attacks"
-2d_physics/layer_6="Enemy AI Raycasts"
+2d_physics/layer_2="Water"
+2d_physics/layer_3="Player"
+2d_physics/layer_4="Enemy"
+2d_physics/layer_5="Player Attacks"
+2d_physics/layer_6="Enemy Attacks"
+2d_physics/layer_7="Enemy AI Raycasts"
 
 [rendering]
 

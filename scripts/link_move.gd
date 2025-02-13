@@ -29,20 +29,26 @@ func _process(delta: float) -> void:
 	var new_screen_check : Vector2 = check_for_new_screen()
 	if(!GameSettings.camera_is_moving):
 		if (new_screen_check == Vector2.ZERO):
-			if(is_attacked_knockback): 
+			if(is_attacked_knockback):
+				keep_player_in_screen()
 				return
 			calculate_movement(false)
 			move_and_slide()
-			$"Link Sprite"._on_character_body_2d_move_velocity(movement)
-			$"Attack Area"._on_link_move_velocity(movement)
+			$"Link Sprite".set_look_direction(movement)
+			$"Link Sprite".set_current_velocity(velocity)
+			$"Attack Area".set_direction(movement)
 			check_attack()
 		else:
-			$"Link Sprite"._on_character_body_2d_move_velocity(movement)
-			$"Attack Area"._on_link_move_velocity(movement)
+			$"Link Sprite".set_look_direction(movement)
+			$"Link Sprite".set_current_velocity(velocity)
+			$"Attack Area".set_direction(movement)
 			call_new_screen.emit(new_screen_check)
 	else:
 		keep_player_in_screen()
-		
+
+func get_look_direction() -> Vector2:
+	return $"Link Sprite".current_direction
+
 func keep_player_in_screen() -> void:
 	var camera_position = get_tree().get_first_node_in_group("Camera").position
 	var relative_position = position - camera_position

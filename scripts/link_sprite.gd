@@ -1,44 +1,46 @@
 extends AnimatedSprite2D
 
-enum CURRENT_DIRECTION { LEFT, RIGHT, UP, DOWN }
-var current_direction : CURRENT_DIRECTION
+var current_direction : Vector2 = Vector2.UP
 var is_attacking : bool = false
 signal attack_ended
 
-func _on_character_body_2d_move_velocity(velocity: Vector2) -> void:
+func set_look_direction(direction: Vector2) -> void:
 	var anim_name : String
 	if(is_attacking):
 		anim_name = "attack_wooden_"
-	if(velocity.normalized() == Vector2.LEFT):
+	if(direction == Vector2.LEFT):
 		anim_name += "left"
-		current_direction = CURRENT_DIRECTION.LEFT
-	elif(velocity.normalized() == Vector2.RIGHT):
+	elif(direction == Vector2.RIGHT):
 		anim_name += "right"
-		current_direction = CURRENT_DIRECTION.RIGHT
-	elif(velocity.normalized() == Vector2.DOWN):
+	elif(direction == Vector2.DOWN):
 		anim_name += "down"
-		current_direction = CURRENT_DIRECTION.DOWN
-	elif(velocity.normalized() == Vector2.UP):
+	elif(direction == Vector2.UP):
 		anim_name += "up"
-		current_direction = CURRENT_DIRECTION.UP
 	else:
 		return
-		
+	current_direction = direction
 	var current_frame = get_frame()
 	var current_progress = get_frame_progress()
 	play(anim_name)
 	set_frame_and_progress(current_frame, current_progress)
+	
+func set_current_velocity(velocity : Vector2) -> void:
+	if(velocity == Vector2.ZERO and !is_attacking):
+		pause()
+	else:
+		play()
+	pass
 
 func _on_character_body_2d_attack() -> void:
 	is_attacking = true
 	match current_direction:
-		CURRENT_DIRECTION.UP:
+		Vector2.UP:
 			play("attack_wooden_up")
-		CURRENT_DIRECTION.DOWN:
+		Vector2.DOWN:
 			play("attack_wooden_down")
-		CURRENT_DIRECTION.LEFT:
+		Vector2.LEFT:
 			play("attack_wooden_left")
-		CURRENT_DIRECTION.RIGHT:
+		Vector2.RIGHT:
 			play("attack_wooden_right")
 
 
@@ -47,11 +49,11 @@ func _on_animation_finished() -> void:
 		is_attacking = false
 		attack_ended.emit()
 		match current_direction:
-			CURRENT_DIRECTION.UP:
+			Vector2.UP:
 				play("up")
-			CURRENT_DIRECTION.DOWN:
+			Vector2.DOWN:
 				play("down")
-			CURRENT_DIRECTION.LEFT:
+			Vector2.LEFT:
 				play("left")
-			CURRENT_DIRECTION.RIGHT:
+			Vector2.RIGHT:
 				play("right")
