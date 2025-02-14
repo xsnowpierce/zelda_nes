@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://bnrlmifgdjgsb"]
+[gd_scene load_steps=41 format=4 uid="uid://bnrlmifgdjgsb"]
 
 [ext_resource type="Script" path="res://scripts/GameData.gd" id="1_fiv6q"]
 [ext_resource type="Script" path="res://scripts/camera.gd" id="1_xkdoo"]
@@ -9,14 +9,17 @@
 [ext_resource type="Texture2D" uid="uid://ce83re1ofiuqk" path="res://images/map.png" id="4_3pbg7"]
 [ext_resource type="PackedScene" uid="uid://d10k3fx3srsr6" path="res://scenes/leever.tscn" id="5_xnrau"]
 [ext_resource type="PackedScene" uid="uid://b2gll84jnyb1u" path="res://scenes/link.tscn" id="6_s1nwl"]
-[ext_resource type="Texture2D" uid="uid://b2najvik7sivm" path="res://images/top.png" id="7_3hybp"]
 [ext_resource type="Script" path="res://scripts/health_controller.gd" id="9_famci"]
 [ext_resource type="Texture2D" uid="uid://bj2n5wwlob6fn" path="res://images/sheet_2.png" id="9_uobgr"]
 [ext_resource type="Texture2D" uid="uid://px3oy8t7d8tm" path="res://images/sheet_03.png" id="10_m1n5q"]
 [ext_resource type="PackedScene" uid="uid://bleifp0lssfek" path="res://scenes/tektite.tscn" id="10_r32hl"]
 [ext_resource type="Texture2D" uid="uid://p2em4746j6hp" path="res://images/sheet_04.png" id="11_bk7b4"]
 [ext_resource type="PackedScene" uid="uid://bm82dcwhs04ti" path="res://scenes/enemy_spawner.tscn" id="13_m77ew"]
+[ext_resource type="Script" path="res://scripts/ui_iterator.gd" id="15_csgmy"]
 [ext_resource type="PackedScene" uid="uid://diar6oivfncst" path="res://scenes/zora.tscn" id="16_vrwwk"]
+[ext_resource type="Texture2D" uid="uid://s0p3ioiqty7b" path="res://images/items_and_weapons.png" id="18_ce6n5"]
+[ext_resource type="Script" path="res://scenes/dropped_item.gd" id="18_qo8l2"]
+[ext_resource type="AudioStream" uid="uid://cp6br2tqwillp" path="res://sound/sfx/The Legend of Zelda Cartoon Sound Effects Shiney.wav" id="20_y8gmd"]
 
 [sub_resource type="AudioStreamWAV" id="AudioStreamWAV_3rr3c"]
 
@@ -336,12 +339,94 @@ sources/2 = SubResource("TileSetAtlasSource_1phis")
 sources/3 = SubResource("TileSetAtlasSource_krb10")
 sources/4 = SubResource("TileSetAtlasSource_rhi1i")
 
-[node name="Game" type="Node"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_gqbb6"]
+load_path = "res://.godot/imported/ui.png-f023fad2da19e3aac41d4379846e9a76.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kr1tn"]
+atlas = SubResource("CompressedTexture2D_gqbb6")
+region = Rect2(0, 0, 18, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4wif0"]
+atlas = SubResource("CompressedTexture2D_gqbb6")
+region = Rect2(64, 0, 46, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_phwt2"]
+atlas = SubResource("CompressedTexture2D_gqbb6")
+region = Rect2(24, 0, 18, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x8snv"]
+atlas = SubResource("CompressedTexture2D_gqbb6")
+region = Rect2(48, 0, 8, 8)
+
+[sub_resource type="LabelSettings" id="LabelSettings_8qlc4"]
+font_size = 8
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_by63v"]
+atlas = SubResource("CompressedTexture2D_gqbb6")
+region = Rect2(48, 8, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ke2ip"]
+atlas = SubResource("CompressedTexture2D_gqbb6")
+region = Rect2(48, 16, 8, 8)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ndn3l"]
+radius = 5.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dn62o"]
+atlas = ExtResource("18_ce6n5")
+region = Rect2(72, 16, 8, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qwpgs"]
+atlas = ExtResource("18_ce6n5")
+region = Rect2(72, 0, 8, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sjaux"]
+atlas = ExtResource("18_ce6n5")
+region = Rect2(72, 16, 8, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yamaw"]
+atlas = ExtResource("18_ce6n5")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_umf14"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dn62o")
+}],
+"loop": true,
+"name": &"blue_rupee",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qwpgs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sjaux")
+}],
+"loop": true,
+"name": &"green_rupee",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yamaw")
+}],
+"loop": true,
+"name": &"heart",
+"speed": 5.0
+}]
+
+[node name="Game" type="Node" node_paths=PackedStringArray("rupees_ui_controller", "keys_ui_controller", "bombs_ui_controller")]
 script = ExtResource("1_fiv6q")
 enemy_tektite_scene = ExtResource("10_r32hl")
 enemy_octorok_scene = ExtResource("3_v65v3")
 enemy_zora_scene = ExtResource("16_vrwwk")
 enemy_leever_scene = ExtResource("5_xnrau")
+rupees_ui_controller = NodePath("CanvasLayer/rupee")
+keys_ui_controller = NodePath("CanvasLayer/key")
+bombs_ui_controller = NodePath("CanvasLayer/bomb")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.2)
@@ -386,24 +471,98 @@ offset_bottom = 64.0
 grow_horizontal = 2
 color = Color(0, 0, 0, 1)
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+[node name="b_select" type="TextureRect" parent="CanvasLayer"]
 texture_filter = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -128.0
-offset_top = 8.0
-offset_right = 128.0
-offset_bottom = 64.0
-grow_horizontal = 2
-texture = ExtResource("7_3hybp")
-
-[node name="HealthController" type="FlowContainer" parent="CanvasLayer/TextureRect"]
-layout_mode = 0
-offset_left = 176.0
+offset_left = 123.0
 offset_top = 24.0
+offset_right = 141.0
+offset_bottom = 53.0
+texture = SubResource("AtlasTexture_kr1tn")
+
+[node name="life_text" type="TextureRect" parent="CanvasLayer"]
+texture_filter = 1
+offset_left = 184.0
+offset_top = 24.0
+offset_right = 230.0
+offset_bottom = 31.0
+texture = SubResource("AtlasTexture_4wif0")
+
+[node name="a_select" type="TextureRect" parent="CanvasLayer"]
+texture_filter = 1
+offset_left = 147.0
+offset_top = 24.0
+offset_right = 165.0
+offset_bottom = 53.0
+texture = SubResource("AtlasTexture_phwt2")
+
+[node name="rupee" type="TextureRect" parent="CanvasLayer"]
+texture_filter = 1
+offset_left = 88.0
+offset_top = 24.0
+offset_right = 96.0
+offset_bottom = 32.0
+texture = SubResource("AtlasTexture_x8snv")
+script = ExtResource("15_csgmy")
+
+[node name="Label" type="Label" parent="CanvasLayer/rupee"]
+layout_mode = 0
+offset_left = 8.0
+offset_right = 32.0
+offset_bottom = 8.0
+text = "x23"
+label_settings = SubResource("LabelSettings_8qlc4")
+
+[node name="key" type="TextureRect" parent="CanvasLayer"]
+texture_filter = 1
+offset_left = 88.0
+offset_top = 40.0
+offset_right = 96.0
+offset_bottom = 48.0
+texture = SubResource("AtlasTexture_by63v")
+script = ExtResource("15_csgmy")
+
+[node name="Label" type="Label" parent="CanvasLayer/key"]
+offset_left = 8.0
+offset_right = 32.0
+offset_bottom = 8.0
+text = "x23"
+label_settings = SubResource("LabelSettings_8qlc4")
+
+[node name="bomb" type="TextureRect" parent="CanvasLayer"]
+texture_filter = 1
+offset_left = 88.0
+offset_top = 48.0
+offset_right = 96.0
+offset_bottom = 56.0
+texture = SubResource("AtlasTexture_ke2ip")
+script = ExtResource("15_csgmy")
+
+[node name="Label" type="Label" parent="CanvasLayer/bomb"]
+offset_left = 8.0
+offset_right = 32.0
+offset_bottom = 8.0
+text = "x23"
+label_settings = SubResource("LabelSettings_8qlc4")
+
+[node name="minimap" type="ColorRect" parent="CanvasLayer"]
+texture_filter = 1
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 80.0
+offset_bottom = 56.0
+color = Color(0.4, 0.4, 0.4, 1)
+
+[node name="position" type="ColorRect" parent="CanvasLayer/minimap"]
+layout_mode = 0
+offset_right = 3.0
+offset_bottom = 3.0
+color = Color(0.533333, 0.847059, 0, 1)
+
+[node name="HealthController" type="FlowContainer" parent="CanvasLayer"]
+offset_left = 176.0
+offset_top = 32.0
 offset_right = 241.0
-offset_bottom = 47.0
+offset_bottom = 55.0
 theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0
 reverse_fill = true
@@ -434,9 +593,24 @@ enemy_type = 1
 position = Vector2(-560, -32)
 enemy_type = 2
 
-[node name="Enemy Spawner7" parent="Enemy Spawners" instance=ExtResource("13_m77ew")]
-position = Vector2(-64, -16)
-enemy_type = 3
+[node name="Dropped Item" type="Area2D" parent="."]
+position = Vector2(-48, 0)
+collision_layer = 128
+collision_mask = 20
+script = ExtResource("18_qo8l2")
 
-[connection signal="player_health_changed" from="." to="CanvasLayer/TextureRect/HealthController" method="_on_game_player_health_changed"]
-[connection signal="player_max_health_changed" from="." to="CanvasLayer/TextureRect/HealthController" method="_on_game_player_max_health_changed"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Dropped Item"]
+shape = SubResource("CircleShape2D_ndn3l")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Dropped Item"]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_umf14")
+animation = &"heart"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Dropped Item"]
+stream = ExtResource("20_y8gmd")
+bus = &"SFX"
+
+[connection signal="player_health_changed" from="." to="CanvasLayer/HealthController" method="_on_game_player_health_changed"]
+[connection signal="player_max_health_changed" from="." to="CanvasLayer/HealthController" method="_on_game_player_max_health_changed"]
+[connection signal="area_entered" from="Dropped Item" to="Dropped Item" method="_on_area_entered"]

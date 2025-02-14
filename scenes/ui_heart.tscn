@@ -1,27 +1,22 @@
-[gd_scene load_steps=7 format=3 uid="uid://cdwyrqi1neoab"]
+[gd_scene load_steps=6 format=3 uid="uid://cdwyrqi1neoab"]
 
-[ext_resource type="Texture2D" uid="uid://csudautyfp15t" path="res://images/hearts.png" id="1_h5hil"]
 [ext_resource type="Script" path="res://scripts/ui_heart.gd" id="2_25ofb"]
+[ext_resource type="Texture2D" uid="uid://cny2f1uxlxmiw" path="res://images/ui.png" id="3_a1hhc"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_2bdwy"]
-atlas = ExtResource("1_h5hil")
-region = Rect2(0, 0, 8, 8)
+[sub_resource type="AtlasTexture" id="AtlasTexture_tqtwm"]
+atlas = ExtResource("3_a1hhc")
+region = Rect2(48, 24, 8, 8)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ipaqo"]
-atlas = ExtResource("1_h5hil")
-region = Rect2(0, 0, 8, 8)
+[sub_resource type="AtlasTexture" id="AtlasTexture_fbw1y"]
+atlas = ExtResource("3_a1hhc")
+region = Rect2(56, 24, 8, 8)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_xhr67"]
-atlas = ExtResource("1_h5hil")
-region = Rect2(8, 0, 8, 8)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_00ger"]
-atlas = ExtResource("1_h5hil")
-region = Rect2(16, 0, 8, 8)
+[sub_resource type="AtlasTexture" id="AtlasTexture_gmdnr"]
+atlas = ExtResource("3_a1hhc")
+region = Rect2(64, 24, 8, 8)
 
 [node name="ui_heart" type="TextureRect"]
-texture = SubResource("AtlasTexture_2bdwy")
 script = ExtResource("2_25ofb")
-empty_heart_texture = SubResource("AtlasTexture_ipaqo")
-half_heart_texture = SubResource("AtlasTexture_xhr67")
-full_heart_texture = SubResource("AtlasTexture_00ger")
+empty_heart_texture = SubResource("AtlasTexture_tqtwm")
+half_heart_texture = SubResource("AtlasTexture_fbw1y")
+full_heart_texture = SubResource("AtlasTexture_gmdnr")

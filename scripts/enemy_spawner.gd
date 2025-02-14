@@ -4,11 +4,25 @@ var residing_in_area : Vector2
 var is_awake : bool
 @export var enemy_type : ENUM.ENEMY_TYPE
 var enemy_scene
+var should_cloud_be_visible : bool
 
 func _ready() -> void:
+	$Sprite2D.visible = false
+	set_cloud_visibility()
 	var camera := get_tree().get_first_node_in_group("Camera")
 	camera.connect("camera_moved", Callable(self, "on_camera_move"))
 	residing_in_area = Vector2(roundi(position.x / GameSettings.map_screen_size.x), roundi(position.y / GameSettings.map_screen_size.y))
+
+func set_cloud_visibility() -> void:
+	match enemy_type:
+			ENUM.ENEMY_TYPE.TEKTITE:
+				should_cloud_be_visible = true
+			ENUM.ENEMY_TYPE.OCTOROK:
+				should_cloud_be_visible = true
+			ENUM.ENEMY_TYPE.ZORA:
+				should_cloud_be_visible = false
+			ENUM.ENEMY_TYPE.LEEVER:
+				should_cloud_be_visible = false
 
 func on_camera_move(area_entered : Vector2) -> void:
 	if(area_entered == residing_in_area):
@@ -19,6 +33,7 @@ func on_camera_move(area_entered : Vector2) -> void:
 
 func awake():
 	is_awake = true
+	$Sprite2D.visible = should_cloud_be_visible
 	$Sprite2D.play()
 	
 func sleep():
@@ -26,7 +41,7 @@ func sleep():
 	if(is_instance_valid(enemy_scene)):
 		enemy_scene.queue_free()
 	$Sprite2D.frame = 0
-	$Sprite2D.visible = true
+	$Sprite2D.visible = should_cloud_be_visible
 
 func _on_sprite_2d_animation_looped() -> void:
 	if(enemy_scene == null):

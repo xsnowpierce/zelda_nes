@@ -4,17 +4,33 @@ extends Node
 @export var enemy_octorok_scene : PackedScene
 @export var enemy_zora_scene : PackedScene
 @export var enemy_leever_scene : PackedScene
+@export var rupees_ui_controller : TextureRect
+@export var keys_ui_controller : TextureRect
+@export var bombs_ui_controller : TextureRect
 
 var max_player_health : int = 6
-var current_player_health : int = 6
+var max_rupees : int = 255
+var max_keys : int = 255
+var max_bombs : int = 8
+var current_player_health : int = 4
+var current_rupees : int = 0
+var current_keys : int = 0
+var current_bombs : int = 0
 
 signal player_death
 signal player_health_changed(new_current_amount : int)
 signal player_max_health_changed(new_max_amount : int)
+signal rupees_changed(new_current_amount : int)
+signal keys_changed(new_current_amount : int)
+signal bombs_changed(new_current_amount : int)
+signal max_bombs_changed(new_max_amount : int)
 
 func _ready() -> void:
 	player_max_health_changed.emit(max_player_health)
 	player_health_changed.emit(current_player_health)
+	rupees_ui_controller.set_text_amount(current_rupees)
+	keys_ui_controller.set_text_amount(current_keys)
+	bombs_ui_controller.set_text_amount(current_bombs)
 
 func player_took_damage(damage : int) -> void:
 	player_lose_health(damage)
@@ -34,3 +50,22 @@ func change_max_hearts(amount : int) -> void:
 	if(current_player_health > max_player_health):
 		current_player_health = max_player_health
 	player_max_health_changed.emit(max_player_health)
+
+func change_rupees(amount : int) -> void:
+	current_rupees += amount
+	rupees_changed.emit(current_rupees)
+	rupees_ui_controller.set_text_amount(current_rupees)
+
+func change_keys(amount : int) -> void:
+	current_keys += amount
+	keys_changed.emit(current_keys)
+	keys_ui_controller.set_text_amount(current_rupees)
+
+func change_bombs(amount : int) -> void:
+	current_bombs += amount
+	bombs_changed.emit(current_bombs)
+	bombs_ui_controller.set_text_amount(current_rupees)
+
+func change_max_bombs(amount : int) -> void:
+	max_bombs += amount
+	max_bombs_changed.emit(max_bombs)
