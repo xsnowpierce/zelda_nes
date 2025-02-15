@@ -1,0 +1,75 @@
+[gd_scene load_steps=11 format=3 uid="uid://2h8i8o7wy52v"]
+
+[ext_resource type="Script" path="res://scripts/dropped_item.gd" id="1_gqyti"]
+[ext_resource type="AudioStream" uid="uid://cp6br2tqwillp" path="res://sound/sfx/The Legend of Zelda Cartoon Sound Effects Shiney.wav" id="2_x7a2w"]
+[ext_resource type="AudioStream" uid="uid://caertfnaqct0y" path="res://sound/sfx/The Legend of Zelda Cartoon Sound Effects Health Heart.wav" id="3_agqju"]
+[ext_resource type="Texture2D" uid="uid://s0p3ioiqty7b" path="res://images/items_and_weapons.png" id="4_6w1cc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lffti"]
+size = Vector2(8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mh51d"]
+atlas = ExtResource("4_6w1cc")
+region = Rect2(72, 16, 8, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ml1or"]
+atlas = ExtResource("4_6w1cc")
+region = Rect2(72, 0, 8, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jvda7"]
+atlas = ExtResource("4_6w1cc")
+region = Rect2(72, 16, 8, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pc5ak"]
+atlas = ExtResource("4_6w1cc")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ofqey"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mh51d")
+}],
+"loop": true,
+"name": &"blue_rupee",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ml1or")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jvda7")
+}],
+"loop": true,
+"name": &"green_rupee",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pc5ak")
+}],
+"loop": true,
+"name": &"heart",
+"speed": 5.0
+}]
+
+[node name="Dropped Item" type="Area2D"]
+collision_layer = 128
+collision_mask = 4
+script = ExtResource("1_gqyti")
+rupee_gain_sound = ExtResource("2_x7a2w")
+heart_gain_sound = ExtResource("3_agqju")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_lffti")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"SFX"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_ofqey")
+animation = &"heart"
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
