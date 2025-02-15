@@ -21,7 +21,6 @@ buses/default_bus_layout="res://sound/audio_bus_layout.tres"
 [autoload]
 
 GameSettings="*res://scripts/GameSettings.gd"
-Utils="*res://scripts/Utils.gd"
 
 [display]
 

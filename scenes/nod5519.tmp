@@ -719,7 +719,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1cueu"]
-size = Vector2(7, 7)
+size = Vector2(15, 15)
 
 [node name="Game" type="Node" node_paths=PackedStringArray("rupees_ui_controller", "keys_ui_controller", "bombs_ui_controller") groups=["GameData"]]
 script = ExtResource("1_fiv6q")
@@ -1005,7 +1005,7 @@ collision_mask = 3
 script = ExtResource("27_t3vhq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Leever/TopCollider"]
-position = Vector2(8, -4)
+position = Vector2(8, -8)
 shape = SubResource("RectangleShape2D_1cueu")
 
 [node name="BottomCollider" type="Area2D" parent="Leever"]
@@ -1014,7 +1014,7 @@ collision_mask = 3
 script = ExtResource("27_t3vhq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Leever/BottomCollider"]
-position = Vector2(8, 20)
+position = Vector2(8, 24)
 shape = SubResource("RectangleShape2D_1cueu")
 
 [node name="LeftCollider" type="Area2D" parent="Leever"]
@@ -1023,7 +1023,7 @@ collision_mask = 3
 script = ExtResource("27_t3vhq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Leever/LeftCollider"]
-position = Vector2(-4, 8)
+position = Vector2(-8, 8)
 shape = SubResource("RectangleShape2D_1cueu")
 
 [node name="RightCollider" type="Area2D" parent="Leever"]
@@ -1032,7 +1032,7 @@ collision_mask = 3
 script = ExtResource("27_t3vhq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Leever/RightCollider"]
-position = Vector2(20, 8)
+position = Vector2(24, 8)
 shape = SubResource("RectangleShape2D_1cueu")
 
 [connection signal="player_health_changed" from="." to="CanvasLayer/HealthController" method="set_current_hearts"]

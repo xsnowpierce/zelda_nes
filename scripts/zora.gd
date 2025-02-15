@@ -77,14 +77,7 @@ func pick_random_new_tile() -> Vector2:
 		print(use_array_index, pre_target_position, target_position)
 	
 		# cast ray to see if we can go here
-		var space : PhysicsDirectSpaceState2D = get_world_2d().direct_space_state
-		var parameters = PhysicsPointQueryParameters2D.new()
-		parameters.position = target_position + Vector2(8,8) # add 8 to get centre of point
-		parameters.collide_with_areas = true
-		parameters.collide_with_bodies = true
-		parameters.collision_mask = collision_layers_bitmask
-		var result : Array[Dictionary] = space.intersect_point(parameters)
-		if(!result.is_empty()):
+		if(Utils.check_position_for_colliders(target_position, collision_layers_bitmask, get_world_2d())):
 			break
 	return target_position
 
