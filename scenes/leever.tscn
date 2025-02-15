@@ -1,0 +1,160 @@
+[gd_scene load_steps=15 format=3 uid="uid://c43ocjbbtan7f"]
+
+[ext_resource type="Script" path="res://scripts/leever.gd" id="1_k33cw"]
+[ext_resource type="Texture2D" uid="uid://7uv75ywip144" path="res://images/enemies.png" id="2_6od4o"]
+[ext_resource type="AudioStream" uid="uid://dtn5thjr7fpjk" path="res://sound/sfx/The Legend of Zelda Cartoon Sound Effects Enemy Zapped.wav" id="3_11bej"]
+[ext_resource type="Script" path="res://scripts/enemy_collider_check.gd" id="4_pgigd"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_20hka"]
+radius = 7.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ecnk6"]
+atlas = ExtResource("2_6od4o")
+region = Rect2(0, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hiob4"]
+atlas = ExtResource("2_6od4o")
+region = Rect2(17, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_exgtl"]
+atlas = ExtResource("2_6od4o")
+region = Rect2(34, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eak6o"]
+atlas = ExtResource("2_6od4o")
+region = Rect2(51, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lfpqd"]
+atlas = ExtResource("2_6od4o")
+region = Rect2(68, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_25eg1"]
+atlas = ExtResource("2_6od4o")
+region = Rect2(51, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h3vau"]
+atlas = ExtResource("2_6od4o")
+region = Rect2(68, 64, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mf7ak"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ecnk6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hiob4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_exgtl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eak6o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lfpqd")
+}],
+"loop": false,
+"name": &"rising",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lfpqd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eak6o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_exgtl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hiob4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ecnk6")
+}],
+"loop": false,
+"name": &"sinking",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_25eg1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h3vau")
+}],
+"loop": true,
+"name": &"spinning",
+"speed": 12.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1cueu"]
+size = Vector2(7, 7)
+
+[node name="Leever" type="Area2D" groups=["Enemy"]]
+collision_layer = 8
+collision_mask = 23
+script = ExtResource("1_k33cw")
+collision_layers_bitmask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(8, 8)
+shape = SubResource("CircleShape2D_20hka")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_mf7ak")
+animation = &"rising"
+centered = false
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_11bej")
+bus = &"SFX"
+
+[node name="TopCollider" type="Area2D" parent="."]
+collision_layer = 64
+collision_mask = 3
+script = ExtResource("4_pgigd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TopCollider"]
+position = Vector2(8, -4)
+shape = SubResource("RectangleShape2D_1cueu")
+
+[node name="BottomCollider" type="Area2D" parent="."]
+collision_layer = 64
+collision_mask = 3
+script = ExtResource("4_pgigd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomCollider"]
+position = Vector2(8, 20)
+shape = SubResource("RectangleShape2D_1cueu")
+
+[node name="LeftCollider" type="Area2D" parent="."]
+collision_layer = 64
+collision_mask = 3
+script = ExtResource("4_pgigd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftCollider"]
+position = Vector2(-4, 8)
+shape = SubResource("RectangleShape2D_1cueu")
+
+[node name="RightCollider" type="Area2D" parent="."]
+collision_layer = 64
+collision_mask = 3
+script = ExtResource("4_pgigd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightCollider"]
+position = Vector2(20, 8)
+shape = SubResource("RectangleShape2D_1cueu")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="TopCollider" to="TopCollider" method="_on_body_entered"]
+[connection signal="body_exited" from="TopCollider" to="TopCollider" method="_on_body_exited"]
+[connection signal="body_entered" from="BottomCollider" to="BottomCollider" method="_on_body_entered"]
+[connection signal="body_exited" from="BottomCollider" to="BottomCollider" method="_on_body_exited"]
+[connection signal="body_entered" from="LeftCollider" to="LeftCollider" method="_on_body_entered"]
+[connection signal="body_exited" from="LeftCollider" to="LeftCollider" method="_on_body_exited"]
+[connection signal="body_entered" from="RightCollider" to="RightCollider" method="_on_body_entered"]
+[connection signal="body_exited" from="RightCollider" to="RightCollider" method="_on_body_exited"]

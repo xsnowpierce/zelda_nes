@@ -34,7 +34,6 @@ func loop() -> void:
 		# move towards links position until we either hit link, or a wall
 		current_state = LEEVER_STATE.ABOVEGROUND
 		$AnimatedSprite2D.play("spinning")
-		print("starting movement towards: ", towards_link_direction)
 		while check_if_move_is_valid(towards_link_direction):
 			if(!is_moving):
 				await move()
@@ -43,7 +42,6 @@ func loop() -> void:
 		
 		# if we hit a wall, go underground
 		if(!check_if_move_is_valid(towards_link_direction)):
-			print("turning around")
 			$AnimatedSprite2D.play("sinking")
 			while $AnimatedSprite2D.is_playing():
 				await get_tree().process_frame

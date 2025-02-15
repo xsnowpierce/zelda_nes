@@ -6,6 +6,7 @@ extends Node
 @export var enemy_tektite_scene : PackedScene
 @export var enemy_octorok_scene : PackedScene
 @export var enemy_zora_scene : PackedScene
+@export var enemy_leever_scene : PackedScene
 
 @export_group("UI Controllers")
 @export var rupees_ui_controller : TextureRect
