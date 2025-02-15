@@ -11,6 +11,7 @@ var stay_abovewater_before_shoot_time : float = 0.4
 var projectile_hold_on_zora_time : float = 0.2
 var stay_abovewater_after_shoot_time : float = 0.4
 var current_state : ZORA_STATE = ZORA_STATE.UNDERWATER
+var current_projectile : Node
 
 func _ready() -> void:
 	super()
@@ -36,7 +37,7 @@ func loop() -> void:
 			await get_tree().process_frame
 	
 		# spawn projectile now and hold onto it
-		var spawned_projectile = spawn_projectile()
+		spawn_projectile()
 		var projectile_hold_timer : float = projectile_hold_on_zora_time
 		while projectile_hold_timer > 0:
 			projectile_hold_timer -= get_process_delta_time()
@@ -45,8 +46,8 @@ func loop() -> void:
 		# shoot projectile and start timer to go back underwater
 		# TODO change this precise angle to 8 directions only, to be accurate.
 		var direction_to_link : Vector2 = (global_position - link.global_position).normalized()
-		if(is_instance_valid(spawned_projectile)):
-			spawned_projectile.set_forward_vector(-direction_to_link)
+		if(is_instance_valid(current_projectile)):
+			current_projectile.set_forward_vector(-direction_to_link)
 		var stay_abovewater_time : float = stay_abovewater_after_shoot_time
 		while stay_abovewater_time > 0:
 			stay_abovewater_time -= get_process_delta_time()
@@ -59,7 +60,13 @@ func loop() -> void:
 		while reset_timer > 0:
 			reset_timer -= get_process_delta_time()
 			await get_tree().process_frame
+		while(is_instance_valid(current_projectile)): # make sure our current ball has despawned before we move
+			await get_tree().process_frame
 
+func death() -> void:
+	if(is_instance_valid(current_projectile)):
+		current_projectile.queue_free()
+	super()
 
 func pick_random_new_tile() -> Vector2:
 	var target_position : Vector2
@@ -81,9 +88,10 @@ func pick_random_new_tile() -> Vector2:
 			break
 	return target_position
 
-func spawn_projectile() -> Node2D:
-	var projectile : Node2D = zora_projectile_scene.instantiate()
-	get_parent().add_child(projectile)
-	projectile.global_position = global_position
-	projectile.set_forward_vector(Vector2.ZERO)
-	return projectile
+func spawn_projectile() -> void:
+	if(is_instance_valid(current_projectile)):
+		current_projectile.queue_free()
+	current_projectile = zora_projectile_scene.instantiate()
+	get_parent().add_child(current_projectile)
+	current_projectile.global_position = global_position
+	current_projectile.set_forward_vector(Vector2.ZERO)
