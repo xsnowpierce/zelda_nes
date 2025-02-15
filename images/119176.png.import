@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://fkgn6glcffe"
-path="res://.godot/imported/NES - The Legend of Zelda - Enemy Death.png-7517af24a199d6eb6080d78b75fc214f.ctex"
+uid="uid://c8mvpepbqb7a2"
+path="res://.godot/imported/119176.png-41af00c3080666a78f2d3dbf7e55bde9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/NES - The Legend of Zelda - Enemy Death.png"
-dest_files=["res://.godot/imported/NES - The Legend of Zelda - Enemy Death.png-7517af24a199d6eb6080d78b75fc214f.ctex"]
+source_file="res://images/119176.png"
+dest_files=["res://.godot/imported/119176.png-41af00c3080666a78f2d3dbf7e55bde9.ctex"]
 
 [params]
 

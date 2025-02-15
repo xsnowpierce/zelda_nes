@@ -21,6 +21,7 @@ buses/default_bus_layout="res://sound/audio_bus_layout.tres"
 [autoload]
 
 GameSettings="*res://scripts/GameSettings.gd"
+Utils="*res://scripts/Utils.gd"
 
 [display]
 
@@ -33,6 +34,11 @@ window/stretch/mode="viewport"
 [dotnet]
 
 project/assembly_name="zelda"
+
+[editor]
+
+version_control/plugin_name="GitPlugin"
+version_control/autoload_on_startup=true
 
 [global_group]
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bleifp0lssfek"]
+[gd_scene load_steps=8 format=3 uid="uid://cj75wahsqwoah"]
 
 [ext_resource type="Script" path="res://scripts/tektite.gd" id="1_x8nh4"]
 [ext_resource type="Texture2D" uid="uid://7uv75ywip144" path="res://images/enemies.png" id="2_1mp0t"]
