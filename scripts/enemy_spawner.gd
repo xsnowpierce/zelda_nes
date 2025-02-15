@@ -5,11 +5,13 @@ var is_awake : bool
 @export var enemy_type : ENUM.ENEMY_TYPE
 var enemy_scene
 var should_cloud_be_visible : bool
+var game_data : Node
 
 func _ready() -> void:
 	$Sprite2D.visible = false
 	set_cloud_visibility()
 	var camera := get_tree().get_first_node_in_group("Camera")
+	game_data = get_tree().get_first_node_in_group("GameData")
 	camera.connect("camera_moved", Callable(self, "on_camera_move"))
 	residing_in_area = Vector2(roundi(position.x / GameSettings.map_screen_size.x), roundi(position.y / GameSettings.map_screen_size.y))
 
@@ -48,16 +50,16 @@ func _on_sprite_2d_animation_looped() -> void:
 		$Sprite2D.visible = false
 		match enemy_type:
 			ENUM.ENEMY_TYPE.TEKTITE:
-				enemy_scene = get_parent().get_parent().enemy_tektite_scene.instantiate()
+				enemy_scene = game_data.enemy_tektite_scene.instantiate()
 			ENUM.ENEMY_TYPE.OCTOROK:
-				enemy_scene = get_parent().get_parent().enemy_octorok_scene.instantiate()
+				enemy_scene = game_data.enemy_octorok_scene.instantiate()
 			ENUM.ENEMY_TYPE.ZORA:
-				enemy_scene = get_parent().get_parent().enemy_zora_scene.instantiate()
+				enemy_scene = game_data.enemy_zora_scene.instantiate()
 			ENUM.ENEMY_TYPE.LEEVER:
-				enemy_scene = get_parent().get_parent().enemy_leever_scene.instantiate()
+				enemy_scene = game_data.enemy_leever_scene.instantiate()
 		
 		enemy_scene.position = position
-		get_parent().get_parent().add_child(enemy_scene)
+		game_data.add_child(enemy_scene)
 		enemy_scene.connect("has_died", Callable(self, "spawned_enemy_has_died"))
 		$Sprite2D.stop()
 

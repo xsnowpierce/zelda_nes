@@ -6,6 +6,7 @@ var current_attacked_iframes : float
 var current_health : int
 @export_flags_2d_physics var collision_layers_bitmask
 
+var link : CharacterBody2D
 var death_scene : PackedScene = load("res://scenes/enemy_death.tscn")
 var camera
 signal was_attacked
@@ -14,6 +15,7 @@ signal has_died
 func _ready() -> void:
 	current_health = max_health
 	camera = get_tree().get_first_node_in_group("Camera")
+	link = get_tree().get_first_node_in_group("Player")
 	
 func _process(delta: float) -> void:
 	current_attacked_iframes -= delta

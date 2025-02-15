@@ -23,7 +23,7 @@
 [ext_resource type="FontFile" uid="uid://bw55a4dg4x4gs" path="res://images/the-legend-of-zelda-nes.ttf" id="19_fvc07"]
 [ext_resource type="AudioStream" uid="uid://bjkmgnosuhtpw" path="res://sound/sfx/text_progress.wav" id="22_xpy7p"]
 [ext_resource type="Texture2D" uid="uid://c0pwpxlkow2pa" path="res://images/dungeon_tilemap.png" id="23_4k6nb"]
-[ext_resource type="PackedScene" uid="uid://yh71ycle5mum" path="res://scenes/zora.tscn" id="24_n4nw8"]
+[ext_resource type="PackedScene" uid="uid://dhxxr225o5tr3" path="res://scenes/zora.tscn" id="24_n4nw8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dh51p"]
 radius = 7.0
@@ -637,6 +637,7 @@ size = Vector2(8, 8)
 script = ExtResource("1_fiv6q")
 enemy_tektite_scene = SubResource("PackedScene_wbpxt")
 enemy_octorok_scene = ExtResource("3_jg83s")
+enemy_zora_scene = ExtResource("24_n4nw8")
 rupees_ui_controller = NodePath("CanvasLayer/rupee")
 keys_ui_controller = NodePath("CanvasLayer/key")
 bombs_ui_controller = NodePath("CanvasLayer/bomb")
@@ -812,7 +813,7 @@ position = Vector2(-32, -176)
 enemy_type = 1
 
 [node name="Enemy Spawner6" parent="Enemy Spawners" instance=ExtResource("13_m77ew")]
-position = Vector2(-560, -32)
+position = Vector2(-544, 64)
 enemy_type = 2
 
 [node name="Interiors" type="TileMapLayer" parent="."]
@@ -891,9 +892,6 @@ tile_set = SubResource("TileSet_j88e2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_lffti")
-
-[node name="Zora" parent="." instance=ExtResource("24_n4nw8")]
-position = Vector2(-64, -16)
 
 [connection signal="player_health_changed" from="." to="CanvasLayer/HealthController" method="set_current_hearts"]
 [connection signal="player_max_health_changed" from="." to="CanvasLayer/HealthController" method="set_max_hearts"]

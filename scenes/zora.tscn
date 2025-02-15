@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://yh71ycle5mum"]
+[gd_scene load_steps=10 format=3 uid="uid://dhxxr225o5tr3"]
 
 [ext_resource type="Script" path="res://scripts/zora.gd" id="1_wqvra"]
 [ext_resource type="Texture2D" uid="uid://7uv75ywip144" path="res://images/enemies.png" id="2_eo3q0"]
+[ext_resource type="PackedScene" uid="uid://bx5f8ndr07fwn" path="res://scenes/zora_ball.tscn" id="2_sgqyw"]
 [ext_resource type="AudioStream" uid="uid://dtn5thjr7fpjk" path="res://sound/sfx/The Legend of Zelda Cartoon Sound Effects Enemy Zapped.wav" id="3_tccek"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dh51p"]
@@ -10,10 +11,6 @@ radius = 7.0
 [sub_resource type="AtlasTexture" id="AtlasTexture_jym38"]
 atlas = ExtResource("2_eo3q0")
 region = Rect2(223, 11, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0bfy4"]
-atlas = ExtResource("2_eo3q0")
-region = Rect2(240, 11, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2rll1"]
 atlas = ExtResource("2_eo3q0")
@@ -28,9 +25,6 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_jym38")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0bfy4")
 }],
 "loop": false,
 "name": &"above_water",
@@ -52,6 +46,9 @@ animations = [{
 collision_layer = 8
 collision_mask = 16
 script = ExtResource("1_wqvra")
+movable_tile_range = Array[Vector4]([Vector4(-560, -96, -544, 64)])
+zora_projectile_scene = ExtResource("2_sgqyw")
+collision_layers_bitmask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(8, 8)
@@ -60,7 +57,7 @@ shape = SubResource("CircleShape2D_dh51p")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_nip88")
-animation = &"under_water"
+animation = &"above_water"
 centered = false
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

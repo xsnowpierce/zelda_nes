@@ -1,0 +1,64 @@
+[gd_scene load_steps=9 format=3 uid="uid://bx5f8ndr07fwn"]
+
+[ext_resource type="Script" path="res://scripts/octorock_rock.gd" id="1_yamwf"]
+[ext_resource type="Texture2D" uid="uid://7uv75ywip144" path="res://images/enemies.png" id="2_pajj8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3145t"]
+size = Vector2(8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hxykh"]
+atlas = ExtResource("2_pajj8")
+region = Rect2(257, 11, 8, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7jbpe"]
+atlas = ExtResource("2_pajj8")
+region = Rect2(266, 11, 8, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jw3og"]
+atlas = ExtResource("2_pajj8")
+region = Rect2(275, 11, 8, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fb7mn"]
+atlas = ExtResource("2_pajj8")
+region = Rect2(284, 11, 8, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rl5iq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hxykh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7jbpe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jw3og")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fb7mn")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
+
+[node name="Zora Ball" type="Area2D" groups=["Enemy_Attack"]]
+collision_layer = 32
+collision_mask = 4
+script = ExtResource("1_yamwf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+texture_filter = 1
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_3145t")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(4, 0)
+sprite_frames = SubResource("SpriteFrames_rl5iq")
+autoplay = "default"
+frame_progress = 0.21475
+centered = false
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

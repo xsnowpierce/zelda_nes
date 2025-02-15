@@ -15,6 +15,8 @@ static func is_out_of_bounds(global_position : Vector2, camera : Camera2D) -> bo
 	return false
 
 static func align_to_grid(value : Vector2, align : int = 16) -> Vector2:
+	value.x = roundi(value.x)
+	value.y = roundi(value.y)
 	value.x = snapped(value.x, align)
 	value.y = snappedi(value.y, align)
 	return value
