@@ -5,6 +5,7 @@ var is_currently_moving : bool = false
 signal camera_moved(new_area_position : Vector2)
 
 func _ready() -> void:
+	await get_tree().process_frame
 	camera_moved.emit(Vector2(position.x / GameSettings.map_screen_size.x, position.y / GameSettings.map_screen_size.y))
 
 func _on_link_call_new_screen(direction: Vector2) -> void:
@@ -26,4 +27,8 @@ func _on_link_call_new_screen(direction: Vector2) -> void:
 	
 	is_currently_moving = false
 	GameSettings.camera_is_moving = false
+	camera_moved.emit(Vector2(position.x / GameSettings.map_screen_size.x, position.y / GameSettings.map_screen_size.y))
+
+func set_camera_position(location : Vector2) -> void:
+	position = location
 	camera_moved.emit(Vector2(position.x / GameSettings.map_screen_size.x, position.y / GameSettings.map_screen_size.y))

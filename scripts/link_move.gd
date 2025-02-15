@@ -1,23 +1,38 @@
 extends CharacterBody2D
 
+@export_group("Movement")
 @export var move_speed : float = 65
 var movement : Vector2
 var last_velocity : Vector2
 var is_position_correcting : bool
 signal move_velocity(velocity : Vector2)
+
+#screen transition variables
 var max_x_until_new_screen : float = 120
 var max_y_until_new_screen : float = 87
 signal call_new_screen(direction : Vector2)
-var is_attacking : bool = false
 var current_colliding_enemies : int = 0
+
+@export_group("Combat")
+var is_attacking : bool = false
 @export var attacked_iframes : float = 16
 var current_attacked_iframes : float
 var is_attacked_knockback : bool
 @export var attacked_knockback_force : float = 140
 @export var attacked_knockback_duration : float = .2
+
+@export_group("SFX Files")
 @export var sword_swing_sound := preload("res://sound/sfx/sword_Swing.wav")
 @export var attacked_sound := preload("res://sound/sfx/The Legend of Zelda Cartoon Sound Effects Player Hurt.wav")
-# this goes by Vector4(left, right, up, down)
+@export var door_enter_sound := preload("res://sound/sfx/The Legend of Zelda Cartoon Sound Effects Walking on Stairs.wav")
+
+#door entering variables
+var colliding_with_door : Area2D
+var is_entering_door : bool = false
+var is_exiting_door : bool = false
+var has_room_events : bool = false
+signal entering_door(door : Area2D)
+var is_inside_room : bool
 
 func _ready() -> void:
 	var camera := get_tree().get_first_node_in_group("Camera")
@@ -25,29 +40,31 @@ func _ready() -> void:
 	pass
 
 func _process(delta: float) -> void:
+	if(colliding_with_door != null):
+		check_door_collision()
 	current_attacked_iframes -= delta
 	var new_screen_check : Vector2 = check_for_new_screen()
-	if(!GameSettings.camera_is_moving):
+	if(!GameSettings.camera_is_moving and !is_entering_door and !is_exiting_door and !has_room_events):
 		if (new_screen_check == Vector2.ZERO):
 			if(is_attacked_knockback):
 				keep_player_in_screen()
 				return
 			calculate_movement(false)
 			move_and_slide()
-			$"Link Sprite".set_look_direction(movement)
-			$"Link Sprite".set_current_velocity(velocity)
+			$"Link Sprite Mask/Link Sprite".set_look_direction(movement)
+			$"Link Sprite Mask/Link Sprite".set_current_velocity(velocity)
 			$"Attack Area".set_direction(movement)
 			check_attack()
 		else:
-			$"Link Sprite".set_look_direction(movement)
-			$"Link Sprite".set_current_velocity(velocity)
+			$"Link Sprite Mask/Link Sprite".set_look_direction(movement)
+			$"Link Sprite Mask/Link Sprite".set_current_velocity(velocity)
 			$"Attack Area".set_direction(movement)
 			call_new_screen.emit(new_screen_check)
 	else:
 		keep_player_in_screen()
 
 func get_look_direction() -> Vector2:
-	return $"Link Sprite".current_direction
+	return $"Link Sprite Mask/Link Sprite".current_direction
 
 func keep_player_in_screen() -> void:
 	var camera_position = get_tree().get_first_node_in_group("Camera").position
@@ -130,7 +147,7 @@ func check_for_new_screen() -> Vector2:
 func check_attack() -> void:
 	if(Input.is_action_just_pressed("attack") and !is_attacking):
 		is_attacking = true
-		$"Link Sprite"._on_character_body_2d_attack()
+		$"Link Sprite Mask/Link Sprite"._on_character_body_2d_attack()
 		$"Attack Area"._on_link_attack()
 		$AudioPlayer.stream = sword_swing_sound
 		$AudioPlayer.play()
@@ -143,7 +160,89 @@ func _on_animated_sprite_2d_attack_ended() -> void:
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if(area.is_in_group("Enemy") or area.is_in_group("Enemy_Attack")):
 		attacked(area.global_position)
+	if(area.is_in_group("EntranceDoor") and (!is_entering_door and !is_exiting_door)):
+		colliding_with_door = area
 
+func _on_link_hitbox_area_exited(area: Area2D) -> void:
+	if(area.is_in_group("EntranceDoor")):
+		colliding_with_door = null
+		
+
+func check_door_collision() -> void:
+	var grid_position = position - Vector2(8,8)
+	var target_position = colliding_with_door.global_position
+	grid_position.x = roundi(grid_position.x)
+	grid_position.y = roundi(grid_position.y)
+	if(colliding_with_door.is_wide_horizontal):
+		grid_position.x = 0
+		target_position.x = 0
+	if(colliding_with_door.is_tall_vertical):
+		grid_position.y = 0
+		target_position.y = 0
+	if(grid_position == target_position):
+		if(is_inside_room):
+			exit_door()
+		else:
+			enter_door()
+
+func enter_door() -> void:
+	if(is_entering_door or is_exiting_door):
+		return
+	is_entering_door = true
+	position = (colliding_with_door.global_position + Vector2(8,8))
+	entering_door.emit(colliding_with_door)
+	get_parent().player_start_enter_door(colliding_with_door)
+	$AudioPlayer.stream = door_enter_sound
+	$AudioPlayer.play(0.0)
+	var start_sprite_y : float = $"Link Sprite Mask/Link Sprite".position.y
+	await enter_door_sprite_animation()
+	get_parent().player_finish_enter_door(colliding_with_door)
+	$"Link Sprite Mask".clip_contents = false
+	$"Link Sprite Mask/Link Sprite".position.y = start_sprite_y
+	is_inside_room = true
+	is_entering_door = false
+	
+func wait_for_room_events() -> void:
+	has_room_events = true
+	
+func finish_room_events() -> void:
+	has_room_events = false
+	
+func exit_door() -> void:
+	if(is_exiting_door or is_entering_door):
+		return
+	is_exiting_door = true
+	get_parent().player_finish_enter_door(colliding_with_door)
+	$AudioPlayer.stream = door_enter_sound
+	$AudioPlayer.play(0.0)
+	var start_sprite_y : float = $"Link Sprite Mask/Link Sprite".position.y
+	
+	await exit_door_sprite_animation()
+	$"Link Sprite Mask".clip_contents = false
+	$"Link Sprite Mask/Link Sprite".position.y = start_sprite_y
+	is_inside_room = false
+	is_exiting_door = false
+	
+func enter_door_sprite_animation() -> void:
+	var target_position : float = 24
+	var pixel_drop_speed : float = 15
+	$"Link Sprite Mask/Link Sprite".play("up")
+	$"Link Sprite Mask".clip_contents = true
+	while $"Link Sprite Mask/Link Sprite".position.y < target_position:
+		$"Link Sprite Mask/Link Sprite".position.y += get_process_delta_time() * pixel_drop_speed
+		await get_tree().process_frame
+	$"Link Sprite Mask/Link Sprite".pause()
+
+func exit_door_sprite_animation() -> void:
+	var target_position : float = 8
+	var pixel_rise_speed : float = 15
+	$"Link Sprite Mask/Link Sprite".position.y = 24
+	$"Link Sprite Mask/Link Sprite".play("down")
+	$"Link Sprite Mask".clip_contents = true
+	while $"Link Sprite Mask/Link Sprite".position.y > target_position:
+		$"Link Sprite Mask/Link Sprite".position.y -= get_process_delta_time() * pixel_rise_speed
+		await get_tree().process_frame
+	$"Link Sprite Mask/Link Sprite".pause()
 
 func attacked(from : Vector2) -> void:
 	if(current_attacked_iframes > 0):

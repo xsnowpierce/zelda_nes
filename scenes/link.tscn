@@ -243,8 +243,8 @@ animations = [{
 "speed": 8.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_mrfqx"]
-radius = 6.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g0xjw"]
+size = Vector2(16, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_305y3"]
 size = Vector2(12, 12)
@@ -261,24 +261,37 @@ position = Vector2(0, 4)
 shape = SubResource("RectangleShape2D_3pcpd")
 one_way_collision_margin = 0.0
 
-[node name="Link Sprite" type="AnimatedSprite2D" parent="."]
+[node name="Link Sprite Mask" type="Control" parent="."]
+clip_children = 1
+layout_mode = 3
+anchors_preset = 0
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="Link Sprite" type="AnimatedSprite2D" parent="Link Sprite Mask"]
 z_index = 1
 texture_filter = 1
+texture_repeat = 1
+position = Vector2(8, 8)
 sprite_frames = SubResource("SpriteFrames_18du3")
-animation = &"attack_wooden_up"
+animation = &"down"
 autoplay = "down"
 script = ExtResource("3_1avva")
 
 [node name="Link Hitbox" type="Area2D" parent="." groups=["Player"]]
+position = Vector2(0, -4)
 collision_layer = 4
-collision_mask = 40
+collision_mask = 296
 
 [node name="Link Collider" type="CollisionShape2D" parent="Link Hitbox"]
-position = Vector2(0, 3)
-shape = SubResource("CircleShape2D_mrfqx")
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_g0xjw")
 one_way_collision_margin = 0.0
 
 [node name="Attack Area" type="Area2D" parent="." groups=["Player_Attack"]]
+visible = false
 position = Vector2(0, -14)
 collision_layer = 16
 collision_mask = 8
@@ -292,9 +305,10 @@ shape = SubResource("RectangleShape2D_305y3")
 [node name="AudioPlayer" type="AudioStreamPlayer" parent="."]
 bus = &"SFX"
 
-[connection signal="animation_finished" from="Link Sprite" to="Link Sprite" method="_on_animation_finished"]
-[connection signal="animation_looped" from="Link Sprite" to="Link Sprite" method="_on_animation_finished"]
-[connection signal="attack_ended" from="Link Sprite" to="." method="_on_animated_sprite_2d_attack_ended"]
-[connection signal="attack_ended" from="Link Sprite" to="Attack Area" method="_on_link_sprite_attack_ended"]
+[connection signal="animation_finished" from="Link Sprite Mask/Link Sprite" to="Link Sprite Mask/Link Sprite" method="_on_animation_finished"]
+[connection signal="animation_looped" from="Link Sprite Mask/Link Sprite" to="Link Sprite Mask/Link Sprite" method="_on_animation_finished"]
+[connection signal="attack_ended" from="Link Sprite Mask/Link Sprite" to="." method="_on_animated_sprite_2d_attack_ended"]
+[connection signal="attack_ended" from="Link Sprite Mask/Link Sprite" to="Attack Area" method="_on_link_sprite_attack_ended"]
 [connection signal="area_entered" from="Link Hitbox" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Link Hitbox" to="." method="_on_link_hitbox_area_exited"]
 [connection signal="area_exited" from="Link Hitbox" to="." method="_on_area_2d_area_exited"]

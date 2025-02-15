@@ -13,11 +13,10 @@ config_version=5
 config/name="zelda"
 run/main_scene="res://scenes/node.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
-config/icon="res://images/icon.svg"
 
 [audio]
 
-buses/default_bus_layout="res://audio_bus_layout.tres"
+buses/default_bus_layout="res://sound/audio_bus_layout.tres"
 
 [autoload]
 
@@ -42,6 +41,9 @@ Player_Attack=""
 Camera=""
 Enemy=""
 Enemy_Attack=""
+TileMap=""
+EntranceDoor=""
+GameData=""
 
 [gui]
 
@@ -86,6 +88,7 @@ attack={
 2d_physics/layer_6="Enemy Attacks"
 2d_physics/layer_7="Enemy AI Raycasts"
 2d_physics/layer_8="Item"
+2d_physics/layer_9="Door"
 
 [rendering]
 
