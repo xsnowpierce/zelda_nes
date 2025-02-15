@@ -43,7 +43,6 @@ func _on_character_body_2d_attack() -> void:
 		Vector2.RIGHT:
 			play("attack_wooden_right")
 
-
 func _on_animation_finished() -> void:
 	if(is_attacking):
 		is_attacking = false

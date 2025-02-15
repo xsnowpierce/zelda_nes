@@ -32,3 +32,9 @@ func _on_link_call_new_screen(direction: Vector2) -> void:
 func set_camera_position(location : Vector2) -> void:
 	position = location
 	camera_moved.emit(Vector2(position.x / GameSettings.map_screen_size.x, position.y / GameSettings.map_screen_size.y))
+
+func open_pause_menu() -> void:
+	pass
+
+func close_pause_menu() -> void:
+	pass

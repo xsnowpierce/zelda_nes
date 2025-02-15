@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://b2gll84jnyb1u"]
+[gd_scene load_steps=35 format=3 uid="uid://b2gll84jnyb1u"]
 
 [ext_resource type="Script" path="res://scripts/link_move.gd" id="1_y1qvt"]
 [ext_resource type="Texture2D" uid="uid://cpa11tutqc7h1" path="res://images/Sprite-0001.png" id="2_8jjpd"]
@@ -80,6 +80,10 @@ region = Rect2(0, 0, 16, 16)
 atlas = ExtResource("2_8jjpd")
 region = Rect2(16, 0, 16, 16)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_2pwx3"]
+atlas = ExtResource("2_8jjpd")
+region = Rect2(0, 32, 16, 16)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_0pfuo"]
 atlas = ExtResource("2_8jjpd")
 region = Rect2(32, 16, 16, 16)
@@ -95,6 +99,10 @@ region = Rect2(32, 0, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_hahtb"]
 atlas = ExtResource("2_8jjpd")
 region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_shh65"]
+atlas = ExtResource("2_8jjpd")
+region = Rect2(16, 32, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3o3yf"]
 atlas = ExtResource("2_8jjpd")
@@ -211,6 +219,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_2pwx3")
+}],
+"loop": true,
+"name": &"item_pickup",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_0pfuo")
 }, {
 "duration": 1.0,
@@ -230,6 +246,14 @@ animations = [{
 "loop": true,
 "name": &"right",
 "speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_shh65")
+}],
+"loop": true,
+"name": &"triforce_pickup",
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -255,6 +279,7 @@ texture_repeat = 1
 collision_layer = 2
 safe_margin = 0.001
 script = ExtResource("1_y1qvt")
+pickup_animation_length = 2.5
 
 [node name="Link Collider" type="CollisionShape2D" parent="."]
 position = Vector2(0, 4)
@@ -276,7 +301,7 @@ texture_filter = 1
 texture_repeat = 1
 position = Vector2(8, 8)
 sprite_frames = SubResource("SpriteFrames_18du3")
-animation = &"down"
+animation = &"item_pickup"
 autoplay = "down"
 script = ExtResource("3_1avva")
 
@@ -310,5 +335,5 @@ bus = &"SFX"
 [connection signal="attack_ended" from="Link Sprite Mask/Link Sprite" to="." method="_on_animated_sprite_2d_attack_ended"]
 [connection signal="attack_ended" from="Link Sprite Mask/Link Sprite" to="Attack Area" method="_on_link_sprite_attack_ended"]
 [connection signal="area_entered" from="Link Hitbox" to="." method="_on_area_2d_area_entered"]
-[connection signal="area_exited" from="Link Hitbox" to="." method="_on_link_hitbox_area_exited"]
 [connection signal="area_exited" from="Link Hitbox" to="." method="_on_area_2d_area_exited"]
+[connection signal="area_exited" from="Link Hitbox" to="." method="_on_link_hitbox_area_exited"]

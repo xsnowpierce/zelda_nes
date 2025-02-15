@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+var game_data : Node
+
 @export_group("Movement")
 @export var move_speed : float = 65
 var movement : Vector2
@@ -25,6 +27,7 @@ var is_attacked_knockback : bool
 @export var sword_swing_sound := preload("res://sound/sfx/sword_Swing.wav")
 @export var attacked_sound := preload("res://sound/sfx/The Legend of Zelda Cartoon Sound Effects Player Hurt.wav")
 @export var door_enter_sound := preload("res://sound/sfx/The Legend of Zelda Cartoon Sound Effects Walking on Stairs.wav")
+@export var key_item_pickup := preload("res://sound/sfx/The Legend of Zelda Cartoon Sound Effects Item Received.wav")
 
 #door entering variables
 var colliding_with_door : Area2D
@@ -34,7 +37,16 @@ var has_room_events : bool = false
 signal entering_door(door : Area2D)
 var is_inside_room : bool
 
+var is_pickup_animation : bool
+@export_group("Pickup Animation")
+@export var pickup_animation_length : float
+
+@export_group("Equipment")
+@export var current_equipped_a : ENUM.KEY_ITEM_TYPE
+@export var current_equipped_b : ENUM.KEY_ITEM_TYPE
+
 func _ready() -> void:
+	game_data = get_tree().get_first_node_in_group("GameData")
 	var camera := get_tree().get_first_node_in_group("Camera")
 	self.connect("call_new_screen", Callable(camera, "_on_link_call_new_screen"))
 	pass
@@ -44,7 +56,7 @@ func _process(delta: float) -> void:
 		check_door_collision()
 	current_attacked_iframes -= delta
 	var new_screen_check : Vector2 = check_for_new_screen()
-	if(!GameSettings.camera_is_moving and !is_entering_door and !is_exiting_door and !has_room_events):
+	if(is_player_input_allowed()):
 		if (new_screen_check == Vector2.ZERO):
 			if(is_attacked_knockback):
 				keep_player_in_screen()
@@ -62,6 +74,13 @@ func _process(delta: float) -> void:
 			call_new_screen.emit(new_screen_check)
 	else:
 		keep_player_in_screen()
+		
+func is_player_input_allowed() -> bool:
+	return (!GameSettings.camera_is_moving 
+		and !is_entering_door 
+		and !is_exiting_door 
+		and !has_room_events 
+		and !is_pickup_animation)
 
 func get_look_direction() -> Vector2:
 	return $"Link Sprite Mask/Link Sprite".current_direction
@@ -146,12 +165,25 @@ func check_for_new_screen() -> Vector2:
 
 func check_attack() -> void:
 	if(Input.is_action_just_pressed("attack") and !is_attacking):
-		is_attacking = true
-		$"Link Sprite Mask/Link Sprite"._on_character_body_2d_attack()
-		$"Attack Area"._on_link_attack()
-		$AudioPlayer.stream = sword_swing_sound
-		$AudioPlayer.play()
-
+		if(current_equipped_a == ENUM.KEY_ITEM_TYPE.NULL):
+			return
+		match current_equipped_a:
+			ENUM.KEY_ITEM_TYPE.WOODEN_SWORD:
+				is_attacking = true
+				$"Link Sprite Mask/Link Sprite"._on_character_body_2d_attack()
+				$"Attack Area"._on_link_attack()
+				$AudioPlayer.stream = sword_swing_sound
+				$AudioPlayer.play()
+	if(Input.is_action_just_pressed("alternate_attack") and !is_attacking):
+		if(current_equipped_b == ENUM.KEY_ITEM_TYPE.NULL):
+			return
+		match current_equipped_b:
+			ENUM.KEY_ITEM_TYPE.WOODEN_SWORD:
+				is_attacking = true
+				$"Link Sprite Mask/Link Sprite"._on_character_body_2d_attack()
+				$"Attack Area"._on_link_attack()
+				$AudioPlayer.stream = sword_swing_sound
+				$AudioPlayer.play()
 
 func _on_animated_sprite_2d_attack_ended() -> void:
 	is_attacking = false
@@ -191,12 +223,12 @@ func enter_door() -> void:
 	is_entering_door = true
 	position = (colliding_with_door.global_position + Vector2(8,8))
 	entering_door.emit(colliding_with_door)
-	get_parent().player_start_enter_door(colliding_with_door)
+	game_data.player_start_enter_door(colliding_with_door)
 	$AudioPlayer.stream = door_enter_sound
 	$AudioPlayer.play(0.0)
 	var start_sprite_y : float = $"Link Sprite Mask/Link Sprite".position.y
 	await enter_door_sprite_animation()
-	get_parent().player_finish_enter_door(colliding_with_door)
+	game_data.player_finish_enter_door(colliding_with_door)
 	$"Link Sprite Mask".clip_contents = false
 	$"Link Sprite Mask/Link Sprite".position.y = start_sprite_y
 	is_inside_room = true
@@ -275,3 +307,14 @@ func attacked(from : Vector2) -> void:
 		await get_tree().process_frame
 	
 	is_attacked_knockback = false
+
+func picked_up_key_item(type : ENUM.KEY_ITEM_TYPE) -> void:
+	game_data.player_pickup_key_item(type)
+	$AudioPlayer.stream = key_item_pickup
+	$AudioPlayer.play()
+	is_pickup_animation = true
+	var current_animation = $"Link Sprite Mask/Link Sprite".animation
+	$"Link Sprite Mask/Link Sprite".play("item_pickup")
+	await get_tree().create_timer(pickup_animation_length).timeout
+	$"Link Sprite Mask/Link Sprite".animation = current_animation
+	is_pickup_animation = false

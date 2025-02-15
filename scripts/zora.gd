@@ -48,6 +48,12 @@ func loop() -> void:
 		while(is_instance_valid(current_projectile)): # make sure our current ball has despawned before we move
 			await get_tree().process_frame
 
+func attacked() -> void:
+	if(current_state == ZORA_STATE.UNDERWATER):
+		return
+	else:
+		super()
+
 func death() -> void:
 	if(is_instance_valid(current_projectile)):
 		current_projectile.queue_free()

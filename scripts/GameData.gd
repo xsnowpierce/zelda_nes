@@ -38,6 +38,8 @@ signal rupees_changed(new_current_amount : int)
 signal keys_changed(new_current_amount : int)
 signal bombs_changed(new_current_amount : int)
 signal max_bombs_changed(new_max_amount : int)
+signal pause_menu_opened
+signal pause_menu_closed
 
 func _ready() -> void:
 	camera = get_tree().get_first_node_in_group("Camera")
@@ -111,3 +113,14 @@ func player_finish_enter_door(door : Area2D) -> void:
 		while(!current_room.is_loaded):
 			await get_tree().process_frame
 		link.finish_room_events()
+
+func player_pickup_key_item(item_type : ENUM.KEY_ITEM_TYPE) -> void:
+	match item_type:
+		ENUM.KEY_ITEM_TYPE.WOODEN_SWORD:
+			add_player_flag("obtained_wooden_sword")
+
+func open_pause_menu() -> void:
+	pause_menu_opened.emit()
+
+func close_pause_menu() -> void:
+	pause_menu_closed.emit()

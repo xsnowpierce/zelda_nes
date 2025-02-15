@@ -1,21 +1,29 @@
 extends "res://scripts/room_data.gd"
 
 @export var text_print_delay : float = 0.12
+@export var old_man_dissapear_time : float = 1
+var has_item : bool
 
 func _ready() -> void:
 	super()
 	set_room_visibility(false)
 
 func awake() -> void:
+	if(get_tree().get_first_node_in_group("GameData").has_player_flag("obtained_wooden_sword")):
+		set_room_visibility(false)
+		$fire.visible = true
+		$fire2.visible = true
+		has_item = true
+		is_loaded = true
+	else:
+		set_room_visibility(true)
+		$dialogue_text.visible_characters = 0
+		$dialogue_text2.visible_characters = 0
+		$old_man.play("default")
 	is_awake = true
-	set_room_visibility(true)
-	$dialogue_text.visible_characters = 0
-	$dialogue_text2.visible_characters = 0
 	$fire.play("appear")
 	$fire2.play("appear")
-	$old_man.play("default")
-	pass
-	
+
 func sleep() -> void:
 	super()
 	set_room_visibility(false)
@@ -46,4 +54,12 @@ func _on_fire_animation_finished() -> void:
 		return
 	$fire.play("fire")
 	$fire2.play("fire")
-	start_typing_animation()
+	if(!has_item):
+		start_typing_animation()
+
+func sword_obtained() -> void:
+	$dialogue_text.visible = false
+	$dialogue_text2.visible = false
+	$old_man.play("disappear")
+	await get_tree().create_timer(old_man_dissapear_time).timeout
+	$old_man.visible = false
