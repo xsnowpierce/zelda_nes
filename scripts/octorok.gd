@@ -48,7 +48,7 @@ func move() -> void:
 			if(check_if_move_is_valid(direction)):
 				move_to_direction(direction)
 				return
-		print("wtf is going on")
+		print("couldnt find possible move") # no possible moves?
 
 func check_if_move_is_valid(target_direction : Vector2) -> bool:
 	if(Utils.is_out_of_bounds(get_target_position_from_direction(target_direction), camera)):

@@ -1,7 +1,7 @@
 extends "res://scripts/enemy_ai.gd"
 
 ## X,Y is the top left point of the square, while Z,W is the bottom right point of the square.
-@export var movable_tile_range : Array[Vector4]
+var movable_tile_range : Array[Vector4]
 @export var zora_projectile_scene : PackedScene
 
 enum ZORA_STATE {UNDERWATER, ABOVEWATER}
@@ -23,43 +23,28 @@ func loop() -> void:
 		global_position = pick_random_new_tile()
 		$AnimatedSprite2D.play("under_water")
 		current_state = ZORA_STATE.UNDERWATER
-		var underwater_time_counter : float = stay_underwater_before_time
-		while underwater_time_counter > 0:
-			underwater_time_counter -= get_process_delta_time()
-			await get_tree().process_frame
+		await get_tree().create_timer(stay_underwater_before_time).timeout
 	
 		# pop up and wait to shoot
 		$AnimatedSprite2D.play("above_water")
 		current_state = ZORA_STATE.ABOVEWATER
-		var shoot_delay_timer : float = stay_abovewater_before_shoot_time
-		while shoot_delay_timer > 0:
-			shoot_delay_timer -= get_process_delta_time()
-			await get_tree().process_frame
+		await get_tree().create_timer(stay_abovewater_before_shoot_time).timeout
 	
 		# spawn projectile now and hold onto it
 		spawn_projectile()
-		var projectile_hold_timer : float = projectile_hold_on_zora_time
-		while projectile_hold_timer > 0:
-			projectile_hold_timer -= get_process_delta_time()
-			await get_tree().process_frame
+		await get_tree().create_timer(projectile_hold_on_zora_time).timeout
 	
 		# shoot projectile and start timer to go back underwater
 		# TODO change this precise angle to 8 directions only, to be accurate.
 		var direction_to_link : Vector2 = (global_position - link.global_position).normalized()
 		if(is_instance_valid(current_projectile)):
 			current_projectile.set_forward_vector(-direction_to_link)
-		var stay_abovewater_time : float = stay_abovewater_after_shoot_time
-		while stay_abovewater_time > 0:
-			stay_abovewater_time -= get_process_delta_time()
-			await get_tree().process_frame
+		await get_tree().create_timer(stay_abovewater_after_shoot_time).timeout
 	
 		# go underwater and wait to loop
 		$AnimatedSprite2D.play("under_water")
 		current_state = ZORA_STATE.UNDERWATER
-		var reset_timer : float = stay_underwater_after_time
-		while reset_timer > 0:
-			reset_timer -= get_process_delta_time()
-			await get_tree().process_frame
+		await get_tree().create_timer(stay_underwater_after_time).timeout
 		while(is_instance_valid(current_projectile)): # make sure our current ball has despawned before we move
 			await get_tree().process_frame
 
@@ -74,7 +59,6 @@ func pick_random_new_tile() -> Vector2:
 		var use_array_index = randi_range(0, movable_tile_range.size() - 1)
 		var pre_target_position = Vector2(randi_range(movable_tile_range[use_array_index].z, movable_tile_range[use_array_index].x), randi_range(movable_tile_range[use_array_index].w, movable_tile_range[use_array_index].y))
 		target_position = Utils.align_to_grid(pre_target_position)
-		print(use_array_index, pre_target_position, target_position)
 	
 		# cast ray to see if we can go here
 		if(Utils.check_position_for_colliders(target_position, collision_layers_bitmask, get_world_2d())):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=4 uid="uid://bnrlmifgdjgsb"]
+[gd_scene load_steps=63 format=4 uid="uid://bnrlmifgdjgsb"]
 
 [ext_resource type="Script" path="res://scripts/GameData.gd" id="1_fiv6q"]
 [ext_resource type="Script" path="res://scripts/camera.gd" id="1_xkdoo"]
@@ -24,6 +24,7 @@
 [ext_resource type="AudioStream" uid="uid://bjkmgnosuhtpw" path="res://sound/sfx/text_progress.wav" id="22_xpy7p"]
 [ext_resource type="Texture2D" uid="uid://c0pwpxlkow2pa" path="res://images/dungeon_tilemap.png" id="23_4k6nb"]
 [ext_resource type="PackedScene" uid="uid://dhxxr225o5tr3" path="res://scenes/zora.tscn" id="24_n4nw8"]
+[ext_resource type="Script" path="res://scenes/shop_001.gd" id="24_q68sk"]
 
 [sub_resource type="AudioStreamWAV" id="AudioStreamWAV_3rr3c"]
 
@@ -423,11 +424,15 @@ region = Rect2(152, 0, 16, 16)
 atlas = ExtResource("18_dja85")
 region = Rect2(169, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_pio31"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_bgih1"]
 atlas = ExtResource("13_ptuyq")
 region = Rect2(0, 0, 16, 16)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_yeoh0"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_dvs4j"]
+atlas = ExtResource("13_ptuyq")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3dvue"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -440,7 +445,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_tyxcs")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_pio31")
+"texture": SubResource("AtlasTexture_bgih1")
 }],
 "loop": false,
 "name": &"default",
@@ -448,7 +453,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_pio31")
+"texture": SubResource("AtlasTexture_dvs4j")
 }, {
 "duration": 1.0,
 "texture": null
@@ -496,6 +501,45 @@ animations = [{
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_62vc4"]
 size = Vector2(32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tv1ag"]
+atlas = ExtResource("13_ptuyq")
+region = Rect2(112, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h15gm"]
+atlas = ExtResource("13_ptuyq")
+region = Rect2(112, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yeoh0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yt5bw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_onby7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tyxcs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tv1ag")
+}],
+"loop": false,
+"name": &"default",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h15gm")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": true,
+"name": &"disappear",
+"speed": 60.0
+}]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vd83b"]
 resource_name = "Tiles"
@@ -633,6 +677,19 @@ link_move_to_position = Vector2(-1800, 408)
 room_data = NodePath("../../../Interiors/wooden_sword_room")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Door Entrances/ROOM_001"]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_0wgtc")
+
+[node name="ROOM_002" type="Area2D" parent="Level/Door Entrances" node_paths=PackedStringArray("room_data") groups=["EntranceDoor"]]
+position = Vector2(-272, -256)
+collision_layer = 256
+collision_mask = 4
+script = ExtResource("12_doncs")
+camera_move_to_position = Vector2(-1536, 352)
+link_move_to_position = Vector2(-1544, 408)
+room_data = NodePath("../../../Interiors/shop_001")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Door Entrances/ROOM_002"]
 position = Vector2(8, 8)
 shape = SubResource("RectangleShape2D_0wgtc")
 
@@ -777,6 +834,86 @@ enemy_type = 1
 [node name="Enemy Spawner6" parent="Enemy Spawners" instance=ExtResource("13_m77ew")]
 position = Vector2(-544, 64)
 enemy_type = 2
+zora_movable_tile_range = Array[Vector4]([Vector4(-560, -96, -544, 64)])
+
+[node name="Enemy Spawner7" parent="Enemy Spawners" instance=ExtResource("13_m77ew")]
+position = Vector2(-352, -224)
+enemy_type = 1
+
+[node name="Enemy Spawner8" parent="Enemy Spawners" instance=ExtResource("13_m77ew")]
+position = Vector2(-304, -176)
+enemy_type = 1
+
+[node name="Enemy Spawner9" parent="Enemy Spawners" instance=ExtResource("13_m77ew")]
+position = Vector2(-224, -224)
+enemy_type = 1
+
+[node name="Enemy Spawner10" parent="Enemy Spawners" instance=ExtResource("13_m77ew")]
+position = Vector2(-192, -176)
+enemy_type = 1
+
+[node name="Enemy Spawner11" parent="Enemy Spawners" instance=ExtResource("13_m77ew")]
+position = Vector2(-304, 16)
+
+[node name="Enemy Spawner12" parent="Enemy Spawners" instance=ExtResource("13_m77ew")]
+position = Vector2(-224, -32)
+
+[node name="Enemy Spawner13" parent="Enemy Spawners" instance=ExtResource("13_m77ew")]
+position = Vector2(-208, 16)
+
+[node name="Enemy Spawner14" parent="Enemy Spawners" instance=ExtResource("13_m77ew")]
+position = Vector2(-512, 0)
+enemy_type = 3
+
+[node name="Enemy Spawner15" parent="Enemy Spawners" instance=ExtResource("13_m77ew")]
+position = Vector2(-496, -208)
+
+[node name="Enemy Spawner16" parent="Enemy Spawners" instance=ExtResource("13_m77ew")]
+position = Vector2(-592, -192)
+enemy_type = 1
+
+[node name="Enemy Spawner17" parent="Enemy Spawners" instance=ExtResource("13_m77ew")]
+position = Vector2(-624, -240)
+enemy_type = 1
+
+[node name="Enemy Spawner18" parent="Enemy Spawners" instance=ExtResource("13_m77ew")]
+position = Vector2(-608, -144)
+enemy_type = 1
+
+[node name="Enemy Spawner19" parent="Enemy Spawners" instance=ExtResource("13_m77ew")]
+position = Vector2(-560, -224)
+enemy_type = 2
+zora_movable_tile_range = Array[Vector4]([Vector4(-560, -272, -544, -112)])
+
+[node name="Enemy Spawner20" parent="Enemy Spawners" instance=ExtResource("13_m77ew")]
+position = Vector2(-464, -336)
+enemy_type = 1
+
+[node name="Enemy Spawner21" parent="Enemy Spawners" instance=ExtResource("13_m77ew")]
+position = Vector2(-560, -416)
+enemy_type = 2
+zora_movable_tile_range = Array[Vector4]([Vector4(-640, -448, -400, -384), Vector4(-560, -368, -544, -288)])
+
+[node name="Enemy Spawner22" parent="Enemy Spawners" instance=ExtResource("13_m77ew")]
+position = Vector2(-288, -384)
+enemy_type = 2
+zora_movable_tile_range = Array[Vector4]([Vector4(-384, -448, -288, -384)])
+
+[node name="Enemy Spawner23" parent="Enemy Spawners" instance=ExtResource("13_m77ew")]
+position = Vector2(-272, -336)
+enemy_type = 1
+
+[node name="Enemy Spawner24" parent="Enemy Spawners" instance=ExtResource("13_m77ew")]
+position = Vector2(-192, -368)
+enemy_type = 1
+
+[node name="Enemy Spawner25" parent="Enemy Spawners" instance=ExtResource("13_m77ew")]
+position = Vector2(-224, -400)
+enemy_type = 1
+
+[node name="Enemy Spawner26" parent="Enemy Spawners" instance=ExtResource("13_m77ew")]
+position = Vector2(-160, -320)
+enemy_type = 1
 
 [node name="Interiors" type="TileMapLayer" parent="."]
 texture_filter = 1
@@ -812,7 +949,7 @@ visible_ratio = 0.0
 
 [node name="old_man" type="AnimatedSprite2D" parent="Interiors/wooden_sword_room"]
 position = Vector2(-8, -32)
-sprite_frames = SubResource("SpriteFrames_yeoh0")
+sprite_frames = SubResource("SpriteFrames_3dvue")
 centered = false
 
 [node name="fire" type="AnimatedSprite2D" parent="Interiors/wooden_sword_room"]
@@ -839,8 +976,61 @@ collision_mask = 4
 script = ExtResource("12_doncs")
 link_move_to_position = Vector2(-56, -72)
 is_wide_horizontal = true
+leads_to_hyrule = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Interiors/wooden_sword_room/LEAVE_001"]
+position = Vector2(16, 8)
+shape = SubResource("RectangleShape2D_62vc4")
+
+[node name="shop_001" type="Node2D" parent="Interiors"]
+position = Vector2(-1536, 352)
+script = ExtResource("24_q68sk")
+
+[node name="dialogue_text" type="Label" parent="Interiors/shop_001"]
+offset_left = -88.0
+offset_top = -56.0
+offset_right = 88.0
+offset_bottom = -48.0
+text = "BUY SOMETHIN' WILL YA!"
+label_settings = SubResource("LabelSettings_w7q5k")
+horizontal_alignment = 1
+visible_characters = 0
+visible_characters_behavior = 1
+visible_ratio = 0.0
+
+[node name="npc" type="AnimatedSprite2D" parent="Interiors/shop_001"]
+position = Vector2(-8, -32)
+sprite_frames = SubResource("SpriteFrames_yeoh0")
+centered = false
+
+[node name="fire" type="AnimatedSprite2D" parent="Interiors/shop_001"]
+position = Vector2(-56, -32)
+sprite_frames = SubResource("SpriteFrames_gmfok")
+animation = &"appear"
+centered = false
+
+[node name="fire2" type="AnimatedSprite2D" parent="Interiors/shop_001"]
+position = Vector2(40, -32)
+sprite_frames = SubResource("SpriteFrames_gmfok")
+animation = &"appear"
+centered = false
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Interiors/shop_001"]
+stream = ExtResource("22_xpy7p")
+volume_db = -6.0
+bus = &"SFX"
+
+[node name="LEAVE_002" type="Area2D" parent="Interiors/shop_001" groups=["EntranceDoor"]]
+position = Vector2(-16, 56)
+collision_layer = 256
+collision_mask = 4
+script = ExtResource("12_doncs")
+camera_move_to_position = Vector2(-256, -176)
+link_move_to_position = Vector2(-264, -248)
+is_wide_horizontal = true
+leads_to_hyrule = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interiors/shop_001/LEAVE_002"]
 position = Vector2(16, 8)
 shape = SubResource("RectangleShape2D_62vc4")
 
@@ -853,3 +1043,4 @@ tile_set = SubResource("TileSet_j88e2")
 [connection signal="player_health_changed" from="." to="CanvasLayer/HealthController" method="set_current_hearts"]
 [connection signal="player_max_health_changed" from="." to="CanvasLayer/HealthController" method="set_max_hearts"]
 [connection signal="animation_finished" from="Interiors/wooden_sword_room/fire" to="Interiors/wooden_sword_room" method="_on_fire_animation_finished"]
+[connection signal="animation_finished" from="Interiors/shop_001/fire" to="Interiors/shop_001" method="_on_fire_animation_finished"]

@@ -36,7 +36,7 @@ func loop() -> void:
 		$AnimatedSprite2D.play("spinning")
 		while check_if_move_is_valid(towards_link_direction):
 			if(!is_moving):
-				await move()
+				move()
 				while is_moving:
 					await get_tree().process_frame
 		

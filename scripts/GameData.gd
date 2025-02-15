@@ -99,7 +99,7 @@ func change_max_bombs(amount : int) -> void:
 	max_bombs += amount
 	max_bombs_changed.emit(max_bombs)
 
-func player_start_enter_door(door : Area2D) -> void:
+func player_start_enter_door(_door : Area2D) -> void:
 	$MusicPlayer.stop()
 
 func player_finish_enter_door(door : Area2D) -> void:

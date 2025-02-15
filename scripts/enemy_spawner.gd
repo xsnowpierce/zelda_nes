@@ -6,6 +6,9 @@ var is_awake : bool
 var enemy_scene
 var should_cloud_be_visible : bool
 var game_data : Node
+@export_group("Zora Settings")
+@export var zora_movable_tile_range : Array[Vector4]
+
 
 func _ready() -> void:
 	$Sprite2D.visible = false
@@ -55,6 +58,7 @@ func _on_sprite_2d_animation_looped() -> void:
 				enemy_scene = game_data.enemy_octorok_scene.instantiate()
 			ENUM.ENEMY_TYPE.ZORA:
 				enemy_scene = game_data.enemy_zora_scene.instantiate()
+				enemy_scene.movable_tile_range = zora_movable_tile_range
 			ENUM.ENEMY_TYPE.LEEVER:
 				enemy_scene = game_data.enemy_leever_scene.instantiate()
 		

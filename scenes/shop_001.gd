@@ -10,10 +10,9 @@ func awake() -> void:
 	is_awake = true
 	set_room_visibility(true)
 	$dialogue_text.visible_characters = 0
-	$dialogue_text2.visible_characters = 0
 	$fire.play("appear")
 	$fire2.play("appear")
-	$old_man.play("default")
+	$npc.play("default")
 	pass
 	
 func sleep() -> void:
@@ -23,20 +22,15 @@ func sleep() -> void:
 
 func set_room_visibility(value : bool) -> void:
 	$dialogue_text.visible = value
-	$dialogue_text2.visible = value
 	$fire.visible = value
 	$fire2.visible = value
-	$old_man.visible = value
+	$npc.visible = value
 
 func start_typing_animation() -> void:
 	var dialogue_max_chars = $dialogue_text.get_total_character_count()
 	$AudioStreamPlayer.play()
 	for character in dialogue_max_chars:
 		$dialogue_text.visible_characters += 1
-		await get_tree().create_timer(text_print_delay).timeout
-	dialogue_max_chars = $dialogue_text2.get_total_character_count()
-	for character in dialogue_max_chars:
-		$dialogue_text2.visible_characters += 1
 		await get_tree().create_timer(text_print_delay).timeout
 	$AudioStreamPlayer.stop()
 	is_loaded = true
