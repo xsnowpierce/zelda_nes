@@ -1,7 +1,6 @@
 extends "res://scripts/room_data.gd"
 
 @export var text_print_delay : float = 0.12
-@export var old_man_dissapear_time : float = 1
 var has_item : bool
 
 func _ready() -> void:
@@ -57,9 +56,10 @@ func _on_fire_animation_finished() -> void:
 	if(!has_item):
 		start_typing_animation()
 
-func sword_obtained() -> void:
+func _on_key_item_item_picked_up() -> void:
+	has_item = false
 	$dialogue_text.visible = false
 	$dialogue_text2.visible = false
 	$old_man.play("disappear")
-	await get_tree().create_timer(old_man_dissapear_time).timeout
+	await get_tree().create_timer(npc_disappear_time).timeout
 	$old_man.visible = false

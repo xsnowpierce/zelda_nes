@@ -10,7 +10,7 @@ func _on_game_pause_menu_opened() -> void:
 
 
 func _on_game_pause_menu_closed() -> void:
-	pass # Replace with function body.
+	pass
 
 func apply_stats_to_items() -> void:
 	

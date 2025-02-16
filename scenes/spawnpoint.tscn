@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://dnhpm34f6ka1c"]
+
+[ext_resource type="Texture2D" uid="uid://cpa11tutqc7h1" path="res://images/Sprite-0001.png" id="1_xh2r7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tokoo"]
+atlas = ExtResource("1_xh2r7")
+region = Rect2(224, 0, 16, 16)
+
+[node name="SPAWNPOINT" type="Node2D" groups=["SPAWNPOINT"]]
+position = Vector2(0, -688)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visibility_layer = 2
+z_index = 5
+texture_filter = 1
+texture = SubResource("AtlasTexture_tokoo")

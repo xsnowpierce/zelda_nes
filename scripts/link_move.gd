@@ -34,16 +34,12 @@ var colliding_with_door : Area2D
 var is_entering_door : bool = false
 var is_exiting_door : bool = false
 var has_room_events : bool = false
-signal entering_door(door : Area2D)
+signal entering_door(door : Area2D, leads_to_hyrule : bool)
 var is_inside_room : bool
 
 var is_pickup_animation : bool
 @export_group("Pickup Animation")
 @export var pickup_animation_length : float
-
-@export_group("Equipment")
-@export var current_equipped_a : ENUM.KEY_ITEM_TYPE
-@export var current_equipped_b : ENUM.KEY_ITEM_TYPE
 
 func _ready() -> void:
 	game_data = get_tree().get_first_node_in_group("GameData")
@@ -165,9 +161,9 @@ func check_for_new_screen() -> Vector2:
 
 func check_attack() -> void:
 	if(Input.is_action_just_pressed("attack") and !is_attacking):
-		if(current_equipped_a == ENUM.KEY_ITEM_TYPE.NULL):
+		if(game_data.current_equipped_item_a == ENUM.KEY_ITEM_TYPE.NULL):
 			return
-		match current_equipped_a:
+		match game_data.current_equipped_item_a:
 			ENUM.KEY_ITEM_TYPE.WOODEN_SWORD:
 				is_attacking = true
 				$"Link Sprite Mask/Link Sprite"._on_character_body_2d_attack()
@@ -175,9 +171,9 @@ func check_attack() -> void:
 				$AudioPlayer.stream = sword_swing_sound
 				$AudioPlayer.play()
 	if(Input.is_action_just_pressed("alternate_attack") and !is_attacking):
-		if(current_equipped_b == ENUM.KEY_ITEM_TYPE.NULL):
+		if(game_data.current_equipped_item_b == ENUM.KEY_ITEM_TYPE.NULL):
 			return
-		match current_equipped_b:
+		match game_data.current_equipped_item_b:
 			ENUM.KEY_ITEM_TYPE.WOODEN_SWORD:
 				is_attacking = true
 				$"Link Sprite Mask/Link Sprite"._on_character_body_2d_attack()
@@ -222,7 +218,7 @@ func enter_door() -> void:
 		return
 	is_entering_door = true
 	position = (colliding_with_door.global_position + Vector2(8,8))
-	entering_door.emit(colliding_with_door)
+	entering_door.emit(colliding_with_door, true)
 	game_data.player_start_enter_door(colliding_with_door)
 	$AudioPlayer.stream = door_enter_sound
 	$AudioPlayer.play(0.0)
@@ -318,3 +314,11 @@ func picked_up_key_item(type : ENUM.KEY_ITEM_TYPE) -> void:
 	await get_tree().create_timer(pickup_animation_length).timeout
 	$"Link Sprite Mask/Link Sprite".animation = current_animation
 	is_pickup_animation = false
+
+
+func _on_game_equipment_slot_a_changed(new_item_type: ENUM.KEY_ITEM_TYPE) -> void:
+	pass # Replace with function body.
+
+
+func _on_game_equipment_slot_b_changed(new_item_type: ENUM.KEY_ITEM_TYPE) -> void:
+	pass # Replace with function body.
