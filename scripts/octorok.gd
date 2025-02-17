@@ -80,7 +80,7 @@ func move_to_direction(target_direction : Vector2) -> void:
 	
 		# move to position
 	while (position.distance_to(target_position) > 1):
-		if(is_shooting or GameSettings.camera_is_moving):
+		if(is_shooting or GameSettings.camera_is_moving or !can_process()):
 			await get_tree().process_frame
 			continue
 		var move_distance = move_speed * get_process_delta_time()  # Distance to move this frame

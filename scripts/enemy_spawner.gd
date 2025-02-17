@@ -63,7 +63,7 @@ func _on_sprite_2d_animation_looped() -> void:
 				enemy_scene = game_data.enemy_leever_scene.instantiate()
 		
 		enemy_scene.position = position
-		game_data.add_child(enemy_scene)
+		game_data.enemy_spawn_parent.add_child(enemy_scene)
 		enemy_scene.connect("has_died", Callable(self, "spawned_enemy_has_died"))
 		$Sprite2D.stop()
 

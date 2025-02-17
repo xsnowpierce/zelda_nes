@@ -81,7 +81,7 @@ func jump_to_position(end_position : Vector2) -> void:
 	var current_jump_time : float = 0
 	
 	while current_jump_time < 1.0:
-		if(GameSettings.camera_is_moving):
+		if(GameSettings.camera_is_moving or !can_process()):
 			await get_tree().process_frame
 			continue
 		current_jump_time += get_process_delta_time() * jump_move_speed  # Adjust speed to control the jump duration

@@ -1,6 +1,7 @@
 extends Camera2D
 
 var is_currently_moving : bool = false
+var is_currently_moving_pause_menu : bool = false
 @export var camera_move_speed : float = 180
 signal camera_moved(new_area_position : Vector2)
 
@@ -48,9 +49,11 @@ func set_camera_tile(tile_coordinate : Vector2) -> void:
 	camera_moved.emit(tile_coordinate)
 
 func open_pause_menu() -> void:
-	move_camera_to_position(global_position + Vector2(0, GameSettings.map_screen_size.y))
-	pass
+	is_currently_moving_pause_menu = true
+	await move_camera_to_position(global_position - Vector2(0, GameSettings.map_screen_size.y))
+	is_currently_moving_pause_menu = false
 
 func close_pause_menu() -> void:
-	move_camera_to_position(global_position - Vector2(0, GameSettings.map_screen_size.y))
-	pass
+	is_currently_moving_pause_menu = true
+	await move_camera_to_position(global_position + Vector2(0, GameSettings.map_screen_size.y))
+	is_currently_moving_pause_menu = false

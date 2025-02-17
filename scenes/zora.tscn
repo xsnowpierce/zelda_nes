@@ -43,10 +43,10 @@ animations = [{
 }]
 
 [node name="Zora" type="Area2D" groups=["Enemy"]]
+process_mode = 1
 collision_layer = 8
 collision_mask = 16
 script = ExtResource("1_wqvra")
-movable_tile_range = Array[Vector4]([Vector4(-560, -96, -544, 64)])
 zora_projectile_scene = ExtResource("2_sgqyw")
 collision_layers_bitmask = 2
 

@@ -8,12 +8,14 @@ func _ready() -> void:
 	set_room_visibility(false)
 
 func awake() -> void:
+	$"Key Item/AnimatedSprite2D".visible = false
 	if(get_tree().get_first_node_in_group("GameData").has_player_flag("obtained_wooden_sword")):
 		set_room_visibility(false)
 		$fire.visible = true
 		$fire2.visible = true
 		has_item = true
 		is_loaded = true
+		$"Key Item".queue_free()
 	else:
 		set_room_visibility(true)
 		$dialogue_text.visible_characters = 0
@@ -54,6 +56,7 @@ func _on_fire_animation_finished() -> void:
 	$fire.play("fire")
 	$fire2.play("fire")
 	if(!has_item):
+		$"Key Item/AnimatedSprite2D".visible = true
 		start_typing_animation()
 
 func _on_key_item_item_picked_up() -> void:

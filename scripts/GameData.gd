@@ -31,6 +31,8 @@ var camera : Camera2D
 var link : CharacterBody2D
 var current_equipped_item_a : ENUM.KEY_ITEM_TYPE = ENUM.KEY_ITEM_TYPE.NULL
 var current_equipped_item_b : ENUM.KEY_ITEM_TYPE = ENUM.KEY_ITEM_TYPE.NULL
+var game_is_paused : bool
+@export var enemy_spawn_parent : Node2D
 
 signal player_death
 signal player_health_changed(new_current_amount : int)
@@ -57,6 +59,15 @@ func _ready() -> void:
 	var camera_position = Vector2i(roundi($SPAWNPOINT.global_position.x / GameSettings.map_screen_size.x), roundi($SPAWNPOINT.global_position.y / GameSettings.map_screen_size.y))
 	camera.set_camera_tile(camera_position)
 	link.position = $SPAWNPOINT.global_position
+
+func _process(delta: float) -> void:
+	if(Input.is_action_just_pressed("pause_game")):
+		if(camera.is_currently_moving or camera.is_currently_moving_pause_menu):
+			return
+		if(game_is_paused):
+			close_pause_menu()
+		else:
+			open_pause_menu()
 
 func has_player_flag(flag : String) -> bool:
 	if(player_flags.has(flag)):
@@ -147,7 +158,18 @@ func equip_key_item(type : ENUM.KEY_ITEM_TYPE, slot : int) -> void:
 		current_equipped_item_a = type
 
 func open_pause_menu() -> void:
+	if(game_is_paused):
+		return
+	print("paused")
+	game_is_paused = true
+	get_tree().paused = true
 	pause_menu_opened.emit()
+	camera.open_pause_menu()
 
 func close_pause_menu() -> void:
+	if(!game_is_paused):
+		return
+	await camera.close_pause_menu()
+	game_is_paused = false
+	get_tree().paused = false
 	pause_menu_closed.emit()

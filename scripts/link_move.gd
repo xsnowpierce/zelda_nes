@@ -76,7 +76,8 @@ func is_player_input_allowed() -> bool:
 		and !is_entering_door 
 		and !is_exiting_door 
 		and !has_room_events 
-		and !is_pickup_animation)
+		and !is_pickup_animation
+		and !game_data.game_is_paused)
 
 func get_look_direction() -> Vector2:
 	return $"Link Sprite Mask/Link Sprite".current_direction

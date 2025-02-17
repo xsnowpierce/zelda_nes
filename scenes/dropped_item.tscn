@@ -68,6 +68,7 @@ shape = SubResource("RectangleShape2D_lffti")
 bus = &"SFX"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+process_mode = 1
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_ofqey")
 animation = &"heart"
