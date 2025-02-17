@@ -160,7 +160,6 @@ func equip_key_item(type : ENUM.KEY_ITEM_TYPE, slot : int) -> void:
 func open_pause_menu() -> void:
 	if(game_is_paused):
 		return
-	print("paused")
 	game_is_paused = true
 	get_tree().paused = true
 	pause_menu_opened.emit()

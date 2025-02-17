@@ -1202,9 +1202,9 @@ collision_layer = 4
 collision_mask = 3
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-process_mode = 1
+process_mode = 3
 script = ExtResource("16_sgrtl")
-camera_position_offset = Vector2(-128, -158)
+camera_position_offset = Vector2(-128, -160)
 
 [node name="Control" type="Control" parent="CanvasLayer"]
 layout_mode = 3
@@ -1946,7 +1946,7 @@ is_wide_horizontal = true
 
 [node name="SPAWNPOINT" parent="." instance=ExtResource("36_w4qf6")]
 process_mode = 1
-position = Vector2(0, 0)
+position = Vector2(512, -896)
 
 [node name="ENEMY_SPAWNS" type="Node2D" parent="."]
 process_mode = 1

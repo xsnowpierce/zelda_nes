@@ -47,10 +47,10 @@ func apply_stats_to_items() -> void:
 		$bow_slot/TextureRect.visible = false
 	
 	#candle
-	if(game_data.has_player_flag("obtained_blue_candle")):
+	if(game_data.has_player_flag("obtained_red_candle")):
 		$candle_slot/TextureRect.frame = 1
 		$candle_slot/TextureRect.visible = true
-	elif(game_data.has_player_flag("obtained_red_candle")):
+	elif(game_data.has_player_flag("obtained_blue_candle")):
 		$candle_slot/TextureRect.frame = 0
 		$candle_slot/TextureRect.visible = true
 	else:
