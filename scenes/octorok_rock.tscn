@@ -15,6 +15,7 @@ process_mode = 1
 collision_layer = 32
 collision_mask = 5
 script = ExtResource("1_0iau7")
+attack_block_level = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 texture_filter = 1

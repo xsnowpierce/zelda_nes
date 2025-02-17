@@ -98,6 +98,7 @@ process_mode = 1
 collision_layer = 8
 collision_mask = 23
 script = ExtResource("1_k33cw")
+enemy_type = 3
 collision_layers_bitmask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

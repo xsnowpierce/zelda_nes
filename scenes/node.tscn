@@ -1,4 +1,4 @@
-[gd_scene load_steps=132 format=4 uid="uid://bnrlmifgdjgsb"]
+[gd_scene load_steps=133 format=4 uid="uid://bnrlmifgdjgsb"]
 
 [ext_resource type="Script" path="res://scripts/GameData.gd" id="1_fiv6q"]
 [ext_resource type="Script" path="res://scripts/camera.gd" id="1_xkdoo"]
@@ -22,7 +22,7 @@
 [ext_resource type="Script" path="res://scripts/pausemenu_ui.gd" id="14_u5ibt"]
 [ext_resource type="Script" path="res://scripts/minimap.gd" id="16_ebc1w"]
 [ext_resource type="Script" path="res://scripts/ui_key_items_row.gd" id="16_l21i6"]
-[ext_resource type="Script" path="res://scenes/ui_canvas_layer.gd" id="16_sgrtl"]
+[ext_resource type="Script" path="res://scripts/ui_canvas_layer.gd" id="16_sgrtl"]
 [ext_resource type="Script" path="res://scripts/ui_usable_items_menu.gd" id="16_ud5o4"]
 [ext_resource type="Texture2D" uid="uid://cxy5ob882odyf" path="res://images/interiors.png" id="17_ygtp3"]
 [ext_resource type="Script" path="res://scripts/room_001.gd" id="18_55qtr"]
@@ -37,6 +37,7 @@
 [ext_resource type="PackedScene" uid="uid://bbxp7t0tw5miq" path="res://scenes/key_item.tscn" id="29_xlno4"]
 [ext_resource type="AudioStream" uid="uid://cmfpaw11ggj1q" path="res://sound/music/dungeon_music.wav" id="36_8um02"]
 [ext_resource type="PackedScene" uid="uid://dnhpm34f6ka1c" path="res://scenes/spawnpoint.tscn" id="36_w4qf6"]
+[ext_resource type="Script" path="res://scripts/rng_dropper.gd" id="38_f8yhx"]
 
 [sub_resource type="AudioStreamWAV" id="AudioStreamWAV_3rr3c"]
 
@@ -1141,7 +1142,9 @@ enemy_tektite_scene = ExtResource("2_ycp2m")
 enemy_octorok_scene = ExtResource("3_jg83s")
 enemy_zora_scene = ExtResource("24_n4nw8")
 enemy_leever_scene = ExtResource("5_mynx1")
+current_player_health = 6
 hyrule_music = ExtResource("2_7hpxk")
+current_equipped_item_a = 1
 enemy_spawn_parent = NodePath("ENEMY_SPAWNS")
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
@@ -1885,6 +1888,7 @@ position = Vector2(-16, 56)
 collision_layer = 256
 collision_mask = 4
 script = ExtResource("12_doncs")
+camera_move_to_tile_coordinate = Vector2(-1, -1)
 link_move_to_position = Vector2(-264, -248)
 area_data = NodePath("../../../Level")
 is_wide_horizontal = true
@@ -1912,7 +1916,7 @@ visible_ratio = -1.0
 
 [node name="ITEM_0" parent="Interiors/shop_001" instance=ExtResource("29_xlno4")]
 position = Vector2(-32, 0)
-item_type = 4
+item_type = 5
 
 [node name="ITEM_1" parent="Interiors/shop_001" instance=ExtResource("29_xlno4")]
 item_type = 20
@@ -1946,10 +1950,13 @@ is_wide_horizontal = true
 
 [node name="SPAWNPOINT" parent="." instance=ExtResource("36_w4qf6")]
 process_mode = 1
-position = Vector2(512, -896)
+position = Vector2(-496, -352)
 
 [node name="ENEMY_SPAWNS" type="Node2D" parent="."]
 process_mode = 1
+
+[node name="RNG_DROPPER" type="Node" parent="."]
+script = ExtResource("38_f8yhx")
 
 [connection signal="bombs_changed" from="." to="CanvasLayer/Control/ingame UI/bomb" method="_on_game_bombs_changed"]
 [connection signal="equipment_slot_a_changed" from="." to="Link" method="_on_game_equipment_slot_a_changed"]

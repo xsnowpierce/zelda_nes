@@ -1,5 +1,7 @@
 extends Area2D
 
+@export var enemy_type : ENUM.ENEMY_TYPE
+@export var hitbox_attack_block_level : ENUM.BLOCK_ATTACK_LEVEL = ENUM.BLOCK_ATTACK_LEVEL.IMPOSSIBLE
 @export var max_health : int = 1
 @export var attacked_iframes : int = 16
 var current_attacked_iframes : float
@@ -23,6 +25,8 @@ func _process(delta: float) -> void:
 func _on_area_entered(area: Area2D) -> void:
 	if(area.is_in_group("Player_Attack")):
 		attacked()
+	elif(area.is_in_group("Player")):
+		get_tree().get_first_node_in_group("Player").attacked(global_position, hitbox_attack_block_level)
 
 func attacked() -> void:
 	if(current_attacked_iframes > 0):
@@ -38,5 +42,6 @@ func death() -> void:
 	var death_object = death_scene.instantiate()
 	get_parent().add_child(death_object)
 	death_object.position = position
+	get_tree().get_first_node_in_group("GameData").add_player_kill(enemy_type, ENUM.KILL_METHOD.OTHER)
 	has_died.emit()
 	queue_free()

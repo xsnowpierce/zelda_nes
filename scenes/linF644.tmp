@@ -280,7 +280,6 @@ collision_layer = 2
 safe_margin = 0.001
 script = ExtResource("1_y1qvt")
 pickup_animation_length = 2.5
-max_block_angle = 40.0
 
 [node name="Link Collider" type="CollisionShape2D" parent="."]
 position = Vector2(0, 4)

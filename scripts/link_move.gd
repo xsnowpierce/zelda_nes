@@ -28,6 +28,7 @@ var is_attacked_knockback : bool
 @export var attacked_sound := preload("res://sound/sfx/The Legend of Zelda Cartoon Sound Effects Player Hurt.wav")
 @export var door_enter_sound := preload("res://sound/sfx/The Legend of Zelda Cartoon Sound Effects Walking on Stairs.wav")
 @export var key_item_pickup := preload("res://sound/sfx/The Legend of Zelda Cartoon Sound Effects Item Received.wav")
+@export var shield_block := preload("res://sound/sfx/The Legend of Zelda Cartoon Sound Effects Shield Deflecting.wav")
 
 #door entering variables
 var colliding_with_door : Area2D
@@ -40,6 +41,8 @@ var is_inside_room : bool
 var is_pickup_animation : bool
 @export_group("Pickup Animation")
 @export var pickup_animation_length : float
+
+@export var max_block_angle : float
 
 func _ready() -> void:
 	game_data = get_tree().get_first_node_in_group("GameData")
@@ -187,8 +190,6 @@ func _on_animated_sprite_2d_attack_ended() -> void:
 
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
-	if(area.is_in_group("Enemy") or area.is_in_group("Enemy_Attack")):
-		attacked(area.global_position)
 	if(area.is_in_group("EntranceDoor") and (!is_entering_door and !is_exiting_door)):
 		colliding_with_door = area
 
@@ -273,15 +274,21 @@ func exit_door_sprite_animation() -> void:
 		await get_tree().process_frame
 	$"Link Sprite Mask/Link Sprite".pause()
 
-func attacked(from : Vector2) -> void:
+func attacked(from : Vector2, attack_block_level : ENUM.BLOCK_ATTACK_LEVEL = ENUM.BLOCK_ATTACK_LEVEL.IMPOSSIBLE) -> void:
+	if(try_block_attack(from, attack_block_level)):
+		$AudioPlayer.stream = shield_block
+		$AudioPlayer.play()
+		return
+	
 	if(current_attacked_iframes > 0):
 		return
 	
 	current_attacked_iframes = (attacked_iframes / 60)
 	is_attacked_knockback = true
+	
 	$AudioPlayer.stream = attacked_sound
 	$AudioPlayer.play()
-	get_parent().player_took_damage(1)
+	game_data.player_took_damage(1)
 	var knockback_direction : Vector2 = (Vector2(global_position.x, global_position.y) - Vector2(from.x - 8, from.y - 8))
 	if(abs(knockback_direction.x) > abs(knockback_direction.y)):
 		knockback_direction.y = 0
@@ -304,6 +311,21 @@ func attacked(from : Vector2) -> void:
 		await get_tree().process_frame
 	
 	is_attacked_knockback = false
+
+func try_block_attack(from: Vector2, block_level: ENUM.BLOCK_ATTACK_LEVEL = ENUM.BLOCK_ATTACK_LEVEL.IMPOSSIBLE) -> bool:
+	if block_level == ENUM.BLOCK_ATTACK_LEVEL.IMPOSSIBLE:
+		return false
+	if block_level == ENUM.BLOCK_ATTACK_LEVEL.MAGICAL_SHIELD and not game_data.has_player_flag("obtained_magical_shield"):
+		return false
+	
+	var link_centre = global_position + Vector2(8, 8)
+	var hit_centre = from + Vector2(8, 8)
+	var hit_direction = (hit_centre - link_centre).normalized()
+	
+	var link_facing_degrees = rad_to_deg($"Link Sprite Mask/Link Sprite".current_direction.angle())
+	var attacking_degrees = rad_to_deg(global_position.angle_to_point(hit_centre))
+	
+	return abs(link_facing_degrees - attacking_degrees) <= max_block_angle
 
 func picked_up_key_item(type : ENUM.KEY_ITEM_TYPE) -> void:
 	game_data.player_pickup_key_item(type)

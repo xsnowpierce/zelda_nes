@@ -38,7 +38,10 @@ func loop() -> void:
 		# TODO change this precise angle to 8 directions only, to be accurate.
 		var direction_to_link : Vector2 = (global_position - link.global_position).normalized()
 		if(is_instance_valid(current_projectile)):
-			current_projectile.set_forward_vector(-direction_to_link)
+			var direction : Vector2 = -direction_to_link
+			direction.x = snappedf(direction.x, 0.5)
+			direction.y = snappedf(direction.y, 0.5)
+			current_projectile.set_forward_vector(direction)
 		await get_tree().create_timer(stay_abovewater_after_shoot_time).timeout
 	
 		# go underwater and wait to loop

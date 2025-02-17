@@ -29,10 +29,11 @@ extends Node
 var current_area : Node2D
 var camera : Camera2D
 var link : CharacterBody2D
-var current_equipped_item_a : ENUM.KEY_ITEM_TYPE = ENUM.KEY_ITEM_TYPE.NULL
-var current_equipped_item_b : ENUM.KEY_ITEM_TYPE = ENUM.KEY_ITEM_TYPE.NULL
+@export var current_equipped_item_a : ENUM.KEY_ITEM_TYPE = ENUM.KEY_ITEM_TYPE.NULL
+@export var current_equipped_item_b : ENUM.KEY_ITEM_TYPE = ENUM.KEY_ITEM_TYPE.NULL
 var game_is_paused : bool
 @export var enemy_spawn_parent : Node2D
+@export var dropped_item_scene : PackedScene = preload("res://scenes/dropped_item.tscn")
 
 signal player_death
 signal player_health_changed(new_current_amount : int)
@@ -56,6 +57,8 @@ func _ready() -> void:
 	keys_changed.emit(current_keys)
 	bombs_changed.emit(current_bombs)
 	max_bombs_changed.emit(max_bombs)
+	equipment_slot_a_changed.emit(current_equipped_item_a)
+	equipment_slot_b_changed.emit(current_equipped_item_b)
 	var camera_position = Vector2i(roundi($SPAWNPOINT.global_position.x / GameSettings.map_screen_size.x), roundi($SPAWNPOINT.global_position.y / GameSettings.map_screen_size.y))
 	camera.set_camera_tile(camera_position)
 	link.position = $SPAWNPOINT.global_position
@@ -86,13 +89,18 @@ func player_took_damage(damage : int) -> void:
 	player_lose_health(damage)
 	if(current_player_health <= 0):
 		player_death.emit()
+	$RNG_DROPPER.link_was_hit()
 
 func player_gain_heart(amount : int) -> void:
 	current_player_health += amount
+	if(current_player_health > max_player_health):
+		current_player_health = max_player_health
 	player_health_changed.emit(current_player_health)
 
 func player_lose_health(amount : int) -> void:
 	current_player_health -= amount
+	if(current_player_health < 0):
+		current_player_health = 0
 	player_health_changed.emit(current_player_health)
 
 func change_max_hearts(amount : int) -> void:
@@ -172,3 +180,16 @@ func close_pause_menu() -> void:
 	game_is_paused = false
 	get_tree().paused = false
 	pause_menu_closed.emit()
+
+func add_player_kill(enemy_type : ENUM.ENEMY_TYPE, kill_method : ENUM.KILL_METHOD) -> void:
+	$RNG_DROPPER.add_kill(enemy_type, kill_method)
+
+func enemy_drop_item(drop_position : Vector2) -> void:
+	var next_drop : ENUM.ITEM_TYPE = $RNG_DROPPER.get_next_drop()
+	print("get_drop called: ", ENUM.ITEM_TYPE.keys()[next_drop])
+	if(next_drop == ENUM.ITEM_TYPE.NULL):
+		return
+	var dropped_item = dropped_item_scene.instantiate()
+	dropped_item.position = drop_position + Vector2(8, 8)
+	dropped_item.set_item_type(next_drop)
+	$ENEMY_SPAWNS.add_child(dropped_item)

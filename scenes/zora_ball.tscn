@@ -47,6 +47,7 @@ process_mode = 1
 collision_layer = 32
 collision_mask = 4
 script = ExtResource("1_yamwf")
+attack_block_level = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 texture_filter = 1

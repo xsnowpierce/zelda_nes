@@ -57,7 +57,7 @@ func get_animation_frame_from_item_type(item_type : ENUM.KEY_ITEM_TYPE) -> int:
 			return 15
 		ENUM.KEY_ITEM_TYPE.DOOR_KEY:
 			return 16
-		ENUM.KEY_ITEM_TYPE.WOODEN_SHIELD:
+		ENUM.KEY_ITEM_TYPE.MAGICAL_SHIELD:
 			return 17
 		ENUM.KEY_ITEM_TYPE.BOW:
 			return 18
@@ -97,6 +97,8 @@ func get_obtain_player_flag_from_item_type(item_type : ENUM.KEY_ITEM_TYPE) -> St
 			return "obtained_door_key"
 		ENUM.KEY_ITEM_TYPE.WOODEN_SHIELD:
 			return "obtained_wooden_shield"
+		ENUM.KEY_ITEM_TYPE.MAGICAL_SHIELD:
+			return "obtained_magical_shield"
 		ENUM.KEY_ITEM_TYPE.BOW:
 			return "obtained_bow"
 	return "null"

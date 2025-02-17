@@ -92,8 +92,9 @@ size = Vector2(15, 15)
 
 [node name="Octorok" type="Area2D" groups=["Enemy"]]
 collision_layer = 8
-collision_mask = 18
+collision_mask = 20
 script = ExtResource("1_2nf78")
+enemy_type = 1
 collision_layers_bitmask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

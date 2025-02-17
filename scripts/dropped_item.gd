@@ -29,7 +29,7 @@ func _on_area_entered(area: Area2D) -> void:
 			$AudioStreamPlayer.stream = rupee_gain_sound
 			$AudioStreamPlayer.play()
 		ENUM.ITEM_TYPE.HEART:
-			game_data.player_gain_heart(1)
+			game_data.player_gain_heart(2)
 			$AudioStreamPlayer.stream = heart_gain_sound
 			$AudioStreamPlayer.play()
 	$AnimatedSprite2D.visible = false

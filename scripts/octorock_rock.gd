@@ -3,6 +3,7 @@ extends Area2D
 @export var move_speed : float = 2
 var current_forward_vector : Vector2 = Vector2.UP
 var camera
+@export var attack_block_level : ENUM.BLOCK_ATTACK_LEVEL
 
 func _ready() -> void:
 	camera = get_tree().get_first_node_in_group("Camera")
@@ -28,4 +29,5 @@ func kill() -> void:
 
 func _on_area_entered(area: Area2D) -> void:
 	if(area.is_in_group("Player")):
+		get_tree().get_first_node_in_group("Player").attacked(global_position, attack_block_level)
 		kill()
