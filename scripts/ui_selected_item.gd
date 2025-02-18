@@ -1,12 +1,10 @@
-extends TextureRect
+extends Node
 
 func _on_game_equipment_slot_a_changed(new_item_type: ENUM.KEY_ITEM_TYPE) -> void:
-	print("updated")
 	$TextureRect.frame = get_animation_frame_from_item_type(new_item_type)
 
 
 func _on_game_equipment_slot_b_changed(new_item_type: ENUM.KEY_ITEM_TYPE) -> void:
-	print("updated")
 	$TextureRect.frame = get_animation_frame_from_item_type(new_item_type)
 
 func get_animation_frame_from_item_type(item_type : ENUM.KEY_ITEM_TYPE) -> int:

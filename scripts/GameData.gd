@@ -23,6 +23,71 @@ extends Node
 @export var max_bombs : int = 8
 @export var current_bombs : int = 0
 
+# NULL,WOODEN_SWORD, WHITE_SWORD, MAGICAL_SWORD, 
+	#WOODEN_SHIELD,MAGICAL_SHIELD,WOODEN_BOOMERANG,MAGICAL_BOOMERANG,
+	#BOMB,BOW,WOODEN_ARROW,SILVER_ARROW,BLUE_CANDLE,RED_CANDLE,RECORDER,
+	#FOOD,LETTER,RED_POTION,BLUE_POTION,MAGICAL_ROD,DOOR_KEY, HEART_CONTAINER
+@export_subgroup("Key Items")
+@export var has_wooden_sword : bool
+@export var has_white_sword : bool
+@export var has_magical_sword : bool
+@export var has_wooden_shield : bool
+@export var has_magical_shield : bool
+@export var has_wooden_boomerang : bool
+@export var has_magical_boomerang : bool
+@export var has_bomb : bool
+@export var has_bow : bool
+@export var has_wooden_arrow : bool
+@export var has_silver_arrow : bool
+@export var has_blue_candle : bool
+@export var has_red_candle : bool
+@export var has_recorder : bool
+@export var has_food : bool
+@export var has_letter : bool
+@export var has_red_potion : bool
+@export var has_blue_potion : bool
+@export var has_magical_rod : bool
+
+func apply_debug_key_item_list() -> void:
+	if(has_wooden_sword):
+		add_player_flag("obtained_wooden_sword")
+	if(has_white_sword):
+		add_player_flag("obtained_white_sword")
+	if(has_magical_sword):
+		add_player_flag("obtained_magical_sword")
+	if(has_wooden_shield):
+		add_player_flag("obtained_wooden_shield")
+	if(has_magical_shield):
+		add_player_flag("obtained_magical_shield")
+	if(has_wooden_boomerang):
+		add_player_flag("obtained_wooden_boomerang")
+	if(has_magical_boomerang):
+		add_player_flag("obtained_magical_boomerang")
+	if(has_bomb):
+		add_player_flag("obtained_bomb")
+	if(has_bow):
+		add_player_flag("obtained_bow")
+	if(has_wooden_arrow):
+		add_player_flag("obtained_wooden_arrows")
+	if(has_silver_arrow):
+		add_player_flag("obtained_silver_arrows")
+	if(has_blue_candle):
+		add_player_flag("obtained_blue_candle")
+	if(has_red_candle):
+		add_player_flag("obtained_red_candle")
+	if(has_recorder):
+		add_player_flag("obtained_whistle")
+	if(has_food):
+		add_player_flag("obtained_food")
+	if(has_letter):
+		add_player_flag("obtained_letter")
+	if(has_red_potion):
+		add_player_flag("obtained_red_potion")
+	if(has_blue_potion):
+		add_player_flag("obtained_blue_potion")
+	if(has_magical_rod):
+		add_player_flag("obtained_magic_rod")
+
 @export_group("Music Files")
 @export var hyrule_music : AudioStreamWAV
 
@@ -46,8 +111,10 @@ signal pause_menu_opened
 signal pause_menu_closed
 signal equipment_slot_a_changed(new_item_type : ENUM.KEY_ITEM_TYPE)
 signal equipment_slot_b_changed(new_item_type : ENUM.KEY_ITEM_TYPE)
+signal pause_menu_control(given_control : bool)
 
 func _ready() -> void:
+	apply_debug_key_item_list()
 	get_tree().root.get_viewport().canvas_cull_mask = camera_cull_mask
 	camera = get_tree().get_first_node_in_group("Camera")
 	link = get_tree().get_first_node_in_group("Player")
@@ -153,6 +220,10 @@ func player_pickup_key_item(item_type : ENUM.KEY_ITEM_TYPE) -> void:
 		ENUM.KEY_ITEM_TYPE.DOOR_KEY:
 			current_keys += 1
 			keys_changed.emit(current_keys)
+		ENUM.KEY_ITEM_TYPE.HEART_CONTAINER:
+			change_max_hearts(2)
+			current_player_health = max_player_health
+			player_health_changed.emit(current_player_health)
 
 func equip_key_item(type : ENUM.KEY_ITEM_TYPE, slot : int) -> void:
 	if(slot == 0):
@@ -171,11 +242,14 @@ func open_pause_menu() -> void:
 	game_is_paused = true
 	get_tree().paused = true
 	pause_menu_opened.emit()
-	camera.open_pause_menu()
+	await camera.open_pause_menu()
+	pause_menu_control.emit(true)
+	
 
 func close_pause_menu() -> void:
 	if(!game_is_paused):
 		return
+	pause_menu_control.emit(false)
 	await camera.close_pause_menu()
 	game_is_paused = false
 	get_tree().paused = false
@@ -193,3 +267,6 @@ func enemy_drop_item(drop_position : Vector2) -> void:
 	dropped_item.position = drop_position + Vector2(8, 8)
 	dropped_item.set_item_type(next_drop)
 	$ENEMY_SPAWNS.add_child(dropped_item)
+
+func equipped_b_slot_change(new_item_type : ENUM.KEY_ITEM_TYPE) -> void:
+	current_equipped_item_b = new_item_type

@@ -303,8 +303,8 @@ texture_filter = 1
 texture_repeat = 1
 position = Vector2(8, 8)
 sprite_frames = SubResource("SpriteFrames_18du3")
-animation = &"item_pickup"
-autoplay = "down"
+animation = &"up"
+autoplay = "up"
 script = ExtResource("3_1avva")
 
 [node name="Link Hitbox" type="Area2D" parent="." groups=["Player"]]
