@@ -36,8 +36,8 @@
 [ext_resource type="Script" path="res://scripts/shop_001.gd" id="24_q68sk"]
 [ext_resource type="AudioStream" uid="uid://cexjokwgnft1d" path="res://sound/sfx/menu_change_selection.wav" id="24_r083s"]
 [ext_resource type="Texture2D" uid="uid://s0p3ioiqty7b" path="res://images/items_and_weapons.png" id="25_1p3jh"]
-[ext_resource type="Script" path="res://scenes/pause_selection_sound.gd" id="25_2tptc"]
-[ext_resource type="Script" path="res://scenes/ingame_ui_selected_item.gd" id="26_qlfam"]
+[ext_resource type="Script" path="res://scripts/pause_selection_sound.gd" id="25_2tptc"]
+[ext_resource type="Script" path="res://scripts/ingame_ui_selected_item.gd" id="26_qlfam"]
 [ext_resource type="PackedScene" uid="uid://bbxp7t0tw5miq" path="res://scenes/key_item.tscn" id="29_xlno4"]
 [ext_resource type="Script" path="res://scripts/shop_002.gd" id="35_c0wxd"]
 [ext_resource type="AudioStream" uid="uid://cmfpaw11ggj1q" path="res://sound/music/dungeon_music.wav" id="36_8um02"]
@@ -1267,7 +1267,6 @@ area_data = NodePath("../../../Interiors/take_any_001")
 process_mode = 1
 collision_layer = 4
 collision_mask = 3
-max_block_angle = 70.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 process_mode = 3
@@ -2083,7 +2082,7 @@ is_wide_horizontal = true
 
 [node name="SPAWNPOINT" parent="." instance=ExtResource("36_w4qf6")]
 process_mode = 1
-position = Vector2(1056, -32)
+position = Vector2(0, 0)
 
 [node name="ENEMY_SPAWNS" type="Node2D" parent="."]
 process_mode = 1

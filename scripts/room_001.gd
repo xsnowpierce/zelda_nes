@@ -8,7 +8,8 @@ func _ready() -> void:
 	set_room_visibility(false)
 
 func awake() -> void:
-	$"Key Item/AnimatedSprite2D".visible = false
+	if(is_instance_valid($KeyItem)):
+		$"Key Item/AnimatedSprite2D".visible = false
 	if(get_tree().get_first_node_in_group("GameData").has_player_flag("obtained_wooden_sword")):
 		set_room_visibility(false)
 		$fire.visible = true

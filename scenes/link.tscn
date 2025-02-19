@@ -1,9 +1,14 @@
-[gd_scene load_steps=35 format=3 uid="uid://b2gll84jnyb1u"]
+[gd_scene load_steps=40 format=3 uid="uid://b2gll84jnyb1u"]
 
-[ext_resource type="Script" path="res://scripts/link_move.gd" id="1_y1qvt"]
+[ext_resource type="Script" path="res://scripts/link_controller.gd" id="1_af1d6"]
 [ext_resource type="Texture2D" uid="uid://cpa11tutqc7h1" path="res://images/Sprite-0001.png" id="2_8jjpd"]
 [ext_resource type="Script" path="res://scripts/link_sprite.gd" id="3_1avva"]
 [ext_resource type="Script" path="res://scripts/link_attack_area.gd" id="4_piqjp"]
+[ext_resource type="Script" path="res://scenes/link_sound_player.gd" id="5_bwarm"]
+[ext_resource type="Script" path="res://scenes/link_movement.gd" id="5_excs0"]
+[ext_resource type="Script" path="res://scenes/link_combat.gd" id="6_2h8fc"]
+[ext_resource type="Script" path="res://scenes/link_interact.gd" id="7_2vkl0"]
+[ext_resource type="Script" path="res://scenes/link_state.gd" id="8_ryf5n"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3pcpd"]
 size = Vector2(15.9, 7.9)
@@ -278,9 +283,7 @@ texture_filter = 1
 texture_repeat = 1
 collision_layer = 2
 safe_margin = 0.001
-script = ExtResource("1_y1qvt")
-pickup_animation_length = 2.5
-max_block_angle = 40.0
+script = ExtResource("1_af1d6")
 
 [node name="Link Collider" type="CollisionShape2D" parent="."]
 position = Vector2(0, 4)
@@ -318,7 +321,6 @@ shape = SubResource("RectangleShape2D_g0xjw")
 one_way_collision_margin = 0.0
 
 [node name="Attack Area" type="Area2D" parent="." groups=["Player_Attack"]]
-visible = false
 position = Vector2(0, -14)
 collision_layer = 16
 collision_mask = 8
@@ -331,11 +333,35 @@ shape = SubResource("RectangleShape2D_305y3")
 
 [node name="AudioPlayer" type="AudioStreamPlayer" parent="."]
 bus = &"SFX"
+script = ExtResource("5_bwarm")
+
+[node name="LinkMovement" type="Node" parent="."]
+script = ExtResource("5_excs0")
+
+[node name="LinkCombat" type="Node" parent="."]
+script = ExtResource("6_2h8fc")
+
+[node name="LinkInteract" type="Node" parent="."]
+script = ExtResource("7_2vkl0")
+
+[node name="LinkState" type="Node" parent="."]
+script = ExtResource("8_ryf5n")
 
 [connection signal="animation_finished" from="Link Sprite Mask/Link Sprite" to="Link Sprite Mask/Link Sprite" method="_on_animation_finished"]
 [connection signal="animation_looped" from="Link Sprite Mask/Link Sprite" to="Link Sprite Mask/Link Sprite" method="_on_animation_finished"]
-[connection signal="attack_ended" from="Link Sprite Mask/Link Sprite" to="." method="_on_animated_sprite_2d_attack_ended"]
 [connection signal="attack_ended" from="Link Sprite Mask/Link Sprite" to="Attack Area" method="_on_link_sprite_attack_ended"]
+[connection signal="attack_ended" from="Link Sprite Mask/Link Sprite" to="LinkCombat" method="_on_animated_sprite_2d_attack_ended"]
 [connection signal="area_entered" from="Link Hitbox" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_entered" from="Link Hitbox" to="LinkInteract" method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Link Hitbox" to="." method="_on_link_hitbox_area_exited"]
 [connection signal="area_exited" from="Link Hitbox" to="." method="_on_area_2d_area_exited"]
+[connection signal="area_exited" from="Link Hitbox" to="LinkInteract" method="_on_area_2d_area_exited"]
+[connection signal="sprite_update" from="LinkMovement" to="Link Sprite Mask/Link Sprite" method="_on_link_movement_sprite_update"]
+[connection signal="sprite_update" from="LinkMovement" to="Attack Area" method="set_direction"]
+[connection signal="play_attacked_sound" from="LinkCombat" to="AudioPlayer" method="play_attacked_sound"]
+[connection signal="play_shield_block_sound" from="LinkCombat" to="AudioPlayer" method="play_shield_block_sound"]
+[connection signal="play_sword_swing_sound" from="LinkCombat" to="AudioPlayer" method="play_sword_swing_sound"]
+[connection signal="sword_swing_attack" from="LinkCombat" to="Link Sprite Mask/Link Sprite" method="_on_character_body_2d_attack"]
+[connection signal="sword_swing_attack" from="LinkCombat" to="Attack Area" method="_on_link_attack"]
+[connection signal="door_enter_sound" from="LinkInteract" to="AudioPlayer" method="play_door_enter_sound"]
+[connection signal="key_item_pickup_sound" from="LinkInteract" to="AudioPlayer" method="play_key_item_pickup_sound"]

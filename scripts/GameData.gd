@@ -201,12 +201,12 @@ func player_finish_enter_door(door : Area2D) -> void:
 	if door.area_data.get_area_type() == "room_data":
 		print("was room_data")
 		if(door.area_data != null):
-			link.wait_for_room_events()
+			link.get_link_interact().wait_for_room_events()
 			current_area = door.area_data
 			while(!current_area.is_loaded):
 				await get_tree().process_frame
-			link.finish_room_events()
-	while(link.is_exiting_door):
+			link.get_link_interact().finish_room_events()
+	while(link.get_player_state().is_exiting_door):
 		await get_tree().process_frame
 	$MusicPlayer.stream = door.area_data.area_music
 	$MusicPlayer.play(0.0)

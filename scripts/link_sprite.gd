@@ -56,3 +56,8 @@ func _on_animation_finished() -> void:
 				play("left")
 			Vector2.RIGHT:
 				play("right")
+
+
+func _on_link_movement_sprite_update(movement: Vector2, velocity: Vector2) -> void:
+	set_look_direction(movement)
+	set_current_velocity(velocity)
