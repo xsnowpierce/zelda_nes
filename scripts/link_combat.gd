@@ -20,6 +20,8 @@ func process(delta: float) -> void:
 		check_attack()
 
 func check_attack() -> void:
+	if(!player.get_player_state().is_player_input_allowed()):
+		return
 	if(Input.is_action_just_pressed("attack") and !player.get_player_state().is_attacking):
 		if(player.game_data.current_equipped_item_a == ENUM.KEY_ITEM_TYPE.NULL):
 			return

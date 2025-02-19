@@ -10,6 +10,7 @@ var is_attacked_knockback : bool
 var is_entering_door : bool = false
 var is_exiting_door : bool = false
 var has_room_events : bool = false
+var is_inside_room : bool
 
 func initialize(parent : CharacterBody2D) -> void:
 	player = parent

@@ -4,11 +4,11 @@
 [ext_resource type="Texture2D" uid="uid://cpa11tutqc7h1" path="res://images/Sprite-0001.png" id="2_8jjpd"]
 [ext_resource type="Script" path="res://scripts/link_sprite.gd" id="3_1avva"]
 [ext_resource type="Script" path="res://scripts/link_attack_area.gd" id="4_piqjp"]
-[ext_resource type="Script" path="res://scenes/link_sound_player.gd" id="5_bwarm"]
-[ext_resource type="Script" path="res://scenes/link_movement.gd" id="5_excs0"]
-[ext_resource type="Script" path="res://scenes/link_combat.gd" id="6_2h8fc"]
-[ext_resource type="Script" path="res://scenes/link_interact.gd" id="7_2vkl0"]
-[ext_resource type="Script" path="res://scenes/link_state.gd" id="8_ryf5n"]
+[ext_resource type="Script" path="res://scripts/link_sound_player.gd" id="5_bwarm"]
+[ext_resource type="Script" path="res://scripts/link_movement.gd" id="5_excs0"]
+[ext_resource type="Script" path="res://scripts/link_combat.gd" id="6_2h8fc"]
+[ext_resource type="Script" path="res://scripts/link_interact.gd" id="7_2vkl0"]
+[ext_resource type="Script" path="res://scripts/link_state.gd" id="8_ryf5n"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3pcpd"]
 size = Vector2(15.9, 7.9)

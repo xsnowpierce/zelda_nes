@@ -1195,7 +1195,6 @@ enemy_octorok_scene = ExtResource("3_jg83s")
 enemy_zora_scene = ExtResource("24_n4nw8")
 enemy_leever_scene = ExtResource("5_mynx1")
 current_player_health = 6
-has_wooden_sword = true
 has_magical_shield = true
 has_bomb = true
 has_silver_arrow = true

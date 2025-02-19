@@ -22,8 +22,8 @@ func process(delta: float) -> void:
 		if (player.get_player_state().is_attacked_knockback):
 			keep_player_in_screen()
 		
-		if(player.get_player_state().is_player_input_allowed()):
-			calculate_movement(false)
+		if(!GameSettings.camera_is_moving):
+			calculate_movement(!player.get_player_state().is_player_input_allowed())
 			player.move_and_slide()
 		
 		sprite_update.emit(movement, player.velocity)

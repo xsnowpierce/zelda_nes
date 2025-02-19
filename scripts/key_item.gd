@@ -20,7 +20,7 @@ func _process(delta: float) -> void:
 	if(link_is_colliding):
 		var distance = global_position.distance_to(link.global_position)
 		if(distance <= distance_required):
-			link.picked_up_key_item(item_type)
+			link.get_link_interact().picked_up_key_item(item_type)
 			item_picked_up.emit()
 			get_tree().get_first_node_in_group("GameData").add_player_flag(get_obtain_player_flag_from_item_type(item_type))
 			queue_free()
