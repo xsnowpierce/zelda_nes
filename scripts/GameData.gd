@@ -244,7 +244,6 @@ func open_pause_menu() -> void:
 	pause_menu_opened.emit()
 	await camera.open_pause_menu()
 	pause_menu_control.emit(true)
-	
 
 func close_pause_menu() -> void:
 	if(!game_is_paused):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=140 format=4 uid="uid://bnrlmifgdjgsb"]
+[gd_scene load_steps=145 format=4 uid="uid://bnrlmifgdjgsb"]
 
 [ext_resource type="Script" path="res://scripts/GameData.gd" id="1_fiv6q"]
 [ext_resource type="Script" path="res://scripts/camera.gd" id="1_xkdoo"]
@@ -20,8 +20,10 @@
 [ext_resource type="PackedScene" uid="uid://c0qnguwwrsx0o" path="res://scenes/room_entrance.tscn" id="13_v6toj"]
 [ext_resource type="Texture2D" uid="uid://bcv5qvtth3451" path="res://images/pause_menu.png" id="14_73mj2"]
 [ext_resource type="Script" path="res://scripts/pausemenu_ui.gd" id="14_u5ibt"]
+[ext_resource type="Script" path="res://scenes/bombable_tile.gd" id="15_kce8e"]
 [ext_resource type="Script" path="res://scripts/minimap.gd" id="16_ebc1w"]
 [ext_resource type="Script" path="res://scripts/ui_key_items_row.gd" id="16_l21i6"]
+[ext_resource type="AudioStream" uid="uid://dd3yihvqxpsx4" path="res://sound/sfx/The Legend of Zelda Cartoon Sound Effects Magical.wav" id="16_s1nbs"]
 [ext_resource type="Script" path="res://scripts/ui_canvas_layer.gd" id="16_sgrtl"]
 [ext_resource type="Script" path="res://scripts/ui_usable_items_menu.gd" id="16_ud5o4"]
 [ext_resource type="Texture2D" uid="uid://cxy5ob882odyf" path="res://images/interiors.png" id="17_ygtp3"]
@@ -372,6 +374,16 @@ sources/3 = SubResource("TileSetAtlasSource_krb10")
 sources/4 = SubResource("TileSetAtlasSource_rhi1i")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0wgtc"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_asj3c"]
+size = Vector2(16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_plv3a"]
+atlas = ExtResource("3_m65ud")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ia4h6"]
 size = Vector2(16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mw17m"]
@@ -1230,7 +1242,7 @@ tile_set = SubResource("TileSet_j7eva")
 script = ExtResource("12_sh4jd")
 area_music = ExtResource("2_7hpxk")
 
-[node name="Door Entrances" type="Node2D" parent="Level"]
+[node name="Door Entrances" type="Node" parent="Level"]
 
 [node name="ROOM_001" parent="Level/Door Entrances" node_paths=PackedStringArray("area_data") instance=ExtResource("13_v6toj")]
 position = Vector2(-64, -80)
@@ -1262,6 +1274,32 @@ position = Vector2(1040, -80)
 camera_move_to_tile_coordinate = Vector2(-5, 2)
 link_move_to_position = Vector2(-1288, 408)
 area_data = NodePath("../../../Interiors/take_any_001")
+
+[node name="Bombable Tiles" type="Node" parent="Level"]
+
+[node name="Bombable Tile" type="StaticBody2D" parent="Level/Bombable Tiles"]
+position = Vector2(1048, -72)
+collision_mask = 512
+script = ExtResource("15_kce8e")
+secret_found_sound = ExtResource("16_s1nbs")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Bombable Tiles/Bombable Tile"]
+shape = SubResource("RectangleShape2D_asj3c")
+
+[node name="Sprite2D" type="Sprite2D" parent="Level/Bombable Tiles/Bombable Tile"]
+texture_filter = 1
+texture = SubResource("AtlasTexture_plv3a")
+
+[node name="Hitbox" type="Area2D" parent="Level/Bombable Tiles/Bombable Tile"]
+collision_layer = 512
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Bombable Tiles/Bombable Tile/Hitbox"]
+shape = SubResource("RectangleShape2D_ia4h6")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Level/Bombable Tiles/Bombable Tile"]
+stream = ExtResource("16_s1nbs")
+bus = &"SFX"
 
 [node name="Link" parent="." instance=ExtResource("6_s1nwl")]
 process_mode = 1
@@ -2114,6 +2152,7 @@ script = ExtResource("38_f8yhx")
 [connection signal="player_health_changed" from="." to="CanvasLayer/Control/ingame UI/HealthController" method="set_current_hearts"]
 [connection signal="player_max_health_changed" from="." to="CanvasLayer/Control/ingame UI/HealthController" method="set_max_hearts"]
 [connection signal="rupees_changed" from="." to="CanvasLayer/Control/ingame UI/rupee" method="_on_game_rupees_changed"]
+[connection signal="area_entered" from="Level/Bombable Tiles/Bombable Tile/Hitbox" to="Level/Bombable Tiles/Bombable Tile" method="_on_hitbox_area_entered"]
 [connection signal="item_selection_change_sound" from="CanvasLayer/Control/pausemenu UI" to="CanvasLayer/Control/pausemenu UI/PauseSelectionSound" method="_on_pausemenu_ui_item_selection_change_sound"]
 [connection signal="selected_item_index_change" from="CanvasLayer/Control/pausemenu UI" to="CanvasLayer/Control/pausemenu UI/top half/usable_items_row/selector_icon" method="_on_pausemenu_ui_selected_item_change"]
 [connection signal="selected_item_type_change" from="CanvasLayer/Control/pausemenu UI" to="." method="equipped_b_slot_change"]

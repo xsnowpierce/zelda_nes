@@ -18,6 +18,8 @@ func set_item_type(type : ENUM.ITEM_TYPE) -> void:
 			$AnimatedSprite2D.play("heart")
 		
 func _on_area_entered(area: Area2D) -> void:
+	if(area.is_in_group("Player_Bomb")):
+		return
 	var game_data = get_tree().get_first_node_in_group("GameData")
 	match item_type:
 		ENUM.ITEM_TYPE.GREEN_RUPEE:

@@ -51,6 +51,7 @@ TileMap=""
 EntranceDoor=""
 GameData=""
 SPAWNPOINT=""
+Player_Bomb=""
 
 [gui]
 

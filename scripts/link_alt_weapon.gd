@@ -23,3 +23,4 @@ func use_alternate_weapon(item : ENUM.KEY_ITEM_TYPE) -> void:
 			bomb.global_position = (player.global_position - Vector2(8,8)) + (player.get_look_direction() * (spawn_projectile_distance * 16))
 			current_projectile = bomb
 			player.game_data.add_child(bomb)
+			player.game_data.change_bombs(-1)
