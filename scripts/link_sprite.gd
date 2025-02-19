@@ -18,7 +18,8 @@ func set_look_direction(direction: Vector2) -> void:
 		anim_name += "up"
 	else:
 		return
-	current_direction = direction
+	if(direction != Vector2.ZERO):
+		current_direction = direction
 	var current_frame = get_frame()
 	var current_progress = get_frame_progress()
 	play(anim_name)

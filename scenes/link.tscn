@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://b2gll84jnyb1u"]
+[gd_scene load_steps=41 format=3 uid="uid://b2gll84jnyb1u"]
 
 [ext_resource type="Script" path="res://scripts/link_controller.gd" id="1_af1d6"]
 [ext_resource type="Texture2D" uid="uid://cpa11tutqc7h1" path="res://images/Sprite-0001.png" id="2_8jjpd"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://scripts/link_combat.gd" id="6_2h8fc"]
 [ext_resource type="Script" path="res://scripts/link_interact.gd" id="7_2vkl0"]
 [ext_resource type="Script" path="res://scripts/link_state.gd" id="8_ryf5n"]
+[ext_resource type="Script" path="res://scripts/link_alt_weapon.gd" id="10_d33na"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3pcpd"]
 size = Vector2(15.9, 7.9)
@@ -346,6 +347,9 @@ script = ExtResource("7_2vkl0")
 
 [node name="LinkState" type="Node" parent="."]
 script = ExtResource("8_ryf5n")
+
+[node name="Link AltWeapon" type="Node" parent="."]
+script = ExtResource("10_d33na")
 
 [connection signal="animation_finished" from="Link Sprite Mask/Link Sprite" to="Link Sprite Mask/Link Sprite" method="_on_animation_finished"]
 [connection signal="animation_looped" from="Link Sprite Mask/Link Sprite" to="Link Sprite Mask/Link Sprite" method="_on_animation_finished"]

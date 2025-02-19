@@ -23,17 +23,19 @@ func check_attack() -> void:
 	if(!player.get_player_state().is_player_input_allowed()):
 		return
 	if(Input.is_action_just_pressed("attack") and !player.get_player_state().is_attacking):
-		if(player.game_data.current_equipped_item_a == ENUM.KEY_ITEM_TYPE.NULL):
-			return
-		match player.game_data.current_equipped_item_a:
-			ENUM.KEY_ITEM_TYPE.WOODEN_SWORD:
-				wooden_sword_swing()
-	if(Input.is_action_just_pressed("alternate_attack") and !!player.get_player_state().is_attacking):
-		if(player.game_data.current_equipped_item_b == ENUM.KEY_ITEM_TYPE.NULL):
-			return
-		match player.game_data.current_equipped_item_b:
-			ENUM.KEY_ITEM_TYPE.WOODEN_SWORD:
-				wooden_sword_swing()
+		use_weapon(player.game_data.current_equipped_item_a)
+	if(Input.is_action_just_pressed("alternate_attack") and !player.get_player_state().is_attacking):
+		use_weapon(player.game_data.current_equipped_item_b)
+
+func use_weapon(item : ENUM.KEY_ITEM_TYPE) -> void:
+	if(item == ENUM.KEY_ITEM_TYPE.NULL):
+		return
+	match item:
+		ENUM.KEY_ITEM_TYPE.WOODEN_SWORD:
+			wooden_sword_swing()
+		_:
+			player.use_alt_weapon(item)
+			
 
 func wooden_sword_swing() -> void:
 	player.get_player_state().is_attacking = true

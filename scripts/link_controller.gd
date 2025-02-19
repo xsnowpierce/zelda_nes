@@ -10,12 +10,13 @@ func _ready() -> void:
 	$LinkCombat.initialize(self)
 	$LinkInteract.initialize(self)
 	$LinkState.initialize(self)
+	$"Link AltWeapon".initialize(self)
 
 func _process(delta: float) -> void:
 	$LinkCombat.process(delta)
 	$LinkMovement.process(delta)
 	$LinkInteract.process(delta)
-	#$LinkState.process(delta)
+	$"Link AltWeapon".process(delta)
 
 func get_player_state() -> Node:
 	return $LinkState
@@ -34,3 +35,6 @@ func get_sprite() -> AnimatedSprite2D:
 
 func get_link_interact() -> Node:
 	return $LinkInteract
+
+func use_alt_weapon(item : ENUM.KEY_ITEM_TYPE) -> void:
+	$"Link AltWeapon".use_alternate_weapon(item)

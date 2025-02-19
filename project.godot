@@ -119,6 +119,7 @@ pause_game={
 2d_physics/layer_7="Enemy AI Raycasts"
 2d_physics/layer_8="Item"
 2d_physics/layer_9="Door"
+2d_physics/layer_10="Bombable Tile"
 
 [rendering]
 

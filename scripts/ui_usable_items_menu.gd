@@ -29,7 +29,7 @@ func apply_stats_to_items() -> void:
 		item_array.insert(0, ENUM.KEY_ITEM_TYPE.NULL)
 		
 	#bomb
-	if(game_data.has_player_flag("obtained_bomb")):
+	if(game_data.has_player_flag("obtained_bomb") and game_data.current_bombs > 0):
 		$bomb_slot/TextureRect.frame = 0
 		$bomb_slot/TextureRect.visible = true
 		item_array.insert(1, ENUM.KEY_ITEM_TYPE.BOMB)
