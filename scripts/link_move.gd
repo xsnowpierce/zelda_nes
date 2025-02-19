@@ -169,21 +169,20 @@ func check_attack() -> void:
 			return
 		match game_data.current_equipped_item_a:
 			ENUM.KEY_ITEM_TYPE.WOODEN_SWORD:
-				is_attacking = true
-				$"Link Sprite Mask/Link Sprite"._on_character_body_2d_attack()
-				$"Attack Area"._on_link_attack()
-				$AudioPlayer.stream = sword_swing_sound
-				$AudioPlayer.play()
+				wooden_sword_swing()
 	if(Input.is_action_just_pressed("alternate_attack") and !is_attacking):
 		if(game_data.current_equipped_item_b == ENUM.KEY_ITEM_TYPE.NULL):
 			return
 		match game_data.current_equipped_item_b:
 			ENUM.KEY_ITEM_TYPE.WOODEN_SWORD:
-				is_attacking = true
-				$"Link Sprite Mask/Link Sprite"._on_character_body_2d_attack()
-				$"Attack Area"._on_link_attack()
-				$AudioPlayer.stream = sword_swing_sound
-				$AudioPlayer.play()
+				wooden_sword_swing()
+
+func wooden_sword_swing() -> void:
+	is_attacking = true
+	$"Link Sprite Mask/Link Sprite"._on_character_body_2d_attack()
+	$"Attack Area"._on_link_attack()
+	$AudioPlayer.stream = sword_swing_sound
+	$AudioPlayer.play()
 
 func _on_animated_sprite_2d_attack_ended() -> void:
 	is_attacking = false

@@ -2118,6 +2118,7 @@ script = ExtResource("38_f8yhx")
 [connection signal="selected_item_index_change" from="CanvasLayer/Control/pausemenu UI" to="CanvasLayer/Control/pausemenu UI/top half/usable_items_row/selector_icon" method="_on_pausemenu_ui_selected_item_change"]
 [connection signal="selected_item_type_change" from="CanvasLayer/Control/pausemenu UI" to="." method="equipped_b_slot_change"]
 [connection signal="selected_item_type_change" from="CanvasLayer/Control/pausemenu UI" to="CanvasLayer/Control/pausemenu UI/top half/b_selected_sprite" method="_on_game_equipment_slot_b_changed"]
+[connection signal="selected_item_type_change" from="CanvasLayer/Control/pausemenu UI" to="CanvasLayer/Control/ingame UI/b_select" method="_on_game_equipment_slot_b_changed"]
 [connection signal="animation_finished" from="Interiors/wooden_sword_room/fire" to="Interiors/wooden_sword_room" method="_on_fire_animation_finished"]
 [connection signal="item_picked_up" from="Interiors/wooden_sword_room/Key Item" to="Interiors/wooden_sword_room" method="_on_key_item_item_picked_up"]
 [connection signal="animation_finished" from="Interiors/shop_001/fire" to="Interiors/shop_001" method="_on_fire_animation_finished"]

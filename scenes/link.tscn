@@ -337,5 +337,5 @@ bus = &"SFX"
 [connection signal="attack_ended" from="Link Sprite Mask/Link Sprite" to="." method="_on_animated_sprite_2d_attack_ended"]
 [connection signal="attack_ended" from="Link Sprite Mask/Link Sprite" to="Attack Area" method="_on_link_sprite_attack_ended"]
 [connection signal="area_entered" from="Link Hitbox" to="." method="_on_area_2d_area_entered"]
-[connection signal="area_exited" from="Link Hitbox" to="." method="_on_area_2d_area_exited"]
 [connection signal="area_exited" from="Link Hitbox" to="." method="_on_link_hitbox_area_exited"]
+[connection signal="area_exited" from="Link Hitbox" to="." method="_on_area_2d_area_exited"]
