@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://c1ech1fmwimsl"]
+
+[ext_resource type="Script" path="res://scripts/armos_spawner.gd" id="1_tpp5c"]
+[ext_resource type="Texture2D" uid="uid://px3oy8t7d8tm" path="res://images/sheet_03.png" id="2_uki8y"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ktbt5"]
+atlas = ExtResource("2_uki8y")
+region = Rect2(32, 32, 16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0ac8i"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vd5og"]
+size = Vector2(17, 17)
+
+[node name="Armos Spawner" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_tpp5c")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = SubResource("AtlasTexture_ktbt5")
+centered = false
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_0ac8i")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_vd5og")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

@@ -384,7 +384,6 @@ _data = {
 }
 
 [node name="Bomb" type="Node2D"]
-position = Vector2(-80, -16)
 script = ExtResource("1_qfobf")
 explosion_wait_time = 1.0
 

@@ -1,8 +1,10 @@
 extends Area2D
 
 @export var item_type : ENUM.ITEM_TYPE
+@export var rupee_value_override : int = -1
 @export var rupee_gain_sound : AudioStreamWAV
 @export var heart_gain_sound : AudioStreamWAV
+signal item_picked_up
 
 func _ready() -> void:
 	set_item_type(item_type)
@@ -23,11 +25,17 @@ func _on_area_entered(area: Area2D) -> void:
 	var game_data = get_tree().get_first_node_in_group("GameData")
 	match item_type:
 		ENUM.ITEM_TYPE.GREEN_RUPEE:
-			game_data.change_rupees(1)
+			if(rupee_value_override != -1):
+				game_data.change_rupees(rupee_value_override)
+			else:
+				game_data.change_rupees(1)
 			$AudioStreamPlayer.stream = rupee_gain_sound
 			$AudioStreamPlayer.play()
 		ENUM.ITEM_TYPE.BLUE_RUPEE:
-			game_data.change_rupees(5)
+			if(rupee_value_override != -1):
+				game_data.change_rupees(rupee_value_override)
+			else:
+				game_data.change_rupees(5)
 			$AudioStreamPlayer.stream = rupee_gain_sound
 			$AudioStreamPlayer.play()
 		ENUM.ITEM_TYPE.HEART:
@@ -35,6 +43,7 @@ func _on_area_entered(area: Area2D) -> void:
 			$AudioStreamPlayer.stream = heart_gain_sound
 			$AudioStreamPlayer.play()
 	$AnimatedSprite2D.visible = false
+	item_picked_up.emit()
 	while $AudioStreamPlayer.playing:
 		await get_tree().process_frame
 	queue_free()

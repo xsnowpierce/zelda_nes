@@ -16,6 +16,7 @@ func initialize(parent: CharacterBody2D) -> void:
 	player = parent
 	self.connect("call_new_screen", Callable(player.camera, "_on_link_call_new_screen"))
 	
+	
 func process(delta: float) -> void:
 	var new_screen_check : Vector2 = check_for_new_screen()
 	if(new_screen_check == Vector2.ZERO):

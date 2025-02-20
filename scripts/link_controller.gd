@@ -11,6 +11,7 @@ func _ready() -> void:
 	$LinkInteract.initialize(self)
 	$LinkState.initialize(self)
 	$"Link AltWeapon".initialize(self)
+	
 
 func _process(delta: float) -> void:
 	$LinkCombat.process(delta)
@@ -23,6 +24,9 @@ func get_player_state() -> Node:
 
 func get_look_direction() -> Vector2:
 	return $"Link Sprite Mask/Link Sprite".current_direction
+
+func get_movement_value() -> Vector2:
+	return $LinkMovement.movement
 
 func attacked(from : Vector2, attack_block_level : ENUM.BLOCK_ATTACK_LEVEL = ENUM.BLOCK_ATTACK_LEVEL.IMPOSSIBLE) -> void:
 	$LinkCombat.attacked(from, attack_block_level)

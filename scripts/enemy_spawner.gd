@@ -1,11 +1,9 @@
-extends Node2D
+extends "res://scripts/entity.gd"
 
-var residing_in_area : Vector2
-var is_awake : bool
+var game_data : Node
 @export var enemy_type : ENUM.ENEMY_TYPE
 var enemy_scene
 var should_cloud_be_visible : bool
-var game_data : Node
 @export_group("Zora Settings")
 @export var zora_movable_tile_range : Array[Vector4]
 
@@ -13,10 +11,7 @@ var game_data : Node
 func _ready() -> void:
 	$Sprite2D.visible = false
 	set_cloud_visibility()
-	var camera := get_tree().get_first_node_in_group("Camera")
 	game_data = get_tree().get_first_node_in_group("GameData")
-	camera.connect("camera_moved", Callable(self, "on_camera_move"))
-	residing_in_area = Vector2(roundi(position.x / GameSettings.map_screen_size.x), roundi(position.y / GameSettings.map_screen_size.y))
 
 func set_cloud_visibility() -> void:
 	match enemy_type:
@@ -29,20 +24,13 @@ func set_cloud_visibility() -> void:
 			ENUM.ENEMY_TYPE.LEEVER:
 				should_cloud_be_visible = false
 
-func on_camera_move(area_entered : Vector2) -> void:
-	if(area_entered == residing_in_area):
-		awake()
-	else:
-		if(is_awake):
-			sleep()
-
 func awake():
-	is_awake = true
+	super()
 	$Sprite2D.visible = should_cloud_be_visible
 	$Sprite2D.play()
 	
 func sleep():
-	is_awake = false
+	super()
 	if(is_instance_valid(enemy_scene)):
 		enemy_scene.queue_free()
 	$Sprite2D.frame = 0
