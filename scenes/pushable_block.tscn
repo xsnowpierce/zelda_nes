@@ -1,11 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://drwn5sedpqqf6"]
+[gd_scene load_steps=6 format=3 uid="uid://2mxi1bxcesq"]
 
-[ext_resource type="Script" path="res://scripts/armos_spawner.gd" id="1_tpp5c"]
-[ext_resource type="Texture2D" uid="uid://px3oy8t7d8tm" path="res://images/sheet_03.png" id="2_uki8y"]
+[ext_resource type="Script" path="res://scripts/pushable_block.gd" id="1_ys0md"]
+[ext_resource type="Texture2D" uid="uid://cqbg7fmos30qo" path="res://images/tileset2.png" id="2_xlnkm"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ucaeg"]
-atlas = ExtResource("2_uki8y")
-region = Rect2(32, 32, 16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_8pj3r"]
+atlas = ExtResource("2_xlnkm")
+region = Rect2(0, 32, 16, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qvoj7"]
 size = Vector2(16, 16)
@@ -13,13 +13,14 @@ size = Vector2(16, 16)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ewinb"]
 size = Vector2(16, 16)
 
-[node name="Armos Spawner" type="StaticBody2D"]
+[node name="Pushable Block" type="StaticBody2D"]
 collision_mask = 5
-script = ExtResource("1_tpp5c")
+script = ExtResource("1_ys0md")
+move_speed = 26.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
-texture = SubResource("AtlasTexture_ucaeg")
+texture = SubResource("AtlasTexture_8pj3r")
 centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

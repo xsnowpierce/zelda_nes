@@ -1,9 +1,15 @@
-extends "res://scenes/interactable_block.gd"
+extends "res://scripts/interactable_block.gd"
 
 var starting_position : Vector2
 @export var move_speed : float = 25
 var is_moving : bool
 @export var move_times : int = -1
+
+@export_group("Push Restrictions")
+@export var restrict_upwards_push : bool
+@export var restrict_leftways_push : bool
+@export var restrict_rightways_push : bool
+@export var restrict_downwards_push : bool
 signal was_pushed
 
 func _ready() -> void:
@@ -13,11 +19,13 @@ func _ready() -> void:
 func block_interact(interacted_from_direction : Vector2) -> void:
 	if(is_moving or move_times == 0):
 		return
-	is_moving = true
+	if(is_push_restricted(-interacted_from_direction)):
+		return
 	var target_position = global_position + (-interacted_from_direction * 16)
 	if(!is_target_position_in_bounds(target_position)):
 		return
 	# move to position
+	is_moving = true
 	while (position.distance_to(target_position) > 1):
 		if(!can_move()):
 			break
@@ -28,6 +36,17 @@ func block_interact(interacted_from_direction : Vector2) -> void:
 	move_times -= 1
 	is_moving = false
 	was_pushed.emit()
+
+func is_push_restricted(push_direction : Vector2) -> bool:
+	if(restrict_upwards_push && push_direction == Vector2.UP):
+		return true
+	if(restrict_leftways_push && push_direction == Vector2.LEFT):
+		return true
+	if(restrict_rightways_push && push_direction == Vector2.RIGHT):
+		return true
+	if(restrict_downwards_push && push_direction == Vector2.DOWN):
+		return true
+	return false
 
 func is_target_position_in_bounds(target_position : Vector2) -> bool:
 	if(Utils.is_out_of_bounds(target_position, camera)):
