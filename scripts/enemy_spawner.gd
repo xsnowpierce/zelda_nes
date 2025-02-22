@@ -9,6 +9,7 @@ var should_cloud_be_visible : bool
 
 
 func _ready() -> void:
+	super()
 	$Sprite2D.visible = false
 	set_cloud_visibility()
 	game_data = get_tree().get_first_node_in_group("GameData")

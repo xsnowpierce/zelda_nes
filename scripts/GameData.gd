@@ -90,6 +90,7 @@ func apply_debug_key_item_list() -> void:
 
 @export_group("Music Files")
 @export var hyrule_music : AudioStreamWAV
+@export var dungeon_music : AudioStreamWAV
 
 var current_area : Node2D
 var camera : Camera2D
@@ -129,6 +130,7 @@ func _ready() -> void:
 	var camera_position = Vector2i(roundi($SPAWNPOINT.global_position.x / GameSettings.map_screen_size.x), roundi($SPAWNPOINT.global_position.y / GameSettings.map_screen_size.y))
 	camera.set_camera_tile(camera_position)
 	link.position = $SPAWNPOINT.global_position
+	$INTERIOR_HANDLER.initialize(camera, link, self)
 
 func _process(delta: float) -> void:
 	if(Input.is_action_just_pressed("pause_game")):
@@ -196,21 +198,22 @@ func player_start_enter_door(_door : Area2D) -> void:
 	$MusicPlayer.stop()
 
 func player_finish_enter_door(door : Area2D) -> void:
-	camera.set_camera_tile(door.camera_move_to_tile_coordinate)
-	link.position = door.link_move_to_position
-	if door.area_data.get_area_type() == "room_data":
-		print("was room_data")
-		if(door.area_data != null):
-			link.get_link_interact().wait_for_room_events()
-			current_area = door.area_data
-			while(!current_area.is_loaded):
-				await get_tree().process_frame
-			link.get_link_interact().finish_room_events()
-	while(link.get_player_state().is_exiting_door):
-		await get_tree().process_frame
-	$MusicPlayer.stream = door.area_data.area_music
-	$MusicPlayer.play(0.0)
-
+	if(door is RoomEntrance):
+		$INTERIOR_HANDLER.handle_interior(door.interior_data)
+		link.get_player_state().has_room_events = true
+		while !$INTERIOR_HANDLER.player_has_input:
+			await get_tree().process_frame
+		link.get_player_state().has_room_events = false
+	elif(door is HyruleEntrance):
+		link.global_position = door.link_moveto_position
+		camera.set_camera_tile(door.camera_moveto_position)
+		$MusicPlayer.stream = hyrule_music
+		$MusicPlayer.play(0.0)
+	elif(door is DungeonEntrance):
+		link.global_position = door.link_moveto_position
+		camera.set_camera_tile(door.camera_moveto_position)
+		$MusicPlayer.stream = dungeon_music
+		$MusicPlayer.play(0.0)
 func player_pickup_key_item(item_type : ENUM.KEY_ITEM_TYPE) -> void:
 	match item_type:
 		ENUM.KEY_ITEM_TYPE.WOODEN_SWORD:

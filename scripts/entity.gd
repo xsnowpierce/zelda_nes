@@ -13,6 +13,7 @@ func on_camera_move(area_entered : Vector2) -> void:
 	if(area_entered == residing_in_area):
 		awake()
 	else:
+		print(area_entered, residing_in_area)
 		if(is_awake):
 			sleep()
 			

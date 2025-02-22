@@ -12,7 +12,7 @@ func set_forward_vector(direction : Vector2) -> void:
 	current_forward_vector = direction
 
 func _physics_process(_delta: float) -> void:
-	if(Utils.is_out_of_bounds(position, camera)):
+	if(Utils.is_out_of_bounds(position, camera, true)):
 		kill()
 	if(GameSettings.camera_is_moving):
 		return

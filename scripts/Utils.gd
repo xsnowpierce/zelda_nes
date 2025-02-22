@@ -4,11 +4,11 @@ class_name Utils
 
 static var map_boundaries : Vector4 = Vector4()
 
-static func is_out_of_bounds(global_position : Vector2, camera : Camera2D, outer_ring_is_invalid : bool = false) -> bool:
-	return is_out_of_bounds_x(global_position, camera, outer_ring_is_invalid) and is_out_of_bounds_y(global_position, camera, outer_ring_is_invalid)
+static func is_out_of_bounds(global_position : Vector2, camera : Camera2D, outer_ring_is_invalid : bool = true) -> bool:
+	return is_out_of_bounds_x(global_position, camera, outer_ring_is_invalid) or is_out_of_bounds_y(global_position, camera, outer_ring_is_invalid)
 	
-static func is_out_of_bounds_x(global_position : Vector2, camera : Camera2D, outer_ring_is_invalid : bool = false) -> bool:
-	var relative_position : Vector2 = global_position - camera.position
+static func is_out_of_bounds_x(global_position : Vector2, camera : Camera2D, outer_ring_is_invalid : bool = true) -> bool:
+	var relative_position : Vector2 = global_position - camera.global_position
 	var x_boundary_left = GameSettings.screen_boundaries.x
 	var x_boundary_right = GameSettings.screen_boundaries.y
 	
@@ -22,8 +22,8 @@ static func is_out_of_bounds_x(global_position : Vector2, camera : Camera2D, out
 		return true
 	return false
 
-static func is_out_of_bounds_y(global_position : Vector2, camera : Camera2D, outer_ring_is_invalid : bool = false) -> bool:
-	var relative_position : Vector2 = global_position - camera.position
+static func is_out_of_bounds_y(global_position : Vector2, camera : Camera2D, outer_ring_is_invalid : bool = true) -> bool:
+	var relative_position : Vector2 = global_position - camera.global_position
 	var y_boundary_top = GameSettings.screen_boundaries.z
 	var y_boundary_bottom = GameSettings.screen_boundaries.w
 	if(outer_ring_is_invalid):
@@ -55,3 +55,11 @@ static func check_position_for_colliders(target_position : Vector2, collision_la
 	if(!result.is_empty()):
 		return true
 	return false
+
+static func get_tile_coordinate_from_global_coordinate(global_position : Vector2) -> Vector2:
+	return Vector2i(roundi(global_position.x / GameSettings.map_screen_size.x), roundi(global_position.y / GameSettings.map_screen_size.y))
+	
+static func get_global_coordinate_from_tile_coordinate(tile_coordinate : Vector2) -> Vector2:
+	tile_coordinate.x *= 16 * 16
+	tile_coordinate.y *= 11 * 16
+	return tile_coordinate
