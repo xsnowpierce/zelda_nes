@@ -4,15 +4,35 @@ class_name Utils
 
 static var map_boundaries : Vector4 = Vector4()
 
-static func is_out_of_bounds(global_position : Vector2, camera : Camera2D) -> bool:
+static func is_out_of_bounds(global_position : Vector2, camera : Camera2D, outer_ring_is_invalid : bool = false) -> bool:
+	return is_out_of_bounds_x(global_position, camera, outer_ring_is_invalid) and is_out_of_bounds_y(global_position, camera, outer_ring_is_invalid)
+	
+static func is_out_of_bounds_x(global_position : Vector2, camera : Camera2D, outer_ring_is_invalid : bool = false) -> bool:
 	var relative_position : Vector2 = global_position - camera.position
-	if(relative_position.x < GameSettings.screen_boundaries.x):
+	var x_boundary_left = GameSettings.screen_boundaries.x
+	var x_boundary_right = GameSettings.screen_boundaries.y
+	
+	if(outer_ring_is_invalid):
+		x_boundary_left += 16
+		x_boundary_right -= 16
+	
+	if(relative_position.x < x_boundary_left):
 		return true
-	if(relative_position.x > GameSettings.screen_boundaries.y):
+	if(relative_position.x > x_boundary_right):
 		return true
-	if(relative_position.y < GameSettings.screen_boundaries.z):
+	return false
+
+static func is_out_of_bounds_y(global_position : Vector2, camera : Camera2D, outer_ring_is_invalid : bool = false) -> bool:
+	var relative_position : Vector2 = global_position - camera.position
+	var y_boundary_top = GameSettings.screen_boundaries.z
+	var y_boundary_bottom = GameSettings.screen_boundaries.w
+	if(outer_ring_is_invalid):
+		y_boundary_top += 16
+		y_boundary_bottom -= 16
+	
+	if(relative_position.y < y_boundary_top):
 		return true
-	if(relative_position.y > GameSettings.screen_boundaries.w):
+	if(relative_position.y > y_boundary_bottom):
 		return true
 	return false
 

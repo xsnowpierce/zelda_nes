@@ -31,13 +31,10 @@ animations = [{
 
 [node name="Tektite" type="Area2D" groups=["Enemy"]]
 process_mode = 1
-position = Vector2(-37, -29)
 collision_layer = 8
 collision_mask = 19
 input_pickable = false
 script = ExtResource("1_x8nh4")
-jump_move_speed = 2.0
-collision_layers_bitmask = 23
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["Enemy"]]
 position = Vector2(8, 8)

@@ -2326,7 +2326,7 @@ is_wide_horizontal = true
 
 [node name="SPAWNPOINT" parent="." instance=ExtResource("36_w4qf6")]
 process_mode = 1
-position = Vector2(1728, -512)
+position = Vector2(-32, 32)
 
 [node name="ENEMY_SPAWNS" type="Node2D" parent="."]
 process_mode = 1
