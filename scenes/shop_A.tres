@@ -1,0 +1,36 @@
+[gd_resource type="Resource" script_class="InteriorData" load_steps=6 format=3 uid="uid://c3ce0mguc3x3"]
+
+[ext_resource type="Script" path="res://scripts/interior_data.gd" id="1_vuekv"]
+[ext_resource type="Script" path="res://scripts/shop_item.gd" id="2_mvi5l"]
+
+[sub_resource type="Resource" id="Resource_ur1i0"]
+script = ExtResource("2_mvi5l")
+item_type = 4
+item_price = 160
+
+[sub_resource type="Resource" id="Resource_wacqk"]
+resource_local_to_scene = true
+script = ExtResource("2_mvi5l")
+item_type = 20
+item_price = 100
+
+[sub_resource type="Resource" id="Resource_dkolp"]
+script = ExtResource("2_mvi5l")
+item_type = 12
+item_price = 60
+
+[resource]
+script = ExtResource("1_vuekv")
+interior_type = 1
+flag_add_after_completion = ""
+dialogue_line_one = "BUY SOMETHIN' WILL YA!"
+dialogue_line_two = ""
+npc_sprite_index = 1
+item_to_give = 0
+shop_item_1 = SubResource("Resource_ur1i0")
+shop_item_2 = SubResource("Resource_wacqk")
+shop_item_3 = SubResource("Resource_dkolp")
+take_any_item_choice_1 = 0
+take_any_item_choice_2 = 0
+take_any_item_choice_3 = 0
+rupee_amount = 0

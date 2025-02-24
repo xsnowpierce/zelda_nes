@@ -20,13 +20,16 @@ script = ExtResource("1_nret6")
 secret_found_sound = ExtResource("2_maced")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(8, 8)
 shape = SubResource("RectangleShape2D_asj3c")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 texture = SubResource("AtlasTexture_plv3a")
+centered = false
 
 [node name="Hitbox" type="Area2D" parent="."]
+position = Vector2(8, 8)
 collision_layer = 512
 collision_mask = 16
 

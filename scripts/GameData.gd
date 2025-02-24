@@ -8,6 +8,7 @@ extends Node
 @export var enemy_octorok_scene : PackedScene
 @export var enemy_zora_scene : PackedScene
 @export var enemy_leever_scene : PackedScene
+@export var enemy_blue_tektite_scene : PackedScene
 
 @export_group("Player Stats")
 @export_subgroup("Health")
@@ -95,6 +96,7 @@ func apply_debug_key_item_list() -> void:
 var current_area : Node2D
 var camera : Camera2D
 var link : CharacterBody2D
+@export_group("")
 @export var current_equipped_item_a : ENUM.KEY_ITEM_TYPE = ENUM.KEY_ITEM_TYPE.NULL
 @export var current_equipped_item_b : ENUM.KEY_ITEM_TYPE = ENUM.KEY_ITEM_TYPE.NULL
 var game_is_paused : bool
@@ -266,7 +268,7 @@ func enemy_drop_item(drop_position : Vector2) -> void:
 	if(next_drop == ENUM.ITEM_TYPE.NULL):
 		return
 	var dropped_item = dropped_item_scene.instantiate()
-	dropped_item.position = drop_position + Vector2(8, 8)
+	dropped_item.global_position = drop_position + Vector2(8, 8)
 	dropped_item.set_item_type(next_drop)
 	$ENEMY_SPAWNS.add_child(dropped_item)
 

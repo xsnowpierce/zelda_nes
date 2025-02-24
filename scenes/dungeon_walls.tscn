@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=3 uid="uid://dnicijk4mi8ce"]
+
+[ext_resource type="Texture2D" uid="uid://c0pwpxlkow2pa" path="res://images/dungeon_tilemap.png" id="1_cjynw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xebn6"]
+atlas = ExtResource("1_cjynw")
+region = Rect2(265, 0, 256, 176)
+
+[node name="Dungeon Walls" type="Sprite2D"]
+texture_filter = 1
+texture = SubResource("AtlasTexture_xebn6")
+centered = false
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(128, 88)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(-8, -56, -8, -88, -128, -88, -128, -8, -96, -8, -96, -56)
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(128, 88)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D2"]
+polygon = PackedVector2Array(8, -88, 8, -56, 96, -56, 96, -8, 128, -8, 128, -88)
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="."]
+position = Vector2(128, 88)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D3"]
+polygon = PackedVector2Array(-128, 8, -128, 88, -8, 88, -8, 56, -96, 56, -96, 8)
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="."]
+position = Vector2(128, 88)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D4"]
+polygon = PackedVector2Array(8, 56, 8, 88, 128, 88, 128, 8, 96, 8, 96, 56)

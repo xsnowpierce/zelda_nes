@@ -12,11 +12,11 @@ func set_forward_vector(direction : Vector2) -> void:
 	current_forward_vector = direction
 
 func _physics_process(_delta: float) -> void:
-	if(Utils.is_out_of_bounds(position, camera, true)):
+	if(Utils.is_out_of_bounds(global_position, camera, true)):
 		kill()
 	if(GameSettings.camera_is_moving):
 		return
-	position += current_forward_vector * move_speed
+	global_position += current_forward_vector * move_speed
 
 func _on_body_entered(body: Node2D) -> void:
 	if(body.is_in_group("Player")):

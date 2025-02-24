@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="InteriorData" load_steps=2 format=3 uid="uid://di0mwx5aws2xe"]
+
+[ext_resource type="Script" path="res://scripts/interior_data.gd" id="1_x5uua"]
+
+[resource]
+script = ExtResource("1_x5uua")
+interior_type = 2
+flag_add_after_completion = "take_any_002"
+dialogue_line_one = "TAKE ANY ONE YOU WANT."
+dialogue_line_two = ""
+npc_sprite_index = 0
+item_to_give = 0
+take_any_item_choice_1 = 17
+take_any_item_choice_2 = 21
+take_any_item_choice_3 = 0
+rupee_amount = 0

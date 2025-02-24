@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="InteriorData" load_steps=6 format=3 uid="uid://dijfjau75dp45"]
+
+[ext_resource type="Script" path="res://scripts/interior_data.gd" id="1_boy8n"]
+[ext_resource type="Script" path="res://scripts/shop_item.gd" id="2_0d1ow"]
+
+[sub_resource type="Resource" id="Resource_ethic"]
+script = ExtResource("2_0d1ow")
+item_type = 5
+item_price = 90
+
+[sub_resource type="Resource" id="Resource_rrfil"]
+script = ExtResource("2_0d1ow")
+item_type = 15
+item_price = 100
+
+[sub_resource type="Resource" id="Resource_mih3j"]
+script = ExtResource("2_0d1ow")
+item_type = 10
+item_price = 80
+
+[resource]
+script = ExtResource("1_boy8n")
+interior_type = 1
+flag_add_after_completion = ""
+dialogue_line_one = "BUY SOMETHIN' WILL YA!"
+dialogue_line_two = ""
+npc_sprite_index = 1
+item_to_give = 0
+shop_item_1 = SubResource("Resource_ethic")
+shop_item_2 = SubResource("Resource_rrfil")
+shop_item_3 = SubResource("Resource_mih3j")
+take_any_item_choice_1 = 0
+take_any_item_choice_2 = 0
+take_any_item_choice_3 = 0
+rupee_amount = 0

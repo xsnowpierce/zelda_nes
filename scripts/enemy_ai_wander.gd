@@ -66,7 +66,7 @@ func check_if_move_is_valid(target_direction : Vector2) -> bool:
 	return false
 
 func get_target_position_from_direction(target_direction : Vector2) -> Vector2:
-	var target_position = (target_direction * 16) + position
+	var target_position = (target_direction * 16) + global_position
 	target_position = Utils.align_to_grid(target_position)
 	return target_position
 
@@ -75,15 +75,15 @@ func move_to_direction(target_direction : Vector2) -> void:
 	var target_position = get_target_position_from_direction(target_direction)
 	
 		# move to position
-	while (position.distance_to(target_position) > 1):
+	while (global_position.distance_to(target_position) > 1):
 		if(!can_move()):
 			await get_tree().process_frame
 			continue
 		var move_distance = move_speed * get_process_delta_time()  # Distance to move this frame
-		position = position.move_toward(target_position, move_distance)  # Move at constant speed
+		global_position = global_position.move_toward(target_position, move_distance)  # Move at constant speed
 		await get_tree().process_frame
 		
-	position = target_position
+	global_position = target_position
 	is_moving = false
 
 func rotate_enemy(direction : Vector2):
