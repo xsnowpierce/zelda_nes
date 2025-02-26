@@ -1,11 +1,13 @@
-[gd_scene load_steps=41 format=3 uid="uid://b2gll84jnyb1u"]
+[gd_scene load_steps=50 format=3 uid="uid://b2gll84jnyb1u"]
 
 [ext_resource type="Script" path="res://scripts/link_controller.gd" id="1_af1d6"]
 [ext_resource type="Texture2D" uid="uid://cpa11tutqc7h1" path="res://images/Sprite-0001.png" id="2_8jjpd"]
+[ext_resource type="Shader" path="res://scenes/link.gdshader" id="2_dkx5a"]
 [ext_resource type="Script" path="res://scripts/link_sprite.gd" id="3_1avva"]
 [ext_resource type="Script" path="res://scripts/link_attack_area.gd" id="4_piqjp"]
 [ext_resource type="Script" path="res://scripts/link_sound_player.gd" id="5_bwarm"]
 [ext_resource type="Script" path="res://scripts/link_movement.gd" id="5_excs0"]
+[ext_resource type="Script" path="res://scripts/link_sprite_hit_colour.gd" id="5_tr0rj"]
 [ext_resource type="Script" path="res://scripts/link_combat.gd" id="6_2h8fc"]
 [ext_resource type="Script" path="res://scripts/link_interact.gd" id="7_2vkl0"]
 [ext_resource type="Script" path="res://scripts/link_state.gd" id="8_ryf5n"]
@@ -13,6 +15,18 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3pcpd"]
 size = Vector2(15.9, 7.9)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1hnhe"]
+resource_local_to_scene = true
+shader = ExtResource("2_dkx5a")
+shader_parameter/OLD_COLOUR_1 = Color(0.501961, 0.815686, 0.0627451, 1)
+shader_parameter/OLD_COLOUR_2 = Color(0.784314, 0.298039, 0.0470588, 1)
+shader_parameter/OLD_COLOUR_3 = Color(0.988235, 0.596078, 0.219608, 1)
+shader_parameter/OLD_COLOUR_4 = null
+shader_parameter/NEW_COLOUR_1 = Color(0.501961, 0.12549, 0.0627451, 1)
+shader_parameter/NEW_COLOUR_2 = Color(0.784314, 0.0784314, 0.0470588, 1)
+shader_parameter/NEW_COLOUR_3 = Color(0.988235, 0.596078, 0.905882, 1)
+shader_parameter/NEW_COLOUR_4 = null
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_f118x"]
 atlas = ExtResource("2_8jjpd")
@@ -273,6 +287,42 @@ animations = [{
 "speed": 8.0
 }]
 
+[sub_resource type="Resource" id="Resource_qwuou"]
+script = ExtResource("5_tr0rj")
+tunic_colour = Color(0.501961, 0.815686, 0.0627451, 1)
+skin_colour = Color(0.988235, 0.596078, 0.219608, 1)
+hair_colour = Color(0.784314, 0.298039, 0.0470588, 1)
+
+[sub_resource type="Resource" id="Resource_i6fwv"]
+script = ExtResource("5_tr0rj")
+tunic_colour = Color(0.847059, 0.156863, 0, 1)
+skin_colour = Color(0.988235, 0.596078, 0.219608, 1)
+hair_colour = Color(0.784314, 0.298039, 0.0470588, 1)
+
+[sub_resource type="Resource" id="Resource_xbqt8"]
+script = ExtResource("5_tr0rj")
+tunic_colour = Color(0.768627, 0.831373, 0.988235, 1)
+skin_colour = Color(0.988235, 0.596078, 0.219608, 1)
+hair_colour = Color(0.784314, 0.298039, 0.0470588, 1)
+
+[sub_resource type="Resource" id="Resource_4sj7v"]
+script = ExtResource("5_tr0rj")
+tunic_colour = Color(0, 0, 0, 1)
+skin_colour = Color(0, 0.501961, 0.533333, 1)
+hair_colour = Color(0.847059, 0.156863, 0, 1)
+
+[sub_resource type="Resource" id="Resource_65npy"]
+script = ExtResource("5_tr0rj")
+tunic_colour = Color(0.847059, 0.156863, 0, 1)
+skin_colour = Color(0.988235, 0.596078, 0.219608, 1)
+hair_colour = Color(0.988235, 0.988235, 0.988235, 1)
+
+[sub_resource type="Resource" id="Resource_2y08c"]
+script = ExtResource("5_tr0rj")
+tunic_colour = Color(0, 0, 0.658824, 1)
+skin_colour = Color(0.360784, 0.580392, 0.988235, 1)
+hair_colour = Color(0.988235, 0.988235, 0.988235, 1)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g0xjw"]
 size = Vector2(16, 16)
 
@@ -311,11 +361,18 @@ process_mode = 1
 z_index = 1
 texture_filter = 1
 texture_repeat = 1
+material = SubResource("ShaderMaterial_1hnhe")
 position = Vector2(8, 8)
 sprite_frames = SubResource("SpriteFrames_18du3")
-animation = &"up"
+animation = &"attack_wooden_right"
 autoplay = "up"
 script = ExtResource("3_1avva")
+default_sprite_palette = SubResource("Resource_qwuou")
+red_tunic_sprite_palette = SubResource("Resource_i6fwv")
+white_tunic_sprite_palette = SubResource("Resource_xbqt8")
+hit_effect_sprite_palette_1 = SubResource("Resource_4sj7v")
+hit_effect_sprite_palette_2 = SubResource("Resource_65npy")
+hit_effect_sprite_palette_3 = SubResource("Resource_2y08c")
 
 [node name="Link Hitbox" type="Area2D" parent="." groups=["Player"]]
 collision_layer = 4

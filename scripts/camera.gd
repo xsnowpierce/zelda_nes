@@ -37,7 +37,7 @@ func move_camera_to_tile(tile_coordinate : Vector2) -> void:
 	await move_camera_to_position(tile_coordinate)
 
 func set_camera_position(location : Vector2) -> void:
-	var altered_location : Vector2 = Vector2i(roundi(position.x / GameSettings.map_screen_size.x), roundi(position.y / GameSettings.map_screen_size.y))
+	var altered_location : Vector2 = Vector2i(roundi(location.x / GameSettings.map_screen_size.x), roundi(location.y / GameSettings.map_screen_size.y))
 	position = altered_location
 	camera_moved.emit(altered_location)
 

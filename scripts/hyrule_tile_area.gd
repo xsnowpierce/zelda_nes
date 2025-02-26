@@ -23,6 +23,8 @@ func tile_exited(next_tile : Vector2) -> void:
 func spawn_enemies(enemies : EnemySpawnGroup) -> void:
 	var spawns : int = 0
 	for enemy in enemies.enemy_spawns:
+		if(enemy == null):
+			continue
 		if(enemy.has_been_killed):
 			continue
 		var enemy_object = enemy_spawner_scene.instantiate()
@@ -38,5 +40,5 @@ func spawn_enemies(enemies : EnemySpawnGroup) -> void:
 
 func enemy_has_been_killed(enemy_spawner : EnemySpawner) -> void:
 	for spawn_group in random_map_spawns:
-		spawn_group.enemy_spawns.remove_at(enemy_spawner.spawner_id)
+		spawn_group.enemy_spawns[enemy_spawner.spawner_id] = null
 	enemy_spawner.queue_free()

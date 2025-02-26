@@ -52,6 +52,7 @@ EntranceDoor=""
 GameData=""
 SPAWNPOINT=""
 Player_Bomb=""
+SFXPlayer=""
 
 [gui]
 

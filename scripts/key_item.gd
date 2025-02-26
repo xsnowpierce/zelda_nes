@@ -25,8 +25,8 @@ func _process(delta: float) -> void:
 			get_tree().get_first_node_in_group("GameData").add_player_flag(get_obtain_player_flag_from_item_type(item_type))
 			queue_free()
 
-func get_animation_frame_from_item_type(item_type : ENUM.KEY_ITEM_TYPE) -> int:
-	match item_type:
+func get_animation_frame_from_item_type(get_item_type : ENUM.KEY_ITEM_TYPE) -> int:
+	match get_item_type:
 		ENUM.KEY_ITEM_TYPE.WOODEN_BOOMERANG:
 			return 1
 		ENUM.KEY_ITEM_TYPE.MAGICAL_BOOMERANG:
@@ -65,8 +65,8 @@ func get_animation_frame_from_item_type(item_type : ENUM.KEY_ITEM_TYPE) -> int:
 			return 20
 	return 0
 
-func get_obtain_player_flag_from_item_type(item_type : ENUM.KEY_ITEM_TYPE) -> String:
-	match item_type:
+func get_obtain_player_flag_from_item_type(get_item_type : ENUM.KEY_ITEM_TYPE) -> String:
+	match get_item_type:
 		ENUM.KEY_ITEM_TYPE.WOODEN_BOOMERANG:
 			return "obtained_wooden_boomerang"
 		ENUM.KEY_ITEM_TYPE.MAGICAL_BOOMERANG:

@@ -1,0 +1,86 @@
+[gd_resource type="VisualShader" load_steps=11 format=3 uid="uid://bcgdtxawfhd7v"]
+
+[sub_resource type="VisualShaderNodeCompare" id="VisualShaderNodeCompare_6gqen"]
+default_input_values = [0, Quaternion(0, 0, 0, 0), 1, Quaternion(0, 0, 0, 0), 2, 1e-05]
+type = 5
+
+[sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_hw2ql"]
+expanded_output_ports = [0]
+parameter_name = "OLD_COLOUR_3"
+qualifier = 2
+default_value_enabled = true
+default_value = Color(0.501961, 0.815686, 0.0627451, 1)
+
+[sub_resource type="VisualShaderNodeCompare" id="VisualShaderNodeCompare_npack"]
+default_input_values = [0, Quaternion(0, 0, 0, 0), 1, Quaternion(0, 0, 0, 0), 2, 1e-05]
+type = 5
+
+[sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_2bedd"]
+expanded_output_ports = [0]
+parameter_name = "OLD_COLOUR_4"
+qualifier = 2
+default_value_enabled = true
+default_value = Color(0.501961, 0.815686, 0.0627451, 1)
+
+[sub_resource type="VisualShaderNodeCompare" id="VisualShaderNodeCompare_m5hf5"]
+default_input_values = [0, Quaternion(0, 0, 0, 0), 1, Quaternion(0, 0, 0, 0), 2, 1e-05]
+type = 5
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_d6ia5"]
+input_name = "texture"
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_brub3"]
+expanded_output_ports = [0]
+source = 5
+
+[sub_resource type="VisualShaderNodeCompare" id="VisualShaderNodeCompare_iwlce"]
+default_input_values = [0, Quaternion(0, 0, 0, 0), 1, Quaternion(0, 0, 0, 0), 2, 1e-05]
+type = 5
+
+[sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_q61k7"]
+expanded_output_ports = [0]
+parameter_name = "OLD_COLOUR_1"
+qualifier = 2
+default_value_enabled = true
+default_value = Color(0.501961, 0.815686, 0.0627451, 1)
+
+[sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_x5c3k"]
+expanded_output_ports = [0]
+parameter_name = "OLD_COLOUR_2"
+qualifier = 2
+default_value_enabled = true
+default_value = Color(0.501961, 0.815686, 0.0627451, 1)
+
+[resource]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+render_mode blend_mix;
+
+
+
+"
+graph_offset = Vector2(-991.454, 61.7695)
+mode = 1
+flags/light_only = false
+nodes/fragment/0/position = Vector2(200, 1040)
+nodes/fragment/2/node = SubResource("VisualShaderNodeInput_d6ia5")
+nodes/fragment/2/position = Vector2(-740, 180)
+nodes/fragment/4/node = SubResource("VisualShaderNodeTexture_brub3")
+nodes/fragment/4/position = Vector2(-380, 80)
+nodes/fragment/7/node = SubResource("VisualShaderNodeCompare_iwlce")
+nodes/fragment/7/position = Vector2(-60, 940)
+nodes/fragment/8/node = SubResource("VisualShaderNodeColorParameter_q61k7")
+nodes/fragment/8/position = Vector2(-740, 360)
+nodes/fragment/9/node = SubResource("VisualShaderNodeColorParameter_x5c3k")
+nodes/fragment/9/position = Vector2(-740, 780)
+nodes/fragment/10/node = SubResource("VisualShaderNodeCompare_6gqen")
+nodes/fragment/10/position = Vector2(-60, 320)
+nodes/fragment/11/node = SubResource("VisualShaderNodeColorParameter_hw2ql")
+nodes/fragment/11/position = Vector2(-740, 1220)
+nodes/fragment/12/node = SubResource("VisualShaderNodeCompare_npack")
+nodes/fragment/12/position = Vector2(-60, 640)
+nodes/fragment/13/node = SubResource("VisualShaderNodeColorParameter_2bedd")
+nodes/fragment/13/position = Vector2(-740, 1640)
+nodes/fragment/14/node = SubResource("VisualShaderNodeCompare_m5hf5")
+nodes/fragment/14/position = Vector2(-60, 20)
+nodes/fragment/connections = PackedInt32Array(2, 0, 4, 2, 4, 0, 7, 0, 8, 0, 7, 1, 9, 0, 10, 1, 11, 0, 12, 1, 13, 0, 14, 1, 4, 0, 10, 0, 4, 0, 12, 0, 4, 0, 14, 0)

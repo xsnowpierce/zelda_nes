@@ -17,7 +17,6 @@ func _ready() -> void:
 	starting_position = global_position
 
 func block_interact(interacted_from_direction : Vector2) -> void:
-	print("interacted")
 	if(is_moving or move_times == 0):
 		return
 	if(is_push_restricted(-interacted_from_direction)):

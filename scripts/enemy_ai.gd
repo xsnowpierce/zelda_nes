@@ -34,7 +34,8 @@ func attacked() -> void:
 	current_attacked_iframes = attacked_iframes / 60.0
 	current_health -= 1
 	was_attacked.emit()
-	$AudioStreamPlayer.play()
+	var sfx_player : SFXPlayer = get_tree().get_first_node_in_group("SFXPlayer")
+	sfx_player.play_sound(SFXPlayer.SFX.ENEMY_DEATH)
 	if(current_health <= 0):
 		death()
 
