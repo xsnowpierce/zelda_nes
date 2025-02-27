@@ -7,7 +7,6 @@ atlas = ExtResource("1_xh2r7")
 region = Rect2(224, 0, 16, 16)
 
 [node name="SPAWNPOINT" type="Node2D" groups=["SPAWNPOINT"]]
-position = Vector2(0, -688)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visibility_layer = 2

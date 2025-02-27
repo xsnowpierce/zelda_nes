@@ -52,18 +52,20 @@ func check_door_collision() -> void:
 func enter_door() -> void:
 	if(player.get_player_state().is_entering_door or player.get_player_state().is_exiting_door):
 		return
-	player.get_player_state().is_entering_door = true
-	player.position = (colliding_with_door.global_position + Vector2(8,8))
-	entering_door.emit(colliding_with_door, true)
-	player.game_data.player_start_enter_door(colliding_with_door)
-	door_enter_sound.emit()
-	var start_sprite_y : float = player.get_sprite().position.y
-	await enter_door_sprite_animation()
+	if(!colliding_with_door.is_staircase):
+		player.get_player_state().is_entering_door = true
+		player.position = (colliding_with_door.global_position + Vector2(8,8))
+		entering_door.emit(colliding_with_door, true)
+		player.game_data.player_start_enter_door(colliding_with_door)
+		door_enter_sound.emit()
+		var start_sprite_y : float = player.get_sprite().position.y
+		await enter_door_sprite_animation()
+		player.get_sprite_mask().clip_contents = false
+		player.get_sprite().position.y = start_sprite_y
+		player.get_player_state().is_inside_room = true
+		player.get_player_state().is_entering_door = false
+		
 	player.game_data.player_finish_enter_door(colliding_with_door)
-	player.get_sprite_mask().clip_contents = false
-	player.get_sprite().position.y = start_sprite_y
-	player.get_player_state().is_inside_room = true
-	player.get_player_state().is_entering_door = false
 	
 func wait_for_room_events() -> void:
 	player.get_player_state().has_room_events = true

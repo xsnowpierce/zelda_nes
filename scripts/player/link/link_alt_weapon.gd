@@ -3,11 +3,14 @@ extends Node
 var player : CharacterBody2D
 
 var spawn_projectile_distance : float = 1
+@export_group("Scenes")
 @export var bomb_scene : PackedScene = preload("res://scenes/bomb.tscn")
 @export var candle_flame_scene : PackedScene = preload("res://scenes/candle_fire.tscn")
 @export var magical_wand_scene : PackedScene = preload("res://scenes/magical_wand_beam.tscn")
 @export var wooden_arrow_scene : PackedScene = preload("res://scenes/wooden_arrow.tscn")
 var current_projectile
+@export_group("")
+@export var whistle_pause_time : float = 2.7
 
 func initialize(parent : CharacterBody2D) -> void:
 	player = parent
@@ -19,6 +22,8 @@ func use_alternate_weapon(item : ENUM.KEY_ITEM_TYPE) -> void:
 	match item:
 		ENUM.KEY_ITEM_TYPE.BOMB:
 			if(is_instance_valid(current_projectile)):
+				return
+			if(player.game_data.current_bombs <= 0):
 				return
 			var bomb = bomb_scene.instantiate()
 			bomb.global_position = (player.global_position - Vector2(8,8)) + (player.get_look_direction() * (spawn_projectile_distance * 16))
@@ -43,12 +48,22 @@ func use_alternate_weapon(item : ENUM.KEY_ITEM_TYPE) -> void:
 		ENUM.KEY_ITEM_TYPE.WOODEN_ARROW:
 			if(is_instance_valid(current_projectile)):
 				return
+			if(player.game_data.current_rupees <= 0):
+				return
 			var arrow = wooden_arrow_scene.instantiate()
 			arrow.global_position = (player.global_position) + (player.get_look_direction() * (spawn_projectile_distance * 16))
 			player.game_data.add_child(arrow)
 			arrow.initialize_arrow(player.get_look_direction(), player.camera)
 			current_projectile = arrow
 			player.use_item_animation()
+			player.game_data.change_rupees(-1)
+		ENUM.KEY_ITEM_TYPE.RECORDER:
+			player.game_data.set_whistle_pause_value(true)
+			get_tree().get_first_node_in_group("SFXPlayer").play_sound(SFXPlayer.SFX.WHISTLE_MUSIC)
+			await get_tree().create_timer(whistle_pause_time).timeout
+			player.played_flute.emit()
+			player.game_data.set_whistle_pause_value(false)
+			
 
 func cast_magical_wand_beam() -> void:
 	var wand_beam = magical_wand_scene.instantiate()

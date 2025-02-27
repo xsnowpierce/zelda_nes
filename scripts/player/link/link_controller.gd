@@ -3,6 +3,8 @@ extends CharacterBody2D
 var game_data : Node
 var camera : Camera2D
 
+signal played_flute
+
 func _ready() -> void:
 	game_data = get_tree().get_first_node_in_group("GameData")
 	camera = get_tree().get_first_node_in_group("Camera")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=229 format=4 uid="uid://bnrlmifgdjgsb"]
+[gd_scene load_steps=230 format=4 uid="uid://bnrlmifgdjgsb"]
 
 [ext_resource type="Script" path="res://scripts/utils/GameData.gd" id="1_fiv6q"]
 [ext_resource type="Script" path="res://scripts/player/link/camera.gd" id="1_xkdoo"]
@@ -42,6 +42,7 @@
 [ext_resource type="AudioStream" uid="uid://boy2mac61rejw" path="res://sound/sfx/The Legend of Zelda Cartoon Sound Effects Power Zap.wav" id="18_ippjc"]
 [ext_resource type="Script" path="res://scripts/player/userinterface/ui_selected_item.gd" id="18_tkg53"]
 [ext_resource type="FontFile" uid="uid://bw55a4dg4x4gs" path="res://images/the-legend-of-zelda-nes.ttf" id="19_fvc07"]
+[ext_resource type="AudioStream" uid="uid://llgx3dbrrwkp" path="res://sound/sfx/The Legend of Zelda Cartoon Sound Effects Magic Whistle Tune.wav" id="19_g4fo5"]
 [ext_resource type="Resource" uid="uid://dijfjau75dp45" path="res://scenes/shop_B.tres" id="19_klo3g"]
 [ext_resource type="Resource" uid="uid://bs6obu18aoljd" path="res://scenes/shop_C.tres" id="20_8ncxx"]
 [ext_resource type="Resource" uid="uid://di0mwx5aws2xe" path="res://scenes/take_any.tres" id="20_ydc8l"]
@@ -1559,7 +1560,9 @@ enemy_zora_scene = ExtResource("24_n4nw8")
 enemy_leever_scene = ExtResource("5_mynx1")
 enemy_blue_tektite_scene = ExtResource("6_8f64w")
 current_player_health = 6
+current_rupees = 244
 current_bombs = 8
+has_recorder = true
 hyrule_music = ExtResource("2_7hpxk")
 dungeon_music = ExtResource("36_8um02")
 current_equipped_item_a = 1
@@ -1585,6 +1588,7 @@ bomb_explosion_sfx = ExtResource("12_j64rb")
 key_item_pickup_sfx = ExtResource("16_03uuv")
 fire_shot_sfx = ExtResource("17_n8ghj")
 magical_wand_shoot = ExtResource("18_ippjc")
+whistle_music = ExtResource("19_g4fo5")
 
 [node name="Camera2D" type="Camera2D" parent="." groups=["Camera"]]
 process_mode = 3
@@ -2399,7 +2403,6 @@ position = Vector2(1504, -736)
 
 [node name="SPAWNPOINT" parent="." instance=ExtResource("36_w4qf6")]
 process_mode = 1
-position = Vector2(0, 0)
 
 [node name="ENEMY_SPAWNS" type="Node2D" parent="."]
 process_mode = 1

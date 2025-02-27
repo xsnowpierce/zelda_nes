@@ -100,6 +100,7 @@ var link : CharacterBody2D
 @export var current_equipped_item_a : ENUM.KEY_ITEM_TYPE = ENUM.KEY_ITEM_TYPE.NULL
 @export var current_equipped_item_b : ENUM.KEY_ITEM_TYPE = ENUM.KEY_ITEM_TYPE.NULL
 var game_is_paused : bool
+var link_using_whistle : bool
 @export var enemy_spawn_parent : Node2D
 @export var dropped_item_scene : PackedScene = preload("res://scenes/dropped_item.tscn")
 
@@ -242,7 +243,7 @@ func equip_key_item(type : ENUM.KEY_ITEM_TYPE, slot : int) -> void:
 		current_equipped_item_a = type
 
 func open_pause_menu() -> void:
-	if(game_is_paused):
+	if(game_is_paused or link_using_whistle):
 		return
 	game_is_paused = true
 	get_tree().paused = true
@@ -251,13 +252,17 @@ func open_pause_menu() -> void:
 	pause_menu_control.emit(true)
 
 func close_pause_menu() -> void:
-	if(!game_is_paused):
+	if(!game_is_paused or link_using_whistle):
 		return
 	pause_menu_control.emit(false)
 	await camera.close_pause_menu()
 	game_is_paused = false
 	get_tree().paused = false
 	pause_menu_closed.emit()
+
+func set_whistle_pause_value(value : bool) -> void:
+	link_using_whistle = value
+	get_tree().paused = value
 
 func add_player_kill(enemy_type : ENUM.ENEMY_TYPE, kill_method : ENUM.KILL_METHOD) -> void:
 	$RNG_DROPPER.add_kill(enemy_type, kill_method)

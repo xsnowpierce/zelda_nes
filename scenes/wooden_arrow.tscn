@@ -77,7 +77,7 @@ script = ExtResource("1_njy5f")
 sprite_frames = SubResource("SpriteFrames_nhvgv")
 animation = &"hit"
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." groups=["Player_Attack"]]
 collision_layer = 16
 collision_mask = 8
 
