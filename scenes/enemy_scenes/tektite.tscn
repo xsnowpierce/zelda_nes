@@ -1,8 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://cj75wahsqwoah"]
+[gd_scene load_steps=7 format=3 uid="uid://cj75wahsqwoah"]
 
 [ext_resource type="Script" path="res://scripts/entity/enemy/tektite.gd" id="1_x8nh4"]
 [ext_resource type="Texture2D" uid="uid://7uv75ywip144" path="res://images/enemies.png" id="2_1mp0t"]
-[ext_resource type="AudioStream" uid="uid://dtn5thjr7fpjk" path="res://sound/sfx/The Legend of Zelda Cartoon Sound Effects Enemy Zapped.wav" id="3_vpptp"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dh51p"]
 radius = 7.0
@@ -32,7 +31,7 @@ animations = [{
 [node name="Tektite" type="Area2D" groups=["Enemy"]]
 process_mode = 1
 collision_layer = 8
-collision_mask = 19
+collision_mask = 20
 input_pickable = false
 script = ExtResource("1_x8nh4")
 
@@ -40,15 +39,11 @@ script = ExtResource("1_x8nh4")
 position = Vector2(8, 8)
 shape = SubResource("CircleShape2D_dh51p")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." groups=["Enemy"]]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_k8inr")
 autoplay = "default"
 frame_progress = 0.676841
 centered = false
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_vpptp")
-bus = &"SFX"
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

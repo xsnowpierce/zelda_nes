@@ -9,6 +9,7 @@ extends Node
 @export var enemy_zora_scene : PackedScene
 @export var enemy_leever_scene : PackedScene
 @export var enemy_blue_tektite_scene : PackedScene
+@export var enemy_peahat_scene : PackedScene
 
 @export_group("Player Stats")
 @export_subgroup("Health")

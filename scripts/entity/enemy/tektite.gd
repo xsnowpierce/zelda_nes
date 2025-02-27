@@ -12,10 +12,16 @@ extends EnemyAI
 var current_jump_direction: int = 1
 var jump_active: bool = false
 var force_downwards_jump = false
+var camera_has_moved : bool
 
 func _ready() -> void:
 	super()
 	loop()
+
+func _process(delta: float) -> void:
+	super(delta)
+	if(GameSettings.camera_is_moving):
+		camera_has_moved = true
 
 func loop() -> void:
 	while true:
@@ -45,7 +51,9 @@ func jump() -> void:
 		jump_ascend_time -= delta * jump_speed * jump_speed_duration_multiplier
 		velocity = Vector2(jump_horizontal_speed * current_jump_direction, -jump_current_power)
 		position += velocity * delta * jump_speed
-		if(deal_with_out_of_bounds() && !GameSettings.camera_is_moving):
+		if(camera_has_moved):
+			break
+		if(check_bounds()):
 			jump()
 			return
 		await get_tree().process_frame
@@ -54,7 +62,9 @@ func jump() -> void:
 		jump_current_power -= delta * jump_speed * jump_speed_duration_multiplier * jump_deceleration_speed
 		velocity = Vector2(jump_horizontal_speed * current_jump_direction, -jump_current_power)
 		position += velocity * delta * jump_speed
-		if(deal_with_out_of_bounds() && !GameSettings.camera_is_moving):
+		if(camera_has_moved):
+			break
+		if(check_bounds()):
 			jump()
 			return
 		await get_tree().process_frame
@@ -66,7 +76,9 @@ func jump() -> void:
 		jump_descend_time -= delta * jump_speed * jump_speed_duration_multiplier
 		velocity = Vector2(jump_horizontal_speed * current_jump_direction, -jump_descend_strength)
 		position += velocity * delta * jump_speed
-		if(deal_with_out_of_bounds() && !GameSettings.camera_is_moving):
+		if(camera_has_moved):
+			break
+		if(check_bounds()):
 			jump()
 			return
 		if ((global_position + Vector2(8,8)).y > GameSettings.screen_boundaries.w - 16):
@@ -74,6 +86,13 @@ func jump() -> void:
 		await get_tree().process_frame
 
 	jump_active = false
+
+func check_bounds() -> bool:
+	if(!GameSettings.camera_is_moving):
+		if(deal_with_out_of_bounds()):
+			jump()
+			return true
+	return false
 
 func deal_with_out_of_bounds() -> bool:
 	var position_offset := global_position + Vector2(8, 8)

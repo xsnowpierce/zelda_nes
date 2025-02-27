@@ -1,7 +1,7 @@
 extends InteractableBlock
 
 @export var disappear_timer : float = 1 
-var armos_scene : PackedScene = load("res://scenes/armos.tscn")
+var armos_scene : PackedScene = load("res://scenes/enemy_scenes/armos.tscn")
 var spawned_armos
 var has_spawned : bool
 

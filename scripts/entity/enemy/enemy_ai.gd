@@ -44,7 +44,7 @@ func attacked() -> void:
 func death() -> void:
 	var death_object = death_scene.instantiate()
 	get_parent().add_child(death_object)
-	death_object.position = position
+	death_object.global_position = global_position
 	get_tree().get_first_node_in_group("GameData").add_player_kill(enemy_type, ENUM.KILL_METHOD.OTHER)
 	has_died.emit()
 	queue_free()

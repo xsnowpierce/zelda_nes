@@ -23,13 +23,18 @@ func set_cloud_visibility() -> void:
 				should_cloud_be_visible = false
 			ENUM.ENEMY_TYPE.LEEVER:
 				should_cloud_be_visible = false
+			ENUM.ENEMY_TYPE.PEAHAT:
+				should_cloud_be_visible = false
 			_:
 				should_cloud_be_visible = true
 
 func awake():
 	super()
-	$Sprite2D.visible = should_cloud_be_visible
-	$Sprite2D.play()
+	if(should_cloud_be_visible):
+		$Sprite2D.visible = true
+		$Sprite2D.play()
+	else:
+		_on_sprite_2d_animation_looped()
 	
 func sleep():
 	super()
@@ -53,6 +58,8 @@ func _on_sprite_2d_animation_looped() -> void:
 				enemy_scene = game_data.enemy_leever_scene.instantiate()
 			ENUM.ENEMY_TYPE.BLUE_TEKTITE:
 				enemy_scene = game_data.enemy_blue_tektite_scene.instantiate()
+			ENUM.ENEMY_TYPE.PEAHAT:
+				enemy_scene = game_data.enemy_peahat_scene.instantiate()
 			_:
 				printerr("Tried to spawn enemy that does not have a set scene in GameData. (", str(enemy_type), ", ", ENUM.ENEMY_TYPE.keys()[enemy_type] ,")")
 				$Sprite2D.stop()

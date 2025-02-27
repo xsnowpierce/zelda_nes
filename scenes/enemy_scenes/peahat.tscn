@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://7qvtpwix4buu"]
+
+[ext_resource type="Script" path="res://scripts/entity/enemy/peahat.gd" id="1_njyjf"]
+[ext_resource type="Texture2D" uid="uid://7uv75ywip144" path="res://images/enemies.png" id="2_s2ahh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_y47j1"]
+radius = 6.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l8ch5"]
+atlas = ExtResource("2_s2ahh")
+region = Rect2(162, 59, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ia3rx"]
+atlas = ExtResource("2_s2ahh")
+region = Rect2(179, 59, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_u3mrq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l8ch5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ia3rx")
+}],
+"loop": true,
+"name": &"default",
+"speed": 30.0
+}]
+
+[node name="Peahat" type="Area2D" groups=["Enemy", "Enemy_Attack"]]
+collision_layer = 8
+collision_mask = 20
+script = ExtResource("1_njyjf")
+enemy_type = 13
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["Enemy"]]
+position = Vector2(8, 8)
+shape = SubResource("CircleShape2D_y47j1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." groups=["Enemy"]]
+sprite_frames = SubResource("SpriteFrames_u3mrq")
+autoplay = "default"
+frame_progress = 0.128754
+centered = false
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

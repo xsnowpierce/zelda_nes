@@ -31,7 +31,7 @@ animations = [{
 [node name="Blue Tektite" type="Area2D" groups=["Enemy"]]
 process_mode = 1
 collision_layer = 8
-collision_mask = 19
+collision_mask = 20
 input_pickable = false
 script = ExtResource("1_asujb")
 enemy_type = 14
@@ -41,7 +41,7 @@ max_health = 2
 position = Vector2(8, 8)
 shape = SubResource("CircleShape2D_dh51p")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." groups=["Enemy"]]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_u0bmr")
 autoplay = "default"
