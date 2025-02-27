@@ -1,4 +1,6 @@
-extends "res://scripts/entity.gd"
+extends Entity
+
+class_name InteractableBlock
 
 var link_area : Area2D
 var difference_deadzone : float = 0.5

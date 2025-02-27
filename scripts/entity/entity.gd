@@ -1,5 +1,7 @@
 extends Node2D
 
+class_name Entity
+
 var residing_in_area : Vector2
 var is_awake : bool
 var camera : Camera2D

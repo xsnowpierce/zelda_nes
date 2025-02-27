@@ -1,5 +1,7 @@
 extends Node2D
 
+class_name TileArea
+
 var tile_area_position : Vector2
 
 func _ready() -> void:

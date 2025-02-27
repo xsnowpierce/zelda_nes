@@ -1,4 +1,4 @@
-extends "res://scripts/enemy_ai.gd"
+extends EnemyAI
 
 @export var jump_ascend_strength: float = 2
 @export var jump_descend_strength: float = -2

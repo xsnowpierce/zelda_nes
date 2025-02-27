@@ -2390,15 +2390,19 @@ process_mode = 1
 
 [node name="Armos Spawner" parent="Enemy Spawners" instance=ExtResource("32_30it7")]
 position = Vector2(1824, -560)
+disappear_timer = null
 
 [node name="Armos Spawner2" parent="Enemy Spawners" instance=ExtResource("32_30it7")]
 position = Vector2(1744, -560)
+disappear_timer = null
 
 [node name="Armos Spawner3" parent="Enemy Spawners" instance=ExtResource("32_30it7")]
 position = Vector2(1552, -736)
+disappear_timer = null
 
 [node name="Armos Spawner4" parent="Enemy Spawners" instance=ExtResource("32_30it7")]
 position = Vector2(1504, -736)
+disappear_timer = null
 
 [node name="SPAWNPOINT" parent="." instance=ExtResource("36_w4qf6")]
 process_mode = 1

@@ -1,4 +1,4 @@
-extends "res://scripts/ui_selected_item.gd"
+extends "res://scripts/player/userinterface/ui_selected_item.gd"
 
 func _on_game_pause_menu_opened() -> void:
 	$TextureRect.visible = false

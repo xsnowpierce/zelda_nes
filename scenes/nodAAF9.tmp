@@ -1776,7 +1776,6 @@ centered = false
 [node name="Hyrule Tile (1, 0)" type="Node2D" parent="Level/Tile Areas"]
 position = Vector2(256, 0)
 script = ExtResource("28_17esn")
-random_map_spawns = null
 
 [node name="Scripts" type="Node" parent="Level/Tile Areas/Hyrule Tile (1, 0)"]
 
@@ -1792,7 +1791,6 @@ position = Vector2(192, 0)
 
 [node name="Hyrule Tile (0, 0)" type="Node2D" parent="Level/Tile Areas"]
 script = ExtResource("28_17esn")
-random_map_spawns = null
 
 [node name="Spawned Enemies" type="Node" parent="Level/Tile Areas/Hyrule Tile (0, 0)"]
 

@@ -1,4 +1,4 @@
-extends "res://scripts/enemy_ai.gd"
+extends EnemyAI
 
 ## X,Y is the top left point of the square, while Z,W is the bottom right point of the square.
 var movable_tile_range : Array[Vector4]

@@ -1,4 +1,4 @@
-extends "res://scripts/interactable_block.gd"
+extends InteractableBlock
 
 @export var disappear_timer : float = 1 
 var armos_scene : PackedScene = load("res://scenes/armos.tscn")

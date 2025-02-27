@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://b87w5pnfnkmc2"]
 
-[ext_resource type="Script" path="res://scripts/enemy_death.gd" id="1_t4cvn"]
+[ext_resource type="Script" path="res://scripts/entity/enemy/enemy_death.gd" id="1_t4cvn"]
 [ext_resource type="Texture2D" uid="uid://fkgn6glcffe" path="res://images/NES - The Legend of Zelda - Enemy Death.png" id="2_2xds8"]
 [ext_resource type="AudioStream" uid="uid://dtn5thjr7fpjk" path="res://sound/sfx/The Legend of Zelda Cartoon Sound Effects Enemy Zapped.wav" id="3_u3mv3"]
 

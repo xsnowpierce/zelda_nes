@@ -1,4 +1,6 @@
-extends "res://scripts/enemy_ai.gd"
+extends EnemyAI
+
+class_name EnemyAI_Wander
 
 @export var rotate_chance : float = 0.5
 @export var move_speed : float = 23

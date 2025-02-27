@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://svye2k1mer1i"]
 
-[ext_resource type="Script" path="res://scripts/tektite.gd" id="1_asujb"]
+[ext_resource type="Script" path="res://scripts/entity/enemy/tektite.gd" id="1_asujb"]
 [ext_resource type="Texture2D" uid="uid://7uv75ywip144" path="res://images/enemies.png" id="2_f82q0"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dh51p"]

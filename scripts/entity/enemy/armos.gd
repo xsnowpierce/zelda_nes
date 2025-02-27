@@ -1,4 +1,4 @@
-extends "res://scripts/enemy_ai_wander.gd"
+extends EnemyAI_Wander
 
 var is_active : bool = false
 @export var active_wait_time : float

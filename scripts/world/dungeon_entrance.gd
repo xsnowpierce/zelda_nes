@@ -1,4 +1,4 @@
-extends "res://scripts/door_entrance.gd"
+extends DoorEntrance
 
 class_name DungeonEntrance
 

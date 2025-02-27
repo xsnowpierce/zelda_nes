@@ -1,4 +1,4 @@
-extends "res://scripts/enemy_ai.gd"
+extends EnemyAI
 
 enum LEEVER_STATE {ABOVEGROUND, UNDERGROUND}
 var current_state : LEEVER_STATE

@@ -1,4 +1,4 @@
-extends "res://scripts/enemy_ai_wander.gd"
+extends EnemyAI_Wander
 
 @export var random_shoot_time_range : Vector2 = Vector2(1.5,2.5)
 @export var shoot_delay_time : float = 0.3

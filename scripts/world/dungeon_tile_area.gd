@@ -1,4 +1,4 @@
-extends "res://scripts/tile_area.gd"
+extends TileArea
 
 @export_group("Starting Door Statuses")
 @export var door_north_status : DungeonDoor.DOOR_STATUS

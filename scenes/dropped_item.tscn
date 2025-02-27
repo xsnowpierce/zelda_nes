@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://2h8i8o7wy52v"]
 
-[ext_resource type="Script" path="res://scripts/dropped_item.gd" id="1_gqyti"]
+[ext_resource type="Script" path="res://scripts/entity/dropped_item.gd" id="1_gqyti"]
 [ext_resource type="AudioStream" uid="uid://cp6br2tqwillp" path="res://sound/sfx/The Legend of Zelda Cartoon Sound Effects Shiney.wav" id="2_x7a2w"]
 [ext_resource type="AudioStream" uid="uid://caertfnaqct0y" path="res://sound/sfx/The Legend of Zelda Cartoon Sound Effects Health Heart.wav" id="3_agqju"]
 [ext_resource type="Texture2D" uid="uid://s0p3ioiqty7b" path="res://images/items_and_weapons.png" id="4_6w1cc"]

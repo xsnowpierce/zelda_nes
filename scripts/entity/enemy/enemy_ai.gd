@@ -1,5 +1,7 @@
 extends Area2D
 
+class_name EnemyAI
+
 @export var enemy_type : ENUM.ENEMY_TYPE
 @export var hitbox_attack_block_level : ENUM.BLOCK_ATTACK_LEVEL = ENUM.BLOCK_ATTACK_LEVEL.IMPOSSIBLE
 @export var max_health : int = 1

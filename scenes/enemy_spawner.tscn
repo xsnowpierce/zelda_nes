@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://bm82dcwhs04ti"]
 
-[ext_resource type="Script" path="res://scripts/enemy_spawner.gd" id="1_hkpij"]
+[ext_resource type="Script" path="res://scripts/entity/enemy/enemy_spawner.gd" id="1_hkpij"]
 [ext_resource type="Texture2D" uid="uid://u1i1trqicn2k" path="res://images/weapons.png" id="2_uc2o6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nh2rg"]

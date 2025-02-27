@@ -1,4 +1,4 @@
-extends "res://scripts/hyrule_tile_area.gd"
+extends HyruleTileArea
 
 func _on_pushable_block_was_pushed() -> void:
 	if(is_instance_valid($"Fake Block Cover")):

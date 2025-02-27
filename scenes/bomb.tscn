@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://f6eh8j2v5ntc"]
 
-[ext_resource type="Script" path="res://scripts/bomb.gd" id="1_qfobf"]
+[ext_resource type="Script" path="res://scripts/player/item/bomb.gd" id="1_qfobf"]
 [ext_resource type="Texture2D" uid="uid://s0p3ioiqty7b" path="res://images/items_and_weapons.png" id="2_yj0mx"]
 [ext_resource type="Texture2D" uid="uid://u1i1trqicn2k" path="res://images/weapons.png" id="3_4ihp4"]
 [ext_resource type="AudioStream" uid="uid://bvbakpgvqxoua" path="res://sound/sfx/The Legend of Zelda Cartoon Sound Effects Bomb Apearance and Selfdrestruction.wav" id="4_y6pam"]

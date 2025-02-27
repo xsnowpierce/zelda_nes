@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="InteriorData" load_steps=6 format=3 uid="uid://c3ce0mguc3x3"]
 
-[ext_resource type="Script" path="res://scripts/interior_data.gd" id="1_vuekv"]
-[ext_resource type="Script" path="res://scripts/shop_item.gd" id="2_mvi5l"]
+[ext_resource type="Script" path="res://scripts/world/interior_data.gd" id="1_vuekv"]
+[ext_resource type="Script" path="res://scripts/world/shop_item.gd" id="2_mvi5l"]
 
 [sub_resource type="Resource" id="Resource_ur1i0"]
 script = ExtResource("2_mvi5l")

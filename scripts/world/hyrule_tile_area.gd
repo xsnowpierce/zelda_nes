@@ -1,4 +1,6 @@
-extends "res://scripts/tile_area.gd"
+extends TileArea
+
+class_name HyruleTileArea
 
 @export var random_map_spawns : Array[EnemySpawnGroup]
 

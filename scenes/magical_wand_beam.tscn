@@ -1,6 +1,6 @@
 [gd_scene load_steps=21 format=3 uid="uid://cgv0qfcslkh1n"]
 
-[ext_resource type="Script" path="res://scenes/magical_wand_beam.gd" id="1_deh72"]
+[ext_resource type="Script" path="res://scripts/player/item/magical_wand_beam.gd" id="1_deh72"]
 [ext_resource type="Texture2D" uid="uid://cpa11tutqc7h1" path="res://images/Sprite-0001.png" id="2_qdq0c"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ye8yo"]

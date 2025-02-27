@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://d0gkn1fbxt2p7"]
 
-[ext_resource type="Script" path="res://scripts/bombable_tile.gd" id="1_nret6"]
+[ext_resource type="Script" path="res://scripts/world/bombable_tile.gd" id="1_nret6"]
 [ext_resource type="Texture2D" uid="uid://cqbg7fmos30qo" path="res://images/tileset2.png" id="3_cdnx2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_asj3c"]

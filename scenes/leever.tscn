@@ -1,9 +1,9 @@
 [gd_scene load_steps=15 format=3 uid="uid://c43ocjbbtan7f"]
 
-[ext_resource type="Script" path="res://scripts/leever.gd" id="1_k33cw"]
+[ext_resource type="Script" path="res://scripts/entity/enemy/leever.gd" id="1_k33cw"]
 [ext_resource type="Texture2D" uid="uid://7uv75ywip144" path="res://images/enemies.png" id="2_6od4o"]
 [ext_resource type="AudioStream" uid="uid://dtn5thjr7fpjk" path="res://sound/sfx/The Legend of Zelda Cartoon Sound Effects Enemy Zapped.wav" id="3_11bej"]
-[ext_resource type="Script" path="res://scripts/enemy_collider_check.gd" id="4_pgigd"]
+[ext_resource type="Script" path="res://scripts/entity/enemy/enemy_collider_check.gd" id="4_pgigd"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_20hka"]
 radius = 7.0

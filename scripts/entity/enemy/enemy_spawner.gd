@@ -1,4 +1,4 @@
-extends "res://scripts/entity.gd"
+extends Entity
 
 class_name EnemySpawner
 

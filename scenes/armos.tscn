@@ -1,9 +1,9 @@
 [gd_scene load_steps=12 format=3 uid="uid://b62c4urwkwpcw"]
 
-[ext_resource type="Script" path="res://scripts/armos.gd" id="1_kpuvp"]
+[ext_resource type="Script" path="res://scripts/entity/enemy/armos.gd" id="1_kpuvp"]
 [ext_resource type="Texture2D" uid="uid://7uv75ywip144" path="res://images/enemies.png" id="2_4hfqa"]
 [ext_resource type="AudioStream" uid="uid://dtn5thjr7fpjk" path="res://sound/sfx/The Legend of Zelda Cartoon Sound Effects Enemy Zapped.wav" id="3_cx7is"]
-[ext_resource type="Script" path="res://scripts/enemy_collider_check.gd" id="4_4fj46"]
+[ext_resource type="Script" path="res://scripts/entity/enemy/enemy_collider_check.gd" id="4_4fj46"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dh51p"]
 radius = 7.0

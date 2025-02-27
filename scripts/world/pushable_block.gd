@@ -1,4 +1,4 @@
-extends "res://scripts/interactable_block.gd"
+extends InteractableBlock
 
 var starting_position : Vector2
 @export var move_speed : float = 25
