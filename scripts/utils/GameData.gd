@@ -10,6 +10,7 @@ extends Node
 @export var enemy_leever_scene : PackedScene
 @export var enemy_blue_tektite_scene : PackedScene
 @export var enemy_peahat_scene : PackedScene
+@export var keese_scene : PackedScene
 
 @export_group("Player Stats")
 @export_subgroup("Health")
@@ -276,7 +277,7 @@ func enemy_drop_item(drop_position : Vector2) -> void:
 	var dropped_item = dropped_item_scene.instantiate()
 	dropped_item.global_position = drop_position + Vector2(8, 8)
 	dropped_item.set_item_type(next_drop)
-	$ENEMY_SPAWNS.add_child(dropped_item)
+	add_child(dropped_item)
 
 func equipped_b_slot_change(new_item_type : ENUM.KEY_ITEM_TYPE) -> void:
 	current_equipped_item_b = new_item_type

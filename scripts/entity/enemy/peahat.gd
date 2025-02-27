@@ -12,6 +12,7 @@ enum PEAHAT_STATE {SPINNING, TRANSITION, STOPPED}
 var current_state : PEAHAT_STATE
 var time_until_stop : float
 var random_direction_change : int
+@export var can_be_hit_in_flight = false
 
 func _ready() -> void:
 	await get_tree().process_frame
@@ -145,5 +146,6 @@ func get_random_direction() -> Vector2:
 	return random
 
 func attacked() -> void:
-	if(current_state == PEAHAT_STATE.STOPPED):
-		super()
+	if(!can_be_hit_in_flight and current_state != PEAHAT_STATE.STOPPED):
+		return
+	super()

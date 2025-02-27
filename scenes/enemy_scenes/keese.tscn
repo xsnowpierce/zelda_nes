@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=3 uid="uid://do2mji3lruyq7"]
+
+[ext_resource type="Script" path="res://scripts/entity/enemy/peahat.gd" id="1_snnvp"]
+[ext_resource type="Texture2D" uid="uid://bwgbbitwmdbm0" path="res://images/dungeon_enemies.png" id="2_01xb7"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_y47j1"]
+radius = 6.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nabqn"]
+atlas = ExtResource("2_01xb7")
+region = Rect2(183, 11, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bin6t"]
+atlas = ExtResource("2_01xb7")
+region = Rect2(200, 11, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_12r0w"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nabqn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bin6t")
+}],
+"loop": true,
+"name": &"default",
+"speed": 20.0
+}]
+
+[node name="Keese" type="Area2D" groups=["Enemy", "Enemy_Attack"]]
+position = Vector2(-64, -16)
+collision_layer = 8
+collision_mask = 20
+script = ExtResource("1_snnvp")
+can_be_hit_in_flight = true
+enemy_type = 24
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["Enemy"]]
+position = Vector2(8, 8)
+shape = SubResource("CircleShape2D_y47j1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." groups=["Enemy"]]
+sprite_frames = SubResource("SpriteFrames_12r0w")
+autoplay = "default"
+centered = false
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

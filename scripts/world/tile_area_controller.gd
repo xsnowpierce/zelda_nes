@@ -17,3 +17,8 @@ func new_tile_entered(tile : Vector2) -> void:
 
 func _on_camera_2d_camera_moved(new_area_position: Vector2) -> void:
 	new_tile_entered(new_area_position)
+
+
+func _on_camera_2d_camera_start_moving(new_area_position : Vector2) -> void:
+	if(tile_dictionary.has(current_tile)):
+			tile_dictionary[current_tile].tile_exited(new_area_position)
