@@ -285,6 +285,38 @@ animations = [{
 "loop": true,
 "name": &"up",
 "speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f118x")
+}],
+"loop": false,
+"name": &"use_item_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nsoqt")
+}],
+"loop": false,
+"name": &"use_item_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8ihq7")
+}],
+"loop": false,
+"name": &"use_item_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l3e27")
+}],
+"loop": false,
+"name": &"use_item_up",
+"speed": 5.0
 }]
 
 [sub_resource type="Resource" id="Resource_qwuou"]
@@ -364,7 +396,7 @@ texture_repeat = 1
 material = SubResource("ShaderMaterial_1hnhe")
 position = Vector2(8, 8)
 sprite_frames = SubResource("SpriteFrames_18du3")
-animation = &"attack_wooden_right"
+animation = &"use_item_down"
 autoplay = "up"
 script = ExtResource("3_1avva")
 default_sprite_palette = SubResource("Resource_qwuou")

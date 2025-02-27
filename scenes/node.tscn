@@ -1,4 +1,4 @@
-[gd_scene load_steps=224 format=4 uid="uid://bnrlmifgdjgsb"]
+[gd_scene load_steps=228 format=4 uid="uid://bnrlmifgdjgsb"]
 
 [ext_resource type="Script" path="res://scripts/GameData.gd" id="1_fiv6q"]
 [ext_resource type="Script" path="res://scripts/camera.gd" id="1_xkdoo"]
@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://svye2k1mer1i" path="res://scenes/blue_tektite.tscn" id="6_8f64w"]
 [ext_resource type="PackedScene" uid="uid://b2gll84jnyb1u" path="res://scenes/link.tscn" id="6_s1nwl"]
 [ext_resource type="Script" path="res://scripts/health_controller.gd" id="9_famci"]
-[ext_resource type="Script" path="res://scenes/sfx_player.gd" id="9_ll8iq"]
+[ext_resource type="Script" path="res://scripts/sfx_player.gd" id="9_ll8iq"]
 [ext_resource type="Script" path="res://scripts/ui_controller.gd" id="9_qpta4"]
 [ext_resource type="Texture2D" uid="uid://deuuoehf4blls" path="res://images/sheet_2.png" id="9_uobgr"]
 [ext_resource type="AudioStream" uid="uid://caertfnaqct0y" path="res://sound/sfx/The Legend of Zelda Cartoon Sound Effects Health Heart.wav" id="10_2h7vq"]
@@ -36,6 +36,7 @@
 [ext_resource type="Script" path="res://scripts/ui_usable_items_menu.gd" id="16_ud5o4"]
 [ext_resource type="Script" path="res://scripts/dungeon_entrance.gd" id="17_23jsa"]
 [ext_resource type="Resource" uid="uid://c3ce0mguc3x3" path="res://scenes/shop_A.tres" id="17_ij1fk"]
+[ext_resource type="AudioStream" uid="uid://dhunefrhsyom8" path="res://sound/sfx/The Legend of Zelda Cartoon Sound Effects Flames Shot.wav" id="17_n8ghj"]
 [ext_resource type="Texture2D" uid="uid://cxy5ob882odyf" path="res://images/interiors.png" id="17_ygtp3"]
 [ext_resource type="Texture2D" uid="uid://u1i1trqicn2k" path="res://images/weapons.png" id="18_dja85"]
 [ext_resource type="Script" path="res://scripts/ui_selected_item.gd" id="18_tkg53"]
@@ -53,7 +54,7 @@
 [ext_resource type="Script" path="res://scripts/pause_selection_sound.gd" id="25_2tptc"]
 [ext_resource type="Script" path="res://scripts/tile_area_controller.gd" id="25_3a4rm"]
 [ext_resource type="Script" path="res://scripts/ingame_ui_selected_item.gd" id="26_qlfam"]
-[ext_resource type="Script" path="res://scenes/hyrule_event_tile_001.gd" id="27_23nor"]
+[ext_resource type="Script" path="res://scripts/hyrule_event_tile_001.gd" id="27_23nor"]
 [ext_resource type="Script" path="res://scripts/hyrule_tile_area.gd" id="28_17esn"]
 [ext_resource type="PackedScene" uid="uid://ce1bg1140ays1" path="res://scenes/dungeon_tile.tscn" id="28_yikca"]
 [ext_resource type="Script" path="res://scripts/dungeon_tile_area.gd" id="29_2vjeo"]
@@ -64,8 +65,11 @@
 [ext_resource type="PackedScene" uid="uid://dnhpm34f6ka1c" path="res://scenes/spawnpoint.tscn" id="36_w4qf6"]
 [ext_resource type="Script" path="res://scripts/rng_dropper.gd" id="38_f8yhx"]
 [ext_resource type="Texture2D" uid="uid://7uv75ywip144" path="res://images/enemies.png" id="41_54lnv"]
+[ext_resource type="Script" path="res://scenes/hyrule_tile_burnable_secret.gd" id="41_ke6pq"]
+[ext_resource type="Script" path="res://scripts/hyrule_tile_bombable_secret.gd" id="43_e1wyw"]
 [ext_resource type="PackedScene" uid="uid://n1x0qyyt10lo" path="res://scenes/room_exit.tscn" id="43_nrqk4"]
 [ext_resource type="Script" path="res://scripts/interior_handler.gd" id="50_k6536"]
+[ext_resource type="PackedScene" uid="uid://bhj35nnpvr72k" path="res://scenes/burnable_tile.tscn" id="68_en6p7"]
 
 [sub_resource type="AudioStreamWAV" id="AudioStreamWAV_3rr3c"]
 
@@ -1556,6 +1560,8 @@ enemy_blue_tektite_scene = ExtResource("6_8f64w")
 current_player_health = 6
 current_bombs = 8
 has_wooden_sword = true
+has_bomb = true
+has_blue_candle = true
 hyrule_music = ExtResource("2_7hpxk")
 dungeon_music = ExtResource("36_8um02")
 current_equipped_item_a = 1
@@ -1578,13 +1584,14 @@ heart_pickup_sfx = ExtResource("10_2h7vq")
 sword_swing_sfx = ExtResource("11_5wgwy")
 bomb_explosion_sfx = ExtResource("12_j64rb")
 key_item_pickup_sfx = ExtResource("16_03uuv")
+fire_shot_sfx = ExtResource("17_n8ghj")
 
 [node name="Camera2D" type="Camera2D" parent="." groups=["Camera"]]
 process_mode = 3
 offset = Vector2(0, -40)
 script = ExtResource("1_xkdoo")
 
-[node name="Level" type="TileMapLayer" parent="." groups=["TileMap"]]
+[node name="Level" type="TileMapLayer" parent="." groups=["Ground", "TileMap"]]
 process_mode = 1
 z_index = -2
 texture_filter = 1
@@ -1725,10 +1732,6 @@ position = Vector2(-992, -784)
 [node name="Bombable Tile13" parent="Level/Bombable Tiles" instance=ExtResource("15_gxjfl")]
 position = Vector2(-1584, -80)
 
-[node name="Bombable Tile15" parent="Level/Bombable Tiles" instance=ExtResource("15_gxjfl")]
-position = Vector2(-16, -256)
-use_spritesheet = 0
-
 [node name="Bombable Tile16" parent="Level/Bombable Tiles" instance=ExtResource("15_gxjfl")]
 position = Vector2(1248, -80)
 
@@ -1767,6 +1770,22 @@ texture_filter = 1
 texture = SubResource("AtlasTexture_t4vxy")
 centered = false
 
+[node name="Hyrule Tile (1, 0)" type="Node2D" parent="Level/Tile Areas"]
+position = Vector2(256, 0)
+script = ExtResource("28_17esn")
+
+[node name="Scripts" type="Node" parent="Level/Tile Areas/Hyrule Tile (1, 0)"]
+
+[node name="Burnable Secret" type="Node" parent="Level/Tile Areas/Hyrule Tile (1, 0)/Scripts"]
+script = ExtResource("41_ke6pq")
+
+[node name="Spawned Enemies" type="Node" parent="Level/Tile Areas/Hyrule Tile (1, 0)"]
+
+[node name="Entities" type="Node" parent="Level/Tile Areas/Hyrule Tile (1, 0)"]
+
+[node name="Burnable Tile" parent="Level/Tile Areas/Hyrule Tile (1, 0)/Entities" instance=ExtResource("68_en6p7")]
+position = Vector2(192, 0)
+
 [node name="Hyrule Tile (0, 0)" type="Node2D" parent="Level/Tile Areas"]
 script = ExtResource("28_17esn")
 
@@ -1779,9 +1798,18 @@ position = Vector2(0, -176)
 script = ExtResource("28_17esn")
 random_map_spawns = Array[ExtResource("29_e8xa5")]([SubResource("Resource_e52bc"), SubResource("Resource_upbbl")])
 
+[node name="Scripts" type="Node" parent="Level/Tile Areas/Hyrule Tile (0, -1)"]
+
+[node name="Bombable Secret" type="Node" parent="Level/Tile Areas/Hyrule Tile (0, -1)/Scripts"]
+script = ExtResource("43_e1wyw")
+
 [node name="Spawned Enemies" type="Node" parent="Level/Tile Areas/Hyrule Tile (0, -1)"]
 
 [node name="Entities" type="Node" parent="Level/Tile Areas/Hyrule Tile (0, -1)"]
+
+[node name="Bombable Tile" parent="Level/Tile Areas/Hyrule Tile (0, -1)/Entities" instance=ExtResource("15_gxjfl")]
+position = Vector2(-16, -256)
+use_spritesheet = 0
 
 [node name="Hyrule Tile (-1, 0)" type="Node2D" parent="Level/Tile Areas"]
 position = Vector2(-256, 0)
@@ -2418,7 +2446,7 @@ centered = false
 texture_filter = 1
 position = Vector2(-568, 320)
 sprite_frames = SubResource("SpriteFrames_gmfok")
-animation = &"appear"
+animation = &"fire"
 centered = false
 
 [node name="fire2" type="AnimatedSprite2D" parent="INTERIOR_HANDLER"]
@@ -2538,6 +2566,8 @@ bus = &"SFX"
 [connection signal="rupees_changed" from="." to="CanvasLayer/Control/ingame UI/rupee" method="_on_game_rupees_changed"]
 [connection signal="camera_moved" from="Camera2D" to="Level/Tile Areas" method="_on_camera_2d_camera_moved"]
 [connection signal="was_pushed" from="Level/Tile Areas/Hyrule Tile (2, 0)/Entities/Pushable Block" to="Level/Tile Areas/Hyrule Tile (2, 0)" method="_on_pushable_block_was_pushed"]
+[connection signal="was_burned" from="Level/Tile Areas/Hyrule Tile (1, 0)/Entities/Burnable Tile" to="Level/Tile Areas/Hyrule Tile (1, 0)/Scripts/Burnable Secret" method="_on_burnable_tile_was_burned"]
+[connection signal="was_bombed" from="Level/Tile Areas/Hyrule Tile (0, -1)/Entities/Bombable Tile" to="Level/Tile Areas/Hyrule Tile (0, -1)/Scripts/Bombable Secret" method="_on_bombable_tile_was_bombed"]
 [connection signal="item_selection_change_sound" from="CanvasLayer/Control/pausemenu UI" to="CanvasLayer/Control/pausemenu UI/PauseSelectionSound" method="_on_pausemenu_ui_item_selection_change_sound"]
 [connection signal="selected_item_index_change" from="CanvasLayer/Control/pausemenu UI" to="CanvasLayer/Control/pausemenu UI/top half/usable_items_row/selector_icon" method="_on_pausemenu_ui_selected_item_change"]
 [connection signal="selected_item_type_change" from="CanvasLayer/Control/pausemenu UI" to="." method="equipped_b_slot_change"]

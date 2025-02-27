@@ -53,6 +53,8 @@ GameData=""
 SPAWNPOINT=""
 Player_Bomb=""
 SFXPlayer=""
+Player_Fire=""
+Ground=""
 
 [gui]
 
@@ -122,6 +124,7 @@ pause_game={
 2d_physics/layer_8="Item"
 2d_physics/layer_9="Door"
 2d_physics/layer_10="Bombable Tile"
+2d_physics/layer_11="Burnable Tile"
 
 [rendering]
 

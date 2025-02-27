@@ -1,4 +1,4 @@
-extends StaticBody2D
+extends "res://scripts/entity.gd"
 
 class_name BombableTile
 
@@ -8,7 +8,7 @@ var orange_spritesheet : Texture2D = load("res://images/sheet_2.png")
 var white_spritesheet : Texture2D = load("res://images/sheet_04.png")
 enum SPRITESHEET {GREEN, BROWN, ORANGE, WHITE}
 @export var use_spritesheet : SPRITESHEET = SPRITESHEET.BROWN
-@export var secret_found_sound : AudioStreamWAV = load("res://sound/sfx/The Legend of Zelda Cartoon Sound Effects Magical.wav")
+signal was_bombed
 
 func _ready() -> void:
 	set_sprite_from_spritesheet()
@@ -28,8 +28,5 @@ func set_sprite_from_spritesheet() -> void:
 	$Sprite2D.texture = usetex
 
 func _on_hitbox_area_entered(area: Area2D) -> void:
-	$CollisionShape2D.disabled = true
-	$Sprite2D.visible = false
-	$Hitbox/CollisionShape2D.disabled = true
-	get_tree().get_first_node_in_group("SFXPlayer").play_sound(SFXPlayer.SFX.SECRET_DISCOVER)
+	was_bombed.emit()
 	queue_free()

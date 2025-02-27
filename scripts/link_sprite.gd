@@ -17,6 +17,8 @@ var is_attacking : bool = false
 var current_sprite_palette : LinkSpriteHitColour
 var is_hit_flash : bool
 var hit_flash_timer : float
+var is_placing_animation
+var placing_animation_duration : float = 0.1
 signal attack_ended
 
 func _ready() -> void:
@@ -77,6 +79,31 @@ func _on_animation_finished() -> void:
 		is_attacking = false
 		attack_ended.emit()
 		match current_direction:
+			Vector2.UP:
+				play("up")
+			Vector2.DOWN:
+				play("down")
+			Vector2.LEFT:
+				play("left")
+			Vector2.RIGHT:
+				play("right")
+
+func play_placing_item_animation() -> void:
+	is_placing_animation = true
+	
+	match current_direction:
+		Vector2.UP:
+			play("use_item_up")
+		Vector2.DOWN:
+			play("use_item_down")
+		Vector2.LEFT:
+			play("use_item_left")
+		Vector2.RIGHT:
+			play("use_item_right")
+	
+	await get_tree().create_timer(placing_animation_duration).timeout
+	is_placing_animation = false
+	match current_direction:
 			Vector2.UP:
 				play("up")
 			Vector2.DOWN:

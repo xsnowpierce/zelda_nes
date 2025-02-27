@@ -1,21 +1,22 @@
-[gd_scene load_steps=6 format=3 uid="uid://d0gkn1fbxt2p7"]
+[gd_scene load_steps=6 format=3 uid="uid://bhj35nnpvr72k"]
 
-[ext_resource type="Script" path="res://scripts/bombable_tile.gd" id="1_nret6"]
-[ext_resource type="Texture2D" uid="uid://cqbg7fmos30qo" path="res://images/tileset2.png" id="3_cdnx2"]
+[ext_resource type="Script" path="res://scripts/burnable_tile.gd" id="1_oj8a3"]
+[ext_resource type="Texture2D" uid="uid://px3oy8t7d8tm" path="res://images/sheet_03.png" id="2_bixco"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_asj3c"]
 size = Vector2(16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_plv3a"]
-atlas = ExtResource("3_cdnx2")
-region = Rect2(32, 16, 16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_el1e5"]
+atlas = ExtResource("2_bixco")
+region = Rect2(16, 32, 16, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ia4h6"]
 size = Vector2(16, 16)
 
-[node name="Bombable Tile" type="StaticBody2D"]
-collision_mask = 512
-script = ExtResource("1_nret6")
+[node name="Burnable Tile" type="StaticBody2D"]
+collision_layer = 1025
+collision_mask = 16
+script = ExtResource("1_oj8a3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(8, 8)
@@ -23,7 +24,7 @@ shape = SubResource("RectangleShape2D_asj3c")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
-texture = SubResource("AtlasTexture_plv3a")
+texture = SubResource("AtlasTexture_el1e5")
 centered = false
 
 [node name="Hitbox" type="Area2D" parent="."]

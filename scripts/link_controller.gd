@@ -23,7 +23,7 @@ func get_player_state() -> Node:
 	return $LinkState
 
 func get_look_direction() -> Vector2:
-	return $"Link Sprite Mask/Link Sprite".current_direction
+	return get_sprite().current_direction
 
 func get_movement_value() -> Vector2:
 	return $LinkMovement.movement
@@ -42,3 +42,8 @@ func get_link_interact() -> Node:
 
 func use_alt_weapon(item : ENUM.KEY_ITEM_TYPE) -> void:
 	$"Link AltWeapon".use_alternate_weapon(item)
+	
+func use_item_animation() -> void:
+	get_player_state().is_placing_item = true
+	await get_sprite().play_placing_item_animation()
+	get_player_state().is_placing_item = false
