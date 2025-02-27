@@ -28,5 +28,6 @@ func set_sprite_from_spritesheet() -> void:
 	$Sprite2D.texture = usetex
 
 func _on_hitbox_area_entered(area: Area2D) -> void:
-	was_bombed.emit()
-	queue_free()
+	if(area.is_in_group("Player_Bomb")):
+		was_bombed.emit()
+		queue_free()

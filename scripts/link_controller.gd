@@ -11,6 +11,8 @@ func _ready() -> void:
 	$LinkInteract.initialize(self)
 	$LinkState.initialize(self)
 	$"Link AltWeapon".initialize(self)
+	$"Link Sprite Mask/Link Sprite".connect("cast_magical_wand", Callable(self, "cast_magical_wand_beam"))
+	$"Link Sprite Mask/Link Sprite".connect("magical_wand_cast_ended", Callable(self, "magical_wand_cast_ended"))
 	
 
 func _process(delta: float) -> void:
@@ -47,3 +49,9 @@ func use_item_animation() -> void:
 	get_player_state().is_placing_item = true
 	await get_sprite().play_placing_item_animation()
 	get_player_state().is_placing_item = false
+
+func cast_magical_wand_beam() -> void:
+	$"Link AltWeapon".cast_magical_wand_beam()
+
+func magical_wand_cast_ended() -> void:
+	get_player_state().is_shooting_magical_wand = false

@@ -12,6 +12,7 @@ var is_exiting_door : bool = false
 var has_room_events : bool = false
 var is_inside_room : bool
 var is_placing_item : bool
+var is_shooting_magical_wand : bool
 
 func initialize(parent : CharacterBody2D) -> void:
 	player = parent
@@ -25,4 +26,5 @@ func is_player_input_allowed() -> bool:
 		and !is_pickup_animation
 		and !game_data.game_is_paused
 		and !is_attacked_knockback
-		and !is_placing_item)
+		and !is_placing_item
+		and !is_shooting_magical_wand)

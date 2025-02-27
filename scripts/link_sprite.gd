@@ -4,10 +4,13 @@ class_name LinkSprite
 
 enum TUNIC_TYPE {GREEN, RED, WHITE} 
 
-var hit_effect_length : float = 0.8
-var hit_effect_colour_change_time : float = 0.1
 var current_direction : Vector2 = Vector2.UP
+
+# attacking
 var is_attacking : bool = false
+signal attack_ended
+
+# sprite palette changes
 @export var default_sprite_palette : LinkSpriteHitColour
 @export var red_tunic_sprite_palette : LinkSpriteHitColour
 @export var white_tunic_sprite_palette : LinkSpriteHitColour
@@ -15,11 +18,23 @@ var is_attacking : bool = false
 @export var hit_effect_sprite_palette_2 : LinkSpriteHitColour
 @export var hit_effect_sprite_palette_3 : LinkSpriteHitColour
 var current_sprite_palette : LinkSpriteHitColour
+
+# hit flash
+var hit_effect_length : float = 0.8
+var hit_effect_colour_change_time : float = 0.1
 var is_hit_flash : bool
 var hit_flash_timer : float
+
+# item placing animation
 var is_placing_animation
 var placing_animation_duration : float = 0.1
-signal attack_ended
+
+# magical wand
+var is_magical_wand_cast : bool
+var magical_wand_hold_timer : float = 0.2
+signal magical_wand_cast_ended
+signal cast_magical_wand
+
 
 func _ready() -> void:
 	set_current_tunic(TUNIC_TYPE.GREEN)
@@ -56,7 +71,7 @@ func set_look_direction(direction: Vector2) -> void:
 	set_frame_and_progress(current_frame, current_progress)
 	
 func set_current_velocity(velocity : Vector2) -> void:
-	if(velocity == Vector2.ZERO and !is_attacking):
+	if(velocity == Vector2.ZERO and !is_attacking and !is_magical_wand_cast):
 		pause()
 	else:
 		play()
@@ -74,11 +89,36 @@ func _on_character_body_2d_attack() -> void:
 		Vector2.RIGHT:
 			play("attack_wooden_right")
 
+func on_magical_wand_cast() -> void:
+	if(is_magical_wand_cast):
+		return
+	is_magical_wand_cast = true
+	var animation : String = ""
+	match current_direction:
+		Vector2.UP:
+			animation = "magical_wand_up"
+		Vector2.DOWN:
+			animation = "magical_wand_down"
+		Vector2.LEFT:
+			animation = "magical_wand_left"
+		Vector2.RIGHT:
+			animation = "magical_wand_right"
+	speed_scale = 0
+	play(animation)
+	await get_tree().create_timer(magical_wand_hold_timer).timeout
+	cast_magical_wand.emit()
+	speed_scale = 1
+
+
 func _on_animation_finished() -> void:
 	if(is_attacking):
 		is_attacking = false
 		attack_ended.emit()
-		match current_direction:
+	if(is_magical_wand_cast):
+		is_magical_wand_cast = false
+		magical_wand_cast_ended.emit()
+		
+	match current_direction:
 			Vector2.UP:
 				play("up")
 			Vector2.DOWN:

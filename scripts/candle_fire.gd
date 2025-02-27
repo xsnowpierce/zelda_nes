@@ -11,14 +11,13 @@ func initialize_fire(direction : Vector2) -> void:
 	move_to_direction(direction)
 	
 func move_to_direction(target_direction : Vector2) -> void:
-	var move_time : float = fire_move_time
-	print(target_direction)
-		# move to position
-	while (move_time > 0 && !has_collided_with_ground):
-		var move_distance = fire_move_speed * get_process_delta_time()
-		global_position += target_direction * move_distance
-		move_time -= get_process_delta_time()
-		await get_tree().process_frame
+	if(target_direction != Vector2.ZERO):
+		var move_time : float = fire_move_time
+		while (move_time > 0 && !has_collided_with_ground):
+			var move_distance = fire_move_speed * get_process_delta_time()
+			global_position += target_direction * move_distance
+			move_time -= get_process_delta_time()
+			await get_tree().process_frame
 	start_killing()
 	
 func start_killing() -> void:

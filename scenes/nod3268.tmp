@@ -1,4 +1,4 @@
-[gd_scene load_steps=229 format=4 uid="uid://bnrlmifgdjgsb"]
+[gd_scene load_steps=246 format=4 uid="uid://bnrlmifgdjgsb"]
 
 [ext_resource type="Script" path="res://scripts/GameData.gd" id="1_fiv6q"]
 [ext_resource type="Script" path="res://scripts/camera.gd" id="1_xkdoo"]
@@ -39,7 +39,6 @@
 [ext_resource type="AudioStream" uid="uid://dhunefrhsyom8" path="res://sound/sfx/The Legend of Zelda Cartoon Sound Effects Flames Shot.wav" id="17_n8ghj"]
 [ext_resource type="Texture2D" uid="uid://cxy5ob882odyf" path="res://images/interiors.png" id="17_ygtp3"]
 [ext_resource type="Texture2D" uid="uid://u1i1trqicn2k" path="res://images/weapons.png" id="18_dja85"]
-[ext_resource type="AudioStream" uid="uid://boy2mac61rejw" path="res://sound/sfx/The Legend of Zelda Cartoon Sound Effects Power Zap.wav" id="18_ippjc"]
 [ext_resource type="Script" path="res://scripts/ui_selected_item.gd" id="18_tkg53"]
 [ext_resource type="FontFile" uid="uid://bw55a4dg4x4gs" path="res://images/the-legend-of-zelda-nes.ttf" id="19_fvc07"]
 [ext_resource type="Resource" uid="uid://dijfjau75dp45" path="res://scenes/shop_B.tres" id="19_klo3g"]
@@ -71,6 +70,7 @@
 [ext_resource type="PackedScene" uid="uid://n1x0qyyt10lo" path="res://scenes/room_exit.tscn" id="43_nrqk4"]
 [ext_resource type="Script" path="res://scripts/interior_handler.gd" id="50_k6536"]
 [ext_resource type="PackedScene" uid="uid://bhj35nnpvr72k" path="res://scenes/burnable_tile.tscn" id="68_en6p7"]
+[ext_resource type="Texture2D" uid="uid://cpa11tutqc7h1" path="res://images/Sprite-0001.png" id="71_b2m8k"]
 
 [sub_resource type="AudioStreamWAV" id="AudioStreamWAV_3rr3c"]
 
@@ -1549,6 +1549,141 @@ animations = [{
 "speed": 7.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ye8yo"]
+atlas = ExtResource("71_b2m8k")
+region = Rect2(352, 160, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rd0be"]
+atlas = ExtResource("71_b2m8k")
+region = Rect2(368, 160, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_awy7x"]
+atlas = ExtResource("71_b2m8k")
+region = Rect2(384, 160, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6eweu"]
+atlas = ExtResource("71_b2m8k")
+region = Rect2(400, 160, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_53h8s"]
+atlas = ExtResource("71_b2m8k")
+region = Rect2(416, 160, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eqogy"]
+atlas = ExtResource("71_b2m8k")
+region = Rect2(432, 160, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_docqs"]
+atlas = ExtResource("71_b2m8k")
+region = Rect2(448, 160, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fbq3a"]
+atlas = ExtResource("71_b2m8k")
+region = Rect2(464, 160, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8w7p0"]
+atlas = ExtResource("71_b2m8k")
+region = Rect2(416, 144, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_opf3r"]
+atlas = ExtResource("71_b2m8k")
+region = Rect2(432, 144, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r028m"]
+atlas = ExtResource("71_b2m8k")
+region = Rect2(448, 144, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qfe16"]
+atlas = ExtResource("71_b2m8k")
+region = Rect2(464, 144, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cwkcd"]
+atlas = ExtResource("71_b2m8k")
+region = Rect2(352, 144, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0h7uo"]
+atlas = ExtResource("71_b2m8k")
+region = Rect2(368, 144, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s06qa"]
+atlas = ExtResource("71_b2m8k")
+region = Rect2(384, 144, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_chbsq"]
+atlas = ExtResource("71_b2m8k")
+region = Rect2(400, 144, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ekded"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ye8yo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rd0be")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_awy7x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6eweu")
+}],
+"loop": true,
+"name": &"down",
+"speed": 24.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_53h8s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eqogy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_docqs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fbq3a")
+}],
+"loop": true,
+"name": &"left",
+"speed": 24.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8w7p0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_opf3r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r028m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qfe16")
+}],
+"loop": true,
+"name": &"right",
+"speed": 24.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cwkcd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0h7uo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s06qa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_chbsq")
+}],
+"loop": true,
+"name": &"up",
+"speed": 24.0
+}]
+
 [node name="Game" type="Node" node_paths=PackedStringArray("enemy_spawn_parent") groups=["GameData"]]
 process_mode = 3
 script = ExtResource("1_fiv6q")
@@ -1587,7 +1722,6 @@ sword_swing_sfx = ExtResource("11_5wgwy")
 bomb_explosion_sfx = ExtResource("12_j64rb")
 key_item_pickup_sfx = ExtResource("16_03uuv")
 fire_shot_sfx = ExtResource("17_n8ghj")
-magical_wand_shoot = ExtResource("18_ippjc")
 
 [node name="Camera2D" type="Camera2D" parent="." groups=["Camera"]]
 process_mode = 3
@@ -2544,6 +2678,12 @@ sprite_frames = SubResource("SpriteFrames_1pu0c")
 stream = ExtResource("22_xpy7p")
 volume_db = -6.0
 bus = &"SFX"
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Node2D"]
+sprite_frames = SubResource("SpriteFrames_ekded")
+animation = &"down"
 
 [connection signal="bombs_changed" from="." to="CanvasLayer/Control/ingame UI/bomb" method="_on_game_bombs_changed"]
 [connection signal="equipment_slot_a_changed" from="." to="Link" method="_on_game_equipment_slot_a_changed"]
