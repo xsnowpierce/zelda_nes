@@ -142,6 +142,7 @@ animations = [{
 size = Vector2(16, 16)
 
 [node name="Magical Wand Beam" type="Node2D"]
+texture_filter = 1
 script = ExtResource("1_deh72")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

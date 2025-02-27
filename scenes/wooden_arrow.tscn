@@ -1,0 +1,87 @@
+[gd_scene load_steps=10 format=3 uid="uid://dryu6gh2yn0rn"]
+
+[ext_resource type="Script" path="res://scripts/player/item/arrow.gd" id="1_njy5f"]
+[ext_resource type="Texture2D" uid="uid://cpa11tutqc7h1" path="res://images/Sprite-0001.png" id="2_fdbmu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qbj5r"]
+atlas = ExtResource("2_fdbmu")
+region = Rect2(360, 176, 8, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qermk"]
+atlas = ExtResource("2_fdbmu")
+region = Rect2(416, 176, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qhxmd"]
+atlas = ExtResource("2_fdbmu")
+region = Rect2(368, 184, 16, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2c00y"]
+atlas = ExtResource("2_fdbmu")
+region = Rect2(368, 176, 16, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_liwia"]
+atlas = ExtResource("2_fdbmu")
+region = Rect2(352, 176, 8, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nhvgv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qbj5r")
+}],
+"loop": true,
+"name": &"down",
+"speed": 24.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qermk")
+}],
+"loop": true,
+"name": &"hit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qhxmd")
+}],
+"loop": true,
+"name": &"left",
+"speed": 24.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2c00y")
+}],
+"loop": true,
+"name": &"right",
+"speed": 24.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_liwia")
+}],
+"loop": true,
+"name": &"up",
+"speed": 24.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_spxj0"]
+size = Vector2(8, 8)
+
+[node name="Arrow" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_njy5f")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_nhvgv")
+animation = &"hit"
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_spxj0")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

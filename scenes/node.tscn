@@ -1560,13 +1560,10 @@ enemy_leever_scene = ExtResource("5_mynx1")
 enemy_blue_tektite_scene = ExtResource("6_8f64w")
 current_player_health = 6
 current_bombs = 8
-has_wooden_sword = true
-has_bomb = true
-has_blue_candle = true
 hyrule_music = ExtResource("2_7hpxk")
 dungeon_music = ExtResource("36_8um02")
 current_equipped_item_a = 1
-current_equipped_item_b = 19
+current_equipped_item_b = 10
 enemy_spawn_parent = NodePath("ENEMY_SPAWNS")
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]

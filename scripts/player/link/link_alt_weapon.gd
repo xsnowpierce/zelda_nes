@@ -6,6 +6,7 @@ var spawn_projectile_distance : float = 1
 @export var bomb_scene : PackedScene = preload("res://scenes/bomb.tscn")
 @export var candle_flame_scene : PackedScene = preload("res://scenes/candle_fire.tscn")
 @export var magical_wand_scene : PackedScene = preload("res://scenes/magical_wand_beam.tscn")
+@export var wooden_arrow_scene : PackedScene = preload("res://scenes/wooden_arrow.tscn")
 var current_projectile
 
 func initialize(parent : CharacterBody2D) -> void:
@@ -39,6 +40,15 @@ func use_alternate_weapon(item : ENUM.KEY_ITEM_TYPE) -> void:
 				return
 			player.get_player_state().is_shooting_magical_wand = true
 			player.get_sprite().on_magical_wand_cast()
+		ENUM.KEY_ITEM_TYPE.WOODEN_ARROW:
+			if(is_instance_valid(current_projectile)):
+				return
+			var arrow = wooden_arrow_scene.instantiate()
+			arrow.global_position = (player.global_position) + (player.get_look_direction() * (spawn_projectile_distance * 16))
+			player.game_data.add_child(arrow)
+			arrow.initialize_arrow(player.get_look_direction(), player.camera)
+			current_projectile = arrow
+			player.use_item_animation()
 
 func cast_magical_wand_beam() -> void:
 	var wand_beam = magical_wand_scene.instantiate()
