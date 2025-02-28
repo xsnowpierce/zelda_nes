@@ -73,7 +73,6 @@ func move() -> void:
 
 func get_target_position_from_direction(target_direction : Vector2) -> Vector2:
 	var target_position = (target_direction * 8) + global_position
-	print(global_position, position)
 	target_position = Utils.align_to_grid(target_position, 8)
 	if(Utils.is_out_of_bounds(target_position, camera, true)):
 		target_position = (-target_direction * 8) + global_position

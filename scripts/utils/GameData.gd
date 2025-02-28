@@ -1,5 +1,7 @@
 extends Node
 
+class_name GameData
+
 @export var player_flags : Array[String]
 @export_flags_2d_render var camera_cull_mask
 
@@ -10,7 +12,8 @@ extends Node
 @export var enemy_leever_scene : PackedScene
 @export var enemy_blue_tektite_scene : PackedScene
 @export var enemy_peahat_scene : PackedScene
-@export var keese_scene : PackedScene
+@export var enemy_keese_scene : PackedScene
+@export var enemy_stalfos_scene : PackedScene
 
 @export_group("Player Stats")
 @export_subgroup("Health")
@@ -103,7 +106,6 @@ var link : CharacterBody2D
 @export var current_equipped_item_b : ENUM.KEY_ITEM_TYPE = ENUM.KEY_ITEM_TYPE.NULL
 var game_is_paused : bool
 var link_using_whistle : bool
-@export var enemy_spawn_parent : Node2D
 @export var dropped_item_scene : PackedScene = preload("res://scenes/dropped_item.tscn")
 
 signal player_death
@@ -275,7 +277,7 @@ func enemy_drop_item(drop_position : Vector2) -> void:
 	if(next_drop == ENUM.ITEM_TYPE.NULL):
 		return
 	var dropped_item = dropped_item_scene.instantiate()
-	dropped_item.global_position = drop_position + Vector2(8, 8)
+	dropped_item.global_position = drop_position
 	dropped_item.set_item_type(next_drop)
 	add_child(dropped_item)
 

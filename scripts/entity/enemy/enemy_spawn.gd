@@ -7,3 +7,5 @@ class_name EnemySpawn
 var has_been_killed : bool
 @export_group("Zora Settings")
 @export var zora_movable_tile_range : Array[Vector4]
+@export_group("Stalfos Settings")
+@export var spawn_with_key : bool

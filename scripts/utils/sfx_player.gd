@@ -12,10 +12,12 @@ class_name SFXPlayer
 @export var fire_shot_sfx : AudioStreamWAV
 @export var magical_wand_shoot : AudioStreamWAV
 @export var whistle_music : AudioStreamWAV
+@export var door_open_sfx : AudioStreamWAV
+@export var key_appearance_sfx : AudioStreamWAV
 
 enum SFX {SECRET_DISCOVER, ENEMY_DEATH, RUPEE_PICKUP, HEART_PICKUP, 
 	SWORD_SWING, BOMB_EXPLOSION, KEY_ITEM_PICKUP, FIRE_SHOT, MAGICAL_WAND_SHOOT,
-	WHISTLE_MUSIC}
+	WHISTLE_MUSIC, DOOR_OPEN, KEY_APPEARANCE}
 
 func play_sound(sfx : SFX) -> void:
 	stream = get_audio_file_from_enum(sfx)
@@ -43,5 +45,9 @@ func get_audio_file_from_enum(sfx : SFX) -> AudioStreamWAV:
 			return magical_wand_shoot
 		SFX.WHISTLE_MUSIC:
 			return whistle_music
+		SFX.DOOR_OPEN:
+			return door_open_sfx
+		SFX.KEY_APPEARANCE:
+			return key_appearance_sfx
 		_:
 			return

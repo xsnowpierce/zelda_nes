@@ -16,4 +16,8 @@ func set_door_value(direction : DOOR_DIRECTION, door_status : DungeonDoor.DOOR_S
 			$"West Door".set_door_status(door_status)
 
 func set_room_active(value : bool) -> void:
-	pass
+	for child in get_children():
+		if(value):
+			child.awake()
+		else:
+			child.sleep()

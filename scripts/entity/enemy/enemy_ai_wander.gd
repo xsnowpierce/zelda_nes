@@ -6,6 +6,7 @@ class_name EnemyAI_Wander
 @export var move_speed : float = 23
 var current_forward_vector : Vector2
 var is_moving : bool = false
+@export var rotate_sprite : bool = true
 
 func _ready() -> void:
 	super()
@@ -89,6 +90,8 @@ func move_to_direction(target_direction : Vector2) -> void:
 	is_moving = false
 
 func rotate_enemy(direction : Vector2):
+	if(!rotate_sprite):
+		return
 	match direction:
 		Vector2.UP:
 			$AnimatedSprite2D.play("up")

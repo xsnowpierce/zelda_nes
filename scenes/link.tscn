@@ -549,7 +549,6 @@ script = ExtResource("8_ryf5n")
 script = ExtResource("10_d33na")
 
 [node name="Link Collision Hitbox Area" type="Area2D" parent="." groups=["Player"]]
-collision_layer = 4
 
 [node name="Link Collider" type="CollisionShape2D" parent="Link Collision Hitbox Area"]
 position = Vector2(0, 4)

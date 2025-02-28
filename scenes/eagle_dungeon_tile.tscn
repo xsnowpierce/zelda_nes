@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://c7wqgqnsq66tk"]
+
+[ext_resource type="Script" path="res://scripts/world/eagle_dungeon_tile_01.gd" id="1_0adkh"]
+[ext_resource type="PackedScene" uid="uid://ce1bg1140ays1" path="res://scenes/dungeon_tile.tscn" id="2_fb3xy"]
+
+[node name="Eagle Dungeon Tile" type="Node2D"]
+script = ExtResource("1_0adkh")
+
+[node name="Entities" type="Node" parent="."]
+
+[node name="Spawned Enemies" type="Node" parent="."]
+
+[node name="Walls" parent="." instance=ExtResource("2_fb3xy")]

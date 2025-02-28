@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://csbgb1xk300nl"]
+[gd_scene load_steps=39 format=3 uid="uid://csbgb1xk300nl"]
 
 [ext_resource type="Script" path="res://scripts/world/dungeon_tile_doors.gd" id="1_hdvfl"]
 [ext_resource type="Script" path="res://scripts/world/dungeon_door.gd" id="2_j0q0j"]
@@ -60,6 +60,9 @@ size = Vector2(8, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i7qnb"]
 size = Vector2(16, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0l10n"]
+size = Vector2(33, 33)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_70wei"]
 atlas = ExtResource("3_cqn37")
@@ -214,6 +217,7 @@ script = ExtResource("1_hdvfl")
 [node name="North Door" type="Node2D" parent="."]
 position = Vector2(-16, -96)
 script = ExtResource("2_j0q0j")
+block_size = Vector2(32, 32)
 
 [node name="Top" type="Sprite2D" parent="North Door"]
 z_index = 2
@@ -246,9 +250,17 @@ position = Vector2(8, 16)
 position = Vector2(8, 0)
 shape = SubResource("RectangleShape2D_i7qnb")
 
+[node name="Interaction Area" type="Area2D" parent="North Door"]
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="North Door/Interaction Area"]
+position = Vector2(16, 16)
+shape = SubResource("RectangleShape2D_0l10n")
+
 [node name="South Door" type="Node2D" parent="."]
 position = Vector2(-16, 48)
 script = ExtResource("2_j0q0j")
+block_size = Vector2(32, 32)
 
 [node name="Top" type="Sprite2D" parent="South Door"]
 z_index = 2
@@ -281,9 +293,17 @@ position = Vector2(8, 16)
 position = Vector2(8, 0)
 shape = SubResource("RectangleShape2D_i7qnb")
 
+[node name="Interaction Area" type="Area2D" parent="South Door"]
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="South Door/Interaction Area"]
+position = Vector2(16, 16)
+shape = SubResource("RectangleShape2D_0l10n")
+
 [node name="West Door" type="Node2D" parent="."]
 position = Vector2(-128, -24)
 script = ExtResource("2_j0q0j")
+block_size = Vector2(32, 32)
 
 [node name="Top" type="Sprite2D" parent="West Door"]
 z_index = 2
@@ -316,9 +336,17 @@ position = Vector2(0, 8)
 position = Vector2(16, 8)
 shape = SubResource("RectangleShape2D_qmkor")
 
+[node name="Interaction Area" type="Area2D" parent="West Door"]
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="West Door/Interaction Area"]
+position = Vector2(16, 16)
+shape = SubResource("RectangleShape2D_0l10n")
+
 [node name="East Door" type="Node2D" parent="."]
 position = Vector2(96, -24)
 script = ExtResource("2_j0q0j")
+block_size = Vector2(32, 32)
 
 [node name="Top" type="Sprite2D" parent="East Door"]
 z_index = 2
@@ -350,3 +378,19 @@ position = Vector2(0, 8)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="East Door/Doorway Collider"]
 position = Vector2(16, 8)
 shape = SubResource("RectangleShape2D_qmkor")
+
+[node name="Interaction Area" type="Area2D" parent="East Door"]
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="East Door/Interaction Area"]
+position = Vector2(16, 16)
+shape = SubResource("RectangleShape2D_0l10n")
+
+[connection signal="area_entered" from="North Door/Interaction Area" to="North Door" method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="North Door/Interaction Area" to="North Door" method="_on_area_2d_area_exited"]
+[connection signal="area_entered" from="South Door/Interaction Area" to="South Door" method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="South Door/Interaction Area" to="South Door" method="_on_area_2d_area_exited"]
+[connection signal="area_entered" from="West Door/Interaction Area" to="West Door" method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="West Door/Interaction Area" to="West Door" method="_on_area_2d_area_exited"]
+[connection signal="area_entered" from="East Door/Interaction Area" to="East Door" method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="East Door/Interaction Area" to="East Door" method="_on_area_2d_area_exited"]
