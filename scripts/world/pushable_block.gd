@@ -1,6 +1,7 @@
 extends InteractableBlock
 
 var starting_position : Vector2
+@export var texture : Texture2D
 @export var move_speed : float = 25
 var is_moving : bool
 @export var move_times : int = -1
@@ -15,6 +16,7 @@ signal was_pushed
 func _ready() -> void:
 	super()
 	starting_position = global_position
+	$Sprite2D.texture = texture
 
 func block_interact(interacted_from_direction : Vector2) -> void:
 	if(is_moving or move_times == 0):

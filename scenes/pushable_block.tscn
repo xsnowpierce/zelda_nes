@@ -1,7 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://2mxi1bxcesq"]
+[gd_scene load_steps=7 format=3 uid="uid://2mxi1bxcesq"]
 
 [ext_resource type="Script" path="res://scripts/world/pushable_block.gd" id="1_ys0md"]
 [ext_resource type="Texture2D" uid="uid://cqbg7fmos30qo" path="res://images/tileset2.png" id="2_xlnkm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t56vj"]
+atlas = ExtResource("2_xlnkm")
+region = Rect2(0, 32, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8pj3r"]
 atlas = ExtResource("2_xlnkm")
@@ -16,6 +20,7 @@ size = Vector2(16, 16)
 [node name="Pushable Block" type="StaticBody2D"]
 collision_mask = 5
 script = ExtResource("1_ys0md")
+texture = SubResource("AtlasTexture_t56vj")
 move_speed = 26.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

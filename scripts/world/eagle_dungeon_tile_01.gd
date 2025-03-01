@@ -10,11 +10,20 @@ func tile_entered(previous_tile : Vector2) -> void:
 	if(!random_map_spawns.is_empty()):
 		var random_spawn : EnemySpawnGroup = random_map_spawns[randi_range(0, random_map_spawns.size() - 1)] 
 		spawn_enemies(random_spawn)
-
+	for child in get_children():
+		if(child is DungeonTileListener):
+			child.awake()
+	for child in get_children():
+		if(child is DungeonTileListener):
+			child.start()
+			
 func tile_exited(next_tile : Vector2) -> void:
 	super(next_tile)
 	for child in $"Spawned Enemies".get_children():
 		child.queue_free()
+	for child in get_children():
+		if(child is DungeonTileListener):
+			child.exit()
 
 func spawn_enemies(enemies : EnemySpawnGroup) -> void:
 	var spawns : int = 0

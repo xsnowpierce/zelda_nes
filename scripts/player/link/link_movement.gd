@@ -9,10 +9,11 @@ var max_y_until_new_screen : float = 87
 signal call_new_screen(direction : Vector2)
 signal sprite_update(movement : Vector2, velocity : Vector2)
 var current_colliding_enemies : int = 0
+@export var force_walk_tile_distance : float = 2
 
-var player : CharacterBody2D
+var player : LinkController
 
-func initialize(parent: CharacterBody2D) -> void:
+func initialize(parent: LinkController) -> void:
 	player = parent
 	self.connect("call_new_screen", Callable(player.camera, "_on_link_call_new_screen"))
 	
@@ -26,11 +27,12 @@ func process(delta: float) -> void:
 		if(!GameSettings.camera_is_moving):
 			calculate_movement(!player.get_player_state().is_player_input_allowed())
 			player.move_and_slide()
-		
-		sprite_update.emit(movement, player.velocity)
+		if(!player.get_player_state().is_entering_new_tile):
+			sprite_update.emit(movement, player.velocity)
 	else:
-		call_new_screen.emit(new_screen_check)
-		sprite_update.emit(movement, player.velocity)
+		if(player.get_player_state().is_player_input_allowed()):
+			call_new_screen.emit(new_screen_check)
+			sprite_update.emit(movement, player.velocity)
 		
 	
 	if(!player.get_player_state().is_player_input_allowed()):
@@ -113,3 +115,22 @@ func check_for_new_screen() -> Vector2:
 		return Vector2(0, 1)
 		
 	return Vector2.ZERO
+
+func force_player_walk() -> void:
+	var target_direction : Vector2 = (player.camera.global_position - player.global_position).normalized()
+	target_direction.x = roundi(target_direction.x)
+	target_direction.y = roundi(target_direction.y)
+	var target_position : Vector2 = player.global_position + (target_direction * (force_walk_tile_distance * 16))
+	
+		# move to position
+	while (player.global_position.distance_to(target_position) > 1):
+		if(!can_move()):
+			await get_tree().process_frame
+			continue
+		var move_distance = move_speed * get_process_delta_time()
+		player.global_position = player.global_position.move_toward(target_position, move_distance)
+		sprite_update.emit(target_direction, Vector2.ONE)
+		await get_tree().process_frame
+		
+	player.global_position = target_position
+	player.force_walk_completed.emit()

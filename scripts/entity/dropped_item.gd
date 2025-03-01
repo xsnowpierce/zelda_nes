@@ -23,6 +23,18 @@ func set_item_type(type : ENUM.ITEM_TYPE) -> void:
 			$AnimatedSprite2D.play("heart")
 		ENUM.ITEM_TYPE.KEY:
 			$AnimatedSprite2D.play("key")
+		ENUM.ITEM_TYPE.TIMER:
+			$AnimatedSprite2D.play("timer")
+		ENUM.ITEM_TYPE.ORANGE_MAP:
+			$AnimatedSprite2D.play("orange_map")
+		ENUM.ITEM_TYPE.BLUE_MAP:
+			$AnimatedSprite2D.play("blue_map")
+		ENUM.ITEM_TYPE.COMPASS:
+			$AnimatedSprite2D.play("compass")
+		ENUM.ITEM_TYPE.FAIRY:
+			# TODO spawn fairy here
+			queue_free()
+			pass
 		
 func _on_area_entered(area: Area2D) -> void:
 	if(area.is_in_group("Player_Bomb")):
@@ -49,6 +61,9 @@ func _on_area_entered(area: Area2D) -> void:
 			sfxplayer.play_sound(SFXPlayer.SFX.HEART_PICKUP)
 		ENUM.ITEM_TYPE.KEY:
 			game_data.change_keys(1)
+			sfxplayer.play_sound(SFXPlayer.SFX.HEART_PICKUP)
+		ENUM.ITEM_TYPE.COMPASS:
+			game_data.picked_up_dungeon_compass()
 			sfxplayer.play_sound(SFXPlayer.SFX.HEART_PICKUP)
 	$AnimatedSprite2D.visible = false
 	item_picked_up.emit()

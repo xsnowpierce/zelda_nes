@@ -1,9 +1,12 @@
 extends CharacterBody2D
 
-var game_data : Node
+class_name LinkController
+
+var game_data : GameData
 var camera : Camera2D
 
 signal played_flute
+signal force_walk_completed
 
 func _ready() -> void:
 	game_data = get_tree().get_first_node_in_group("GameData")
@@ -23,7 +26,7 @@ func _process(delta: float) -> void:
 	$LinkInteract.process(delta)
 	$"Link AltWeapon".process(delta)
 
-func get_player_state() -> Node:
+func get_player_state() -> LinkState:
 	return $LinkState
 
 func get_look_direction() -> Vector2:
@@ -57,3 +60,9 @@ func cast_magical_wand_beam() -> void:
 
 func magical_wand_cast_ended() -> void:
 	get_player_state().is_shooting_magical_wand = false
+
+func new_tile_entered(new_area_position : Vector2) -> void:
+	get_player_state().is_entering_new_tile = true
+	if(game_data.is_inside_dungeon):
+		await $LinkMovement.force_player_walk()
+	get_player_state().is_entering_new_tile = false

@@ -21,7 +21,8 @@ func _on_link_call_new_screen(direction: Vector2) -> void:
 	
 	is_currently_moving = false
 	GameSettings.camera_is_moving = false
-	camera_moved.emit(Vector2(position.x / GameSettings.map_screen_size.x, position.y / GameSettings.map_screen_size.y))
+	var new_grid_position : Vector2 = Vector2(position.x / GameSettings.map_screen_size.x, position.y / GameSettings.map_screen_size.y)
+	camera_moved.emit(new_grid_position)
 
 func move_camera_to_position(target_position : Vector2) -> void:
 	while (position.distance_to(target_position) > 1):

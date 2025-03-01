@@ -54,6 +54,10 @@ class_name GameData
 @export var has_blue_potion : bool
 @export var has_magical_rod : bool
 
+@export_subgroup("Dungeon Key Items")
+@export var has_eagle_compass : bool
+@export var has_eagle_map : bool
+
 func apply_debug_key_item_list() -> void:
 	if(has_wooden_sword):
 		add_player_flag("obtained_wooden_sword")
@@ -106,6 +110,7 @@ var link : CharacterBody2D
 @export var current_equipped_item_b : ENUM.KEY_ITEM_TYPE = ENUM.KEY_ITEM_TYPE.NULL
 var game_is_paused : bool
 var link_using_whistle : bool
+var is_inside_dungeon : bool
 @export var dropped_item_scene : PackedScene = preload("res://scenes/dropped_item.tscn")
 
 signal player_death
@@ -206,21 +211,25 @@ func player_start_enter_door(_door : Area2D) -> void:
 
 func player_finish_enter_door(door : Area2D) -> void:
 	if(door is RoomEntrance):
+		is_inside_dungeon = false
 		$INTERIOR_HANDLER.handle_interior(door.interior_data)
 		link.get_player_state().has_room_events = true
 		while !$INTERIOR_HANDLER.player_has_input:
 			await get_tree().process_frame
 		link.get_player_state().has_room_events = false
 	elif(door is HyruleEntrance):
+		is_inside_dungeon = false
 		link.global_position = door.link_moveto_position
 		camera.set_camera_tile(door.camera_moveto_position)
 		$MusicPlayer.stream = hyrule_music
 		$MusicPlayer.play(0.0)
 	elif(door is DungeonEntrance):
+		is_inside_dungeon = true
 		link.global_position = door.link_moveto_position
 		camera.set_camera_tile(door.camera_moveto_position)
 		$MusicPlayer.stream = dungeon_music
 		$MusicPlayer.play(0.0)
+
 func player_pickup_key_item(item_type : ENUM.KEY_ITEM_TYPE) -> void:
 	match item_type:
 		ENUM.KEY_ITEM_TYPE.WOODEN_SWORD:
@@ -283,3 +292,6 @@ func enemy_drop_item(drop_position : Vector2) -> void:
 
 func equipped_b_slot_change(new_item_type : ENUM.KEY_ITEM_TYPE) -> void:
 	current_equipped_item_b = new_item_type
+
+func picked_up_dungeon_compass() -> void:
+	has_eagle_compass = true

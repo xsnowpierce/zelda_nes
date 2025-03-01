@@ -512,7 +512,7 @@ hit_effect_sprite_palette_3 = SubResource("Resource_2y08c")
 
 [node name="Link Hitbox" type="Area2D" parent="." groups=["Player"]]
 collision_layer = 4
-collision_mask = 296
+collision_mask = 2344
 
 [node name="Link Collider" type="CollisionShape2D" parent="Link Hitbox"]
 shape = SubResource("RectangleShape2D_g0xjw")

@@ -55,6 +55,7 @@ Player_Bomb=""
 SFXPlayer=""
 Player_Fire=""
 Ground=""
+LinkForceWalk="A tile that will force link to walk a distance."
 
 [gui]
 
@@ -125,6 +126,7 @@ pause_game={
 2d_physics/layer_9="Door"
 2d_physics/layer_10="Bombable Tile"
 2d_physics/layer_11="Burnable Tile"
+2d_physics/layer_12="Link Force Walk Tile"
 
 [rendering]
 

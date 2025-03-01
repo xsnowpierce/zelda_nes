@@ -1,36 +1,105 @@
-[gd_scene load_steps=3 format=3 uid="uid://dnicijk4mi8ce"]
+[gd_scene load_steps=8 format=3 uid="uid://ce1bg1140ays1"]
 
+[ext_resource type="Script" path="res://scripts/world/dungeon_walls.gd" id="1_2byn3"]
 [ext_resource type="Texture2D" uid="uid://c0pwpxlkow2pa" path="res://images/dungeon_tilemap.png" id="1_cjynw"]
+[ext_resource type="PackedScene" uid="uid://csbgb1xk300nl" path="res://scenes/dungeon_tile_doors.tscn" id="3_2n3hw"]
+[ext_resource type="Script" path="res://scenes/link_force_walk.gd" id="4_yjy31"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xebn6"]
 atlas = ExtResource("1_cjynw")
 region = Rect2(265, 0, 256, 176)
 
-[node name="Dungeon Walls" type="Sprite2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1yldc"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hhmpi"]
+size = Vector2(32, 16)
+
+[node name="Dungeon Walls" type="Node2D"]
 texture_filter = 1
+script = ExtResource("1_2byn3")
+
+[node name="Dungeon Walls" type="Sprite2D" parent="."]
+z_index = -2
+texture_filter = 1
+position = Vector2(-128, -96)
 texture = SubResource("AtlasTexture_xebn6")
 centered = false
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="StaticBody2D" type="StaticBody2D" parent="Dungeon Walls"]
 position = Vector2(128, 88)
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Dungeon Walls/StaticBody2D"]
 polygon = PackedVector2Array(-8, -56, -8, -88, -128, -88, -128, -8, -96, -8, -96, -56)
 
-[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+[node name="StaticBody2D2" type="StaticBody2D" parent="Dungeon Walls"]
 position = Vector2(128, 88)
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D2"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Dungeon Walls/StaticBody2D2"]
 polygon = PackedVector2Array(8, -88, 8, -56, 96, -56, 96, -8, 128, -8, 128, -88)
 
-[node name="StaticBody2D3" type="StaticBody2D" parent="."]
+[node name="StaticBody2D3" type="StaticBody2D" parent="Dungeon Walls"]
 position = Vector2(128, 88)
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D3"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Dungeon Walls/StaticBody2D3"]
 polygon = PackedVector2Array(-128, 8, -128, 88, -8, 88, -8, 56, -96, 56, -96, 8)
 
-[node name="StaticBody2D4" type="StaticBody2D" parent="."]
+[node name="StaticBody2D4" type="StaticBody2D" parent="Dungeon Walls"]
 position = Vector2(128, 88)
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D4"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Dungeon Walls/StaticBody2D4"]
 polygon = PackedVector2Array(8, 56, 8, 88, 128, 88, 128, 8, 96, 8, 96, 56)
+
+[node name="Dungeon Tile Doors" parent="." instance=ExtResource("3_2n3hw")]
+
+[node name="Link Force Walk" type="Area2D" parent="." groups=["LinkForceWalk"]]
+position = Vector2(-128, -16)
+collision_layer = 2048
+collision_mask = 4
+script = ExtResource("4_yjy31")
+force_move_direction = Vector2(1, 0)
+force_walk_tile_distance = 2.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Link Force Walk" groups=["LinkForceWalk"]]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_1yldc")
+disabled = true
+
+[node name="Link Force Walk3" type="Area2D" parent="." groups=["LinkForceWalk"]]
+position = Vector2(112, -16)
+collision_layer = 2048
+collision_mask = 4
+script = ExtResource("4_yjy31")
+force_move_direction = Vector2(-1, 0)
+force_walk_tile_distance = 2.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Link Force Walk3" groups=["LinkForceWalk"]]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_1yldc")
+disabled = true
+
+[node name="Link Force Walk2" type="Area2D" parent="." groups=["LinkForceWalk"]]
+position = Vector2(-16, 64)
+collision_layer = 2048
+collision_mask = 4
+script = ExtResource("4_yjy31")
+force_move_direction = Vector2(0, -1)
+force_walk_tile_distance = 2.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Link Force Walk2" groups=["LinkForceWalk"]]
+position = Vector2(16, 8)
+shape = SubResource("RectangleShape2D_hhmpi")
+disabled = true
+
+[node name="Link Force Walk4" type="Area2D" parent="." groups=["LinkForceWalk"]]
+position = Vector2(-16, -96)
+collision_layer = 2048
+collision_mask = 4
+script = ExtResource("4_yjy31")
+force_move_direction = Vector2(0, 1)
+force_walk_tile_distance = 2.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Link Force Walk4" groups=["LinkForceWalk"]]
+position = Vector2(16, 8)
+shape = SubResource("RectangleShape2D_hhmpi")
+disabled = true

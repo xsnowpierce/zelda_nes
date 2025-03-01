@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://2h8i8o7wy52v"]
+[gd_scene load_steps=20 format=3 uid="uid://2h8i8o7wy52v"]
 
 [ext_resource type="Script" path="res://scripts/entity/dropped_item.gd" id="1_gqyti"]
 [ext_resource type="AudioStream" uid="uid://cp6br2tqwillp" path="res://sound/sfx/The Legend of Zelda Cartoon Sound Effects Shiney.wav" id="2_x7a2w"]
@@ -8,13 +8,29 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lffti"]
 size = Vector2(8, 8)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_oxvb5"]
+atlas = ExtResource("4_6w1cc")
+region = Rect2(88, 16, 8, 16)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_mh51d"]
 atlas = ExtResource("4_6w1cc")
 region = Rect2(72, 16, 8, 16)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_qi5ua"]
+atlas = ExtResource("4_6w1cc")
+region = Rect2(256, 0, 16, 16)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_rjmby"]
 atlas = ExtResource("4_6w1cc")
 region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xs1v6"]
+atlas = ExtResource("4_6w1cc")
+region = Rect2(40, 0, 8, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6h1dp"]
+atlas = ExtResource("4_6w1cc")
+region = Rect2(48, 0, 8, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ml1or"]
 atlas = ExtResource("4_6w1cc")
@@ -36,8 +52,24 @@ region = Rect2(0, 8, 8, 8)
 atlas = ExtResource("4_6w1cc")
 region = Rect2(240, 0, 8, 16)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_27nka"]
+atlas = ExtResource("4_6w1cc")
+region = Rect2(88, 0, 8, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_epdqb"]
+atlas = ExtResource("4_6w1cc")
+region = Rect2(56, 0, 16, 16)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_ofqey"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oxvb5")
+}],
+"loop": true,
+"name": &"blue_map",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_mh51d")
@@ -48,10 +80,29 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_qi5ua")
+}],
+"loop": true,
+"name": &"compass",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_rjmby")
 }],
 "loop": true,
 "name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xs1v6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6h1dp")
+}],
+"loop": true,
+"name": &"fairy",
 "speed": 5.0
 }, {
 "frames": [{
@@ -83,6 +134,22 @@ animations = [{
 "loop": false,
 "name": &"key",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_27nka")
+}],
+"loop": true,
+"name": &"orange_map",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_epdqb")
+}],
+"loop": true,
+"name": &"timer",
+"speed": 5.0
 }]
 
 [node name="Dropped Item" type="Area2D"]
@@ -102,6 +169,7 @@ z_index = -1
 texture_filter = 1
 position = Vector2(8, 8)
 sprite_frames = SubResource("SpriteFrames_ofqey")
+animation = &"timer"
 autoplay = "default"
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

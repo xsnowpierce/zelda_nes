@@ -1,5 +1,7 @@
 extends Node
 
+class_name LinkState
+
 var player : CharacterBody2D
 var game_data : Node
 
@@ -13,6 +15,7 @@ var has_room_events : bool = false
 var is_inside_room : bool
 var is_placing_item : bool
 var is_shooting_magical_wand : bool
+var is_entering_new_tile : bool
 
 func initialize(parent : CharacterBody2D) -> void:
 	player = parent
@@ -27,4 +30,5 @@ func is_player_input_allowed() -> bool:
 		and !game_data.game_is_paused
 		and !is_attacked_knockback
 		and !is_placing_item
-		and !is_shooting_magical_wand)
+		and !is_shooting_magical_wand
+		and !is_entering_new_tile)

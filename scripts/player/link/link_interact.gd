@@ -3,11 +3,11 @@ extends Node
 var colliding_with_door : Area2D
 signal entering_door(door : Area2D, leads_to_hyrule : bool)
 @export var pickup_animation_length : float = 2.5
-var player : CharacterBody2D
+var player : LinkController
 signal key_item_pickup_sound
 signal door_enter_sound
 
-func initialize(parent: CharacterBody2D) -> void:
+func initialize(parent: LinkController) -> void:
 	player = parent
 
 func process(delta : float) -> void:

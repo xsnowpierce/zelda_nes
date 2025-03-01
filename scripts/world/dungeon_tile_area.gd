@@ -10,19 +10,27 @@ class_name DungeonTileArea
 
 func _ready() -> void:
 	super()
-	$"Walls/Dungeon Tile Doors".set_door_value(DungeonTileDoors.DOOR_DIRECTION.NORTH, door_north_status)
-	$"Walls/Dungeon Tile Doors".set_door_value(DungeonTileDoors.DOOR_DIRECTION.SOUTH, door_south_status)
-	$"Walls/Dungeon Tile Doors".set_door_value(DungeonTileDoors.DOOR_DIRECTION.EAST, door_east_status)
-	$"Walls/Dungeon Tile Doors".set_door_value(DungeonTileDoors.DOOR_DIRECTION.WEST, door_west_status)
+	$"Dungeon Walls/Dungeon Tile Doors".set_door_value(DungeonTileDoors.DOOR_DIRECTION.NORTH, door_north_status)
+	$"Dungeon Walls/Dungeon Tile Doors".set_door_value(DungeonTileDoors.DOOR_DIRECTION.SOUTH, door_south_status)
+	$"Dungeon Walls/Dungeon Tile Doors".set_door_value(DungeonTileDoors.DOOR_DIRECTION.EAST, door_east_status)
+	$"Dungeon Walls/Dungeon Tile Doors".set_door_value(DungeonTileDoors.DOOR_DIRECTION.WEST, door_west_status)
 
 func tile_entered(previous_tile : Vector2) -> void:
 	super(previous_tile)
-	$Walls.tile_entered(previous_tile)
-	for entity in $Entities.get_children():
-		entity.awake()
+	$"Dungeon Walls".tile_entered(previous_tile)
+	if(is_instance_valid($Entities)):
+		for entity in $Entities.get_children():
+			entity.awake()
 
 func tile_exited(next_tile : Vector2) -> void:
 	super(next_tile)
-	$Walls.tile_entered(next_tile)
-	for entity in $Entities.get_children():
-		entity.sleep()
+	$"Dungeon Walls".tile_exited(next_tile)
+	if(is_instance_valid($Entities)):
+		for entity in $Entities.get_children():
+			entity.sleep()
+
+func set_link_force_move_areas(value : bool) -> void:
+	$"Dungeon Walls".set_force_walk_values(value)
+
+func set_door_value(direction : DungeonTileDoors.DOOR_DIRECTION, door_status : DungeonDoor.DOOR_STATUS) -> void:
+	$"Dungeon Walls/Dungeon Tile Doors".set_door_value(direction, door_status)
