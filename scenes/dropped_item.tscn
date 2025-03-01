@@ -1,8 +1,6 @@
-[gd_scene load_steps=20 format=3 uid="uid://2h8i8o7wy52v"]
+[gd_scene load_steps=18 format=3 uid="uid://2h8i8o7wy52v"]
 
 [ext_resource type="Script" path="res://scripts/entity/dropped_item.gd" id="1_gqyti"]
-[ext_resource type="AudioStream" uid="uid://cp6br2tqwillp" path="res://sound/sfx/The Legend of Zelda Cartoon Sound Effects Shiney.wav" id="2_x7a2w"]
-[ext_resource type="AudioStream" uid="uid://caertfnaqct0y" path="res://sound/sfx/The Legend of Zelda Cartoon Sound Effects Health Heart.wav" id="3_agqju"]
 [ext_resource type="Texture2D" uid="uid://s0p3ioiqty7b" path="res://images/items_and_weapons.png" id="4_6w1cc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lffti"]
@@ -152,18 +150,18 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Dropped Item" type="Area2D"]
+[node name="Dropped Item" type="Node2D"]
+script = ExtResource("1_gqyti")
+
+[node name="Dropped Item" type="Area2D" parent="."]
 collision_layer = 128
 collision_mask = 20
-script = ExtResource("1_gqyti")
-rupee_gain_sound = ExtResource("2_x7a2w")
-heart_gain_sound = ExtResource("3_agqju")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Dropped Item"]
 position = Vector2(8, 8)
 shape = SubResource("RectangleShape2D_lffti")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Dropped Item"]
 process_mode = 1
 z_index = -1
 texture_filter = 1
@@ -172,4 +170,4 @@ sprite_frames = SubResource("SpriteFrames_ofqey")
 animation = &"timer"
 autoplay = "default"
 
-[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_entered" from="Dropped Item" to="." method="_on_area_entered"]

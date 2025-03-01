@@ -10,6 +10,9 @@ class_name DungeonTileArea
 
 func _ready() -> void:
 	super()
+	if(get_node("Entities") != null):
+		for entity in $Entities.get_children():
+			entity.sleep()
 	$"Dungeon Walls/Dungeon Tile Doors".set_door_value(DungeonTileDoors.DOOR_DIRECTION.NORTH, door_north_status)
 	$"Dungeon Walls/Dungeon Tile Doors".set_door_value(DungeonTileDoors.DOOR_DIRECTION.SOUTH, door_south_status)
 	$"Dungeon Walls/Dungeon Tile Doors".set_door_value(DungeonTileDoors.DOOR_DIRECTION.EAST, door_east_status)
@@ -18,14 +21,14 @@ func _ready() -> void:
 func tile_entered(previous_tile : Vector2) -> void:
 	super(previous_tile)
 	$"Dungeon Walls".tile_entered(previous_tile)
-	if(is_instance_valid($Entities)):
+	if(get_node("Entities") != null):
 		for entity in $Entities.get_children():
 			entity.awake()
 
 func tile_exited(next_tile : Vector2) -> void:
 	super(next_tile)
 	$"Dungeon Walls".tile_exited(next_tile)
-	if(is_instance_valid($Entities)):
+	if(get_node("Entities") != null):
 		for entity in $Entities.get_children():
 			entity.sleep()
 

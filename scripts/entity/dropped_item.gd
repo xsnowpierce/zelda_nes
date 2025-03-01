@@ -1,14 +1,13 @@
-extends Area2D
+extends Entity
 
 @export var item_type : ENUM.ITEM_TYPE
 @export var rupee_value_override : int = -1
-@export var rupee_gain_sound : AudioStreamWAV
-@export var heart_gain_sound : AudioStreamWAV
 signal item_picked_up
 var sfxplayer : SFXPlayer
 var times_picked_up : int
 
 func _ready() -> void:
+	super()
 	set_item_type(item_type)
 	sfxplayer = get_tree().get_first_node_in_group("SFXPlayer")
 
@@ -16,21 +15,21 @@ func set_item_type(type : ENUM.ITEM_TYPE) -> void:
 	item_type = type
 	match type:
 		ENUM.ITEM_TYPE.GREEN_RUPEE:
-			$AnimatedSprite2D.play("green_rupee")
+			$"Dropped Item/AnimatedSprite2D".play("green_rupee")
 		ENUM.ITEM_TYPE.BLUE_RUPEE:
-			$AnimatedSprite2D.play("blue_rupee")
+			$"Dropped Item/AnimatedSprite2D".play("blue_rupee")
 		ENUM.ITEM_TYPE.HEART:
-			$AnimatedSprite2D.play("heart")
+			$"Dropped Item/AnimatedSprite2D".play("heart")
 		ENUM.ITEM_TYPE.KEY:
-			$AnimatedSprite2D.play("key")
+			$"Dropped Item/AnimatedSprite2D".play("key")
 		ENUM.ITEM_TYPE.TIMER:
-			$AnimatedSprite2D.play("timer")
+			$"Dropped Item/AnimatedSprite2D".play("timer")
 		ENUM.ITEM_TYPE.ORANGE_MAP:
-			$AnimatedSprite2D.play("orange_map")
+			$"Dropped Item/AnimatedSprite2D".play("orange_map")
 		ENUM.ITEM_TYPE.BLUE_MAP:
-			$AnimatedSprite2D.play("blue_map")
+			$"Dropped Item/AnimatedSprite2D".play("blue_map")
 		ENUM.ITEM_TYPE.COMPASS:
-			$AnimatedSprite2D.play("compass")
+			$"Dropped Item/AnimatedSprite2D".play("compass")
 		ENUM.ITEM_TYPE.FAIRY:
 			# TODO spawn fairy here
 			queue_free()
@@ -65,6 +64,12 @@ func _on_area_entered(area: Area2D) -> void:
 		ENUM.ITEM_TYPE.COMPASS:
 			game_data.picked_up_dungeon_compass()
 			sfxplayer.play_sound(SFXPlayer.SFX.HEART_PICKUP)
-	$AnimatedSprite2D.visible = false
+	$"Dropped Item/AnimatedSprite2D".visible = false
 	item_picked_up.emit()
 	queue_free()
+
+func awake() -> void:
+	$"Dropped Item/AnimatedSprite2D".visible = true
+
+func sleep() -> void:
+	$"Dropped Item/AnimatedSprite2D".visible = false

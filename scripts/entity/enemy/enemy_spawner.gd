@@ -70,6 +70,8 @@ func _on_sprite_2d_animation_looped() -> void:
 				enemy_scene = game_data.enemy_keese_scene.instantiate()
 			ENUM.ENEMY_TYPE.STALFOS:
 				enemy_scene = game_data.enemy_stalfos_scene.instantiate()
+			ENUM.ENEMY_TYPE.GEL:
+				enemy_scene = game_data.enemy_gel_scene.instantiate()
 			_:
 				printerr("Tried to spawn enemy that does not have a set scene in GameData. (", str(enemy_type), ", ", ENUM.ENEMY_TYPE.keys()[enemy_type] ,")")
 				$Sprite2D.stop()

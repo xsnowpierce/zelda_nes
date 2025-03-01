@@ -1,0 +1,106 @@
+[gd_scene load_steps=10 format=3 uid="uid://tnoirjgjg855"]
+
+[ext_resource type="Script" path="res://scenes/gel.gd" id="1_yq7vd"]
+[ext_resource type="Texture2D" uid="uid://bwgbbitwmdbm0" path="res://images/dungeon_enemies.png" id="2_h7hxp"]
+[ext_resource type="AudioStream" uid="uid://dtn5thjr7fpjk" path="res://sound/sfx/The Legend of Zelda Cartoon Sound Effects Enemy Zapped.wav" id="3_bev6j"]
+[ext_resource type="Script" path="res://scripts/entity/enemy/enemy_collider_check.gd" id="4_vbfdc"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dh51p"]
+radius = 7.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_odtuh"]
+atlas = ExtResource("2_h7hxp")
+region = Rect2(1, 12, 8, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6cv26"]
+atlas = ExtResource("2_h7hxp")
+region = Rect2(10, 12, 8, 12)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gou4w"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_odtuh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6cv26")
+}],
+"loop": true,
+"name": &"default",
+"speed": 50.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1cueu"]
+size = Vector2(15, 15)
+
+[node name="Gel" type="Area2D" groups=["Enemy"]]
+collision_layer = 8
+collision_mask = 20
+script = ExtResource("1_yq7vd")
+rotate_chance = 1.0
+move_speed = 32.0
+rotate_sprite = false
+enemy_type = 20
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(8, 8)
+shape = SubResource("CircleShape2D_dh51p")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(3.785, 0)
+sprite_frames = SubResource("SpriteFrames_gou4w")
+autoplay = "default"
+frame_progress = 0.0200976
+centered = false
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_bev6j")
+bus = &"SFX"
+
+[node name="TopCollider" type="Area2D" parent="."]
+collision_layer = 64
+collision_mask = 3
+script = ExtResource("4_vbfdc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TopCollider"]
+position = Vector2(8, -8)
+shape = SubResource("RectangleShape2D_1cueu")
+
+[node name="BottomCollider" type="Area2D" parent="."]
+collision_layer = 64
+collision_mask = 3
+script = ExtResource("4_vbfdc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomCollider"]
+position = Vector2(8, 24)
+shape = SubResource("RectangleShape2D_1cueu")
+
+[node name="LeftCollider" type="Area2D" parent="."]
+collision_layer = 64
+collision_mask = 3
+script = ExtResource("4_vbfdc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftCollider"]
+position = Vector2(-8, 8)
+shape = SubResource("RectangleShape2D_1cueu")
+
+[node name="RightCollider" type="Area2D" parent="."]
+process_mode = 1
+collision_layer = 64
+collision_mask = 3
+script = ExtResource("4_vbfdc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightCollider"]
+position = Vector2(24, 8)
+shape = SubResource("RectangleShape2D_1cueu")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="TopCollider" to="TopCollider" method="_on_body_entered"]
+[connection signal="body_exited" from="TopCollider" to="TopCollider" method="_on_body_exited"]
+[connection signal="body_entered" from="BottomCollider" to="BottomCollider" method="_on_body_entered"]
+[connection signal="body_exited" from="BottomCollider" to="BottomCollider" method="_on_body_exited"]
+[connection signal="body_entered" from="LeftCollider" to="LeftCollider" method="_on_body_entered"]
+[connection signal="body_exited" from="LeftCollider" to="LeftCollider" method="_on_body_exited"]
+[connection signal="body_entered" from="RightCollider" to="RightCollider" method="_on_body_entered"]
+[connection signal="body_exited" from="RightCollider" to="RightCollider" method="_on_body_exited"]

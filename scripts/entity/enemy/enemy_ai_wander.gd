@@ -87,7 +87,11 @@ func move_to_direction(target_direction : Vector2) -> void:
 		await get_tree().process_frame
 		
 	global_position = target_position
+	await moved_a_tile()
 	is_moving = false
+
+func moved_a_tile() -> void:
+	pass
 
 func rotate_enemy(direction : Vector2):
 	if(!rotate_sprite):

@@ -14,6 +14,7 @@ class_name GameData
 @export var enemy_peahat_scene : PackedScene
 @export var enemy_keese_scene : PackedScene
 @export var enemy_stalfos_scene : PackedScene
+@export var enemy_gel_scene : PackedScene
 
 @export_group("Player Stats")
 @export_subgroup("Health")
