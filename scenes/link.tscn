@@ -468,7 +468,7 @@ size = Vector2(12, 12)
 [node name="Link" type="CharacterBody2D" groups=["Player"]]
 texture_filter = 1
 texture_repeat = 1
-collision_layer = 2
+collision_layer = 4
 motion_mode = 1
 slide_on_ceiling = false
 floor_stop_on_slope = false
@@ -561,8 +561,8 @@ one_way_collision_margin = 0.0
 [connection signal="attack_ended" from="Link Sprite Mask/Link Sprite" to="LinkCombat" method="_on_animated_sprite_2d_attack_ended"]
 [connection signal="area_entered" from="Link Hitbox" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_entered" from="Link Hitbox" to="LinkInteract" method="_on_area_2d_area_entered"]
-[connection signal="area_exited" from="Link Hitbox" to="." method="_on_area_2d_area_exited"]
 [connection signal="area_exited" from="Link Hitbox" to="." method="_on_link_hitbox_area_exited"]
+[connection signal="area_exited" from="Link Hitbox" to="." method="_on_area_2d_area_exited"]
 [connection signal="area_exited" from="Link Hitbox" to="LinkInteract" method="_on_area_2d_area_exited"]
 [connection signal="sprite_update" from="LinkMovement" to="Link Sprite Mask/Link Sprite" method="_on_link_movement_sprite_update"]
 [connection signal="sprite_update" from="LinkMovement" to="Attack Area" method="set_direction"]
@@ -575,6 +575,6 @@ one_way_collision_margin = 0.0
 [connection signal="key_item_pickup_sound" from="LinkInteract" to="AudioPlayer" method="play_key_item_pickup_sound"]
 [connection signal="area_entered" from="Link Collision Hitbox Area" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_entered" from="Link Collision Hitbox Area" to="LinkInteract" method="_on_area_2d_area_entered"]
-[connection signal="area_exited" from="Link Collision Hitbox Area" to="." method="_on_area_2d_area_exited"]
 [connection signal="area_exited" from="Link Collision Hitbox Area" to="." method="_on_link_hitbox_area_exited"]
+[connection signal="area_exited" from="Link Collision Hitbox Area" to="." method="_on_area_2d_area_exited"]
 [connection signal="area_exited" from="Link Collision Hitbox Area" to="LinkInteract" method="_on_area_2d_area_exited"]

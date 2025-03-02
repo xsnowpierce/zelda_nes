@@ -82,8 +82,8 @@ func move_to_direction(target_direction : Vector2) -> void:
 		if(!can_move()):
 			await get_tree().process_frame
 			continue
-		var move_distance = move_speed * get_process_delta_time()  # Distance to move this frame
-		global_position = global_position.move_toward(target_position, move_distance)  # Move at constant speed
+		var move_distance = move_speed * get_process_delta_time()
+		global_position = global_position.move_toward(target_position, move_distance)
 		await get_tree().process_frame
 		
 	global_position = target_position

@@ -12,6 +12,24 @@ func _ready() -> void:
 			
 func awake():
 	is_awake = true
-	
+	process_while_awake()
+	physics_while_awake()
+
 func sleep():
 	is_awake = false
+
+func process_while_awake() -> void:
+	while is_awake:
+		update()
+		await get_tree().process_frame
+
+func physics_while_awake() -> void:
+	while is_awake:
+		physics_update()
+		await get_tree().physics_frame
+
+func update() -> void:
+	pass
+
+func physics_update() -> void:
+	pass

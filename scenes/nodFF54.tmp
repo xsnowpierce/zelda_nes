@@ -1580,7 +1580,7 @@ max_tiles_right = 5
 script = ExtResource("30_ynj6t")
 enemy_type = 49
 global_spawn_position = Vector2(0, 0)
-relative_grid_position = Vector2(-6, -4)
+relative_grid_position = Vector2(-5, -4)
 use_spawn_type = 1
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
@@ -1597,7 +1597,7 @@ max_tiles_right = 5
 script = ExtResource("30_ynj6t")
 enemy_type = 49
 global_spawn_position = Vector2(0, 0)
-relative_grid_position = Vector2(-6, 2)
+relative_grid_position = Vector2(-5, 2)
 use_spawn_type = 1
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
@@ -2738,7 +2738,6 @@ door_west_status = 3
 [node name="Pushable Block" parent="Level/Eagle Dungeon/Eagle Dungeon Tile14/Entities" instance=ExtResource("16_itiqv")]
 position = Vector2(2784, -2304)
 texture = SubResource("AtlasTexture_1ax37")
-move_times = 1
 
 [node name="Eagle Dungeon Tile17" parent="Level/Eagle Dungeon" instance=ExtResource("54_bxtwv")]
 position = Vector2(3072, -1408)
@@ -2750,9 +2749,6 @@ link_moveto_position = Vector2(-8, -728)
 camera_moveto_position = Vector2(0, -4)
 
 [node name="Entities" type="Node" parent="Level/Eagle Dungeon/Eagle Dungeon Tile17"]
-
-[node name="Blade Trap" parent="Level/Eagle Dungeon/Eagle Dungeon Tile17/Entities" instance=ExtResource("59_rlycn")]
-position = Vector2(2976, -1472)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 process_mode = 3

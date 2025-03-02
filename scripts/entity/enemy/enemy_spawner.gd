@@ -12,6 +12,8 @@ var spawner_id : int
 signal enemy_killed(spawner : EnemySpawner, location : Vector2)
 var dropped_item_scene : PackedScene = load("res://scenes/dropped_item.tscn")
 var key_scene : Node2D
+var blade_trap_settings : BladeTrapSettings
+
 func _ready() -> void:
 	super()
 	$Sprite2D.visible = false
@@ -72,17 +74,25 @@ func _on_sprite_2d_animation_looped() -> void:
 				enemy_scene = game_data.enemy_stalfos_scene.instantiate()
 			ENUM.ENEMY_TYPE.GEL:
 				enemy_scene = game_data.enemy_gel_scene.instantiate()
+			ENUM.ENEMY_TYPE.BLADE_TRAP:
+				enemy_scene = game_data.enemy_blade_trap_scene.instantiate()
+				enemy_scene.blade_trap_settings = blade_trap_settings
 			_:
 				printerr("Tried to spawn enemy that does not have a set scene in GameData. (", str(enemy_type), ", ", ENUM.ENEMY_TYPE.keys()[enemy_type] ,")")
 				$Sprite2D.stop()
 				return
-		get_parent().add_child(enemy_scene)
-		enemy_scene.enemy_type = enemy_type
+				
+		if(enemy_type != ENUM.ENEMY_TYPE.BLADE_TRAP):
+			get_parent().add_child(enemy_scene)
+			enemy_scene.enemy_type = enemy_type
+			if(is_instance_valid(key_scene)):
+				remove_child(key_scene)
+				enemy_scene.add_child(key_scene)
+			enemy_scene.connect("has_died", Callable(self, "spawned_enemy_has_died"))
+		else:
+			get_parent().get_parent().get_entities().add_child(enemy_scene)
+			enemy_scene.awake()
 		enemy_scene.global_position = global_position
-		if(is_instance_valid(key_scene)):
-			remove_child(key_scene)
-			enemy_scene.add_child(key_scene)
-		enemy_scene.connect("has_died", Callable(self, "spawned_enemy_has_died"))
 		$Sprite2D.stop()
 
 func spawned_enemy_has_died() -> void:
