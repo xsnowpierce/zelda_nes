@@ -13,7 +13,7 @@ var is_boomerang_frozen : bool
 var current_health : int
 @export_flags_2d_physics var collision_layers_bitmask
 
-var link : CharacterBody2D
+var link : LinkController
 var death_scene : PackedScene = load("res://scenes/enemy_death.tscn")
 var camera
 signal was_attacked

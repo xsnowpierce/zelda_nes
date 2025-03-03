@@ -8,6 +8,7 @@ var current_forward_vector : Vector2
 var is_moving : bool = false
 var raycast_offset : Vector2 = Vector2(8, 8)
 @export var rotate_sprite : bool = true
+@export var turn_towards_link_chance : float = 0.5
 
 func _ready() -> void:
 	super()
@@ -117,6 +118,9 @@ func rotate_enemy(direction : Vector2):
 	current_forward_vector = direction
 
 func get_rotate_direction() -> Vector2:
+	var link_in_view = is_link_in_view()
+	if(link_in_view != Vector2.ZERO and randf_range(0, 1) >= turn_towards_link_chance):
+		return link_in_view
 	var random_number = randf_range(0, 1)
 	if random_number >= 0.75:
 		return Vector2.RIGHT
@@ -126,3 +130,26 @@ func get_rotate_direction() -> Vector2:
 		return Vector2.DOWN
 	else:
 		return Vector2.UP
+
+func is_link_in_view() -> Vector2:
+	var our_relative_position = get_camera_relative_tile_position()
+	var link_relative_position = link.get_player_camera_relative_tile_position()
+	
+	if our_relative_position.x == link_relative_position.x:
+		if(link_relative_position.y > our_relative_position.y):
+			return Vector2.DOWN
+		else:
+			Vector2.UP
+	elif our_relative_position.y == link_relative_position.y:
+		if(link_relative_position.x > our_relative_position.x):
+			return Vector2.RIGHT
+		else:
+			return Vector2.LEFT
+	return Vector2.ZERO
+
+func get_camera_relative_tile_position() -> Vector2:
+	var collider_centre = global_position + (Vector2(8, 8))
+	collider_centre -= camera.global_position
+	collider_centre.x /= 16
+	collider_centre.y /= 11
+	return Vector2(floori(collider_centre.x), floori(collider_centre.y))

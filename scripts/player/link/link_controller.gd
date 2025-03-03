@@ -67,3 +67,16 @@ func new_tile_entered(new_area_position : Vector2) -> void:
 	if(game_data.is_inside_dungeon):
 		await $LinkMovement.force_player_walk()
 	get_player_state().is_entering_new_tile = false
+
+func get_player_global_tile_position() -> Vector2:
+	var collider_centre = $"Link Collider".global_position
+	collider_centre.x /= 16
+	collider_centre.y /= 11
+	return Vector2(floori(collider_centre.x), floori(collider_centre.y))
+
+func get_player_camera_relative_tile_position() -> Vector2:
+	var collider_centre = $"Link Collider".global_position
+	collider_centre -= camera.global_position
+	collider_centre.x /= 16
+	collider_centre.y /= 11
+	return Vector2(floori(collider_centre.x), floori(collider_centre.y))
