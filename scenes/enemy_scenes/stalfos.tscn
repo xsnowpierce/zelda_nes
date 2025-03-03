@@ -1,9 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://dmoo6a5lybrpp"]
+[gd_scene load_steps=7 format=3 uid="uid://dmoo6a5lybrpp"]
 
 [ext_resource type="Script" path="res://scripts/entity/enemy/enemy_ai_wander.gd" id="1_cq3k4"]
 [ext_resource type="Texture2D" uid="uid://bwgbbitwmdbm0" path="res://images/dungeon_enemies.png" id="2_traeb"]
-[ext_resource type="AudioStream" uid="uid://dtn5thjr7fpjk" path="res://sound/sfx/The Legend of Zelda Cartoon Sound Effects Enemy Zapped.wav" id="3_hqojy"]
-[ext_resource type="Script" path="res://scripts/entity/enemy/enemy_collider_check.gd" id="4_wjvb4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dh51p"]
 radius = 7.0
@@ -30,15 +28,13 @@ animations = [{
 "speed": 7.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1cueu"]
-size = Vector2(15, 15)
-
 [node name="Stalfos" type="Area2D" groups=["Enemy"]]
 collision_layer = 8
 collision_mask = 20
 script = ExtResource("1_cq3k4")
 move_speed = 32.0
 rotate_sprite = false
+collision_layers_bitmask = 4099
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(8, 8)
@@ -51,53 +47,4 @@ autoplay = "default"
 frame_progress = 0.266597
 centered = false
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_hqojy")
-bus = &"SFX"
-
-[node name="TopCollider" type="Area2D" parent="."]
-collision_layer = 64
-collision_mask = 4099
-script = ExtResource("4_wjvb4")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TopCollider"]
-position = Vector2(8, -8)
-shape = SubResource("RectangleShape2D_1cueu")
-
-[node name="BottomCollider" type="Area2D" parent="."]
-collision_layer = 64
-collision_mask = 4099
-script = ExtResource("4_wjvb4")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomCollider"]
-position = Vector2(8, 24)
-shape = SubResource("RectangleShape2D_1cueu")
-
-[node name="LeftCollider" type="Area2D" parent="."]
-collision_layer = 64
-collision_mask = 4099
-script = ExtResource("4_wjvb4")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftCollider"]
-position = Vector2(-8, 8)
-shape = SubResource("RectangleShape2D_1cueu")
-
-[node name="RightCollider" type="Area2D" parent="."]
-process_mode = 1
-collision_layer = 64
-collision_mask = 4099
-script = ExtResource("4_wjvb4")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RightCollider"]
-position = Vector2(24, 8)
-shape = SubResource("RectangleShape2D_1cueu")
-
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
-[connection signal="body_entered" from="TopCollider" to="TopCollider" method="_on_body_entered"]
-[connection signal="body_exited" from="TopCollider" to="TopCollider" method="_on_body_exited"]
-[connection signal="body_entered" from="BottomCollider" to="BottomCollider" method="_on_body_entered"]
-[connection signal="body_exited" from="BottomCollider" to="BottomCollider" method="_on_body_exited"]
-[connection signal="body_entered" from="LeftCollider" to="LeftCollider" method="_on_body_entered"]
-[connection signal="body_exited" from="LeftCollider" to="LeftCollider" method="_on_body_exited"]
-[connection signal="body_entered" from="RightCollider" to="RightCollider" method="_on_body_entered"]
-[connection signal="body_exited" from="RightCollider" to="RightCollider" method="_on_body_exited"]

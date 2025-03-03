@@ -2252,7 +2252,6 @@ enemy_blade_trap_scene = ExtResource("59_rlycn")
 current_player_health = 6
 current_rupees = 20
 current_keys = 20
-has_wooden_boomerang = true
 hyrule_music = ExtResource("2_7hpxk")
 dungeon_music = ExtResource("36_8um02")
 current_equipped_item_a = 1

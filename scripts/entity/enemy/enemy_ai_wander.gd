@@ -6,14 +6,14 @@ class_name EnemyAI_Wander
 @export var move_speed : float = 23
 var current_forward_vector : Vector2
 var is_moving : bool = false
+var raycast_offset : Vector2 = Vector2(8, 8)
 @export var rotate_sprite : bool = true
 
 func _ready() -> void:
 	super()
 	rotate_enemy(get_rotate_direction())
 
-func _process(delta: float) -> void:
-	super(delta)
+func _physics_process(delta: float) -> void:
 	if(GameSettings.camera_is_moving):
 		return
 	if(should_move()):
@@ -48,18 +48,32 @@ func check_if_move_is_valid(target_direction : Vector2) -> bool:
 	if(Utils.is_out_of_bounds(get_target_position_from_direction(target_direction), camera, true)):
 		return false
 	
+	var space_state = get_world_2d().direct_space_state
+	var query = PhysicsShapeQueryParameters2D.new()
+	query.shape = $CollisionShape2D.shape
+	query.transform = Transform2D(0, global_position + raycast_offset + (target_direction * 16))
+	query.collision_mask = collision_layers_bitmask
+
+	var result = space_state.intersect_shape(query)
+	
+	return result.size() == 0
+
+func old_check_if_move_is_valid(target_direction : Vector2) -> bool:
+	if(Utils.is_out_of_bounds(get_target_position_from_direction(target_direction), camera, true)):
+		return false
+	
 	match target_direction:
 		Vector2.UP:
-			if($TopCollider.collider_count <= 0):
+			if($TopCollider.collider_count == 0):
 				return true
 		Vector2.DOWN:
-			if($BottomCollider.collider_count <= 0):
+			if($BottomCollider.collider_count == 0):
 				return true
 		Vector2.LEFT:
-			if($LeftCollider.collider_count <= 0):
+			if($LeftCollider.collider_count == 0):
 				return true
 		Vector2.RIGHT:
-			if($RightCollider.collider_count <= 0):
+			if($RightCollider.collider_count == 0):
 				return true
 	return false
 
