@@ -8,6 +8,7 @@ var spawn_projectile_distance : float = 1
 @export var candle_flame_scene : PackedScene = preload("res://scenes/candle_fire.tscn")
 @export var magical_wand_scene : PackedScene = preload("res://scenes/magical_wand_beam.tscn")
 @export var wooden_arrow_scene : PackedScene = preload("res://scenes/wooden_arrow.tscn")
+@export var boomerang_scene : PackedScene = preload("res://scenes/boomerang.tscn")
 var current_projectile
 @export_group("")
 @export var whistle_pause_time : float = 2.7
@@ -63,7 +64,26 @@ func use_alternate_weapon(item : ENUM.KEY_ITEM_TYPE) -> void:
 			await get_tree().create_timer(whistle_pause_time).timeout
 			player.played_flute.emit()
 			player.game_data.set_whistle_pause_value(false)
-			
+		ENUM.KEY_ITEM_TYPE.WOODEN_BOOMERANG:
+			if(is_instance_valid(current_projectile)):
+				return
+			var boomerang = boomerang_scene.instantiate()
+			boomerang.global_position = (player.global_position) + (player.get_look_direction() * (spawn_projectile_distance * 16))
+			player.game_data.add_child(boomerang)
+			boomerang.initialize_boomerang(Boomerang.BOOMERANG_TYPE.WOODEN, player.get_look_direction(), player.camera, player)
+			current_projectile = boomerang
+			boomerang.connect("boomerang_picked_up", Callable(self, "boomerang_pickup"))
+			player.use_item_animation()
+		ENUM.KEY_ITEM_TYPE.MAGICAL_BOOMERANG:
+			if(is_instance_valid(current_projectile)):
+				return
+			var boomerang = boomerang_scene.instantiate()
+			boomerang.global_position = (player.global_position) + (player.get_look_direction() * (spawn_projectile_distance * 16))
+			player.game_data.add_child(boomerang)
+			boomerang.initialize_boomerang(Boomerang.BOOMERANG_TYPE.MAGICAL, player.get_look_direction(), player.camera, player)
+			current_projectile = boomerang
+			boomerang.connect("boomerang_picked_up", Callable(self, "boomerang_pickup"))
+			player.use_item_animation()
 
 func cast_magical_wand_beam() -> void:
 	var wand_beam = magical_wand_scene.instantiate()
@@ -72,3 +92,6 @@ func cast_magical_wand_beam() -> void:
 	wand_beam.global_position = (player.global_position) + (player.get_look_direction() * (spawn_projectile_distance * 16))
 	wand_beam.initialize_beam(player.get_look_direction(), player.camera)
 	current_projectile = wand_beam
+
+func boomerang_pickup() -> void:
+	player.use_item_animation()

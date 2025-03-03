@@ -1,8 +1,6 @@
 extends EnemyAI
 
 var raycast_offset : Vector2 = Vector2(8, 8)
-## The layer to check for the player to move to.
-@export_flags_2d_physics var raycast_layer
 @export var move_towards_speed : float
 @export var move_backwards_speed : float
 @export var blade_trap_settings : BladeTrapSettings
@@ -27,7 +25,7 @@ func check_for_link(direction : Vector2) -> void:
 	var space_state = get_world_2d().direct_space_state
 	var start_position : Vector2 = global_position + raycast_offset
 	var query = PhysicsRayQueryParameters2D.create(start_position, start_position + 
-		(direction * (get_max_tiles_from_direction(direction) * 16)), raycast_layer, [self])
+		(direction * (get_max_tiles_from_direction(direction) * 16)), collision_layers_bitmask, [self])
 	query.collide_with_areas = true
 	var result = space_state.intersect_ray(query)
 	if(!result.is_empty()):

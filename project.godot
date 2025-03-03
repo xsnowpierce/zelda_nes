@@ -56,6 +56,7 @@ SFXPlayer=""
 Player_Fire=""
 Ground=""
 LinkForceWalk="A tile that will force link to walk a distance."
+Player_Boomerang=""
 
 [gui]
 

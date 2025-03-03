@@ -114,7 +114,7 @@ bus = &"SFX"
 
 [node name="TopCollider" type="Area2D" parent="."]
 collision_layer = 64
-collision_mask = 3
+collision_mask = 4099
 script = ExtResource("4_xo5wr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TopCollider"]

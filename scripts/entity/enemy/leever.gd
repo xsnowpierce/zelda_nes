@@ -107,7 +107,7 @@ func move_to_direction(target_direction : Vector2) -> void:
 			towards_link_direction = target_direction
 			target_position = get_target_position_from_direction(target_direction)
 			hit_link = false
-		if(GameSettings.camera_is_moving):
+		if(!can_move()):
 			await get_tree().process_frame
 			continue
 		var move_distance = move_speed * get_process_delta_time()  # Distance to move this frame

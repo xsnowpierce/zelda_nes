@@ -27,11 +27,6 @@ func try_rotate() -> void:
 
 func should_move() -> bool:
 	return !is_moving
-	
-func can_move() -> bool:
-	if GameSettings.camera_is_moving or !can_process():
-		return false
-	return true
 
 func move() -> void:
 	if(is_moving):

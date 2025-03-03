@@ -1478,7 +1478,7 @@ script = ExtResource("30_ynj6t")
 enemy_type = 34
 global_spawn_position = Vector2(0, 0)
 relative_grid_position = Vector2(0, -1)
-use_spawn_type = 0
+use_spawn_type = 1
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -1487,7 +1487,7 @@ script = ExtResource("30_ynj6t")
 enemy_type = 34
 global_spawn_position = Vector2(0, 0)
 relative_grid_position = Vector2(2, 1)
-use_spawn_type = 0
+use_spawn_type = 1
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -1496,7 +1496,7 @@ script = ExtResource("30_ynj6t")
 enemy_type = 34
 global_spawn_position = Vector2(0, 0)
 relative_grid_position = Vector2(4, -3)
-use_spawn_type = 0
+use_spawn_type = 1
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -2252,10 +2252,11 @@ enemy_blade_trap_scene = ExtResource("59_rlycn")
 current_player_health = 6
 current_rupees = 20
 current_keys = 20
-has_recorder = true
+has_wooden_boomerang = true
 hyrule_music = ExtResource("2_7hpxk")
 dungeon_music = ExtResource("36_8um02")
 current_equipped_item_a = 1
+current_equipped_item_b = 6
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_7hpxk")
@@ -2751,9 +2752,6 @@ camera_moveto_position = Vector2(0, -4)
 
 [node name="Entities" type="Node" parent="Level/Eagle Dungeon/Eagle Dungeon Tile17"]
 
-[node name="Blade Trap" parent="Level/Eagle Dungeon/Eagle Dungeon Tile17/Entities" instance=ExtResource("59_rlycn")]
-position = Vector2(2976, -1472)
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 process_mode = 3
 script = ExtResource("16_sgrtl")
@@ -3243,7 +3241,6 @@ position = Vector2(1504, -736)
 
 [node name="SPAWNPOINT" parent="." instance=ExtResource("36_w4qf6")]
 process_mode = 1
-position = Vector2(0, -688)
 
 [node name="RNG_DROPPER" type="Node" parent="."]
 script = ExtResource("38_f8yhx")

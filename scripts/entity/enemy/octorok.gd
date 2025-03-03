@@ -14,7 +14,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	super(delta)
 	current_shoot_time -= delta
-	if(current_shoot_time <= 0):
+	if(current_shoot_time <= 0 and can_move()):
 		shoot_projectile()
 		current_shoot_time = randf_range(random_shoot_time_range.x, random_shoot_time_range.y)
 
@@ -22,11 +22,6 @@ func should_move() -> bool:
 	if(!is_moving and !is_shooting):
 		return true
 	return false
-
-func can_move() -> bool:
-	if is_shooting or GameSettings.camera_is_moving or !can_process():
-		return false
-	return true
 		
 func shoot_projectile() -> void:
 	is_shooting = true

@@ -62,7 +62,6 @@ func speed_control() -> void:
 		
 		await get_tree().process_frame
 
-
 func move() -> void:
 	while true:
 		await move_to_direction(current_direction)
@@ -89,6 +88,9 @@ func move_to_direction(target_direction : Vector2) -> void:
 	
 		# move to position
 	while (global_position.distance_to(target_position) > 1):
+		if(!can_move()):
+			await get_tree().process_frame
+			continue
 		var move_distance = move_speed * current_slowdown_value * get_process_delta_time()  # Distance to move this frame
 		global_position = global_position.move_toward(target_position, move_distance)  # Move at constant speed
 		await get_tree().process_frame

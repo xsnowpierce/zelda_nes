@@ -10,20 +10,24 @@ region = Rect2(164, 59, 16, 16)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gl1ms"]
 size = Vector2(15, 15)
 
-[node name="Blade Trap" type="Node2D" groups=["Enemy"]]
+[node name="Blade Trap" type="Area2D" groups=["Enemy"]]
+collision_layer = 8
+collision_mask = 4
 script = ExtResource("1_bfsjh")
-raycast_layer = 4
 move_towards_speed = 110.0
 move_backwards_speed = 30.0
+max_health = 9999
+attacked_iframes = 9999
+collision_layers_bitmask = 4
 
 [node name="Sprite2D" type="Sprite2D" parent="." groups=["Enemy"]]
 texture = SubResource("AtlasTexture_3a4c2")
 centered = false
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["Enemy"]]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_gl1ms")
+
 [node name="Hitbox" type="Area2D" parent="." groups=["Enemy"]]
 collision_layer = 8
 collision_mask = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" groups=["Enemy"]]
-position = Vector2(8, 8)
-shape = SubResource("RectangleShape2D_gl1ms")
