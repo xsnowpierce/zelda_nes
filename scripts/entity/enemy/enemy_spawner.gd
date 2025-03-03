@@ -76,7 +76,7 @@ func _on_sprite_2d_animation_looped() -> void:
 				enemy_scene = game_data.enemy_gel_scene.instantiate()
 			ENUM.ENEMY_TYPE.BLADE_TRAP:
 				enemy_scene = game_data.enemy_blade_trap_scene.instantiate()
-				enemy_scene.blade_trap_settings = blade_trap_settings
+				enemy_scene.load_blade_trap_settings(blade_trap_settings)
 			ENUM.ENEMY_TYPE.GORIYA:
 				enemy_scene = game_data.enemy_goriya_scene.instantiate()
 			_:
@@ -84,16 +84,12 @@ func _on_sprite_2d_animation_looped() -> void:
 				$Sprite2D.stop()
 				return
 				
-		if(enemy_type != ENUM.ENEMY_TYPE.BLADE_TRAP):
-			get_parent().add_child(enemy_scene)
-			enemy_scene.enemy_type = enemy_type
-			if(is_instance_valid(key_scene)):
-				remove_child(key_scene)
-				enemy_scene.add_child(key_scene)
-			enemy_scene.connect("has_died", Callable(self, "spawned_enemy_has_died"))
-		else:
-			get_parent().get_parent().get_entities().add_child(enemy_scene)
-			enemy_scene.awake()
+		get_parent().add_child(enemy_scene)
+		enemy_scene.enemy_type = enemy_type
+		if(is_instance_valid(key_scene)):
+			remove_child(key_scene)
+			enemy_scene.add_child(key_scene)
+		enemy_scene.connect("has_died", Callable(self, "spawned_enemy_has_died"))
 		enemy_scene.global_position = global_position
 		$Sprite2D.stop()
 

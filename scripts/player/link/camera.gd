@@ -8,6 +8,7 @@ signal camera_start_moving(new_area_position : Vector2)
 
 func _ready() -> void:
 	await get_tree().process_frame
+	await get_tree().physics_frame
 	camera_moved.emit(Vector2i(roundi(position.x / GameSettings.map_screen_size.x), roundi(position.y / GameSettings.map_screen_size.y)))
 
 func _on_link_call_new_screen(direction: Vector2) -> void:

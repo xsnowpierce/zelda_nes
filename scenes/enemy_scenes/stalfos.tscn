@@ -34,6 +34,7 @@ collision_mask = 20
 script = ExtResource("1_cq3k4")
 move_speed = 32.0
 rotate_sprite = false
+enemy_type = 34
 collision_layers_bitmask = 4099
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

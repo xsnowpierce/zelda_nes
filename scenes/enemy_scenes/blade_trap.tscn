@@ -16,6 +16,7 @@ collision_mask = 4
 script = ExtResource("1_bfsjh")
 move_towards_speed = 110.0
 move_backwards_speed = 30.0
+enemy_type = 49
 max_health = 9999
 attacked_iframes = 9999
 collision_layers_bitmask = 4
@@ -28,6 +29,4 @@ centered = false
 position = Vector2(8, 8)
 shape = SubResource("RectangleShape2D_gl1ms")
 
-[node name="Hitbox" type="Area2D" parent="." groups=["Enemy"]]
-collision_layer = 8
-collision_mask = 4
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

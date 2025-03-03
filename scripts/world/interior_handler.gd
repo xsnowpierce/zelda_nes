@@ -85,7 +85,7 @@ func handle_interior(data : InteriorData) -> void:
 					var item_object := key_item_scene.instantiate()
 					item_object.item_type = data.item_to_give
 					add_child(item_object)
-					item_object.global_position = $room_centre.global_position
+					item_object.global_position = $room_centre.global_position - Vector2(8, 8)
 					item_object.connect("item_picked_up", Callable(self, "key_item_picked_up"))
 					item_objects.append(item_object)
 			data.INTERIOR_TYPE.SHOP:

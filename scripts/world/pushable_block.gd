@@ -5,6 +5,7 @@ var starting_position : Vector2
 @export var move_speed : float = 25
 var is_moving : bool
 @export var move_times : int = -1
+var current_move_times : int
 
 @export_group("Push Restrictions")
 @export var restrict_upwards_push : bool
@@ -15,11 +16,12 @@ signal was_pushed
 
 func _ready() -> void:
 	super()
+	current_move_times = move_times
 	starting_position = global_position
 	$Sprite2D.texture = texture
 
 func block_interact(interacted_from_direction : Vector2) -> void:
-	if(is_moving or move_times == 0):
+	if(is_moving or current_move_times == 0):
 		return
 	if(is_push_restricted(-interacted_from_direction)):
 		return
@@ -35,7 +37,7 @@ func block_interact(interacted_from_direction : Vector2) -> void:
 		global_position = global_position.move_toward(target_position, move_distance)  # Move at constant speed
 		await get_tree().process_frame
 	global_position = target_position
-	move_times -= 1
+	current_move_times -= 1
 	is_moving = false
 	was_pushed.emit()
 
@@ -62,4 +64,5 @@ func can_move() -> bool:
 
 func sleep() -> void:
 	super()
+	current_move_times = move_times
 	global_position = starting_position

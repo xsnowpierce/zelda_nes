@@ -16,6 +16,7 @@ var is_inside_room : bool
 var is_placing_item : bool
 var is_shooting_magical_wand : bool
 var is_entering_new_tile : bool
+var ignore_force_tile_walks : bool
 
 func initialize(parent : CharacterBody2D) -> void:
 	player = parent

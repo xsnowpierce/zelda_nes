@@ -20,7 +20,6 @@ func _ready() -> void:
 	$"Link Sprite Mask/Link Sprite".connect("cast_magical_wand", Callable(self, "cast_magical_wand_beam"))
 	$"Link Sprite Mask/Link Sprite".connect("magical_wand_cast_ended", Callable(self, "magical_wand_cast_ended"))
 	
-
 func _process(delta: float) -> void:
 	$LinkCombat.process(delta)
 	$LinkMovement.process(delta)
@@ -42,7 +41,7 @@ func attacked(from : Vector2, attack_block_level : ENUM.BLOCK_ATTACK_LEVEL = ENU
 func get_sprite_mask() -> Control:
 	return $"Link Sprite Mask"
 
-func get_sprite() -> AnimatedSprite2D:
+func get_sprite() -> LinkSprite:
 	return $"Link Sprite Mask/Link Sprite"
 
 func get_link_interact() -> Node:

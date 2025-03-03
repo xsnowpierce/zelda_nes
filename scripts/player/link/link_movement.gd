@@ -117,7 +117,11 @@ func check_for_new_screen() -> Vector2:
 	return Vector2.ZERO
 
 func force_player_walk() -> void:
-	var target_direction : Vector2 = (player.camera.global_position - player.global_position).normalized()
+	if(player.get_player_state().ignore_force_tile_walks):
+		player.get_player_state().ignore_force_tile_walks = false
+		player.force_walk_completed.emit()
+		return
+	var target_direction : Vector2 = player.get_sprite().current_direction
 	target_direction.x = roundi(target_direction.x)
 	target_direction.y = roundi(target_direction.y)
 	var target_position : Vector2 = player.global_position + (target_direction * (force_walk_tile_distance * 16))

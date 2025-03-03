@@ -165,10 +165,12 @@ script = ExtResource("1_ylan4")
 distance_required = 0.4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(8, 8)
 shape = SubResource("RectangleShape2D_12xxi")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 process_mode = 1
+position = Vector2(8, 8)
 sprite_frames = SubResource("SpriteFrames_ndhod")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

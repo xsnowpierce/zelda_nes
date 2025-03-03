@@ -107,7 +107,7 @@ func apply_debug_key_item_list() -> void:
 
 var current_area : Node2D
 var camera : Camera2D
-var link : CharacterBody2D
+var link : LinkController
 @export_group("")
 @export var current_equipped_item_a : ENUM.KEY_ITEM_TYPE = ENUM.KEY_ITEM_TYPE.NULL
 @export var current_equipped_item_b : ENUM.KEY_ITEM_TYPE = ENUM.KEY_ITEM_TYPE.NULL
@@ -227,11 +227,18 @@ func player_finish_enter_door(door : Area2D) -> void:
 		$MusicPlayer.stream = hyrule_music
 		$MusicPlayer.play(0.0)
 	elif(door is DungeonEntrance):
+		if(door is DungeonRoomEntrance):
+			$DUNGEON_KEY_ROOM.room_entered(door.dungeon_key_room_settings)
+		else:
+			link.get_player_state().ignore_force_tile_walks = true
+			door.entrance_used.emit()
 		is_inside_dungeon = true
 		link.global_position = door.link_moveto_position
+		link.get_sprite().current_direction = Vector2.DOWN
 		camera.set_camera_tile(door.camera_moveto_position)
-		$MusicPlayer.stream = dungeon_music
-		$MusicPlayer.play(0.0)
+		if(!($MusicPlayer.stream == dungeon_music and $MusicPlayer.playing)):
+			$MusicPlayer.stream = dungeon_music
+			$MusicPlayer.play(0.0)
 
 func player_pickup_key_item(item_type : ENUM.KEY_ITEM_TYPE) -> void:
 	match item_type:

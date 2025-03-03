@@ -58,7 +58,7 @@ func attacked(from : Vector2, attack_block_level : ENUM.BLOCK_ATTACK_LEVEL = ENU
 	player.get_sprite().hit_effect()
 	play_attacked_sound.emit()
 	player.game_data.player_took_damage(1)
-	var knockback_direction : Vector2 = (Vector2(player.global_position.x, player.global_position.y) - Vector2(from.x - 8, from.y - 8))
+	var knockback_direction : Vector2 = get_knockback_direction(from)
 	if(abs(knockback_direction.x) > abs(knockback_direction.y)):
 		knockback_direction.y = 0
 		if(knockback_direction.x > 0):
@@ -80,6 +80,18 @@ func attacked(from : Vector2, attack_block_level : ENUM.BLOCK_ATTACK_LEVEL = ENU
 		await get_tree().process_frame
 	
 	player.get_player_state().is_attacked_knockback = false
+
+func get_knockback_direction(from : Vector2) -> Vector2:
+	var link_centre = player.global_position + Vector2(8, 8)
+	var hit_centre = from + Vector2(8, 8)
+	var hit_direction = (hit_centre - link_centre).normalized()
+	
+	var link_facing_degrees = rad_to_deg(player.get_look_direction().angle())
+	
+	var angle_rad : float = player.global_position.angle_to_point(hit_centre)
+	var direction : Vector2 = Vector2(cos(angle_rad), sin(angle_rad)).normalized()
+	return -direction
+	
 
 func try_block_attack(from: Vector2, block_level: ENUM.BLOCK_ATTACK_LEVEL = ENUM.BLOCK_ATTACK_LEVEL.IMPOSSIBLE) -> bool:
 	if block_level == ENUM.BLOCK_ATTACK_LEVEL.IMPOSSIBLE:

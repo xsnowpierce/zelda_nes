@@ -1,16 +1,28 @@
 extends Area2D
 
-var link : Node2D
+var link : LinkController
 var link_is_colliding : bool
 @export var distance_required : float
 @export var item_type : ENUM.KEY_ITEM_TYPE
 signal item_picked_up
+var relative_camera_position : Vector2
 
 func _ready() -> void:
 	link = get_tree().get_first_node_in_group("Player")
+	
 	$AnimatedSprite2D.frame = get_animation_frame_from_item_type(item_type)
 
+func set_item_value(value : ENUM.KEY_ITEM_TYPE) -> void:
+	item_type = value
+	$AnimatedSprite2D.frame = get_animation_frame_from_item_type(value)
+
 func _on_area_entered(area: Area2D) -> void:
+	var camera : Camera2D = get_tree().get_first_node_in_group("Camera")
+	var collider_centre = $CollisionShape2D.global_position
+	collider_centre -= camera.global_position
+	collider_centre.x /= 16
+	collider_centre.y /= 11
+	relative_camera_position = Vector2(floori(collider_centre.x), floori(collider_centre.y))
 	link_is_colliding = true
 
 func _on_area_exited(area: Area2D) -> void:
@@ -18,13 +30,11 @@ func _on_area_exited(area: Area2D) -> void:
 
 func _process(delta: float) -> void:
 	if(link_is_colliding):
-		var distance = global_position.distance_to(link.global_position)
-		if(distance <= distance_required):
+		if(link.get_player_camera_relative_tile_position() == relative_camera_position):
 			link.get_link_interact().picked_up_key_item(item_type)
 			item_picked_up.emit()
 			get_tree().get_first_node_in_group("GameData").add_player_flag(get_obtain_player_flag_from_item_type(item_type))
 			queue_free()
-
 func get_animation_frame_from_item_type(get_item_type : ENUM.KEY_ITEM_TYPE) -> int:
 	match get_item_type:
 		ENUM.KEY_ITEM_TYPE.WOODEN_BOOMERANG:

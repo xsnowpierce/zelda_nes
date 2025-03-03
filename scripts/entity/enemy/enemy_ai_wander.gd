@@ -59,25 +59,6 @@ func check_if_move_is_valid(target_direction : Vector2) -> bool:
 	
 	return result.size() == 0
 
-func old_check_if_move_is_valid(target_direction : Vector2) -> bool:
-	if(Utils.is_out_of_bounds(get_target_position_from_direction(target_direction), camera, true)):
-		return false
-	
-	match target_direction:
-		Vector2.UP:
-			if($TopCollider.collider_count == 0):
-				return true
-		Vector2.DOWN:
-			if($BottomCollider.collider_count == 0):
-				return true
-		Vector2.LEFT:
-			if($LeftCollider.collider_count == 0):
-				return true
-		Vector2.RIGHT:
-			if($RightCollider.collider_count == 0):
-				return true
-	return false
-
 func get_target_position_from_direction(target_direction : Vector2) -> Vector2:
 	var target_position = (target_direction * 16) + global_position
 	target_position = Utils.align_to_grid(target_position)
@@ -104,18 +85,17 @@ func moved_a_tile() -> void:
 	pass
 
 func rotate_enemy(direction : Vector2):
-	if(!rotate_sprite):
-		return
-	match direction:
-		Vector2.UP:
-			$AnimatedSprite2D.play("up")
-		Vector2.DOWN:
-			$AnimatedSprite2D.play("down")
-		Vector2.LEFT:
-			$AnimatedSprite2D.play("left")
-		Vector2.RIGHT:
-			$AnimatedSprite2D.play("right")
 	current_forward_vector = direction
+	if(rotate_sprite):
+		match direction:
+			Vector2.UP:
+				$AnimatedSprite2D.play("up")
+			Vector2.DOWN:
+				$AnimatedSprite2D.play("down")
+			Vector2.LEFT:
+				$AnimatedSprite2D.play("left")
+			Vector2.RIGHT:
+				$AnimatedSprite2D.play("right")
 
 func get_rotate_direction() -> Vector2:
 	var link_in_view = is_link_in_view()

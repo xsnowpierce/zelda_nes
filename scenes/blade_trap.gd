@@ -4,13 +4,17 @@ var raycast_offset : Vector2 = Vector2(8, 8)
 @export var move_towards_speed : float
 @export var move_backwards_speed : float
 @export var blade_trap_settings : BladeTrapSettings
-
+var starting_position : Vector2
 var is_moving : bool
+
+func _ready() -> void:
+	super()
+	starting_position = global_position
 
 func load_blade_trap_settings(settings : BladeTrapSettings) -> void:
 	blade_trap_settings = settings
 
-func physics_update() -> void:
+func _physics_process(delta: float) -> void:
 	if(!is_moving):
 		if(blade_trap_settings.max_tiles_up != 0):
 			check_for_link(Vector2.UP)
@@ -33,7 +37,6 @@ func check_for_link(direction : Vector2) -> void:
 
 func move(direction : Vector2) -> void:
 	is_moving = true
-	var starting_position = global_position
 	var target_position = starting_position + ((direction * 16) * get_max_tiles_from_direction(direction))
 	await move_to_position(target_position, move_towards_speed)
 	await move_to_position(starting_position, move_backwards_speed)
