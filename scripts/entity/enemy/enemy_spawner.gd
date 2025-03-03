@@ -2,7 +2,7 @@ extends Entity
 
 class_name EnemySpawner
 
-var game_data : Node
+var game_data : GameData
 var enemy_type : ENUM.ENEMY_TYPE
 var enemy_scene
 var should_cloud_be_visible : bool
@@ -77,6 +77,8 @@ func _on_sprite_2d_animation_looped() -> void:
 			ENUM.ENEMY_TYPE.BLADE_TRAP:
 				enemy_scene = game_data.enemy_blade_trap_scene.instantiate()
 				enemy_scene.blade_trap_settings = blade_trap_settings
+			ENUM.ENEMY_TYPE.GORIYA:
+				enemy_scene = game_data.enemy_goriya_scene.instantiate()
 			_:
 				printerr("Tried to spawn enemy that does not have a set scene in GameData. (", str(enemy_type), ", ", ENUM.ENEMY_TYPE.keys()[enemy_type] ,")")
 				$Sprite2D.stop()

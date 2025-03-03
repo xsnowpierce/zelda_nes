@@ -4,6 +4,7 @@ extends CanvasLayer
 var camera
 
 func _ready() -> void:
+	visible = true
 	camera = get_tree().get_first_node_in_group("Camera")
 
 func _on_game_pause_menu_opened() -> void:

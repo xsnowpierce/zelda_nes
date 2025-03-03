@@ -7,6 +7,7 @@ var camera : Camera2D
 
 signal played_flute
 signal force_walk_completed
+signal food_placed(place_location : Vector2)
 
 func _ready() -> void:
 	game_data = get_tree().get_first_node_in_group("GameData")

@@ -1,0 +1,112 @@
+[gd_scene load_steps=14 format=3 uid="uid://pg2i4cov640g"]
+
+[ext_resource type="Script" path="res://scenes/goriya.gd" id="1_eiea5"]
+[ext_resource type="PackedScene" uid="uid://upi1e06ex0tj" path="res://scenes/goriya_boomerang.tscn" id="2_tq6hb"]
+[ext_resource type="Texture2D" uid="uid://bwgbbitwmdbm0" path="res://images/dungeon_enemies.png" id="3_cmuq1"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dh51p"]
+radius = 7.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5prt8"]
+atlas = ExtResource("3_cmuq1")
+region = Rect2(448, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0jfcf"]
+atlas = ExtResource("3_cmuq1")
+region = Rect2(464, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n12fs"]
+atlas = ExtResource("3_cmuq1")
+region = Rect2(560, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xygpa"]
+atlas = ExtResource("3_cmuq1")
+region = Rect2(544, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xdgj0"]
+atlas = ExtResource("3_cmuq1")
+region = Rect2(512, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3kfwf"]
+atlas = ExtResource("3_cmuq1")
+region = Rect2(528, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ksmr5"]
+atlas = ExtResource("3_cmuq1")
+region = Rect2(480, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xjeew"]
+atlas = ExtResource("3_cmuq1")
+region = Rect2(496, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_epifl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5prt8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0jfcf")
+}],
+"loop": true,
+"name": &"down",
+"speed": 9.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n12fs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xygpa")
+}],
+"loop": true,
+"name": &"left",
+"speed": 9.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xdgj0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3kfwf")
+}],
+"loop": true,
+"name": &"right",
+"speed": 9.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ksmr5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xjeew")
+}],
+"loop": true,
+"name": &"up",
+"speed": 9.0
+}]
+
+[node name="Goriya" type="Area2D" groups=["Enemy"]]
+collision_layer = 8
+collision_mask = 20
+script = ExtResource("1_eiea5")
+boomerang_scene = ExtResource("2_tq6hb")
+random_shoot_time_range = Vector2(3, 7)
+shoot_delay_time = 0.0
+post_shoot_delay_move_time = 0.0
+enemy_type = 22
+collision_layers_bitmask = 4099
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(8, 8)
+shape = SubResource("CircleShape2D_dh51p")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_epifl")
+animation = &"right"
+autoplay = "down"
+frame_progress = 0.922816
+centered = false
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

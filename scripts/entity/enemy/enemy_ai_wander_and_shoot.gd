@@ -1,9 +1,14 @@
 extends EnemyAI_Wander
 
+class_name EnemyAI_Wander_And_Shoot
+
+## The range of delay inbetween shooting again.
 @export var random_shoot_time_range : Vector2 = Vector2(1.5,2.5)
+## The time to wait before projectile is spawned after stopping.
 @export var shoot_delay_time : float = 0.3
+## The time to sit still and wait before walking again after firing.
 @export var post_shoot_delay_move_time : float = 0.1
-var projectile_scene : PackedScene = load("res://scenes/octorok_rock.tscn")
+@export var projectile_scene : PackedScene = load("res://scenes/octorok_rock.tscn")
 var current_shoot_time : float
 var is_shooting : bool = false
 

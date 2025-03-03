@@ -57,6 +57,7 @@ Player_Fire=""
 Ground=""
 LinkForceWalk="A tile that will force link to walk a distance."
 Player_Boomerang=""
+Enemy_Boomerang=""
 
 [gui]
 
@@ -129,6 +130,7 @@ pause_game={
 2d_physics/layer_11="Burnable Tile"
 2d_physics/layer_12="Link Force Walk Tile"
 2d_physics/layer_13="Collider with Ladder Bypass"
+2d_physics/layer_14="Enemy_Boomeran"
 
 [rendering]
 

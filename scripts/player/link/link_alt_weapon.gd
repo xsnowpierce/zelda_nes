@@ -1,6 +1,6 @@
 extends Node
 
-var player : CharacterBody2D
+var player : LinkController
 
 var spawn_projectile_distance : float = 1
 @export_group("Scenes")
@@ -9,11 +9,13 @@ var spawn_projectile_distance : float = 1
 @export var magical_wand_scene : PackedScene = preload("res://scenes/magical_wand_beam.tscn")
 @export var wooden_arrow_scene : PackedScene = preload("res://scenes/wooden_arrow.tscn")
 @export var boomerang_scene : PackedScene = preload("res://scenes/boomerang.tscn")
+@export var food_item_scene : PackedScene = preload("res://scenes/food.tscn")
 var current_projectile
+var current_food
 @export_group("")
 @export var whistle_pause_time : float = 2.7
 
-func initialize(parent : CharacterBody2D) -> void:
+func initialize(parent : LinkController) -> void:
 	player = parent
 
 func process(delta: float) -> void:
@@ -67,10 +69,12 @@ func use_alternate_weapon(item : ENUM.KEY_ITEM_TYPE) -> void:
 		ENUM.KEY_ITEM_TYPE.WOODEN_BOOMERANG:
 			if(is_instance_valid(current_projectile)):
 				return
+			if(is_instance_valid(current_food)):
+				current_food.queue_free()
 			var boomerang = boomerang_scene.instantiate()
 			boomerang.global_position = (player.global_position) + (player.get_look_direction() * (spawn_projectile_distance * 16))
 			player.game_data.add_child(boomerang)
-			boomerang.initialize_boomerang(Boomerang.BOOMERANG_TYPE.WOODEN, player.get_look_direction(), player.camera, player)
+			boomerang.initialize_boomerang(Boomerang.BOOMERANG_TYPE.WOODEN, player.get_look_direction(), player.camera, player, false)
 			current_projectile = boomerang
 			boomerang.connect("boomerang_picked_up", Callable(self, "boomerang_pickup"))
 			player.use_item_animation()
@@ -80,9 +84,18 @@ func use_alternate_weapon(item : ENUM.KEY_ITEM_TYPE) -> void:
 			var boomerang = boomerang_scene.instantiate()
 			boomerang.global_position = (player.global_position) + (player.get_look_direction() * (spawn_projectile_distance * 16))
 			player.game_data.add_child(boomerang)
-			boomerang.initialize_boomerang(Boomerang.BOOMERANG_TYPE.MAGICAL, player.get_look_direction(), player.camera, player)
+			boomerang.initialize_boomerang(Boomerang.BOOMERANG_TYPE.MAGICAL, player.get_look_direction(), player.camera, player, false)
 			current_projectile = boomerang
 			boomerang.connect("boomerang_picked_up", Callable(self, "boomerang_pickup"))
+			player.use_item_animation()
+		ENUM.KEY_ITEM_TYPE.FOOD:
+			if(is_instance_valid(current_food)):
+				return
+			var food = food_item_scene.instantiate()
+			food.global_position = (player.global_position) + (player.get_look_direction() * (spawn_projectile_distance * 16))
+			player.game_data.add_child(food)
+			current_food = food
+			player.food_placed.emit(food.global_position)
 			player.use_item_animation()
 
 func cast_magical_wand_beam() -> void:

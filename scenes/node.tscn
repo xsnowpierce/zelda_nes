@@ -1,4 +1,4 @@
-[gd_scene load_steps=312 format=4 uid="uid://bnrlmifgdjgsb"]
+[gd_scene load_steps=314 format=4 uid="uid://bnrlmifgdjgsb"]
 
 [ext_resource type="Script" path="res://scripts/utils/GameData.gd" id="1_fiv6q"]
 [ext_resource type="Script" path="res://scripts/player/link/camera.gd" id="1_xkdoo"]
@@ -60,6 +60,7 @@
 [ext_resource type="Script" path="res://scripts/world/tile_area_controller.gd" id="25_3a4rm"]
 [ext_resource type="Script" path="res://scripts/player/userinterface/ingame_ui_selected_item.gd" id="26_qlfam"]
 [ext_resource type="Script" path="res://scripts/world/hyrule_event_tile_001.gd" id="27_23nor"]
+[ext_resource type="AudioStream" uid="uid://bowr54o0tbbxf" path="res://sound/sfx/The Legend of Zelda Cartoon Sound Effects Magical Boomerang Thrown.wav" id="27_da6qm"]
 [ext_resource type="Script" path="res://scripts/world/hyrule_tile_area.gd" id="28_17esn"]
 [ext_resource type="Script" path="res://scripts/entity/enemy/enemy_spawn_group.gd" id="29_e8xa5"]
 [ext_resource type="Script" path="res://scripts/entity/enemy/enemy_spawn.gd" id="30_ynj6t"]
@@ -83,6 +84,7 @@
 [ext_resource type="PackedScene" uid="uid://dmoo6a5lybrpp" path="res://scenes/enemy_scenes/stalfos.tscn" id="77_k2d4n"]
 [ext_resource type="PackedScene" uid="uid://2h8i8o7wy52v" path="res://scenes/dropped_item.tscn" id="79_svs6j"]
 [ext_resource type="PackedScene" uid="uid://tnoirjgjg855" path="res://scenes/enemy_scenes/gel.tscn" id="81_j3o4g"]
+[ext_resource type="PackedScene" uid="uid://pg2i4cov640g" path="res://scenes/enemy_scenes/goriya.tscn" id="85_gkfa4"]
 
 [sub_resource type="AudioStreamWAV" id="AudioStreamWAV_3rr3c"]
 
@@ -2249,9 +2251,11 @@ enemy_keese_scene = ExtResource("8_lmv1c")
 enemy_stalfos_scene = ExtResource("77_k2d4n")
 enemy_gel_scene = ExtResource("81_j3o4g")
 enemy_blade_trap_scene = ExtResource("59_rlycn")
+enemy_goriya_scene = ExtResource("85_gkfa4")
 current_player_health = 6
 current_rupees = 20
 current_keys = 20
+has_food = true
 hyrule_music = ExtResource("2_7hpxk")
 dungeon_music = ExtResource("36_8um02")
 current_equipped_item_a = 1
@@ -2279,6 +2283,7 @@ magical_wand_shoot = ExtResource("18_ippjc")
 whistle_music = ExtResource("19_g4fo5")
 door_open_sfx = ExtResource("23_da0gk")
 key_appearance_sfx = ExtResource("24_5xv16")
+boomerang_loop_sfx = ExtResource("27_da6qm")
 
 [node name="Camera2D" type="Camera2D" parent="." groups=["Camera"]]
 process_mode = 3

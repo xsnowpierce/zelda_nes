@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://c1oxkxiu7tqck"]
+[gd_scene load_steps=14 format=3 uid="uid://c1oxkxiu7tqck"]
 
-[ext_resource type="Script" path="res://scripts/entity/enemy/octorok.gd" id="1_2nf78"]
+[ext_resource type="Script" path="res://scripts/entity/enemy/enemy_ai_wander_and_shoot.gd" id="1_2nf78"]
 [ext_resource type="Texture2D" uid="uid://7uv75ywip144" path="res://images/enemies.png" id="2_0jlal"]
+[ext_resource type="PackedScene" uid="uid://bbb88pavh34n6" path="res://scenes/octorok_rock.tscn" id="2_a0gjy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dh51p"]
 radius = 7.0
@@ -89,6 +90,7 @@ animations = [{
 collision_layer = 8
 collision_mask = 20
 script = ExtResource("1_2nf78")
+projectile_scene = ExtResource("2_a0gjy")
 enemy_type = 1
 collision_layers_bitmask = 4099
 
