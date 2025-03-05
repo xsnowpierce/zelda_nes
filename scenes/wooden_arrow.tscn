@@ -69,19 +69,17 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_spxj0"]
 size = Vector2(8, 8)
 
-[node name="Arrow" type="Node2D"]
+[node name="Arrow" type="Area2D" groups=["Player_Attack"]]
 texture_filter = 1
+collision_layer = 16
+collision_mask = 8
 script = ExtResource("1_njy5f")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_nhvgv")
 animation = &"hit"
 
-[node name="Area2D" type="Area2D" parent="." groups=["Player_Attack"]]
-collision_layer = 16
-collision_mask = 8
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_spxj0")
 
-[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

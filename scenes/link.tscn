@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://scripts/player/link/link_attack_area.gd" id="4_piqjp"]
 [ext_resource type="Script" path="res://scripts/player/link/link_sound_player.gd" id="5_bwarm"]
 [ext_resource type="Script" path="res://scripts/player/link/link_movement.gd" id="5_excs0"]
-[ext_resource type="Script" path="res://scripts/player/link/link_sprite_hit_colour.gd" id="5_tr0rj"]
+[ext_resource type="Script" path="res://scripts/player/link/sprite_hit_colour.gd" id="5_tr0rj"]
 [ext_resource type="Script" path="res://scripts/player/link/link_combat.gd" id="6_2h8fc"]
 [ext_resource type="Script" path="res://scripts/player/link/link_interact.gd" id="7_2vkl0"]
 [ext_resource type="Script" path="res://scripts/player/link/link_state.gd" id="8_ryf5n"]
@@ -425,39 +425,45 @@ animations = [{
 
 [sub_resource type="Resource" id="Resource_qwuou"]
 script = ExtResource("5_tr0rj")
-tunic_colour = Color(0.501961, 0.815686, 0.0627451, 1)
-skin_colour = Color(0.988235, 0.596078, 0.219608, 1)
-hair_colour = Color(0.784314, 0.298039, 0.0470588, 1)
+new_colour_01 = Color(0.501961, 0.815686, 0.0627451, 1)
+new_colour_02 = Color(0.784314, 0.298039, 0.0470588, 1)
+new_colour_03 = Color(0.988235, 0.596078, 0.219608, 1)
+new_colour_04 = Color(0, 0, 0, 0)
 
 [sub_resource type="Resource" id="Resource_i6fwv"]
 script = ExtResource("5_tr0rj")
-tunic_colour = Color(0.847059, 0.156863, 0, 1)
-skin_colour = Color(0.988235, 0.596078, 0.219608, 1)
-hair_colour = Color(0.784314, 0.298039, 0.0470588, 1)
+new_colour_01 = Color(0.847059, 0.156863, 0, 1)
+new_colour_02 = Color(0.784314, 0.298039, 0.0470588, 1)
+new_colour_03 = Color(0.988235, 0.596078, 0.219608, 1)
+new_colour_04 = Color(0, 0, 0, 0)
 
 [sub_resource type="Resource" id="Resource_xbqt8"]
 script = ExtResource("5_tr0rj")
-tunic_colour = Color(0.768627, 0.831373, 0.988235, 1)
-skin_colour = Color(0.988235, 0.596078, 0.219608, 1)
-hair_colour = Color(0.784314, 0.298039, 0.0470588, 1)
+new_colour_01 = Color(0.768627, 0.831373, 0.988235, 1)
+new_colour_02 = Color(0.784314, 0.298039, 0.0470588, 1)
+new_colour_03 = Color(0.988235, 0.596078, 0.219608, 1)
+new_colour_04 = Color(0, 0, 0, 0)
 
 [sub_resource type="Resource" id="Resource_4sj7v"]
 script = ExtResource("5_tr0rj")
-tunic_colour = Color(0, 0, 0, 1)
-skin_colour = Color(0, 0.501961, 0.533333, 1)
-hair_colour = Color(0.847059, 0.156863, 0, 1)
+new_colour_01 = Color(0, 0, 0, 1)
+new_colour_02 = Color(0.847059, 0.156863, 0, 1)
+new_colour_03 = Color(0, 0.501961, 0.533333, 1)
+new_colour_04 = Color(0, 0, 0, 0)
 
 [sub_resource type="Resource" id="Resource_65npy"]
 script = ExtResource("5_tr0rj")
-tunic_colour = Color(0.847059, 0.156863, 0, 1)
-skin_colour = Color(0.988235, 0.596078, 0.219608, 1)
-hair_colour = Color(0.988235, 0.988235, 0.988235, 1)
+new_colour_01 = Color(0.847059, 0.156863, 0, 1)
+new_colour_02 = Color(0.988235, 0.988235, 0.988235, 1)
+new_colour_03 = Color(0.988235, 0.596078, 0.219608, 1)
+new_colour_04 = Color(0, 0, 0, 0)
 
 [sub_resource type="Resource" id="Resource_2y08c"]
 script = ExtResource("5_tr0rj")
-tunic_colour = Color(0, 0, 0.658824, 1)
-skin_colour = Color(0.360784, 0.580392, 0.988235, 1)
-hair_colour = Color(0.988235, 0.988235, 0.988235, 1)
+new_colour_01 = Color(0, 0, 0.658824, 1)
+new_colour_02 = Color(0.988235, 0.988235, 0.988235, 1)
+new_colour_03 = Color(0.360784, 0.580392, 0.988235, 1)
+new_colour_04 = Color(0, 0, 0, 0)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g0xjw"]
 size = Vector2(16, 16)
@@ -560,6 +566,7 @@ one_way_collision_margin = 0.0
 [connection signal="attack_ended" from="Link Sprite Mask/Link Sprite" to="Attack Area" method="_on_link_sprite_attack_ended"]
 [connection signal="attack_ended" from="Link Sprite Mask/Link Sprite" to="LinkCombat" method="_on_animated_sprite_2d_attack_ended"]
 [connection signal="area_entered" from="Link Hitbox" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_entered" from="Link Hitbox" to="LinkCombat" method="_on_link_hitbox_area_entered"]
 [connection signal="area_entered" from="Link Hitbox" to="LinkInteract" method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Link Hitbox" to="." method="_on_area_2d_area_exited"]
 [connection signal="area_exited" from="Link Hitbox" to="." method="_on_link_hitbox_area_exited"]

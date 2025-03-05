@@ -11,9 +11,9 @@ func _ready() -> void:
 	super()
 
 func can_move() -> bool:
-	if GameSettings.camera_is_moving or !can_process() or is_boomerang_frozen or is_instance_valid(spawned_boomerang):
+	if is_instance_valid(spawned_boomerang):
 		return false
-	return true
+	return super()
 
 func spawn_projectile() -> void:
 	if(is_instance_valid(spawned_boomerang)):

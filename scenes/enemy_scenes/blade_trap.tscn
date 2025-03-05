@@ -3,23 +3,32 @@
 [ext_resource type="Script" path="res://scenes/blade_trap.gd" id="1_bfsjh"]
 [ext_resource type="Texture2D" uid="uid://bwgbbitwmdbm0" path="res://images/dungeon_enemies.png" id="2_mq5oo"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gl1ms"]
+size = Vector2(15, 15)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_3a4c2"]
 atlas = ExtResource("2_mq5oo")
 region = Rect2(164, 59, 16, 16)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_gl1ms"]
-size = Vector2(15, 15)
-
-[node name="Blade Trap" type="Area2D" groups=["Enemy"]]
+[node name="Blade Trap" type="CharacterBody2D" groups=["Enemy"]]
 collision_layer = 8
-collision_mask = 4
+collision_mask = 4099
 script = ExtResource("1_bfsjh")
 move_towards_speed = 110.0
 move_backwards_speed = 30.0
 enemy_type = 49
 max_health = 9999
 attacked_iframes = 9999
+attack_contact_damage = 2
 collision_layers_bitmask = 4
+
+[node name="Area2D" type="Area2D" parent="." groups=["Enemy"]]
+collision_layer = 8
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" groups=["Enemy"]]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_gl1ms")
 
 [node name="Sprite2D" type="Sprite2D" parent="." groups=["Enemy"]]
 texture = SubResource("AtlasTexture_3a4c2")
@@ -29,4 +38,4 @@ centered = false
 position = Vector2(8, 8)
 shape = SubResource("RectangleShape2D_gl1ms")
 
-[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_entered"]

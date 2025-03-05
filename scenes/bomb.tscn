@@ -1,9 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://f6eh8j2v5ntc"]
+[gd_scene load_steps=11 format=3 uid="uid://f6eh8j2v5ntc"]
 
 [ext_resource type="Script" path="res://scripts/player/item/bomb.gd" id="1_qfobf"]
 [ext_resource type="Texture2D" uid="uid://s0p3ioiqty7b" path="res://images/items_and_weapons.png" id="2_yj0mx"]
 [ext_resource type="Texture2D" uid="uid://u1i1trqicn2k" path="res://images/weapons.png" id="3_4ihp4"]
-[ext_resource type="AudioStream" uid="uid://bvbakpgvqxoua" path="res://sound/sfx/The Legend of Zelda Cartoon Sound Effects Bomb Apearance and Selfdrestruction.wav" id="4_y6pam"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ocqox"]
 atlas = ExtResource("2_yj0mx")
@@ -180,30 +179,6 @@ tracks/11/keys = {
 "update": 1,
 "values": [true]
 }
-tracks/12/type = "value"
-tracks/12/imported = false
-tracks/12/enabled = true
-tracks/12/path = NodePath("Bomb Hitbox:monitorable")
-tracks/12/interp = 1
-tracks/12/loop_wrap = true
-tracks/12/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/13/type = "value"
-tracks/13/imported = false
-tracks/13/enabled = true
-tracks/13/path = NodePath("Bomb Hitbox:monitoring")
-tracks/13/interp = 1
-tracks/13/loop_wrap = true
-tracks/13/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
 
 [sub_resource type="Animation" id="Animation_fgmxs"]
 resource_name = "bomb_explode"
@@ -352,30 +327,6 @@ tracks/11/keys = {
 "update": 0,
 "values": [Vector2(7, -13), Vector2(-7, -13), Vector2(7, -13), Vector2(-7, -13), Vector2(7, -13), Vector2(-7, -13), Vector2(7, -13), Vector2(-7, -13), Vector2(7, -13), Vector2(-7, -13), Vector2(7, -13), Vector2(-7, -13), Vector2(7, -13), Vector2(-7, -13), Vector2(7, -13), Vector2(-7, -13), Vector2(7, -13), Vector2(-7, -13), Vector2(7, -13), Vector2(-7, -13), Vector2(7, -13), Vector2(-7, -13), Vector2(7, -13), Vector2(-7, -13), Vector2(7, -13), Vector2(-7, -13), Vector2(7, -13), Vector2(-7, -13), Vector2(7, -13), Vector2(-7, -13), Vector2(7, -13), Vector2(-7, -13), Vector2(7, -13), Vector2(-7, -13), Vector2(7, -13), Vector2(-7, -13), Vector2(7, -13), Vector2(-7, -13), Vector2(7, -13), Vector2(-7, -13), Vector2(-7, -13)]
 }
-tracks/12/type = "value"
-tracks/12/imported = false
-tracks/12/enabled = true
-tracks/12/path = NodePath("Bomb Hitbox:monitorable")
-tracks/12/interp = 1
-tracks/12/loop_wrap = true
-tracks/12/keys = {
-"times": PackedFloat32Array(0, 0.75),
-"transitions": PackedFloat32Array(0, 0),
-"update": 1,
-"values": [true, false]
-}
-tracks/13/type = "value"
-tracks/13/imported = false
-tracks/13/enabled = true
-tracks/13/path = NodePath("Bomb Hitbox:monitoring")
-tracks/13/interp = 1
-tracks/13/loop_wrap = true
-tracks/13/keys = {
-"times": PackedFloat32Array(0, 0.75),
-"transitions": PackedFloat32Array(0, 0),
-"update": 1,
-"values": [true, false]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3mt45"]
 _data = {
@@ -383,9 +334,16 @@ _data = {
 "bomb_explode": SubResource("Animation_fgmxs")
 }
 
-[node name="Bomb" type="Node2D"]
+[node name="Bomb" type="Area2D" groups=["Player_Attack", "Player_Bomb"]]
+collision_layer = 16
+collision_mask = 520
+monitoring = false
+monitorable = false
 script = ExtResource("1_qfobf")
-explosion_wait_time = 1.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(23, -13, -7, -13, -7, 0, -13, 0, -13, 16, -7, 16, -7, 30, 23, 30, 23, 16, 29, 16, 29, 0, 23, 0)
+disabled = true
 
 [node name="Bomb Sprite" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -394,50 +352,31 @@ centered = false
 offset = Vector2(4, 0)
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
-visible = false
 texture_filter = 1
-position = Vector2(-7, 14)
+position = Vector2(-14, 0)
 sprite_frames = SubResource("SpriteFrames_5uh7g")
 centered = false
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-visible = false
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_5uh7g")
 centered = false
 
 [node name="AnimatedSprite2D5" type="AnimatedSprite2D" parent="."]
-visible = false
 texture_filter = 1
-position = Vector2(-13, 0)
+position = Vector2(14, 0)
 sprite_frames = SubResource("SpriteFrames_5uh7g")
 centered = false
 
 [node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="."]
-visible = false
 texture_filter = 1
-position = Vector2(7, -13)
+position = Vector2(-7, -13)
 sprite_frames = SubResource("SpriteFrames_5uh7g")
 centered = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-active = false
 libraries = {
 "": SubResource("AnimationLibrary_3mt45")
 }
 speed_scale = 1.4
 movie_quit_on_finish = true
-
-[node name="Bomb Hitbox" type="Area2D" parent="." groups=["Player_Attack", "Player_Bomb"]]
-collision_layer = 16
-collision_mask = 520
-monitoring = false
-monitorable = false
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Bomb Hitbox"]
-polygon = PackedVector2Array(23, -13, -7, -13, -7, 0, -13, 0, -13, 16, -7, 16, -7, 30, 23, 30, 23, 16, 29, 16, 29, 0, 23, 0)
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_y6pam")
-autoplay = true
-bus = &"SFX"

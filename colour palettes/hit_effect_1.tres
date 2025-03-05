@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="SpriteHitColour" load_steps=2 format=3 uid="uid://4utbqbcejrn4"]
+
+[ext_resource type="Script" path="res://scripts/player/link/sprite_hit_colour.gd" id="1_m13pn"]
+
+[resource]
+script = ExtResource("1_m13pn")
+new_colour_01 = Color(0, 0, 0, 1)
+new_colour_02 = Color(0.847059, 0.156863, 0, 1)
+new_colour_03 = Color(0, 0.501961, 0.533333, 1)
+new_colour_04 = Color(0, 0, 0, 1)

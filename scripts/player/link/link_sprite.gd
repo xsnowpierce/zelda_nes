@@ -11,13 +11,13 @@ var is_attacking : bool = false
 signal attack_ended
 
 # sprite palette changes
-@export var default_sprite_palette : LinkSpriteHitColour
-@export var red_tunic_sprite_palette : LinkSpriteHitColour
-@export var white_tunic_sprite_palette : LinkSpriteHitColour
-@export var hit_effect_sprite_palette_1 : LinkSpriteHitColour
-@export var hit_effect_sprite_palette_2 : LinkSpriteHitColour
-@export var hit_effect_sprite_palette_3 : LinkSpriteHitColour
-var current_sprite_palette : LinkSpriteHitColour
+@export var default_sprite_palette : SpriteHitColour
+@export var red_tunic_sprite_palette : SpriteHitColour
+@export var white_tunic_sprite_palette : SpriteHitColour
+@export var hit_effect_sprite_palette_1 : SpriteHitColour
+@export var hit_effect_sprite_palette_2 : SpriteHitColour
+@export var hit_effect_sprite_palette_3 : SpriteHitColour
+var current_sprite_palette : SpriteHitColour
 
 # hit flash
 var hit_effect_length : float = 0.8
@@ -185,13 +185,7 @@ func hit_effect() -> void:
 	set_colour_palette(default_sprite_palette)
 	is_hit_flash = false
 
-func set_colour_palette(colour_set : LinkSpriteHitColour) -> void:
-	material.set("shader_parameter/NEW_COLOUR_1", colour_to_vector4(colour_set.tunic_colour))
-	material.set("shader_parameter/NEW_COLOUR_2", colour_to_vector4(colour_set.hair_colour))
-	material.set("shader_parameter/NEW_COLOUR_3", colour_to_vector4(colour_set.skin_colour))
-
-func colour_to_vector4(colour : Color) -> Vector4:
-	var r : float = colour.r
-	var g : float = colour.g
-	var b : float = colour.b
-	return Vector4(r, g, b, 1)
+func set_colour_palette(colour_set : SpriteHitColour) -> void:
+	material.set("shader_parameter/NEW_COLOUR_1", Utils.colour_to_vec4(colour_set.new_colour_01))
+	material.set("shader_parameter/NEW_COLOUR_2", Utils.colour_to_vec4(colour_set.new_colour_02))
+	material.set("shader_parameter/NEW_COLOUR_3", Utils.colour_to_vec4(colour_set.new_colour_03))

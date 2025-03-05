@@ -17,6 +17,7 @@ func _ready() -> void:
 	$LinkInteract.initialize(self)
 	$LinkState.initialize(self)
 	$"Link AltWeapon".initialize(self)
+	$"Attack Area".initialize(self)
 	$"Link Sprite Mask/Link Sprite".connect("cast_magical_wand", Callable(self, "cast_magical_wand_beam"))
 	$"Link Sprite Mask/Link Sprite".connect("magical_wand_cast_ended", Callable(self, "magical_wand_cast_ended"))
 	
@@ -34,9 +35,6 @@ func get_look_direction() -> Vector2:
 
 func get_movement_value() -> Vector2:
 	return $LinkMovement.movement
-
-func attacked(from : Vector2, attack_block_level : ENUM.BLOCK_ATTACK_LEVEL = ENUM.BLOCK_ATTACK_LEVEL.IMPOSSIBLE) -> void:
-	$LinkCombat.attacked(from, attack_block_level)
 
 func get_sprite_mask() -> Control:
 	return $"Link Sprite Mask"

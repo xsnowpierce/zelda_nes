@@ -15,10 +15,11 @@ class_name SFXPlayer
 @export var door_open_sfx : AudioStreamWAV
 @export var key_appearance_sfx : AudioStreamWAV
 @export var boomerang_loop_sfx : AudioStreamWAV
+@export var aquamentus_roar_sfx : AudioStreamWAV
 
 enum SFX {SECRET_DISCOVER, ENEMY_DEATH, RUPEE_PICKUP, HEART_PICKUP, 
 	SWORD_SWING, BOMB_EXPLOSION, KEY_ITEM_PICKUP, FIRE_SHOT, MAGICAL_WAND_SHOOT,
-	WHISTLE_MUSIC, DOOR_OPEN, KEY_APPEARANCE, BOOMERANG }
+	WHISTLE_MUSIC, DOOR_OPEN, KEY_APPEARANCE, BOOMERANG, AQUAMENTUS_ROAR}
 
 func play_sound(sfx : SFX) -> void:
 	stream = get_audio_file_from_enum(sfx)
@@ -52,6 +53,8 @@ func get_audio_file_from_enum(sfx : SFX) -> AudioStreamWAV:
 			return key_appearance_sfx
 		SFX.BOOMERANG:
 			return boomerang_loop_sfx
+		SFX.AQUAMENTUS_ROAR:
+			return aquamentus_roar_sfx
 		_:
 			return
 

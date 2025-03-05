@@ -1,12 +1,28 @@
-[gd_scene load_steps=15 format=3 uid="uid://c43ocjbbtan7f"]
+[gd_scene load_steps=20 format=3 uid="uid://c43ocjbbtan7f"]
 
 [ext_resource type="Script" path="res://scripts/entity/enemy/leever.gd" id="1_k33cw"]
 [ext_resource type="Texture2D" uid="uid://7uv75ywip144" path="res://images/enemies.png" id="2_6od4o"]
-[ext_resource type="AudioStream" uid="uid://dtn5thjr7fpjk" path="res://sound/sfx/The Legend of Zelda Cartoon Sound Effects Enemy Zapped.wav" id="3_11bej"]
+[ext_resource type="Shader" path="res://scenes/link.gdshader" id="2_omk1k"]
 [ext_resource type="Script" path="res://scripts/entity/enemy/enemy_collider_check.gd" id="4_pgigd"]
+[ext_resource type="Script" path="res://scenes/enemy_scenes/enemy_hit_effect.gd" id="4_rbwvg"]
+[ext_resource type="Resource" uid="uid://4utbqbcejrn4" path="res://colour palettes/hit_effect_1.tres" id="5_5x5wk"]
+[ext_resource type="Resource" uid="uid://k5ei2dg4m6oj" path="res://colour palettes/hit_effect_2.tres" id="6_0pt8f"]
+[ext_resource type="Resource" uid="uid://cggcj5g1dq8du" path="res://colour palettes/hit_effect_3.tres" id="7_ybte2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_20hka"]
 radius = 7.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oelw0"]
+resource_local_to_scene = true
+shader = ExtResource("2_omk1k")
+shader_parameter/OLD_COLOUR_1 = Color(0.847059, 0.156863, 0, 1)
+shader_parameter/OLD_COLOUR_2 = Color(0.988235, 0.596078, 0.219608, 1)
+shader_parameter/OLD_COLOUR_3 = Color(0.988235, 0.988235, 0.988235, 1)
+shader_parameter/OLD_COLOUR_4 = null
+shader_parameter/NEW_COLOUR_1 = null
+shader_parameter/NEW_COLOUR_2 = null
+shader_parameter/NEW_COLOUR_3 = null
+shader_parameter/NEW_COLOUR_4 = null
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ecnk6"]
 atlas = ExtResource("2_6od4o")
@@ -93,13 +109,22 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1cueu"]
 size = Vector2(7, 7)
 
-[node name="Leever" type="Area2D" groups=["Enemy"]]
+[node name="Leever" type="CharacterBody2D" groups=["Enemy"]]
 process_mode = 1
 collision_layer = 8
 collision_mask = 23
 script = ExtResource("1_k33cw")
 enemy_type = 3
+max_health = 4
 collision_layers_bitmask = 3
+
+[node name="Area2D" type="Area2D" parent="." groups=["Enemy"]]
+collision_layer = 8
+collision_mask = 4119
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(8, 8)
+shape = SubResource("CircleShape2D_20hka")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(8, 8)
@@ -107,13 +132,14 @@ shape = SubResource("CircleShape2D_20hka")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
+material = SubResource("ShaderMaterial_oelw0")
 sprite_frames = SubResource("SpriteFrames_mf7ak")
 animation = &"rising"
 centered = false
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_11bej")
-bus = &"SFX"
+script = ExtResource("4_rbwvg")
+hit_effect_palette_1 = ExtResource("5_5x5wk")
+hit_effect_palette_2 = ExtResource("6_0pt8f")
+hit_effect_palette_3 = ExtResource("7_ybte2")
 
 [node name="TopCollider" type="Area2D" parent="."]
 collision_layer = 64
@@ -151,7 +177,6 @@ script = ExtResource("4_pgigd")
 position = Vector2(20, 8)
 shape = SubResource("RectangleShape2D_1cueu")
 
-[connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="TopCollider" to="TopCollider" method="_on_body_entered"]
 [connection signal="body_exited" from="TopCollider" to="TopCollider" method="_on_body_exited"]
 [connection signal="body_entered" from="BottomCollider" to="BottomCollider" method="_on_body_entered"]

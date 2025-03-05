@@ -63,3 +63,13 @@ static func get_global_coordinate_from_tile_coordinate(tile_coordinate : Vector2
 	tile_coordinate.x *= 16 * 16
 	tile_coordinate.y *= 11 * 16
 	return tile_coordinate
+
+static func degrees_to_vector(degrees : float) -> Vector2:
+	var radians = deg_to_rad(degrees)
+	return Vector2(sin(radians), -cos(radians)).normalized()
+
+static func vec4_to_colour(vec : Vector4) -> Color:
+	return Color(vec.x, vec.y, vec.z, vec.w)
+
+static func colour_to_vec4(colour : Color) -> Vector4:
+	return Vector4(colour.r, colour.g, colour.b, colour.a)

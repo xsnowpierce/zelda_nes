@@ -1,10 +1,27 @@
-[gd_scene load_steps=7 format=3 uid="uid://do2mji3lruyq7"]
+[gd_scene load_steps=13 format=3 uid="uid://do2mji3lruyq7"]
 
 [ext_resource type="Script" path="res://scripts/entity/enemy/peahat.gd" id="1_snnvp"]
 [ext_resource type="Texture2D" uid="uid://bwgbbitwmdbm0" path="res://images/dungeon_enemies.png" id="2_01xb7"]
+[ext_resource type="Shader" path="res://scenes/link.gdshader" id="2_ikhyy"]
+[ext_resource type="Script" path="res://scenes/enemy_scenes/enemy_hit_effect.gd" id="4_wkpfk"]
+[ext_resource type="Resource" uid="uid://4utbqbcejrn4" path="res://colour palettes/hit_effect_1.tres" id="5_ec3rn"]
+[ext_resource type="Resource" uid="uid://k5ei2dg4m6oj" path="res://colour palettes/hit_effect_2.tres" id="6_dle81"]
+[ext_resource type="Resource" uid="uid://cggcj5g1dq8du" path="res://colour palettes/hit_effect_3.tres" id="7_0wmfp"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_y47j1"]
 radius = 6.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5c3od"]
+resource_local_to_scene = true
+shader = ExtResource("2_ikhyy")
+shader_parameter/OLD_COLOUR_1 = Color(0, 0, 0.658824, 1)
+shader_parameter/OLD_COLOUR_2 = Color(0.360784, 0.580392, 0.988235, 1)
+shader_parameter/OLD_COLOUR_3 = null
+shader_parameter/OLD_COLOUR_4 = null
+shader_parameter/NEW_COLOUR_1 = null
+shader_parameter/NEW_COLOUR_2 = null
+shader_parameter/NEW_COLOUR_3 = null
+shader_parameter/NEW_COLOUR_4 = null
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nabqn"]
 atlas = ExtResource("2_01xb7")
@@ -28,7 +45,7 @@ animations = [{
 "speed": 20.0
 }]
 
-[node name="Keese" type="Area2D" groups=["Enemy", "Enemy_Attack"]]
+[node name="Keese" type="CharacterBody2D" groups=["Enemy", "Enemy_Attack"]]
 collision_layer = 8
 collision_mask = 20
 script = ExtResource("1_snnvp")
@@ -40,8 +57,21 @@ position = Vector2(8, 8)
 shape = SubResource("CircleShape2D_y47j1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." groups=["Enemy"]]
+material = SubResource("ShaderMaterial_5c3od")
 sprite_frames = SubResource("SpriteFrames_12r0w")
 autoplay = "default"
 centered = false
+script = ExtResource("4_wkpfk")
+hit_effect_palette_1 = ExtResource("5_ec3rn")
+hit_effect_palette_2 = ExtResource("6_dle81")
+hit_effect_palette_3 = ExtResource("7_0wmfp")
 
-[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[node name="Area2D" type="Area2D" parent="." groups=["Enemy"]]
+collision_layer = 8
+collision_mask = 20
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" groups=["Enemy"]]
+position = Vector2(8, 8)
+shape = SubResource("CircleShape2D_y47j1")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_entered"]

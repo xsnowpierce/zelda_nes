@@ -1,10 +1,27 @@
-[gd_scene load_steps=7 format=3 uid="uid://cj75wahsqwoah"]
+[gd_scene load_steps=13 format=3 uid="uid://cj75wahsqwoah"]
 
 [ext_resource type="Script" path="res://scripts/entity/enemy/tektite.gd" id="1_x8nh4"]
 [ext_resource type="Texture2D" uid="uid://7uv75ywip144" path="res://images/enemies.png" id="2_1mp0t"]
+[ext_resource type="Shader" path="res://scenes/link.gdshader" id="2_ycv5y"]
+[ext_resource type="Script" path="res://scenes/enemy_scenes/enemy_hit_effect.gd" id="4_2nf87"]
+[ext_resource type="Resource" uid="uid://4utbqbcejrn4" path="res://colour palettes/hit_effect_1.tres" id="5_nn71v"]
+[ext_resource type="Resource" uid="uid://k5ei2dg4m6oj" path="res://colour palettes/hit_effect_2.tres" id="6_u1noi"]
+[ext_resource type="Resource" uid="uid://cggcj5g1dq8du" path="res://colour palettes/hit_effect_3.tres" id="7_0ugvg"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dh51p"]
 radius = 7.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yq7ym"]
+resource_local_to_scene = true
+shader = ExtResource("2_ycv5y")
+shader_parameter/OLD_COLOUR_1 = Color(0.847059, 0.156863, 0, 1)
+shader_parameter/OLD_COLOUR_2 = Color(0.988235, 0.596078, 0.219608, 1)
+shader_parameter/OLD_COLOUR_3 = Color(0.988235, 0.988235, 0.988235, 1)
+shader_parameter/OLD_COLOUR_4 = null
+shader_parameter/NEW_COLOUR_1 = null
+shader_parameter/NEW_COLOUR_2 = null
+shader_parameter/NEW_COLOUR_3 = null
+shader_parameter/NEW_COLOUR_4 = null
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vcolw"]
 atlas = ExtResource("2_1mp0t")
@@ -28,11 +45,10 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Tektite" type="Area2D" groups=["Enemy"]]
+[node name="Tektite" type="CharacterBody2D" groups=["Enemy"]]
 process_mode = 1
 collision_layer = 8
-collision_mask = 20
-input_pickable = false
+collision_mask = 0
 script = ExtResource("1_x8nh4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["Enemy"]]
@@ -41,9 +57,22 @@ shape = SubResource("CircleShape2D_dh51p")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." groups=["Enemy"]]
 texture_filter = 1
+material = SubResource("ShaderMaterial_yq7ym")
 sprite_frames = SubResource("SpriteFrames_k8inr")
 autoplay = "default"
 frame_progress = 0.676841
 centered = false
+script = ExtResource("4_2nf87")
+hit_effect_palette_1 = ExtResource("5_nn71v")
+hit_effect_palette_2 = ExtResource("6_u1noi")
+hit_effect_palette_3 = ExtResource("7_0ugvg")
 
-[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[node name="Area2D" type="Area2D" parent="." groups=["Enemy"]]
+collision_layer = 8
+collision_mask = 20
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" groups=["Enemy"]]
+position = Vector2(8, 8)
+shape = SubResource("CircleShape2D_dh51p")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_entered"]

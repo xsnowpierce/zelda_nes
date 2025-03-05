@@ -1,12 +1,28 @@
-[gd_scene load_steps=10 format=3 uid="uid://dhxxr225o5tr3"]
+[gd_scene load_steps=15 format=3 uid="uid://dhxxr225o5tr3"]
 
 [ext_resource type="Script" path="res://scripts/entity/enemy/zora.gd" id="1_wqvra"]
 [ext_resource type="Texture2D" uid="uid://7uv75ywip144" path="res://images/enemies.png" id="2_eo3q0"]
 [ext_resource type="PackedScene" uid="uid://bx5f8ndr07fwn" path="res://scenes/zora_ball.tscn" id="2_sgqyw"]
-[ext_resource type="AudioStream" uid="uid://dtn5thjr7fpjk" path="res://sound/sfx/The Legend of Zelda Cartoon Sound Effects Enemy Zapped.wav" id="3_tccek"]
+[ext_resource type="Shader" path="res://scenes/link.gdshader" id="3_ro0cq"]
+[ext_resource type="Script" path="res://scenes/enemy_scenes/enemy_hit_effect.gd" id="5_fasxh"]
+[ext_resource type="Resource" uid="uid://4utbqbcejrn4" path="res://colour palettes/hit_effect_1.tres" id="6_2puyt"]
+[ext_resource type="Resource" uid="uid://k5ei2dg4m6oj" path="res://colour palettes/hit_effect_2.tres" id="7_tro7b"]
+[ext_resource type="Resource" uid="uid://cggcj5g1dq8du" path="res://colour palettes/hit_effect_3.tres" id="8_xlfnr"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dh51p"]
 radius = 7.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_81gcd"]
+resource_local_to_scene = true
+shader = ExtResource("3_ro0cq")
+shader_parameter/OLD_COLOUR_1 = Color(0.847059, 0.156863, 0, 1)
+shader_parameter/OLD_COLOUR_2 = Color(0, 0.501961, 0.533333, 1)
+shader_parameter/OLD_COLOUR_3 = Color(0, 0, 0, 1)
+shader_parameter/OLD_COLOUR_4 = null
+shader_parameter/NEW_COLOUR_1 = null
+shader_parameter/NEW_COLOUR_2 = null
+shader_parameter/NEW_COLOUR_3 = null
+shader_parameter/NEW_COLOUR_4 = null
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jym38"]
 atlas = ExtResource("2_eo3q0")
@@ -42,13 +58,15 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Zora" type="Area2D" groups=["Enemy"]]
+[node name="Zora" type="CharacterBody2D" groups=["Enemy"]]
 process_mode = 1
 collision_layer = 8
-collision_mask = 16
+collision_mask = 0
 script = ExtResource("1_wqvra")
 zora_projectile_scene = ExtResource("2_sgqyw")
 enemy_type = 2
+max_health = 4
+attack_contact_damage = 2
 collision_layers_bitmask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -57,12 +75,21 @@ shape = SubResource("CircleShape2D_dh51p")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
+material = SubResource("ShaderMaterial_81gcd")
 sprite_frames = SubResource("SpriteFrames_nip88")
 animation = &"above_water"
 centered = false
+script = ExtResource("5_fasxh")
+hit_effect_palette_1 = ExtResource("6_2puyt")
+hit_effect_palette_2 = ExtResource("7_tro7b")
+hit_effect_palette_3 = ExtResource("8_xlfnr")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_tccek")
-bus = &"SFX"
+[node name="Area2D" type="Area2D" parent="." groups=["Enemy"]]
+collision_layer = 8
+collision_mask = 20
 
-[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(8, 8)
+shape = SubResource("CircleShape2D_dh51p")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_entered"]

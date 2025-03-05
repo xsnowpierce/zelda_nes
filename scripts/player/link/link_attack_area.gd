@@ -1,9 +1,13 @@
-extends Area2D
+extends PlayerAttack
 
 @export var up_position : Vector2 = Vector2(0, -14)
 @export var down_position : Vector2 = Vector2(0, 14)
 @export var left_position : Vector2 = Vector2(-14, 0)
 @export var right_position : Vector2 = Vector2(14, 0)
+var link : LinkController
+
+func initialize(player : LinkController) -> void:
+	link = player
 
 func set_direction(direction : Vector2, velocity : Vector2) -> void:
 	if(direction == Vector2.ZERO):
@@ -29,3 +33,13 @@ func _on_link_attack() -> void:
 
 func _on_link_sprite_attack_ended() -> void:
 	set_collider_enabled(false)
+
+func get_attack_damage() -> int:
+	match(link.game_data.current_equipped_item_a):
+		ENUM.KEY_ITEM_TYPE.WOODEN_SWORD:
+			return 2
+		ENUM.KEY_ITEM_TYPE.WHITE_SWORD:
+			return 4
+		ENUM.KEY_ITEM_TYPE.MAGICAL_SWORD:
+			return 6
+	return 1

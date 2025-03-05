@@ -1,14 +1,9 @@
-extends Node2D
+extends PlayerProjectile
 
 class_name Boomerang
 
 enum BOOMERANG_TYPE { WOODEN, MAGICAL }
 
-var move_direction : Vector2
-var camera
-@export var move_speed : float = 140
-@export var hit_effect_wait_time : float = 0.1
-var hit_something : bool = false
 var boomerang_type : BOOMERANG_TYPE
 var boomerang_thrower : Node2D
 var return_to_thrower : bool
@@ -19,18 +14,17 @@ var use_thrower_position_offset : bool
 signal boomerang_picked_up
 
 func initialize_boomerang(type : BOOMERANG_TYPE, direction : Vector2, camera_object : Camera2D, thrower : Node2D, use_position_offset : bool) -> void:
+	super.initialize_projectile(camera_object, direction)
 	boomerang_thrower = thrower
 	use_thrower_position_offset = use_position_offset
 	boomerang_type = type
-	camera = camera_object
 	match type:
 		BOOMERANG_TYPE.WOODEN:
 			$AnimatedSprite2D.play("wooden")
 		BOOMERANG_TYPE.MAGICAL:
 			$AnimatedSprite2D.play("magical")
-	move_direction = direction
 	play_sound()
-	
+
 func _process(delta: float) -> void:
 	check_screen_bounds()
 	if(!hit_something and !return_to_thrower):
@@ -40,6 +34,9 @@ func _process(delta: float) -> void:
 		if(boomerang_type == BOOMERANG_TYPE.WOODEN and current_travel_distance >= wooden_boomerang_throw_distance * 16):
 			return_to_thrower = true
 	if(return_to_thrower):
+		if(!is_instance_valid(boomerang_thrower) or boomerang_thrower == null):
+			queue_free()
+			return
 		var boomerang_thrower_position = boomerang_thrower.global_position
 		if(use_thrower_position_offset):
 			boomerang_thrower_position += thrower_position_offset
@@ -55,10 +52,6 @@ func play_sound() -> void:
 
 func stop_sound() -> void:
 	get_tree().get_first_node_in_group("SFXPlayer").stop()
-
-func check_screen_bounds() -> void:
-	if(Utils.is_out_of_bounds(global_position, camera, true) and !return_to_thrower):
-		hit_effect()
 
 func hit_effect() -> void:
 	hit_something = true

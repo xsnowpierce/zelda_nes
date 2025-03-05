@@ -9,7 +9,6 @@ var is_moving : bool
 
 func _ready() -> void:
 	super()
-	starting_position = global_position
 
 func load_blade_trap_settings(settings : BladeTrapSettings) -> void:
 	blade_trap_settings = settings
@@ -37,6 +36,7 @@ func check_for_link(direction : Vector2) -> void:
 
 func move(direction : Vector2) -> void:
 	is_moving = true
+	var starting_position = global_position
 	var target_position = starting_position + ((direction * 16) * get_max_tiles_from_direction(direction))
 	await move_to_position(target_position, move_towards_speed)
 	await move_to_position(starting_position, move_backwards_speed)
@@ -72,7 +72,7 @@ func get_max_tiles_from_direction(direction : Vector2) -> int:
 		_:
 			return 0
 
-func attacked() -> void:
+func attacked(damage : int, from : Vector2) -> void:
 	return
 func death() -> void:
 	return

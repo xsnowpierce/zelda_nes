@@ -22,7 +22,7 @@ func _on_area_entered(area: Area2D) -> void:
 		return
 	super(area)
 
-func attacked() -> void:
+func attacked(damage : int, from : Vector2) -> void:
 	if(!is_active):
 		return
-	super()
+	super(damage, from)

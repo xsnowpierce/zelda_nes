@@ -45,7 +45,7 @@ func wooden_sword_swing() -> void:
 func _on_animated_sprite_2d_attack_ended() -> void:
 	player.get_player_state().is_attacking = false
 
-func attacked(from : Vector2, attack_block_level : ENUM.BLOCK_ATTACK_LEVEL = ENUM.BLOCK_ATTACK_LEVEL.IMPOSSIBLE) -> void:
+func attacked(damage : int, from : Vector2, attack_block_level : ENUM.BLOCK_ATTACK_LEVEL = ENUM.BLOCK_ATTACK_LEVEL.IMPOSSIBLE) -> void:
 	if(try_block_attack(from, attack_block_level)):
 		play_shield_block_sound.emit()
 		return
@@ -57,7 +57,7 @@ func attacked(from : Vector2, attack_block_level : ENUM.BLOCK_ATTACK_LEVEL = ENU
 	player.get_player_state().is_attacked_knockback = true
 	player.get_sprite().hit_effect()
 	play_attacked_sound.emit()
-	player.game_data.player_took_damage(1)
+	player.game_data.player_took_damage(damage)
 	var knockback_direction : Vector2 = get_knockback_direction(from)
 	if(abs(knockback_direction.x) > abs(knockback_direction.y)):
 		knockback_direction.y = 0
@@ -108,3 +108,16 @@ func try_block_attack(from: Vector2, block_level: ENUM.BLOCK_ATTACK_LEVEL = ENUM
 	var attacking_degrees = rad_to_deg(player.global_position.angle_to_point(hit_centre))
 	
 	return abs(link_facing_degrees - attacking_degrees) <= max_block_angle
+
+
+func _on_link_hitbox_area_entered(area: Area2D) -> void:
+	if(area.is_in_group("Enemy")):
+		if(area.get_parent() is EnemyAI):
+			attacked(area.get_parent().attack_contact_damage, area.get_parent().global_position, area.get_parent().hitbox_attack_block_level)
+		else:
+			attacked(1, area.global_position, ENUM.BLOCK_ATTACK_LEVEL.IMPOSSIBLE)
+	if(area.is_in_group("Enemy_Attack")):
+		if(area is EnemyProjectile):
+			attacked(area.attack_contact_damage, area.global_position, area.attack_block_level)
+		else:
+			attacked(area.get_attack_damage(), area.global_position, area.hitbox_attack_block_level)

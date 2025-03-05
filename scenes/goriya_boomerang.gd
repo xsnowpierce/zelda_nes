@@ -10,4 +10,4 @@ func stop_sound() -> void:
 
 func _on_area_entered(area: Area2D) -> void:
 	if(area.is_in_group("Player")):
-		get_tree().get_first_node_in_group("Player").attacked(global_position, hitbox_attack_block_level)
+		hit_effect()

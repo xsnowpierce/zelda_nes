@@ -1452,7 +1452,7 @@ enemy_spawns = Array[ExtResource("30_ynj6t")]([SubResource("Resource_jwfgh"), Su
 
 [sub_resource type="Resource" id="Resource_dty5f"]
 script = ExtResource("30_ynj6t")
-enemy_type = 10
+enemy_type = 22
 global_spawn_position = Vector2(0, 0)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 1
@@ -1461,7 +1461,7 @@ spawn_with_key = false
 
 [sub_resource type="Resource" id="Resource_lkd8i"]
 script = ExtResource("30_ynj6t")
-enemy_type = 10
+enemy_type = 22
 global_spawn_position = Vector2(0, 0)
 relative_grid_position = Vector2(2, 0)
 use_spawn_type = 1
@@ -1470,7 +1470,7 @@ spawn_with_key = false
 
 [sub_resource type="Resource" id="Resource_pcjto"]
 script = ExtResource("30_ynj6t")
-enemy_type = 10
+enemy_type = 22
 global_spawn_position = Vector2(0, 0)
 relative_grid_position = Vector2(2, -2)
 use_spawn_type = 1
@@ -2312,10 +2312,11 @@ enemy_goriya_scene = ExtResource("85_gkfa4")
 current_player_health = 6
 current_rupees = 20
 current_keys = 20
+has_wooden_arrow = true
 hyrule_music = ExtResource("2_7hpxk")
 dungeon_music = ExtResource("36_8um02")
 current_equipped_item_a = 1
-current_equipped_item_b = 6
+current_equipped_item_b = 10
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_7hpxk")
@@ -2744,6 +2745,11 @@ door_east_status = 2
 door_west_status = 3
 
 [node name="Entities" type="Node" parent="Level/Eagle Dungeon/Eagle Dungeon Tile9"]
+
+[node name="RoomCompletion" type="Node" parent="Level/Eagle Dungeon/Eagle Dungeon Tile9"]
+script = ExtResource("54_s4a83")
+close_door_behind = false
+close_door_behind_direction = 2
 
 [node name="Eagle Dungeon Tile10" parent="Level/Eagle Dungeon" instance=ExtResource("54_bxtwv")]
 position = Vector2(3840, -2112)
@@ -3311,7 +3317,6 @@ position = Vector2(1504, -736)
 
 [node name="SPAWNPOINT" parent="." instance=ExtResource("36_w4qf6")]
 process_mode = 1
-position = Vector2(3056, -1904)
 
 [node name="RNG_DROPPER" type="Node" parent="."]
 script = ExtResource("38_f8yhx")

@@ -47,15 +47,16 @@ func loop() -> void:
 		# go underwater and wait to loop
 		$AnimatedSprite2D.play("under_water")
 		current_state = ZORA_STATE.UNDERWATER
+		current_health = max_health # zoras regen health when submerging
 		await get_tree().create_timer(stay_underwater_after_time).timeout
 		while(is_instance_valid(current_projectile)): # make sure our current ball has despawned before we move
 			await get_tree().process_frame
 
-func attacked() -> void:
+func attacked(damage : int, from : Vector2) -> void:
 	if(current_state == ZORA_STATE.UNDERWATER):
 		return
 	else:
-		super()
+		super(damage, from)
 
 func death() -> void:
 	if(is_instance_valid(current_projectile)):

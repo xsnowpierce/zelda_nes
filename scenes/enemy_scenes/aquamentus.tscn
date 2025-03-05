@@ -1,0 +1,70 @@
+[gd_scene load_steps=9 format=3 uid="uid://cmhg4ibk0405j"]
+
+[ext_resource type="Script" path="res://scenes/aquamentus.gd" id="1_ltfw3"]
+[ext_resource type="Texture2D" uid="uid://bwgbbitwmdbm0" path="res://images/dungeon_enemies.png" id="2_dnqjv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_an41c"]
+atlas = ExtResource("2_dnqjv")
+region = Rect2(608, 48, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j3ce5"]
+atlas = ExtResource("2_dnqjv")
+region = Rect2(640, 48, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s6l0d"]
+atlas = ExtResource("2_dnqjv")
+region = Rect2(608, 16, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0om1t"]
+atlas = ExtResource("2_dnqjv")
+region = Rect2(640, 16, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kde71"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_an41c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j3ce5")
+}],
+"loop": true,
+"name": &"default",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s6l0d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0om1t")
+}],
+"loop": true,
+"name": &"mouth_open",
+"speed": 3.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_77i1x"]
+size = Vector2(24, 32)
+
+[node name="Aquamentus" type="Area2D"]
+position = Vector2(48, -32)
+collision_layer = 8
+collision_mask = 20
+script = ExtResource("1_ltfw3")
+enemy_type = 41
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_kde71")
+autoplay = "default"
+frame_progress = 0.450547
+centered = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(12, 16)
+shape = SubResource("RectangleShape2D_77i1x")
+
+[node name="Projectile Spawn Spot" type="Node2D" parent="."]
+position = Vector2(8, 8)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

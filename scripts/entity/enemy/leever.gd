@@ -117,11 +117,11 @@ func move_to_direction(target_direction : Vector2) -> void:
 	position = target_position
 	is_moving = false
 
-func attacked() -> void:
+func attacked(damage : int, from : Vector2) -> void:
 	if(current_state == LEEVER_STATE.UNDERGROUND):
 		return
 	else:
-		super()
+		super(damage, from)
 
 func _on_area_entered(area: Area2D) -> void:
 	if(area.is_in_group("Player")):
