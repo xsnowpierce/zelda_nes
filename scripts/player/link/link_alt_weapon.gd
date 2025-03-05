@@ -10,16 +10,20 @@ var spawn_projectile_distance : float = 1
 @export var wooden_arrow_scene : PackedScene = preload("res://scenes/wooden_arrow.tscn")
 @export var boomerang_scene : PackedScene = preload("res://scenes/boomerang.tscn")
 @export var food_item_scene : PackedScene = preload("res://scenes/food.tscn")
+@export var full_hp_sword_projectile : PackedScene = preload("res://scenes/sword_beam.tscn")
 var current_projectile
 var current_food
 @export_group("")
 @export var whistle_pause_time : float = 2.7
+@export var full_hp_sword_beam_cooldown : float = 1
+var current_sword_beam_cooldown : float
 
 func initialize(parent : LinkController) -> void:
 	player = parent
 
 func process(delta: float) -> void:
-	pass
+	if(current_sword_beam_cooldown > 0):
+		current_sword_beam_cooldown -= delta
 
 func use_alternate_weapon(item : ENUM.KEY_ITEM_TYPE) -> void:
 	match item:
@@ -97,6 +101,8 @@ func use_alternate_weapon(item : ENUM.KEY_ITEM_TYPE) -> void:
 			current_food = food
 			player.food_placed.emit(food.global_position)
 			player.use_item_animation()
+		_:
+			print("Tried to attack with unhandled item type: (", str(item), ", ", ENUM.KEY_ITEM_TYPE.keys()[item] ,")")
 
 func cast_magical_wand_beam() -> void:
 	var wand_beam = magical_wand_scene.instantiate()
@@ -108,3 +114,14 @@ func cast_magical_wand_beam() -> void:
 
 func boomerang_pickup() -> void:
 	player.use_item_animation()
+
+func _on_link_combat_full_health_sword_swing() -> void:
+	if(is_instance_valid(current_projectile) or current_sword_beam_cooldown > 0):
+		return
+	var sword_beam = full_hp_sword_projectile.instantiate()
+	get_tree().get_first_node_in_group("SFXPlayer").play_sound(SFXPlayer.SFX.SWORD_BEAM)
+	player.game_data.add_child(sword_beam)
+	sword_beam.global_position = (player.global_position) + (player.get_look_direction() * (spawn_projectile_distance * 16))
+	sword_beam.initialize_beam(player.get_look_direction(), player.camera)
+	current_projectile = sword_beam
+	current_sword_beam_cooldown = full_hp_sword_beam_cooldown

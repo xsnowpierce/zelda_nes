@@ -52,11 +52,20 @@ func attacked(damage : int, from : Vector2) -> void:
 	was_attacked.emit()
 	if(has_knockback):
 		knockback(from)
-	var sfx_player : SFXPlayer = get_tree().get_first_node_in_group("SFXPlayer")
-	sfx_player.play_sound(SFXPlayer.SFX.ENEMY_DEATH)
+	
 	$AnimatedSprite2D.hit_effect()
 	if(current_health <= 0):
 		death()
+	else:
+		play_hurt_sound()
+
+func play_hurt_sound() -> void:
+	var sfx_player : SFXPlayer = get_tree().get_first_node_in_group("SFXPlayer")
+	sfx_player.play_sound(SFXPlayer.SFX.ENEMY_HURT)
+
+func play_death_sound() -> void:
+	var sfx_player : SFXPlayer = get_tree().get_first_node_in_group("SFXPlayer")
+	sfx_player.play_sound(SFXPlayer.SFX.ENEMY_DEATH)
 
 func knockback(from : Vector2) -> void:
 	if(is_attacked_knockback):
@@ -124,5 +133,6 @@ func death() -> void:
 	get_parent().add_child(death_object)
 	death_object.global_position = global_position
 	get_tree().get_first_node_in_group("GameData").add_player_kill(enemy_type, ENUM.KILL_METHOD.OTHER)
+	play_death_sound()
 	has_died.emit()
 	queue_free()

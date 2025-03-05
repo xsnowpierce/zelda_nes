@@ -1,0 +1,67 @@
+[gd_scene load_steps=9 format=3 uid="uid://3qu0er3g8su"]
+
+[ext_resource type="Script" path="res://scripts/entity/enemy/octorock_rock.gd" id="1_tc3a3"]
+[ext_resource type="Texture2D" uid="uid://bwgbbitwmdbm0" path="res://images/dungeon_enemies.png" id="2_fjjo6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3145t"]
+size = Vector2(8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a046e"]
+atlas = ExtResource("2_fjjo6")
+region = Rect2(608, 0, 8, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aoxrp"]
+atlas = ExtResource("2_fjjo6")
+region = Rect2(616, 0, 8, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yoyr7"]
+atlas = ExtResource("2_fjjo6")
+region = Rect2(624, 0, 8, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_85naa"]
+atlas = ExtResource("2_fjjo6")
+region = Rect2(632, 0, 8, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kp5c8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a046e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aoxrp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yoyr7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_85naa")
+}],
+"loop": true,
+"name": &"default",
+"speed": 60.0
+}]
+
+[node name="Aquamentus Ball" type="Area2D" groups=["Enemy_Attack"]]
+process_mode = 1
+collision_layer = 32
+collision_mask = 4
+script = ExtResource("1_tc3a3")
+move_speed = 1.5
+attack_block_level = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+texture_filter = 1
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_3145t")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(4, 0)
+sprite_frames = SubResource("SpriteFrames_kp5c8")
+autoplay = "default"
+frame_progress = 0.28172
+centered = false
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

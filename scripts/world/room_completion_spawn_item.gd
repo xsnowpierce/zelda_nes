@@ -2,6 +2,7 @@ extends DungeonTileListener
 
 @export var spawn_key_location : Vector2
 @export var drop_at_last_enemy_killed : bool
+@export var item_to_spawn : ENUM.ITEM_TYPE = ENUM.ITEM_TYPE.KEY
 var dropped_item_scene : PackedScene = load("res://scenes/dropped_item.tscn")
 var room_completed : bool
 var key_picked_up : bool
@@ -28,7 +29,7 @@ func spawn_key(location : Vector2) -> void:
 	key_object = dropped_item_scene.instantiate()
 	add_child(key_object)
 	key_object.global_position = location
-	key_object.set_item_type(ENUM.ITEM_TYPE.KEY)
+	key_object.set_item_type(item_to_spawn)
 	get_tree().get_first_node_in_group("SFXPlayer").play_sound(SFXPlayer.SFX.KEY_APPEARANCE)
 	key_object.connect("item_picked_up", Callable(self, "key_was_picked_up"))
 

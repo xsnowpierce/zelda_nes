@@ -1,4 +1,4 @@
-[gd_scene load_steps=332 format=4 uid="uid://bnrlmifgdjgsb"]
+[gd_scene load_steps=338 format=4 uid="uid://bnrlmifgdjgsb"]
 
 [ext_resource type="Script" path="res://scripts/utils/GameData.gd" id="1_fiv6q"]
 [ext_resource type="Script" path="res://scripts/player/link/camera.gd" id="1_xkdoo"]
@@ -41,7 +41,6 @@
 [ext_resource type="Texture2D" uid="uid://u1i1trqicn2k" path="res://images/weapons.png" id="18_dja85"]
 [ext_resource type="AudioStream" uid="uid://boy2mac61rejw" path="res://sound/sfx/The Legend of Zelda Cartoon Sound Effects Power Zap.wav" id="18_ippjc"]
 [ext_resource type="Script" path="res://scripts/player/userinterface/ui_selected_item.gd" id="18_tkg53"]
-[ext_resource type="AudioStream" uid="uid://b2xnq62pmodqx" path="res://sound/sfx/The Legend of Zelda Cartoon Sound Effects Boss Zapped.wav" id="19_eek84"]
 [ext_resource type="FontFile" uid="uid://bw55a4dg4x4gs" path="res://images/the-legend-of-zelda-nes.ttf" id="19_fvc07"]
 [ext_resource type="AudioStream" uid="uid://llgx3dbrrwkp" path="res://sound/sfx/The Legend of Zelda Cartoon Sound Effects Magic Whistle Tune.wav" id="19_g4fo5"]
 [ext_resource type="Resource" uid="uid://dijfjau75dp45" path="res://scenes/shop_B.tres" id="19_klo3g"]
@@ -49,7 +48,6 @@
 [ext_resource type="Resource" uid="uid://di0mwx5aws2xe" path="res://scenes/take_any.tres" id="20_ydc8l"]
 [ext_resource type="Script" path="res://scripts/player/userinterface/pause_item_selector_icon.gd" id="21_37gij"]
 [ext_resource type="Resource" uid="uid://tv2efhr6enaw" path="res://scenes/its_a_secret_30_rupee.tres" id="21_hnk5t"]
-[ext_resource type="AudioStream" uid="uid://4qfwgdgd3h6t" path="res://sound/sfx/The Legend of Zelda Cartoon Sound Effects Item Obtained.wav" id="22_ufa46"]
 [ext_resource type="AudioStream" uid="uid://bjkmgnosuhtpw" path="res://sound/sfx/text_progress.wav" id="22_xpy7p"]
 [ext_resource type="Texture2D" uid="uid://c0pwpxlkow2pa" path="res://images/dungeon_tilemap.png" id="23_4k6nb"]
 [ext_resource type="AudioStream" uid="uid://cj51vsvn8srjl" path="res://sound/sfx/The Legend of Zelda Cartoon Sound Effects Door Opened.wav" id="23_da0gk"]
@@ -79,7 +77,7 @@
 [ext_resource type="PackedScene" uid="uid://djf5u5adev22" path="res://scenes/dungeon_entrance.tscn" id="44_0cylt"]
 [ext_resource type="Script" path="res://scripts/world/eagle_dungeon_controller.gd" id="50_gobiy"]
 [ext_resource type="Script" path="res://scripts/world/interior_handler.gd" id="50_k6536"]
-[ext_resource type="Script" path="res://scripts/world/room_completion_spawn_item.gd" id="53_w5h1n"]
+[ext_resource type="Script" path="res://scripts/world/room_completion_spawn_key.gd" id="53_w5h1n"]
 [ext_resource type="PackedScene" uid="uid://c7wqgqnsq66tk" path="res://scenes/eagle_dungeon_tile.tscn" id="54_bxtwv"]
 [ext_resource type="Script" path="res://scripts/world/room_completion_kill_unlock_door.gd" id="54_s4a83"]
 [ext_resource type="Script" path="res://scripts/world/room_completion_defeat_enemy_push_block.gd" id="56_62qpl"]
@@ -94,7 +92,9 @@
 [ext_resource type="PackedScene" uid="uid://2h8i8o7wy52v" path="res://scenes/dropped_item.tscn" id="79_svs6j"]
 [ext_resource type="PackedScene" uid="uid://tnoirjgjg855" path="res://scenes/enemy_scenes/gel.tscn" id="81_j3o4g"]
 [ext_resource type="PackedScene" uid="uid://pg2i4cov640g" path="res://scenes/enemy_scenes/goriya.tscn" id="85_gkfa4"]
+[ext_resource type="Texture2D" uid="uid://bwgbbitwmdbm0" path="res://images/dungeon_enemies.png" id="86_d34ux"]
 [ext_resource type="Script" path="res://scenes/dungeon_key_room.gd" id="87_6w1h3"]
+[ext_resource type="Script" path="res://scripts/entity/enemy/octorock_rock.gd" id="93_w84xt"]
 
 [sub_resource type="AudioStreamWAV" id="AudioStreamWAV_3rr3c"]
 
@@ -2313,6 +2313,45 @@ animations = [{
 "speed": 7.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3145t"]
+size = Vector2(8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a046e"]
+atlas = ExtResource("86_d34ux")
+region = Rect2(608, 0, 8, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aoxrp"]
+atlas = ExtResource("86_d34ux")
+region = Rect2(616, 0, 8, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yoyr7"]
+atlas = ExtResource("86_d34ux")
+region = Rect2(624, 0, 8, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_85naa"]
+atlas = ExtResource("86_d34ux")
+region = Rect2(632, 0, 8, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kp5c8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a046e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aoxrp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yoyr7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_85naa")
+}],
+"loop": true,
+"name": &"default",
+"speed": 60.0
+}]
+
 [node name="Game" type="Node" groups=["GameData"]]
 process_mode = 3
 script = ExtResource("1_fiv6q")
@@ -2345,15 +2384,14 @@ bus = &"Music"
 
 [node name="SFXPlayer" type="AudioStreamPlayer" parent="." groups=["SFXPlayer"]]
 stream = SubResource("AudioStreamWAV_3rr3c")
+volume_db = -5.0
 max_polyphony = 5
 bus = &"SFX"
 script = ExtResource("9_ll8iq")
 secret_discover_sfx = ExtResource("10_sf206")
 enemy_death_sfx = ExtResource("11_vrvbb")
-enemy_hurt_sfx = ExtResource("19_eek84")
 rupee_pickup_sfx = ExtResource("12_eeyq7")
 heart_pickup_sfx = ExtResource("10_2h7vq")
-heart_container_pickup = ExtResource("22_ufa46")
 sword_swing_sfx = ExtResource("11_5wgwy")
 bomb_explosion_sfx = ExtResource("12_j64rb")
 key_item_pickup_sfx = ExtResource("16_03uuv")
@@ -2771,10 +2809,6 @@ door_east_status = 2
 door_west_status = 3
 
 [node name="Entities" type="Node" parent="Level/Eagle Dungeon/Eagle Dungeon Tile9"]
-
-[node name="RoomCompletion2" type="Node" parent="Level/Eagle Dungeon/Eagle Dungeon Tile9"]
-script = ExtResource("53_w5h1n")
-item_to_spawn = 2
 
 [node name="RoomCompletion" type="Node" parent="Level/Eagle Dungeon/Eagle Dungeon Tile9"]
 script = ExtResource("54_s4a83")
@@ -3347,7 +3381,7 @@ position = Vector2(1504, -736)
 
 [node name="SPAWNPOINT" parent="." instance=ExtResource("36_w4qf6")]
 process_mode = 1
-position = Vector2(3523.84, -2117.03)
+position = Vector2(3528.5, -2108.25)
 
 [node name="RNG_DROPPER" type="Node" parent="."]
 script = ExtResource("38_f8yhx")
@@ -3500,6 +3534,27 @@ link_moveto_position = Vector2(2784, -2272)
 camera_moveto_position = Vector2(11, -13)
 is_staircase = true
 
+[node name="Zora Ball" type="Area2D" parent="." groups=["Enemy_Attack"]]
+process_mode = 1
+position = Vector2(-47.76, 0)
+collision_layer = 32
+collision_mask = 4
+script = ExtResource("93_w84xt")
+attack_block_level = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Zora Ball"]
+texture_filter = 1
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_3145t")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="Zora Ball"]
+texture_filter = 1
+position = Vector2(4, 0)
+sprite_frames = SubResource("SpriteFrames_kp5c8")
+autoplay = "default"
+frame_progress = 0.28172
+centered = false
+
 [connection signal="bombs_changed" from="." to="CanvasLayer/Control/ingame UI/bomb" method="_on_game_bombs_changed"]
 [connection signal="equipment_slot_a_changed" from="." to="Link" method="_on_game_equipment_slot_a_changed"]
 [connection signal="equipment_slot_a_changed" from="." to="CanvasLayer/Control/ingame UI/a_select" method="_on_game_equipment_slot_a_changed"]
@@ -3535,8 +3590,6 @@ is_staircase = true
 [connection signal="killed_all_enemies" from="Level/Eagle Dungeon/Eagle Dungeon Tile3" to="Level/Eagle Dungeon/Eagle Dungeon Tile3/RoomCompletion" method="room_completion"]
 [connection signal="killed_all_enemies" from="Level/Eagle Dungeon/Eagle Dungeon Tile5" to="Level/Eagle Dungeon/Eagle Dungeon Tile5/RoomCompletion" method="room_completion"]
 [connection signal="was_pushed" from="Level/Eagle Dungeon/Eagle Dungeon Tile5/RoomCompletion/Pushable Block" to="Level/Eagle Dungeon/Eagle Dungeon Tile5/RoomCompletion" method="_on_pushable_block_was_pushed"]
-[connection signal="killed_all_enemies" from="Level/Eagle Dungeon/Eagle Dungeon Tile9" to="Level/Eagle Dungeon/Eagle Dungeon Tile9/RoomCompletion2" method="room_completion"]
-[connection signal="killed_all_enemies" from="Level/Eagle Dungeon/Eagle Dungeon Tile9" to="Level/Eagle Dungeon/Eagle Dungeon Tile9/RoomCompletion" method="room_completion"]
 [connection signal="was_pushed" from="Level/Eagle Dungeon/Eagle Dungeon Tile14/Entities/Pushable Block" to="Level/Eagle Dungeon/Eagle Dungeon Tile14/RoomCompletion" method="block_pushed"]
 [connection signal="item_selection_change_sound" from="CanvasLayer/Control/pausemenu UI" to="CanvasLayer/Control/pausemenu UI/PauseSelectionSound" method="_on_pausemenu_ui_item_selection_change_sound"]
 [connection signal="selected_item_index_change" from="CanvasLayer/Control/pausemenu UI" to="CanvasLayer/Control/pausemenu UI/top half/usable_items_row/selector_icon" method="_on_pausemenu_ui_selected_item_change"]
@@ -3544,3 +3597,5 @@ is_staircase = true
 [connection signal="selected_item_type_change" from="CanvasLayer/Control/pausemenu UI" to="CanvasLayer/Control/pausemenu UI/top half/b_selected_sprite" method="_on_game_equipment_slot_b_changed"]
 [connection signal="selected_item_type_change" from="CanvasLayer/Control/pausemenu UI" to="CanvasLayer/Control/ingame UI/b_select" method="_on_game_equipment_slot_b_changed"]
 [connection signal="entrance_used" from="DUNGEON_KEY_ROOM/DUNGEON_ENTRANCE" to="DUNGEON_KEY_ROOM" method="room_exited"]
+[connection signal="area_entered" from="Zora Ball" to="Zora Ball" method="_on_area_entered"]
+[connection signal="body_entered" from="Zora Ball" to="Zora Ball" method="_on_body_entered"]

@@ -79,6 +79,8 @@ func _on_sprite_2d_animation_looped() -> void:
 				enemy_scene.load_blade_trap_settings(blade_trap_settings)
 			ENUM.ENEMY_TYPE.GORIYA:
 				enemy_scene = game_data.enemy_goriya_scene.instantiate()
+			ENUM.ENEMY_TYPE.AQUAMENTUS:
+				enemy_scene = game_data.boss_aquamentus_scene.instantiate()
 			_:
 				printerr("Tried to spawn enemy that does not have a set scene in GameData. (", str(enemy_type), ", ", ENUM.ENEMY_TYPE.keys()[enemy_type] ,")")
 				$Sprite2D.stop()

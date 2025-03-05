@@ -17,6 +17,7 @@ class_name GameData
 @export var enemy_gel_scene : PackedScene
 @export var enemy_blade_trap_scene : PackedScene
 @export var enemy_goriya_scene : PackedScene
+@export var boss_aquamentus_scene : PackedScene
 
 @export_group("Player Stats")
 @export_subgroup("Health")

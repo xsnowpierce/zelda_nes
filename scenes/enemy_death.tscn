@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://b87w5pnfnkmc2"]
+[gd_scene load_steps=6 format=3 uid="uid://b87w5pnfnkmc2"]
 
 [ext_resource type="Script" path="res://scripts/entity/enemy/enemy_death.gd" id="1_t4cvn"]
 [ext_resource type="Texture2D" uid="uid://fkgn6glcffe" path="res://images/NES - The Legend of Zelda - Enemy Death.png" id="2_2xds8"]
-[ext_resource type="AudioStream" uid="uid://dtn5thjr7fpjk" path="res://sound/sfx/The Legend of Zelda Cartoon Sound Effects Enemy Zapped.wav" id="3_u3mv3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fshu1"]
 atlas = ExtResource("2_2xds8")
@@ -36,9 +35,6 @@ sprite_frames = SubResource("SpriteFrames_ub8kt")
 autoplay = "default"
 frame_progress = 0.279785
 centered = false
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_u3mv3")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_looped" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

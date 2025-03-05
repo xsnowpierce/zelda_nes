@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://2h8i8o7wy52v"]
+[gd_scene load_steps=19 format=3 uid="uid://2h8i8o7wy52v"]
 
 [ext_resource type="Script" path="res://scripts/entity/dropped_item.gd" id="1_gqyti"]
 [ext_resource type="Texture2D" uid="uid://s0p3ioiqty7b" path="res://images/items_and_weapons.png" id="4_6w1cc"]
@@ -45,6 +45,10 @@ region = Rect2(0, 0, 8, 8)
 [sub_resource type="AtlasTexture" id="AtlasTexture_fjqh0"]
 atlas = ExtResource("4_6w1cc")
 region = Rect2(0, 8, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g7bt1"]
+atlas = ExtResource("4_6w1cc")
+region = Rect2(24, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ca31r"]
 atlas = ExtResource("4_6w1cc")
@@ -127,6 +131,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_g7bt1")
+}],
+"loop": true,
+"name": &"heart_container",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_ca31r")
 }],
 "loop": false,
@@ -167,7 +179,7 @@ z_index = -1
 texture_filter = 1
 position = Vector2(8, 8)
 sprite_frames = SubResource("SpriteFrames_ofqey")
-animation = &"timer"
+animation = &"heart_container"
 autoplay = "default"
 
 [connection signal="area_entered" from="Dropped Item" to="." method="_on_area_entered"]

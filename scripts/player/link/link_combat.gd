@@ -5,13 +5,14 @@ var current_attacked_iframes : float
 @export var attacked_knockback_force : float = 140
 @export var attacked_knockback_duration : float = .2
 @export var max_block_angle : float = 40
-var player : CharacterBody2D
+var player : LinkController
 signal play_sword_swing_sound
 signal play_shield_block_sound
 signal play_attacked_sound
 signal sword_swing_attack
+signal full_health_sword_swing
 
-func initialize(parent: CharacterBody2D) -> void:
+func initialize(parent : LinkController) -> void:
 	player = parent
 
 func process(delta: float) -> void:
@@ -39,6 +40,8 @@ func use_weapon(item : ENUM.KEY_ITEM_TYPE) -> void:
 
 func wooden_sword_swing() -> void:
 	player.get_player_state().is_attacking = true
+	if(player.game_data.current_player_health == player.game_data.max_player_health):
+		full_health_sword_swing.emit()
 	sword_swing_attack.emit()
 	play_sword_swing_sound.emit()
 

@@ -573,6 +573,7 @@ one_way_collision_margin = 0.0
 [connection signal="area_exited" from="Link Hitbox" to="LinkInteract" method="_on_area_2d_area_exited"]
 [connection signal="sprite_update" from="LinkMovement" to="Link Sprite Mask/Link Sprite" method="_on_link_movement_sprite_update"]
 [connection signal="sprite_update" from="LinkMovement" to="Attack Area" method="set_direction"]
+[connection signal="full_health_sword_swing" from="LinkCombat" to="Link AltWeapon" method="_on_link_combat_full_health_sword_swing"]
 [connection signal="play_attacked_sound" from="LinkCombat" to="AudioPlayer" method="play_attacked_sound"]
 [connection signal="play_shield_block_sound" from="LinkCombat" to="AudioPlayer" method="play_shield_block_sound"]
 [connection signal="play_sword_swing_sound" from="LinkCombat" to="AudioPlayer" method="play_sword_swing_sound"]

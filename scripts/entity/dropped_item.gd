@@ -30,6 +30,8 @@ func set_item_type(type : ENUM.ITEM_TYPE) -> void:
 			$"Dropped Item/AnimatedSprite2D".play("blue_map")
 		ENUM.ITEM_TYPE.COMPASS:
 			$"Dropped Item/AnimatedSprite2D".play("compass")
+		ENUM.ITEM_TYPE.HEART_CONTAINER:
+			$"Dropped Item/AnimatedSprite2D".play("heart_container")
 		ENUM.ITEM_TYPE.FAIRY:
 			# TODO spawn fairy here
 			queue_free()
@@ -41,7 +43,7 @@ func _on_area_entered(area: Area2D) -> void:
 	if(times_picked_up > 0):
 		return
 	times_picked_up += 1
-	var game_data = get_tree().get_first_node_in_group("GameData")
+	var game_data : GameData = get_tree().get_first_node_in_group("GameData")
 	match item_type:
 		ENUM.ITEM_TYPE.GREEN_RUPEE:
 			if(rupee_value_override != -1):
@@ -64,6 +66,9 @@ func _on_area_entered(area: Area2D) -> void:
 		ENUM.ITEM_TYPE.COMPASS:
 			game_data.picked_up_dungeon_compass()
 			sfxplayer.play_sound(SFXPlayer.SFX.HEART_PICKUP)
+		ENUM.ITEM_TYPE.HEART_CONTAINER:
+			game_data.change_max_hearts(2)
+			sfxplayer.play_sound(SFXPlayer.SFX.HEART_CONTAINER_PICKUP)
 	$"Dropped Item/AnimatedSprite2D".visible = false
 	item_picked_up.emit()
 	queue_free()
