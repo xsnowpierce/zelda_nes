@@ -1,17 +1,17 @@
 [gd_scene load_steps=62 format=3 uid="uid://b2gll84jnyb1u"]
 
-[ext_resource type="Script" path="res://scripts/player/link/link_controller.gd" id="1_af1d6"]
+[ext_resource type="Script" uid="uid://sj8lq45j0tyk" path="res://scripts/player/link/link_controller.gd" id="1_af1d6"]
 [ext_resource type="Texture2D" uid="uid://cpa11tutqc7h1" path="res://images/Sprite-0001.png" id="2_8jjpd"]
-[ext_resource type="Shader" path="res://scenes/link.gdshader" id="2_dkx5a"]
-[ext_resource type="Script" path="res://scripts/player/link/link_sprite.gd" id="3_1avva"]
-[ext_resource type="Script" path="res://scripts/player/link/link_attack_area.gd" id="4_piqjp"]
-[ext_resource type="Script" path="res://scripts/player/link/link_sound_player.gd" id="5_bwarm"]
-[ext_resource type="Script" path="res://scripts/player/link/link_movement.gd" id="5_excs0"]
-[ext_resource type="Script" path="res://scripts/player/link/sprite_hit_colour.gd" id="5_tr0rj"]
-[ext_resource type="Script" path="res://scripts/player/link/link_combat.gd" id="6_2h8fc"]
-[ext_resource type="Script" path="res://scripts/player/link/link_interact.gd" id="7_2vkl0"]
-[ext_resource type="Script" path="res://scripts/player/link/link_state.gd" id="8_ryf5n"]
-[ext_resource type="Script" path="res://scripts/player/link/link_alt_weapon.gd" id="10_d33na"]
+[ext_resource type="Shader" uid="uid://8mq5p4boxc2e" path="res://scenes/link.gdshader" id="2_dkx5a"]
+[ext_resource type="Script" uid="uid://k3je4ukw7ruc" path="res://scripts/player/link/link_sprite.gd" id="3_1avva"]
+[ext_resource type="Script" uid="uid://drnw60mn8041n" path="res://scripts/player/link/link_attack_area.gd" id="4_piqjp"]
+[ext_resource type="Script" uid="uid://cmn2avax0xg3b" path="res://scripts/player/link/link_sound_player.gd" id="5_bwarm"]
+[ext_resource type="Script" uid="uid://bin7dasmbb2t0" path="res://scripts/player/link/link_movement.gd" id="5_excs0"]
+[ext_resource type="Script" uid="uid://clnjfkd1ncu75" path="res://scripts/player/link/sprite_hit_colour.gd" id="5_tr0rj"]
+[ext_resource type="Script" uid="uid://dotywcmnr8du0" path="res://scripts/player/link/link_combat.gd" id="6_2h8fc"]
+[ext_resource type="Script" uid="uid://h66gsv47s5vt" path="res://scripts/player/link/link_interact.gd" id="7_2vkl0"]
+[ext_resource type="Script" uid="uid://xkqy3rv80txk" path="res://scripts/player/link/link_state.gd" id="8_ryf5n"]
+[ext_resource type="Script" uid="uid://tndlx3h1adbo" path="res://scripts/player/link/link_alt_weapon.gd" id="10_d33na"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3pcpd"]
 size = Vector2(15.9, 7.9)
@@ -22,11 +22,11 @@ shader = ExtResource("2_dkx5a")
 shader_parameter/OLD_COLOUR_1 = Color(0.501961, 0.815686, 0.0627451, 1)
 shader_parameter/OLD_COLOUR_2 = Color(0.784314, 0.298039, 0.0470588, 1)
 shader_parameter/OLD_COLOUR_3 = Color(0.988235, 0.596078, 0.219608, 1)
-shader_parameter/OLD_COLOUR_4 = null
+shader_parameter/OLD_COLOUR_4 = Color(0, 0, 0, 1)
 shader_parameter/NEW_COLOUR_1 = Color(0.501961, 0.12549, 0.0627451, 1)
 shader_parameter/NEW_COLOUR_2 = Color(0.784314, 0.0784314, 0.0470588, 1)
 shader_parameter/NEW_COLOUR_3 = Color(0.988235, 0.596078, 0.905882, 1)
-shader_parameter/NEW_COLOUR_4 = null
+shader_parameter/NEW_COLOUR_4 = Color(0, 0, 0, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_f118x"]
 atlas = ExtResource("2_8jjpd")

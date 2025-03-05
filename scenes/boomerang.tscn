@@ -1,6 +1,6 @@
 [gd_scene load_steps=22 format=3 uid="uid://w84glnjfeuco"]
 
-[ext_resource type="Script" path="res://scenes/boomerang.gd" id="1_wv1pk"]
+[ext_resource type="Script" uid="uid://d7ksrnrpkojj" path="res://scripts/player/item/boomerang.gd" id="1_wv1pk"]
 [ext_resource type="Texture2D" uid="uid://cpa11tutqc7h1" path="res://images/Sprite-0001.png" id="2_ungyk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c55lh"]

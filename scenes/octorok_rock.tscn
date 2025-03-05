@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bbb88pavh34n6"]
 
-[ext_resource type="Script" path="res://scripts/entity/enemy/octorock_rock.gd" id="1_0iau7"]
+[ext_resource type="Script" uid="uid://cuhs8wlge285p" path="res://scripts/entity/enemy/octorock_rock.gd" id="1_0iau7"]
 [ext_resource type="Texture2D" uid="uid://7uv75ywip144" path="res://images/enemies.png" id="2_u0ufs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3145t"]

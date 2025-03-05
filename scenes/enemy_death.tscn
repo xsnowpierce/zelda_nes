@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://b87w5pnfnkmc2"]
 
-[ext_resource type="Script" path="res://scripts/entity/enemy/enemy_death.gd" id="1_t4cvn"]
+[ext_resource type="Script" uid="uid://brcmcicrk4ex3" path="res://scripts/entity/enemy/enemy_death.gd" id="1_t4cvn"]
 [ext_resource type="Texture2D" uid="uid://fkgn6glcffe" path="res://images/NES - The Legend of Zelda - Enemy Death.png" id="2_2xds8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fshu1"]

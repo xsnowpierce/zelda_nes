@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://bhj35nnpvr72k"]
 
-[ext_resource type="Script" path="res://scripts/world/burnable_tile.gd" id="1_oj8a3"]
+[ext_resource type="Script" uid="uid://guas4nebul7i" path="res://scripts/world/burnable_tile.gd" id="1_oj8a3"]
 [ext_resource type="Texture2D" uid="uid://px3oy8t7d8tm" path="res://images/sheet_03.png" id="2_bixco"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_asj3c"]

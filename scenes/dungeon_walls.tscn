@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://ce1bg1140ays1"]
 
-[ext_resource type="Script" path="res://scripts/world/dungeon_walls.gd" id="1_2byn3"]
+[ext_resource type="Script" uid="uid://c2o76p0m8nueq" path="res://scripts/world/dungeon_walls.gd" id="1_2byn3"]
 [ext_resource type="Texture2D" uid="uid://c0pwpxlkow2pa" path="res://images/dungeon_tilemap.png" id="1_cjynw"]
 [ext_resource type="PackedScene" uid="uid://csbgb1xk300nl" path="res://scenes/dungeon_tile_doors.tscn" id="3_2n3hw"]
-[ext_resource type="Script" path="res://scripts/player/link/link_force_walk.gd" id="4_yjy31"]
+[ext_resource type="Script" uid="uid://buf3a14qxwp65" path="res://scripts/player/link/link_force_walk.gd" id="4_yjy31"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xebn6"]
 atlas = ExtResource("1_cjynw")

@@ -1,7 +1,7 @@
 [gd_scene load_steps=23 format=3 uid="uid://bwun2jn6jgqnu"]
 
 [ext_resource type="Texture2D" uid="uid://cpa11tutqc7h1" path="res://images/Sprite-0001.png" id="1_62tfi"]
-[ext_resource type="Script" path="res://scenes/sword_beam_hit.gd" id="1_f2p2x"]
+[ext_resource type="Script" uid="uid://bhpbreg5qwncr" path="res://scripts/player/link/sword_beam_hit.gd" id="1_f2p2x"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0voni"]
 atlas = ExtResource("1_62tfi")
@@ -242,8 +242,8 @@ tracks/3/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_i5a8i"]
 _data = {
-"RESET": SubResource("Animation_mdw25"),
-"sword_beam": SubResource("Animation_3wtew")
+&"RESET": SubResource("Animation_mdw25"),
+&"sword_beam": SubResource("Animation_3wtew")
 }
 
 [node name="sword_beam_hit" type="Node2D"]

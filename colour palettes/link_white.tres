@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="SpriteHitColour" load_steps=2 format=3 uid="uid://1xxyn06lr837"]
 
-[ext_resource type="Script" path="res://scripts/player/link/sprite_hit_colour.gd" id="1_axdic"]
+[ext_resource type="Script" uid="uid://clnjfkd1ncu75" path="res://scripts/player/link/sprite_hit_colour.gd" id="1_axdic"]
 
 [resource]
 script = ExtResource("1_axdic")

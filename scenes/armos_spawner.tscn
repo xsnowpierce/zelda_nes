@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://drwn5sedpqqf6"]
 
-[ext_resource type="Script" path="res://scripts/entity/enemy/armos_spawner.gd" id="1_tpp5c"]
+[ext_resource type="Script" uid="uid://54qjrgu2uopw" path="res://scripts/entity/enemy/armos_spawner.gd" id="1_tpp5c"]
 [ext_resource type="Texture2D" uid="uid://px3oy8t7d8tm" path="res://images/sheet_03.png" id="2_uki8y"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ucaeg"]

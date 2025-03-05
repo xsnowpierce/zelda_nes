@@ -1,9 +1,9 @@
 [gd_scene load_steps=13 format=3 uid="uid://tnoirjgjg855"]
 
-[ext_resource type="Script" path="res://scenes/gel.gd" id="1_yq7vd"]
-[ext_resource type="Shader" path="res://scenes/link.gdshader" id="2_4k7wk"]
+[ext_resource type="Script" uid="uid://bnulch7xfpcg0" path="res://scripts/entity/enemy/gel.gd" id="1_yq7vd"]
+[ext_resource type="Shader" uid="uid://8mq5p4boxc2e" path="res://scenes/link.gdshader" id="2_4k7wk"]
 [ext_resource type="Texture2D" uid="uid://bwgbbitwmdbm0" path="res://images/dungeon_enemies.png" id="2_h7hxp"]
-[ext_resource type="Script" path="res://scenes/enemy_scenes/enemy_hit_effect.gd" id="4_45gi7"]
+[ext_resource type="Script" uid="uid://cmd4uujjd2kxs" path="res://scripts/entity/enemy/enemy_hit_effect.gd" id="4_45gi7"]
 [ext_resource type="Resource" uid="uid://4utbqbcejrn4" path="res://colour palettes/hit_effect_1.tres" id="5_b1dlf"]
 [ext_resource type="Resource" uid="uid://k5ei2dg4m6oj" path="res://colour palettes/hit_effect_2.tres" id="6_m2ggc"]
 [ext_resource type="Resource" uid="uid://cggcj5g1dq8du" path="res://colour palettes/hit_effect_3.tres" id="7_4kw73"]
@@ -17,11 +17,11 @@ shader = ExtResource("2_4k7wk")
 shader_parameter/OLD_COLOUR_1 = Color(0, 0.909804, 0.847059, 1)
 shader_parameter/OLD_COLOUR_2 = Color(0, 0.501961, 0.533333, 1)
 shader_parameter/OLD_COLOUR_3 = Color(0.0941176, 0.235294, 0.360784, 1)
-shader_parameter/OLD_COLOUR_4 = null
-shader_parameter/NEW_COLOUR_1 = null
-shader_parameter/NEW_COLOUR_2 = null
-shader_parameter/NEW_COLOUR_3 = null
-shader_parameter/NEW_COLOUR_4 = null
+shader_parameter/OLD_COLOUR_4 = Color(0, 0, 0, 1)
+shader_parameter/NEW_COLOUR_1 = Color(0, 0, 0, 1)
+shader_parameter/NEW_COLOUR_2 = Color(0, 0, 0, 1)
+shader_parameter/NEW_COLOUR_3 = Color(0, 0, 0, 1)
+shader_parameter/NEW_COLOUR_4 = Color(0, 0, 0, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_odtuh"]
 atlas = ExtResource("2_h7hxp")

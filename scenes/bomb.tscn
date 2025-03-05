@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://f6eh8j2v5ntc"]
 
-[ext_resource type="Script" path="res://scripts/player/item/bomb.gd" id="1_qfobf"]
+[ext_resource type="Script" uid="uid://i3o3s3itbg0f" path="res://scripts/player/item/bomb.gd" id="1_qfobf"]
 [ext_resource type="Texture2D" uid="uid://s0p3ioiqty7b" path="res://images/items_and_weapons.png" id="2_yj0mx"]
 [ext_resource type="Texture2D" uid="uid://u1i1trqicn2k" path="res://images/weapons.png" id="3_4ihp4"]
 
@@ -330,8 +330,8 @@ tracks/11/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3mt45"]
 _data = {
-"RESET": SubResource("Animation_guhd2"),
-"bomb_explode": SubResource("Animation_fgmxs")
+&"RESET": SubResource("Animation_guhd2"),
+&"bomb_explode": SubResource("Animation_fgmxs")
 }
 
 [node name="Bomb" type="Area2D" groups=["Player_Attack", "Player_Bomb"]]

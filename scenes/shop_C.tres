@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="InteriorData" load_steps=6 format=3 uid="uid://bs6obu18aoljd"]
 
-[ext_resource type="Script" path="res://scripts/world/interior_data.gd" id="1_xxoof"]
-[ext_resource type="Script" path="res://scripts/world/shop_item.gd" id="2_04at0"]
+[ext_resource type="Script" uid="uid://dk8xcg3x6n5x7" path="res://scripts/world/interior_data.gd" id="1_xxoof"]
+[ext_resource type="Script" uid="uid://x28wtrdpxqdv" path="res://scripts/world/shop_item.gd" id="2_04at0"]
 
 [sub_resource type="Resource" id="Resource_ethic"]
 script = ExtResource("2_04at0")

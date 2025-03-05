@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://d4jus2eb4u32x"]
 
-[ext_resource type="Script" path="res://scenes/blade_trap.gd" id="1_bfsjh"]
+[ext_resource type="Script" uid="uid://djao5a3lf0ss7" path="res://scripts/entity/enemy/blade_trap.gd" id="1_bfsjh"]
 [ext_resource type="Texture2D" uid="uid://bwgbbitwmdbm0" path="res://images/dungeon_enemies.png" id="2_mq5oo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gl1ms"]

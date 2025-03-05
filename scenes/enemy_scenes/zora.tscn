@@ -1,10 +1,10 @@
 [gd_scene load_steps=15 format=3 uid="uid://dhxxr225o5tr3"]
 
-[ext_resource type="Script" path="res://scripts/entity/enemy/zora.gd" id="1_wqvra"]
+[ext_resource type="Script" uid="uid://dtxorlprqjb48" path="res://scripts/entity/enemy/zora.gd" id="1_wqvra"]
 [ext_resource type="Texture2D" uid="uid://7uv75ywip144" path="res://images/enemies.png" id="2_eo3q0"]
 [ext_resource type="PackedScene" uid="uid://bx5f8ndr07fwn" path="res://scenes/zora_ball.tscn" id="2_sgqyw"]
-[ext_resource type="Shader" path="res://scenes/link.gdshader" id="3_ro0cq"]
-[ext_resource type="Script" path="res://scenes/enemy_scenes/enemy_hit_effect.gd" id="5_fasxh"]
+[ext_resource type="Shader" uid="uid://8mq5p4boxc2e" path="res://scenes/link.gdshader" id="3_ro0cq"]
+[ext_resource type="Script" uid="uid://cmd4uujjd2kxs" path="res://scripts/entity/enemy/enemy_hit_effect.gd" id="5_fasxh"]
 [ext_resource type="Resource" uid="uid://4utbqbcejrn4" path="res://colour palettes/hit_effect_1.tres" id="6_2puyt"]
 [ext_resource type="Resource" uid="uid://k5ei2dg4m6oj" path="res://colour palettes/hit_effect_2.tres" id="7_tro7b"]
 [ext_resource type="Resource" uid="uid://cggcj5g1dq8du" path="res://colour palettes/hit_effect_3.tres" id="8_xlfnr"]
@@ -18,11 +18,11 @@ shader = ExtResource("3_ro0cq")
 shader_parameter/OLD_COLOUR_1 = Color(0.847059, 0.156863, 0, 1)
 shader_parameter/OLD_COLOUR_2 = Color(0, 0.501961, 0.533333, 1)
 shader_parameter/OLD_COLOUR_3 = Color(0, 0, 0, 1)
-shader_parameter/OLD_COLOUR_4 = null
-shader_parameter/NEW_COLOUR_1 = null
-shader_parameter/NEW_COLOUR_2 = null
-shader_parameter/NEW_COLOUR_3 = null
-shader_parameter/NEW_COLOUR_4 = null
+shader_parameter/OLD_COLOUR_4 = Color(0, 0, 0, 1)
+shader_parameter/NEW_COLOUR_1 = Color(0, 0, 0, 1)
+shader_parameter/NEW_COLOUR_2 = Color(0, 0, 0, 1)
+shader_parameter/NEW_COLOUR_3 = Color(0, 0, 0, 1)
+shader_parameter/NEW_COLOUR_4 = Color(0, 0, 0, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jym38"]
 atlas = ExtResource("2_eo3q0")
