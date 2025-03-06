@@ -10,24 +10,22 @@ var raycast_offset : Vector2 = Vector2(8, 8)
 @export var rotate_sprite : bool = true
 @export var turn_towards_link_chance : float = 0.5
 
+var move_timer : Timer
+
 func _ready() -> void:
 	super()
-	rotate_enemy(get_rotate_direction())
+	current_forward_vector = get_rotate_direction()
+	rotate_enemy(current_forward_vector)
 
 func _physics_process(delta: float) -> void:
-	if(GameSettings.camera_is_moving):
+	if(GameSettings.camera_is_moving or is_moving):
 		return
-	if(should_move()):
-		try_rotate()
-		move()
+	try_rotate()
+	move()
 
 func try_rotate() -> void:
 	if(randf_range(0, 1) > rotate_chance):
 		rotate_enemy(get_rotate_direction())
-	pass
-
-func should_move() -> bool:
-	return !is_moving
 
 func move() -> void:
 	if(is_moving or !can_move()):
@@ -43,7 +41,7 @@ func move() -> void:
 			if(check_if_move_is_valid(direction)):
 				move_to_direction(direction)
 				return
-		print("couldnt find possible move") # no possible moves?
+		print("couldn't find possible move") # No possible moves?
 
 func check_if_move_is_valid(target_direction : Vector2) -> bool:
 	if(Utils.is_out_of_bounds(get_target_position_from_direction(target_direction), camera, true)):
@@ -68,7 +66,6 @@ func move_to_direction(target_direction : Vector2) -> void:
 	rotate_enemy(target_direction)
 	var target_position = get_target_position_from_direction(target_direction)
 	
-		# move to position
 	while (global_position.distance_to(target_position) > 1):
 		if(is_attacked_knockback):
 			target_position = global_position
@@ -122,7 +119,7 @@ func is_link_in_view() -> Vector2:
 		if(link_relative_position.y > our_relative_position.y):
 			return Vector2.DOWN
 		else:
-			Vector2.UP
+			return Vector2.UP
 	elif our_relative_position.y == link_relative_position.y:
 		if(link_relative_position.x > our_relative_position.x):
 			return Vector2.RIGHT

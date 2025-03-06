@@ -53,6 +53,7 @@ move_speed = 32.0
 rotate_sprite = false
 enemy_type = 34
 max_health = 4
+has_knockback = true
 collision_layers_bitmask = 4099
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

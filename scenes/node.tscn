@@ -1,4 +1,4 @@
-[gd_scene load_steps=347 format=4 uid="uid://bnrlmifgdjgsb"]
+[gd_scene load_steps=346 format=4 uid="uid://bnrlmifgdjgsb"]
 
 [ext_resource type="Script" uid="uid://btlnf5jdbrn2t" path="res://scripts/utils/GameData.gd" id="1_fiv6q"]
 [ext_resource type="Script" uid="uid://bd5td35mp3b6s" path="res://scripts/player/link/camera.gd" id="1_xkdoo"]
@@ -67,7 +67,6 @@
 [ext_resource type="Script" uid="uid://cxolxoq2tj0o6" path="res://scripts/entity/enemy/enemy_spawn_group.gd" id="29_e8xa5"]
 [ext_resource type="AudioStream" uid="uid://cvjkdsh60ahwj" path="res://sound/sfx/The Legend of Zelda Cartoon Sound Effects Boss Roaring.wav" id="30_i4yae"]
 [ext_resource type="Script" uid="uid://n27twyd57gcb" path="res://scripts/entity/enemy/enemy_spawn.gd" id="30_ynj6t"]
-[ext_resource type="PackedScene" uid="uid://drwn5sedpqqf6" path="res://scenes/armos_spawner.tscn" id="32_30it7"]
 [ext_resource type="AudioStream" uid="uid://bvqaj4oqdgajb" path="res://sound/sfx/The Legend of Zelda Cartoon Sound Effects Boss Defeated.wav" id="32_jb8rv"]
 [ext_resource type="AudioStream" uid="uid://cmfpaw11ggj1q" path="res://sound/music/dungeon_music.wav" id="36_8um02"]
 [ext_resource type="PackedScene" uid="uid://dnhpm34f6ka1c" path="res://scenes/spawnpoint.tscn" id="36_w4qf6"]
@@ -1388,7 +1387,7 @@ hide_spawn_clouds = false
 [sub_resource type="Resource" id="Resource_cownx"]
 script = ExtResource("30_ynj6t")
 enemy_type = 34
-global_spawn_position = Vector2(3104, -1648)
+global_spawn_position = Vector2(0, 0)
 relative_grid_position = Vector2(-5, -3)
 use_spawn_type = 1
 spawn_delay = 0.0
@@ -1398,7 +1397,7 @@ spawn_with_key = false
 [sub_resource type="Resource" id="Resource_2qj2n"]
 script = ExtResource("30_ynj6t")
 enemy_type = 34
-global_spawn_position = Vector2(3088, -1616)
+global_spawn_position = Vector2(0, 0)
 relative_grid_position = Vector2(2, 0)
 use_spawn_type = 1
 spawn_delay = 0.0
@@ -1408,7 +1407,7 @@ spawn_with_key = false
 [sub_resource type="Resource" id="Resource_y6r5t"]
 script = ExtResource("30_ynj6t")
 enemy_type = 34
-global_spawn_position = Vector2(3040, -1616)
+global_spawn_position = Vector2(0, 0)
 relative_grid_position = Vector2(4, -3)
 use_spawn_type = 1
 spawn_delay = 0.0
@@ -2617,6 +2616,7 @@ enemy_blade_trap_scene = ExtResource("59_rlycn")
 enemy_goriya_scene = ExtResource("85_gkfa4")
 boss_aquamentus_scene = ExtResource("62_mm88y")
 current_player_health = 6
+current_keys = 10
 hyrule_music = ExtResource("2_7hpxk")
 dungeon_music = ExtResource("36_8um02")
 
@@ -2961,19 +2961,19 @@ script = ExtResource("50_gobiy")
 
 [node name="Eagle Dungeon Tile16" parent="Level/Eagle Dungeon" instance=ExtResource("54_bxtwv")]
 position = Vector2(3328, -1408)
-random_map_spawns = Array[ExtResource("29_e8xa5")]([SubResource("Resource_vgtn6")])
 door_north_status = 3
 door_south_status = 3
 door_east_status = 3
+random_map_spawns = Array[ExtResource("29_e8xa5")]([SubResource("Resource_vgtn6")])
 
 [node name="Entities" type="Node" parent="Level/Eagle Dungeon/Eagle Dungeon Tile16"]
 
 [node name="Eagle Dungeon Tile15" parent="Level/Eagle Dungeon" instance=ExtResource("54_bxtwv")]
 position = Vector2(2816, -1408)
-random_map_spawns = Array[ExtResource("29_e8xa5")]([SubResource("Resource_1s47h")])
 door_north_status = 3
 door_south_status = 3
 door_west_status = 3
+random_map_spawns = Array[ExtResource("29_e8xa5")]([SubResource("Resource_1s47h")])
 
 [node name="RoomCompletion" type="Node" parent="Level/Eagle Dungeon/Eagle Dungeon Tile15"]
 script = ExtResource("53_w5h1n")
@@ -2983,16 +2983,16 @@ spawn_key_location = Vector2(2848, -1376)
 
 [node name="Eagle Dungeon Tile" parent="Level/Eagle Dungeon" instance=ExtResource("54_bxtwv")]
 position = Vector2(3072, -1584)
-random_map_spawns = Array[ExtResource("29_e8xa5")]([SubResource("Resource_tvker")])
 door_east_status = 3
 door_west_status = 3
+random_map_spawns = Array[ExtResource("29_e8xa5")]([SubResource("Resource_tvker")])
 
 [node name="Entities" type="Node" parent="Level/Eagle Dungeon/Eagle Dungeon Tile"]
 
 [node name="Eagle Dungeon Tile2" parent="Level/Eagle Dungeon" instance=ExtResource("54_bxtwv")]
 position = Vector2(3072, -1760)
-random_map_spawns = Array[ExtResource("29_e8xa5")]([SubResource("Resource_2phxq")])
 door_north_status = 4
+random_map_spawns = Array[ExtResource("29_e8xa5")]([SubResource("Resource_2phxq")])
 
 [node name="RoomCompletion" type="Node" parent="Level/Eagle Dungeon/Eagle Dungeon Tile2"]
 script = ExtResource("53_w5h1n")
@@ -3002,10 +3002,10 @@ spawn_key_location = Vector2(3072, -1808)
 
 [node name="Eagle Dungeon Tile3" parent="Level/Eagle Dungeon" instance=ExtResource("54_bxtwv")]
 position = Vector2(2816, -1760)
-random_map_spawns = Array[ExtResource("29_e8xa5")]([SubResource("Resource_0nai3")])
 door_north_status = 1
 door_south_status = 3
 door_west_status = 3
+random_map_spawns = Array[ExtResource("29_e8xa5")]([SubResource("Resource_0nai3")])
 
 [node name="RoomCompletion" type="Node" parent="Level/Eagle Dungeon/Eagle Dungeon Tile3"]
 script = ExtResource("54_s4a83")
@@ -3015,10 +3015,10 @@ close_door_behind_direction = 2
 
 [node name="Eagle Dungeon Tile4" parent="Level/Eagle Dungeon" instance=ExtResource("54_bxtwv")]
 position = Vector2(3328, -1760)
-random_map_spawns = Array[ExtResource("29_e8xa5")]([SubResource("Resource_144r3")])
 door_north_status = 4
 door_south_status = 3
 door_east_status = 3
+random_map_spawns = Array[ExtResource("29_e8xa5")]([SubResource("Resource_144r3")])
 
 [node name="Entities" type="Node" parent="Level/Eagle Dungeon/Eagle Dungeon Tile4"]
 
@@ -3029,9 +3029,9 @@ rupee_value_override = -1
 
 [node name="Eagle Dungeon Tile5" parent="Level/Eagle Dungeon" instance=ExtResource("54_bxtwv")]
 position = Vector2(2816, -1936)
-random_map_spawns = Array[ExtResource("29_e8xa5")]([SubResource("Resource_ofpub")])
 door_north_status = 3
 door_west_status = 2
+random_map_spawns = Array[ExtResource("29_e8xa5")]([SubResource("Resource_ofpub")])
 
 [node name="Entities" type="Node" parent="Level/Eagle Dungeon/Eagle Dungeon Tile5"]
 
@@ -3050,9 +3050,9 @@ restrict_downwards_push = true
 
 [node name="Eagle Dungeon Tile6" parent="Level/Eagle Dungeon" instance=ExtResource("54_bxtwv")]
 position = Vector2(3072, -1936)
-random_map_spawns = Array[ExtResource("29_e8xa5")]([SubResource("Resource_066er")])
 door_south_status = 4
 door_east_status = 1
+random_map_spawns = Array[ExtResource("29_e8xa5")]([SubResource("Resource_066er")])
 
 [node name="Entities" type="Node" parent="Level/Eagle Dungeon/Eagle Dungeon Tile6"]
 
@@ -3063,9 +3063,9 @@ rupee_value_override = -1
 
 [node name="Eagle Dungeon Tile7" parent="Level/Eagle Dungeon" instance=ExtResource("54_bxtwv")]
 position = Vector2(3328, -1936)
-random_map_spawns = Array[ExtResource("29_e8xa5")]([SubResource("Resource_d7hhs")])
 door_north_status = 3
 door_south_status = 4
+random_map_spawns = Array[ExtResource("29_e8xa5")]([SubResource("Resource_d7hhs")])
 
 [node name="Entities" type="Node" parent="Level/Eagle Dungeon/Eagle Dungeon Tile7"]
 
@@ -3079,10 +3079,10 @@ door_east_status = 3
 
 [node name="Eagle Dungeon Tile9" parent="Level/Eagle Dungeon" instance=ExtResource("54_bxtwv")]
 position = Vector2(3584, -2112)
-random_map_spawns = Array[ExtResource("29_e8xa5")]([SubResource("Resource_1ma2u")])
 door_north_status = 3
 door_east_status = 2
 door_west_status = 3
+random_map_spawns = Array[ExtResource("29_e8xa5")]([SubResource("Resource_1ma2u")])
 
 [node name="Entities" type="Node" parent="Level/Eagle Dungeon/Eagle Dungeon Tile9"]
 
@@ -3119,28 +3119,28 @@ door_west_status = 3
 
 [node name="Eagle Dungeon Tile12" parent="Level/Eagle Dungeon" instance=ExtResource("54_bxtwv")]
 position = Vector2(3072, -2112)
-random_map_spawns = Array[ExtResource("29_e8xa5")]([SubResource("Resource_q8cyr")])
 door_north_status = 1
 door_east_status = 3
 door_west_status = 3
+random_map_spawns = Array[ExtResource("29_e8xa5")]([SubResource("Resource_q8cyr")])
 
 [node name="Entities" type="Node" parent="Level/Eagle Dungeon/Eagle Dungeon Tile12"]
 
 [node name="Eagle Dungeon Tile13" parent="Level/Eagle Dungeon" instance=ExtResource("54_bxtwv")]
 position = Vector2(3072, -2288)
-random_map_spawns = Array[ExtResource("29_e8xa5")]([SubResource("Resource_5nlsk")])
 door_north_status = 3
 door_east_status = 3
 door_west_status = 1
+random_map_spawns = Array[ExtResource("29_e8xa5")]([SubResource("Resource_5nlsk")])
 
 [node name="Entities" type="Node" parent="Level/Eagle Dungeon/Eagle Dungeon Tile13"]
 
 [node name="Eagle Dungeon Tile14" parent="Level/Eagle Dungeon" instance=ExtResource("54_bxtwv")]
 position = Vector2(2816, -2288)
-random_map_spawns = Array[ExtResource("29_e8xa5")]([SubResource("Resource_dqcmw")])
 door_north_status = 3
 door_south_status = 3
 door_west_status = 3
+random_map_spawns = Array[ExtResource("29_e8xa5")]([SubResource("Resource_dqcmw")])
 
 [node name="Entities" type="Node" parent="Level/Eagle Dungeon/Eagle Dungeon Tile14"]
 
@@ -3652,23 +3652,9 @@ theme_override_constants/v_separation = 0
 reverse_fill = true
 script = ExtResource("9_famci")
 
-[node name="Enemy Spawners" type="Node" parent="."]
-process_mode = 1
-
-[node name="Armos Spawner" parent="Enemy Spawners" instance=ExtResource("32_30it7")]
-position = Vector2(1824, -560)
-
-[node name="Armos Spawner2" parent="Enemy Spawners" instance=ExtResource("32_30it7")]
-position = Vector2(1744, -560)
-
-[node name="Armos Spawner3" parent="Enemy Spawners" instance=ExtResource("32_30it7")]
-position = Vector2(1552, -736)
-
-[node name="Armos Spawner4" parent="Enemy Spawners" instance=ExtResource("32_30it7")]
-position = Vector2(1504, -736)
-
 [node name="SPAWNPOINT" parent="." instance=ExtResource("36_w4qf6")]
 process_mode = 1
+position = Vector2(3068.01, -1428.43)
 
 [node name="RNG_DROPPER" type="Node" parent="."]
 script = ExtResource("38_f8yhx")

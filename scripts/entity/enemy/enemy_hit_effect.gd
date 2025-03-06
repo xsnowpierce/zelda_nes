@@ -24,30 +24,22 @@ func _ready() -> void:
 	set_colour_palette(starting_sprite_palette)
 
 func hit_effect() -> void:
-	hit_flash_timer = hit_effect_length
-	if(is_hit_flash):
+	if is_hit_flash:
 		return
 	is_hit_flash = true
-	var hit_change_timer : float = hit_effect_colour_change_time
-	var times_changed : int = 1
+	var times_changed := 0
 	while hit_flash_timer > 0:
 		hit_flash_timer -= get_process_delta_time()
-		hit_change_timer -= get_process_delta_time()
-		if(hit_change_timer <= 0):
-			hit_change_timer = hit_effect_colour_change_time
-			if(times_changed >= 4):
-				times_changed = 0
-			match times_changed:
-				1:
-					set_colour_palette(hit_effect_palette_1)
-				2:
-					set_colour_palette(hit_effect_palette_2)
-				3:
-					set_colour_palette(hit_effect_palette_3)
-				_:
-					set_colour_palette(starting_sprite_palette)
-			times_changed += 1
-		await get_tree().process_frame
+		if times_changed % 4 == 0:
+			set_colour_palette(hit_effect_palette_1)
+		elif times_changed % 4 == 1:
+			set_colour_palette(hit_effect_palette_2)
+		elif times_changed % 4 == 2:
+			set_colour_palette(hit_effect_palette_3)
+		else:
+			set_colour_palette(starting_sprite_palette)
+		times_changed += 1
+		await get_tree().create_timer(hit_effect_colour_change_time).timeout
 	set_colour_palette(starting_sprite_palette)
 	is_hit_flash = false
 
