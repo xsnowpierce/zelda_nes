@@ -36,10 +36,10 @@ func _on_link_sprite_attack_ended() -> void:
 
 func get_attack_damage() -> int:
 	match(link.game_data.current_equipped_item_a):
-		ENUM.KEY_ITEM_TYPE.WOODEN_SWORD:
+		ENUM.ITEM_TYPE.WOODEN_SWORD:
 			return 2
-		ENUM.KEY_ITEM_TYPE.WHITE_SWORD:
+		ENUM.ITEM_TYPE.WHITE_SWORD:
 			return 4
-		ENUM.KEY_ITEM_TYPE.MAGICAL_SWORD:
+		ENUM.ITEM_TYPE.MAGICAL_SWORD:
 			return 6
 	return 1

@@ -1,4 +1,4 @@
-[gd_scene load_steps=347 format=4 uid="uid://bnrlmifgdjgsb"]
+[gd_scene load_steps=348 format=4 uid="uid://bnrlmifgdjgsb"]
 
 [ext_resource type="Script" uid="uid://btlnf5jdbrn2t" path="res://scripts/utils/GameData.gd" id="1_fiv6q"]
 [ext_resource type="Script" uid="uid://bd5td35mp3b6s" path="res://scripts/player/link/camera.gd" id="1_xkdoo"]
@@ -89,6 +89,7 @@
 [ext_resource type="PackedScene" uid="uid://cmhg4ibk0405j" path="res://scenes/enemy_scenes/aquamentus.tscn" id="62_mm88y"]
 [ext_resource type="Script" uid="uid://c0hbnqvvff5gr" path="res://scripts/world/dungeon_key_room_settings.gd" id="63_sj066"]
 [ext_resource type="Script" uid="uid://bwhwrdsytenn5" path="res://scripts/world/room_completion_push_block.gd" id="64_gqga1"]
+[ext_resource type="PackedScene" uid="uid://bbxp7t0tw5miq" path="res://scenes/key_item.tscn" id="67_yd82y"]
 [ext_resource type="PackedScene" uid="uid://bhj35nnpvr72k" path="res://scenes/burnable_tile.tscn" id="68_en6p7"]
 [ext_resource type="PackedScene" uid="uid://dmoo6a5lybrpp" path="res://scenes/enemy_scenes/stalfos.tscn" id="77_k2d4n"]
 [ext_resource type="PackedScene" uid="uid://2h8i8o7wy52v" path="res://scenes/dropped_item.tscn" id="79_svs6j"]
@@ -2619,6 +2620,7 @@ boss_aquamentus_scene = ExtResource("62_mm88y")
 current_player_health = 6
 hyrule_music = ExtResource("2_7hpxk")
 dungeon_music = ExtResource("36_8um02")
+current_equipped_item_a = 1
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_7hpxk")
@@ -3104,10 +3106,8 @@ door_east_status = 3
 
 [node name="Entities" type="Node" parent="Level/Eagle Dungeon/Eagle Dungeon Tile10"]
 
-[node name="Dropped Item" parent="Level/Eagle Dungeon/Eagle Dungeon Tile10/Entities" instance=ExtResource("79_svs6j")]
+[node name="Key Item" parent="Level/Eagle Dungeon/Eagle Dungeon Tile10/Entities" instance=ExtResource("67_yd82y")]
 position = Vector2(3832, -2120)
-item_type = 23
-rupee_value_override = -1
 
 [node name="Eagle Dungeon Tile11" parent="Level/Eagle Dungeon" instance=ExtResource("54_bxtwv")]
 position = Vector2(2560, -1936)

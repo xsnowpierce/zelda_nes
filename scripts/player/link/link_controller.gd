@@ -45,7 +45,7 @@ func get_sprite() -> LinkSprite:
 func get_link_interact() -> Node:
 	return $LinkInteract
 
-func use_alt_weapon(item : ENUM.KEY_ITEM_TYPE) -> void:
+func use_alt_weapon(item : ENUM.ITEM_TYPE) -> void:
 	$"Link AltWeapon".use_alternate_weapon(item)
 	
 func use_item_animation() -> void:
@@ -77,3 +77,9 @@ func get_player_camera_relative_tile_position() -> Vector2:
 	collider_centre.x /= 16
 	collider_centre.y /= 11
 	return Vector2(floori(collider_centre.x), floori(collider_centre.y))
+
+func pickup_key_item_animation(item : ENUM.ITEM_TYPE) -> void:
+	$LinkInteract.picked_up_key_item(item)
+
+func get_pickup_item_sprite() -> LinkPickupItemSprite:
+	return $pickup_item_sprite

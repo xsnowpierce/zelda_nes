@@ -28,11 +28,11 @@ func check_attack() -> void:
 	if(Input.is_action_just_pressed("alternate_attack") and !player.get_player_state().is_attacking):
 		use_weapon(player.game_data.current_equipped_item_b)
 
-func use_weapon(item : ENUM.KEY_ITEM_TYPE) -> void:
-	if(item == ENUM.KEY_ITEM_TYPE.NULL):
+func use_weapon(item : ENUM.ITEM_TYPE) -> void:
+	if(item == ENUM.ITEM_TYPE.NULL):
 		return
 	match item:
-		ENUM.KEY_ITEM_TYPE.WOODEN_SWORD:
+		ENUM.ITEM_TYPE.WOODEN_SWORD:
 			wooden_sword_swing()
 		_:
 			player.use_alt_weapon(item)

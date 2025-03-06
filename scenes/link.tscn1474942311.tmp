@@ -562,6 +562,7 @@ script = ExtResource("6_2h8fc")
 
 [node name="LinkInteract" type="Node" parent="."]
 script = ExtResource("7_2vkl0")
+pickup_animation_length = null
 
 [node name="LinkState" type="Node" parent="."]
 script = ExtResource("8_ryf5n")
@@ -577,7 +578,6 @@ shape = SubResource("RectangleShape2D_3pcpd")
 one_way_collision_margin = 0.0
 
 [node name="pickup_item_sprite" type="AnimatedSprite2D" parent="."]
-visible = false
 position = Vector2(-8, -24)
 sprite_frames = ExtResource("13_d5og5")
 animation = &"wooden_sword"

@@ -22,15 +22,20 @@ func _on_area_2d_area_exited(area: Area2D) -> void:
 	if(area.is_in_group("EntranceDoor")):
 		colliding_with_door = null
 
-func picked_up_key_item(type : ENUM.KEY_ITEM_TYPE) -> void:
-	player.game_data.player_pickup_key_item(type)
+func picked_up_key_item(type : ENUM.ITEM_TYPE) -> void:
+	player.get_pickup_item_sprite().set_item_type(type)
+	player.get_pickup_item_sprite().visible = true
 	key_item_pickup_sound.emit()
 	player.get_player_state().is_pickup_animation = true
 	var current_animation = player.get_sprite().animation
-	player.get_sprite().play("item_pickup")
+	if(player.get_pickup_item_sprite().is_wide_sprite):
+		player.get_sprite().play("large_item_pickup")
+	else:
+		player.get_sprite().play("item_pickup")
 	await get_tree().create_timer(pickup_animation_length).timeout
 	player.get_sprite().animation = current_animation
 	player.get_player_state().is_pickup_animation = false
+	player.get_pickup_item_sprite().visible = false
 
 func check_door_collision() -> void:
 	var grid_position = player.position - Vector2(8,8)

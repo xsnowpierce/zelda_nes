@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=3 uid="uid://b2gll84jnyb1u"]
+[gd_scene load_steps=62 format=3 uid="uid://b2gll84jnyb1u"]
 
 [ext_resource type="Script" uid="uid://sj8lq45j0tyk" path="res://scripts/player/link/link_controller.gd" id="1_af1d6"]
 [ext_resource type="Texture2D" uid="uid://cpa11tutqc7h1" path="res://images/Sprite-0001.png" id="2_8jjpd"]
@@ -12,8 +12,6 @@
 [ext_resource type="Script" uid="uid://h66gsv47s5vt" path="res://scripts/player/link/link_interact.gd" id="7_2vkl0"]
 [ext_resource type="Script" uid="uid://xkqy3rv80txk" path="res://scripts/player/link/link_state.gd" id="8_ryf5n"]
 [ext_resource type="Script" uid="uid://tndlx3h1adbo" path="res://scripts/player/link/link_alt_weapon.gd" id="10_d33na"]
-[ext_resource type="SpriteFrames" uid="uid://crvdt5bfv3mx6" path="res://scenes/dropped_item_frames.tres" id="13_d5og5"]
-[ext_resource type="Script" uid="uid://b51mlsxw0udlv" path="res://scenes/link_pickup_item_sprite.gd" id="14_ks7w5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3pcpd"]
 size = Vector2(15.9, 7.9)
@@ -181,10 +179,6 @@ region = Rect2(0, 16, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_73v24"]
 atlas = ExtResource("2_8jjpd")
 region = Rect2(16, 16, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_d5og5"]
-atlas = ExtResource("2_8jjpd")
-region = Rect2(16, 32, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_18du3"]
 animations = [{
@@ -427,14 +421,6 @@ animations = [{
 "loop": false,
 "name": &"use_item_up",
 "speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_d5og5")
-}],
-"loop": true,
-"name": &"wide_item_pickup",
-"speed": 5.0
 }]
 
 [sub_resource type="Resource" id="Resource_qwuou"]
@@ -520,7 +506,7 @@ texture_repeat = 1
 material = SubResource("ShaderMaterial_1hnhe")
 position = Vector2(8, 8)
 sprite_frames = SubResource("SpriteFrames_18du3")
-animation = &"wide_item_pickup"
+animation = &"magical_wand_left"
 autoplay = "up"
 script = ExtResource("3_1avva")
 default_sprite_palette = SubResource("Resource_qwuou")
@@ -576,14 +562,6 @@ position = Vector2(0, 4)
 shape = SubResource("RectangleShape2D_3pcpd")
 one_way_collision_margin = 0.0
 
-[node name="pickup_item_sprite" type="AnimatedSprite2D" parent="."]
-visible = false
-position = Vector2(-8, -24)
-sprite_frames = ExtResource("13_d5og5")
-animation = &"wooden_sword"
-centered = false
-script = ExtResource("14_ks7w5")
-
 [connection signal="animation_finished" from="Link Sprite Mask/Link Sprite" to="Link Sprite Mask/Link Sprite" method="_on_animation_finished"]
 [connection signal="animation_looped" from="Link Sprite Mask/Link Sprite" to="Link Sprite Mask/Link Sprite" method="_on_animation_finished"]
 [connection signal="attack_ended" from="Link Sprite Mask/Link Sprite" to="Attack Area" method="_on_link_sprite_attack_ended"]
@@ -591,8 +569,8 @@ script = ExtResource("14_ks7w5")
 [connection signal="area_entered" from="Link Hitbox" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_entered" from="Link Hitbox" to="LinkCombat" method="_on_link_hitbox_area_entered"]
 [connection signal="area_entered" from="Link Hitbox" to="LinkInteract" method="_on_area_2d_area_entered"]
-[connection signal="area_exited" from="Link Hitbox" to="." method="_on_link_hitbox_area_exited"]
 [connection signal="area_exited" from="Link Hitbox" to="." method="_on_area_2d_area_exited"]
+[connection signal="area_exited" from="Link Hitbox" to="." method="_on_link_hitbox_area_exited"]
 [connection signal="area_exited" from="Link Hitbox" to="LinkInteract" method="_on_area_2d_area_exited"]
 [connection signal="sprite_update" from="LinkMovement" to="Link Sprite Mask/Link Sprite" method="_on_link_movement_sprite_update"]
 [connection signal="sprite_update" from="LinkMovement" to="Attack Area" method="set_direction"]
@@ -606,6 +584,6 @@ script = ExtResource("14_ks7w5")
 [connection signal="key_item_pickup_sound" from="LinkInteract" to="AudioPlayer" method="play_key_item_pickup_sound"]
 [connection signal="area_entered" from="Link Collision Hitbox Area" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_entered" from="Link Collision Hitbox Area" to="LinkInteract" method="_on_area_2d_area_entered"]
-[connection signal="area_exited" from="Link Collision Hitbox Area" to="." method="_on_link_hitbox_area_exited"]
 [connection signal="area_exited" from="Link Collision Hitbox Area" to="." method="_on_area_2d_area_exited"]
+[connection signal="area_exited" from="Link Collision Hitbox Area" to="." method="_on_link_hitbox_area_exited"]
 [connection signal="area_exited" from="Link Collision Hitbox Area" to="LinkInteract" method="_on_area_2d_area_exited"]

@@ -31,7 +31,7 @@ enum INTERIOR_TYPE {
 @export var room_music : AudioStreamWAV
 
 @export_group("Item Given Settings")
-@export var item_to_give : ENUM.KEY_ITEM_TYPE
+@export var item_to_give : ENUM.ITEM_TYPE
 
 @export_group("Shop Settings")
 ## The item for purchase on the left side [br]
@@ -45,9 +45,9 @@ enum INTERIOR_TYPE {
 @export var shop_item_3 : ShopItem
 
 @export_group("Take Any One Settings")
-@export var take_any_item_choice_1 : ENUM.KEY_ITEM_TYPE
-@export var take_any_item_choice_2 : ENUM.KEY_ITEM_TYPE
-@export var take_any_item_choice_3 : ENUM.KEY_ITEM_TYPE
+@export var take_any_item_choice_1 : ENUM.ITEM_TYPE
+@export var take_any_item_choice_2 : ENUM.ITEM_TYPE
+@export var take_any_item_choice_3 : ENUM.ITEM_TYPE
 
 @export_group("It's A Secret Settings")
 @export var rupee_amount : int

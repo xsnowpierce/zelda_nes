@@ -6,7 +6,7 @@ var has_bow
 @onready var usable_items_menu : Control = $"top half/usable_items_row"
 
 signal selected_item_index_change(new_index : int)
-signal selected_item_type_change(new_item : ENUM.KEY_ITEM_TYPE)
+signal selected_item_type_change(new_item : ENUM.ITEM_TYPE)
 signal item_selection_change_sound()
 
 func _ready() -> void:
@@ -41,7 +41,7 @@ func get_next_item_slot_in_direction(direction: int) -> int:
 
 	# Collect valid items and track selected index
 	for i in range(usable_items_menu.item_slots.size()):
-		if get_item_slot(i) != ENUM.KEY_ITEM_TYPE.NULL and i != skip_slot:
+		if get_item_slot(i) != ENUM.ITEM_TYPE.NULL and i != skip_slot:
 			valid_items.append(i)
 			if i == current_selected_index:
 				selected_index = len(valid_items) - 1
@@ -63,16 +63,16 @@ func get_next_item_slot_in_direction(direction: int) -> int:
 
 	return valid_items[next_index]
 
-func get_item_slot(index: int) -> ENUM.KEY_ITEM_TYPE:
+func get_item_slot(index: int) -> ENUM.ITEM_TYPE:
 	if index >= 0 and index < usable_items_menu.item_slots.size():
 		return usable_items_menu.item_slots[index]  # Directly return if it's already an ENUM
-	return ENUM.KEY_ITEM_TYPE.NULL  # Return NULL if out of bounds
+	return ENUM.ITEM_TYPE.NULL  # Return NULL if out of bounds
 
 
 func is_item_slot_null(item_slot : int) -> bool:
-	var current_item : ENUM.KEY_ITEM_TYPE = usable_items_menu.item_slots[item_slot]
+	var current_item : ENUM.ITEM_TYPE = usable_items_menu.item_slots[item_slot]
 	print("item at slot: ", item_slot, " is ", current_item)
-	if(current_item == ENUM.KEY_ITEM_TYPE.NULL):
+	if(current_item == ENUM.ITEM_TYPE.NULL):
 			return true
 	# found our item
 	return false

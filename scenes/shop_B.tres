@@ -5,17 +5,17 @@
 
 [sub_resource type="Resource" id="Resource_ethic"]
 script = ExtResource("2_0d1ow")
-item_type = 5
-item_price = 90
+item_type = 15
+item_price = 130
 
 [sub_resource type="Resource" id="Resource_rrfil"]
 script = ExtResource("2_0d1ow")
-item_type = 15
-item_price = 100
+item_type = 0
+item_price = 20
 
 [sub_resource type="Resource" id="Resource_mih3j"]
 script = ExtResource("2_0d1ow")
-item_type = 10
+item_type = 25
 item_price = 80
 
 [resource]

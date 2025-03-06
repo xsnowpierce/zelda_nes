@@ -25,9 +25,9 @@ func process(delta: float) -> void:
 	if(current_sword_beam_cooldown > 0):
 		current_sword_beam_cooldown -= delta
 
-func use_alternate_weapon(item : ENUM.KEY_ITEM_TYPE) -> void:
+func use_alternate_weapon(item : ENUM.ITEM_TYPE) -> void:
 	match item:
-		ENUM.KEY_ITEM_TYPE.BOMB:
+		ENUM.ITEM_TYPE.BOMB:
 			if(is_instance_valid(current_projectile)):
 				return
 			if(player.game_data.current_bombs <= 0):
@@ -38,7 +38,7 @@ func use_alternate_weapon(item : ENUM.KEY_ITEM_TYPE) -> void:
 			player.game_data.add_child(bomb)
 			player.game_data.change_bombs(-1)
 			player.use_item_animation()
-		ENUM.KEY_ITEM_TYPE.BLUE_CANDLE:
+		ENUM.ITEM_TYPE.BLUE_CANDLE:
 			if(is_instance_valid(current_projectile)):
 				return
 			var flame = candle_flame_scene.instantiate()
@@ -47,12 +47,12 @@ func use_alternate_weapon(item : ENUM.KEY_ITEM_TYPE) -> void:
 			flame.initialize_fire(player.get_look_direction())
 			current_projectile = flame
 			player.use_item_animation()
-		ENUM.KEY_ITEM_TYPE.MAGICAL_ROD:
+		ENUM.ITEM_TYPE.MAGICAL_ROD:
 			if(is_instance_valid(current_projectile)):
 				return
 			player.get_player_state().is_shooting_magical_wand = true
 			player.get_sprite().on_magical_wand_cast()
-		ENUM.KEY_ITEM_TYPE.WOODEN_ARROW:
+		ENUM.ITEM_TYPE.WOODEN_ARROW:
 			if(is_instance_valid(current_projectile)):
 				return
 			if(player.game_data.current_rupees <= 0):
@@ -64,13 +64,13 @@ func use_alternate_weapon(item : ENUM.KEY_ITEM_TYPE) -> void:
 			current_projectile = arrow
 			player.use_item_animation()
 			player.game_data.change_rupees(-1)
-		ENUM.KEY_ITEM_TYPE.RECORDER:
+		ENUM.ITEM_TYPE.RECORDER:
 			player.game_data.set_whistle_pause_value(true)
 			get_tree().get_first_node_in_group("SFXPlayer").play_sound(SFXPlayer.SFX.WHISTLE_MUSIC)
 			await get_tree().create_timer(whistle_pause_time).timeout
 			player.played_flute.emit()
 			player.game_data.set_whistle_pause_value(false)
-		ENUM.KEY_ITEM_TYPE.WOODEN_BOOMERANG:
+		ENUM.ITEM_TYPE.WOODEN_BOOMERANG:
 			if(is_instance_valid(current_projectile)):
 				return
 			if(is_instance_valid(current_food)):
@@ -82,7 +82,7 @@ func use_alternate_weapon(item : ENUM.KEY_ITEM_TYPE) -> void:
 			current_projectile = boomerang
 			boomerang.connect("boomerang_picked_up", Callable(self, "boomerang_pickup"))
 			player.use_item_animation()
-		ENUM.KEY_ITEM_TYPE.MAGICAL_BOOMERANG:
+		ENUM.ITEM_TYPE.MAGICAL_BOOMERANG:
 			if(is_instance_valid(current_projectile)):
 				return
 			var boomerang = boomerang_scene.instantiate()
@@ -92,7 +92,7 @@ func use_alternate_weapon(item : ENUM.KEY_ITEM_TYPE) -> void:
 			current_projectile = boomerang
 			boomerang.connect("boomerang_picked_up", Callable(self, "boomerang_pickup"))
 			player.use_item_animation()
-		ENUM.KEY_ITEM_TYPE.FOOD:
+		ENUM.ITEM_TYPE.FOOD:
 			if(is_instance_valid(current_food)):
 				return
 			var food = food_item_scene.instantiate()
@@ -102,7 +102,7 @@ func use_alternate_weapon(item : ENUM.KEY_ITEM_TYPE) -> void:
 			player.food_placed.emit(food.global_position)
 			player.use_item_animation()
 		_:
-			print("Tried to attack with unhandled item type: (", str(item), ", ", ENUM.KEY_ITEM_TYPE.keys()[item] ,")")
+			print("Tried to attack with unhandled item type: (", str(item), ", ", ENUM.ITEM_TYPE.keys()[item] ,")")
 
 func cast_magical_wand_beam() -> void:
 	var wand_beam = magical_wand_scene.instantiate()

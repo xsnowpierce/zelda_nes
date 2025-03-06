@@ -110,8 +110,8 @@ var current_area : Node2D
 var camera : Camera2D
 var link : LinkController
 @export_group("")
-@export var current_equipped_item_a : ENUM.KEY_ITEM_TYPE = ENUM.KEY_ITEM_TYPE.NULL
-@export var current_equipped_item_b : ENUM.KEY_ITEM_TYPE = ENUM.KEY_ITEM_TYPE.NULL
+@export var current_equipped_item_a : ENUM.ITEM_TYPE = ENUM.ITEM_TYPE.NULL
+@export var current_equipped_item_b : ENUM.ITEM_TYPE = ENUM.ITEM_TYPE.NULL
 var game_is_paused : bool
 var link_using_whistle : bool
 var is_inside_dungeon : bool
@@ -126,8 +126,8 @@ signal bombs_changed(new_current_amount : int)
 signal max_bombs_changed(new_max_amount : int)
 signal pause_menu_opened
 signal pause_menu_closed
-signal equipment_slot_a_changed(new_item_type : ENUM.KEY_ITEM_TYPE)
-signal equipment_slot_b_changed(new_item_type : ENUM.KEY_ITEM_TYPE)
+signal equipment_slot_a_changed(new_item_type : ENUM.ITEM_TYPE)
+signal equipment_slot_b_changed(new_item_type : ENUM.ITEM_TYPE)
 signal pause_menu_control(given_control : bool)
 
 func _ready() -> void:
@@ -241,21 +241,15 @@ func player_finish_enter_door(door : Area2D) -> void:
 			$MusicPlayer.stream = dungeon_music
 			$MusicPlayer.play(0.0)
 
-func player_pickup_key_item(item_type : ENUM.KEY_ITEM_TYPE) -> void:
+func player_pickup_key_item(item_type : ENUM.ITEM_TYPE) -> void:
+	link.pickup_key_item_animation(item_type)
 	match item_type:
-		ENUM.KEY_ITEM_TYPE.WOODEN_SWORD:
+		ENUM.ITEM_TYPE.WOODEN_SWORD:
 			add_player_flag("obtained_wooden_sword")
-			if(current_equipped_item_a == ENUM.KEY_ITEM_TYPE.NULL):
+			if(current_equipped_item_a == ENUM.ITEM_TYPE.NULL):
 				equip_key_item(item_type, 1)
-		ENUM.KEY_ITEM_TYPE.DOOR_KEY:
-			current_keys += 1
-			keys_changed.emit(current_keys)
-		ENUM.KEY_ITEM_TYPE.HEART_CONTAINER:
-			change_max_hearts(2)
-			current_player_health = max_player_health
-			player_health_changed.emit(current_player_health)
 
-func equip_key_item(type : ENUM.KEY_ITEM_TYPE, slot : int) -> void:
+func equip_key_item(type : ENUM.ITEM_TYPE, slot : int) -> void:
 	if(slot == 0):
 		# equip to B slot
 		equipment_slot_b_changed.emit(type)
@@ -301,7 +295,7 @@ func enemy_drop_item(drop_position : Vector2) -> void:
 	dropped_item.set_item_type(next_drop)
 	add_child(dropped_item)
 
-func equipped_b_slot_change(new_item_type : ENUM.KEY_ITEM_TYPE) -> void:
+func equipped_b_slot_change(new_item_type : ENUM.ITEM_TYPE) -> void:
 	current_equipped_item_b = new_item_type
 
 func picked_up_dungeon_compass() -> void:

@@ -1,7 +1,6 @@
 extends Node
 
 @export var NPC_SPRITE_DATABASE : Array[Texture]
-@export var key_item_scene : PackedScene = preload("res://scenes/key_item.tscn")
 @export var dropped_item_scene : PackedScene = preload("res://scenes/dropped_item.tscn")
 
 @export var room_link_spawn_position : Vector2
@@ -81,8 +80,8 @@ func handle_interior(data : InteriorData) -> void:
 		match data.interior_type:
 			data.INTERIOR_TYPE.ITEM_GIVEN:
 				# spawn item(s)
-				if(data.item_to_give != ENUM.KEY_ITEM_TYPE.NULL):
-					var item_object := key_item_scene.instantiate()
+				if(data.item_to_give != ENUM.ITEM_TYPE.NULL):
+					var item_object := dropped_item_scene.instantiate()
 					item_object.item_type = data.item_to_give
 					add_child(item_object)
 					item_object.global_position = $room_centre.global_position - Vector2(8, 8)
@@ -115,7 +114,7 @@ func load_shop_items() -> void:
 	if(current_interior_data.shop_item_1 != null):
 		var item := current_interior_data.shop_item_1 
 		$room_centre/purchase_text_price_1.text = str(item.item_price)
-		var item_object := key_item_scene.instantiate()
+		var item_object := dropped_item_scene.instantiate()
 		item_object.item_type = item.item_type
 		add_child(item_object)
 		item_object.global_position = $room_centre.global_position + Vector2(-32, 0)
@@ -124,7 +123,7 @@ func load_shop_items() -> void:
 	if(current_interior_data.shop_item_2 != null):
 		var item := current_interior_data.shop_item_2 
 		$room_centre/purchase_text_price_2.text = str(item.item_price)
-		var item_object := key_item_scene.instantiate()
+		var item_object := dropped_item_scene.instantiate()
 		item_object.item_type = item.item_type
 		add_child(item_object)
 		item_object.global_position = $room_centre.global_position + Vector2(0, 0)
@@ -133,7 +132,7 @@ func load_shop_items() -> void:
 	if(current_interior_data.shop_item_3 != null):
 		var item := current_interior_data.shop_item_3 
 		$room_centre/purchase_text_price_3.text = str(item.item_price)
-		var item_object := key_item_scene.instantiate()
+		var item_object := dropped_item_scene.instantiate()
 		item_object.item_type = item.item_type
 		add_child(item_object)
 		item_object.global_position = $room_centre.global_position + Vector2(32, 0)
@@ -144,16 +143,16 @@ func load_shop_items() -> void:
 
 func load_take_any_you_want_items() -> void:
 	var item_amount : int = 0
-	if(current_interior_data.take_any_item_choice_1 != ENUM.KEY_ITEM_TYPE.NULL):
+	if(current_interior_data.take_any_item_choice_1 != ENUM.ITEM_TYPE.NULL):
 		item_amount += 1
-	if(current_interior_data.take_any_item_choice_2 != ENUM.KEY_ITEM_TYPE.NULL):
+	if(current_interior_data.take_any_item_choice_2 != ENUM.ITEM_TYPE.NULL):
 		item_amount += 1
-	if(current_interior_data.take_any_item_choice_3 != ENUM.KEY_ITEM_TYPE.NULL):
+	if(current_interior_data.take_any_item_choice_3 != ENUM.ITEM_TYPE.NULL):
 		item_amount += 1
 	
-	if(current_interior_data.take_any_item_choice_1 != ENUM.KEY_ITEM_TYPE.NULL):
+	if(current_interior_data.take_any_item_choice_1 != ENUM.ITEM_TYPE.NULL):
 		var item := current_interior_data.take_any_item_choice_1
-		var item_object := key_item_scene.instantiate()
+		var item_object := dropped_item_scene.instantiate()
 		item_object.item_type = item
 		add_child(item_object)
 		match item_amount:
@@ -166,9 +165,9 @@ func load_take_any_you_want_items() -> void:
 		item_object.connect("item_picked_up", Callable(self, "key_item_picked_up"))
 		item_objects.append(item_object)
 		
-	if(current_interior_data.take_any_item_choice_2 != ENUM.KEY_ITEM_TYPE.NULL):
+	if(current_interior_data.take_any_item_choice_2 != ENUM.ITEM_TYPE.NULL):
 		var item := current_interior_data.take_any_item_choice_2
-		var item_object := key_item_scene.instantiate()
+		var item_object := dropped_item_scene.instantiate()
 		item_object.item_type = item
 		add_child(item_object)
 		match item_amount:
@@ -180,9 +179,9 @@ func load_take_any_you_want_items() -> void:
 				item_object.global_position = $room_centre.global_position + Vector2(0, 0)
 		item_object.connect("item_picked_up", Callable(self, "key_item_picked_up"))
 		item_objects.append(item_object)
-	if(current_interior_data.take_any_item_choice_3 != ENUM.KEY_ITEM_TYPE.NULL):
+	if(current_interior_data.take_any_item_choice_3 != ENUM.ITEM_TYPE.NULL):
 		var item := current_interior_data.take_any_item_choice_3
-		var item_object := key_item_scene.instantiate()
+		var item_object := dropped_item_scene.instantiate()
 		item_object.item_type = item
 		add_child(item_object)
 		match item_amount:

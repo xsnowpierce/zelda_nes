@@ -1,169 +1,15 @@
-[gd_scene load_steps=19 format=3 uid="uid://2h8i8o7wy52v"]
+[gd_scene load_steps=4 format=3 uid="uid://2h8i8o7wy52v"]
 
 [ext_resource type="Script" uid="uid://bidyvvjp2jusr" path="res://scripts/entity/dropped_item.gd" id="1_gqyti"]
-[ext_resource type="Texture2D" uid="uid://s0p3ioiqty7b" path="res://images/items_and_weapons.png" id="4_6w1cc"]
+[ext_resource type="SpriteFrames" uid="uid://crvdt5bfv3mx6" path="res://scenes/dropped_item_frames.tres" id="2_qu2ag"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lffti"]
 size = Vector2(8, 8)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_oxvb5"]
-atlas = ExtResource("4_6w1cc")
-region = Rect2(88, 16, 8, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mh51d"]
-atlas = ExtResource("4_6w1cc")
-region = Rect2(72, 16, 8, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qi5ua"]
-atlas = ExtResource("4_6w1cc")
-region = Rect2(256, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_rjmby"]
-atlas = ExtResource("4_6w1cc")
-region = Rect2(0, 0, 8, 8)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_xs1v6"]
-atlas = ExtResource("4_6w1cc")
-region = Rect2(40, 0, 8, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6h1dp"]
-atlas = ExtResource("4_6w1cc")
-region = Rect2(48, 0, 8, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ml1or"]
-atlas = ExtResource("4_6w1cc")
-region = Rect2(72, 0, 8, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jvda7"]
-atlas = ExtResource("4_6w1cc")
-region = Rect2(72, 16, 8, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_pc5ak"]
-atlas = ExtResource("4_6w1cc")
-region = Rect2(0, 0, 8, 8)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fjqh0"]
-atlas = ExtResource("4_6w1cc")
-region = Rect2(0, 8, 8, 8)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_g7bt1"]
-atlas = ExtResource("4_6w1cc")
-region = Rect2(24, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ca31r"]
-atlas = ExtResource("4_6w1cc")
-region = Rect2(240, 0, 8, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_27nka"]
-atlas = ExtResource("4_6w1cc")
-region = Rect2(88, 0, 8, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_epdqb"]
-atlas = ExtResource("4_6w1cc")
-region = Rect2(56, 0, 16, 16)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_ofqey"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_oxvb5")
-}],
-"loop": true,
-"name": &"blue_map",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_mh51d")
-}],
-"loop": true,
-"name": &"blue_rupee",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qi5ua")
-}],
-"loop": true,
-"name": &"compass",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_rjmby")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_xs1v6")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6h1dp")
-}],
-"loop": true,
-"name": &"fairy",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ml1or")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jvda7")
-}],
-"loop": true,
-"name": &"green_rupee",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_pc5ak")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fjqh0")
-}],
-"loop": true,
-"name": &"heart",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_g7bt1")
-}],
-"loop": true,
-"name": &"heart_container",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ca31r")
-}],
-"loop": false,
-"name": &"key",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_27nka")
-}],
-"loop": true,
-"name": &"orange_map",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_epdqb")
-}],
-"loop": true,
-"name": &"timer",
-"speed": 5.0
-}]
-
 [node name="Dropped Item" type="Node2D"]
 script = ExtResource("1_gqyti")
+item_type = null
+rupee_value_override = null
 
 [node name="Dropped Item" type="Area2D" parent="."]
 collision_layer = 128
@@ -178,8 +24,8 @@ process_mode = 1
 z_index = -1
 texture_filter = 1
 position = Vector2(8, 8)
-sprite_frames = SubResource("SpriteFrames_ofqey")
-animation = &"heart_container"
-autoplay = "default"
+sprite_frames = ExtResource("2_qu2ag")
+animation = &"compass"
+autoplay = "heart"
 
 [connection signal="area_entered" from="Dropped Item" to="." method="_on_area_entered"]

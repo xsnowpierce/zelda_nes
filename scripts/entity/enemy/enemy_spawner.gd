@@ -47,7 +47,7 @@ func awake():
 	if(stalfos_spawn_with_key):
 		key_scene = dropped_item_scene.instantiate()
 		add_child(key_scene)
-		key_scene.set_item_type(ENUM.ITEM_TYPE.KEY)
+		key_scene.set_item_type(ENUM.ITEM_TYPE.DOOR_KEY)
 		key_scene.global_position = global_position
 	if(should_cloud_be_visible):
 		$Sprite2D.visible = true

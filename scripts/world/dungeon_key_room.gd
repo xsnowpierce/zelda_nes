@@ -14,7 +14,7 @@ func room_entered(room_settings : DungeonKeyRoomSettings) -> void:
 	$DUNGEON_ENTRANCE.camera_moveto_position = room_settings.leave_camera_grid_teleport_position
 	spawn_key_item(room_settings.key_item_held, room_settings.key_item_spawn_position)
 
-func spawn_key_item(key_item : ENUM.KEY_ITEM_TYPE, spawn_position : Vector2) -> void:
+func spawn_key_item(key_item : ENUM.ITEM_TYPE, spawn_position : Vector2) -> void:
 	key_item_object = key_item_prefab.instantiate()
 	add_child(key_item_object)
 	key_item_object.set_item_value(key_item)
