@@ -3654,7 +3654,6 @@ script = ExtResource("9_famci")
 
 [node name="SPAWNPOINT" parent="." instance=ExtResource("36_w4qf6")]
 process_mode = 1
-position = Vector2(3068.01, -1428.43)
 
 [node name="RNG_DROPPER" type="Node" parent="."]
 script = ExtResource("38_f8yhx")
