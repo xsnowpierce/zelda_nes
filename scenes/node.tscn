@@ -1,4 +1,4 @@
-[gd_scene load_steps=332 format=4 uid="uid://bnrlmifgdjgsb"]
+[gd_scene load_steps=347 format=4 uid="uid://bnrlmifgdjgsb"]
 
 [ext_resource type="Script" uid="uid://btlnf5jdbrn2t" path="res://scripts/utils/GameData.gd" id="1_fiv6q"]
 [ext_resource type="Script" uid="uid://bd5td35mp3b6s" path="res://scripts/player/link/camera.gd" id="1_xkdoo"]
@@ -547,6 +547,7 @@ enemy_type = 14
 global_spawn_position = Vector2(512, -32)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -556,6 +557,7 @@ enemy_type = 14
 global_spawn_position = Vector2(512, 0)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -565,6 +567,7 @@ enemy_type = 14
 global_spawn_position = Vector2(544, 0)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -574,6 +577,7 @@ enemy_type = 14
 global_spawn_position = Vector2(544, -32)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -583,12 +587,14 @@ enemy_type = 14
 global_spawn_position = Vector2(576, -48)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
 [sub_resource type="Resource" id="Resource_5j2ix"]
 script = ExtResource("29_e8xa5")
 enemy_spawns = Array[ExtResource("30_ynj6t")]([SubResource("Resource_32el7"), SubResource("Resource_t034h"), SubResource("Resource_6cpwc"), SubResource("Resource_p1r6v"), SubResource("Resource_jq05g")])
+hide_spawn_clouds = false
 
 [sub_resource type="Resource" id="Resource_cudbn"]
 script = ExtResource("30_ynj6t")
@@ -596,6 +602,7 @@ enemy_type = 14
 global_spawn_position = Vector2(576, -48)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -605,6 +612,7 @@ enemy_type = 14
 global_spawn_position = Vector2(544, -32)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -614,6 +622,7 @@ enemy_type = 14
 global_spawn_position = Vector2(544, 0)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -623,6 +632,7 @@ enemy_type = 14
 global_spawn_position = Vector2(576, 16)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -632,16 +642,168 @@ enemy_type = 14
 global_spawn_position = Vector2(592, -16)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
 [sub_resource type="Resource" id="Resource_m4kxc"]
 script = ExtResource("29_e8xa5")
 enemy_spawns = Array[ExtResource("30_ynj6t")]([SubResource("Resource_cudbn"), SubResource("Resource_qyy62"), SubResource("Resource_8p2lp"), SubResource("Resource_luu7w"), SubResource("Resource_dwrav")])
+hide_spawn_clouds = false
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t4vxy"]
 atlas = ExtResource("3_m65ud")
 region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="Resource" id="Resource_6sqys"]
+script = ExtResource("30_ynj6t")
+enemy_type = 1
+global_spawn_position = Vector2(0, 0)
+relative_grid_position = Vector2(7, -2)
+use_spawn_type = 1
+spawn_delay = 0.0
+zora_movable_tile_range = Array[Vector4]([])
+spawn_with_key = false
+metadata/_custom_type_script = "uid://n27twyd57gcb"
+
+[sub_resource type="Resource" id="Resource_0w6tx"]
+script = ExtResource("30_ynj6t")
+enemy_type = 1
+global_spawn_position = Vector2(0, 0)
+relative_grid_position = Vector2(7, -2)
+use_spawn_type = 1
+spawn_delay = 0.5
+zora_movable_tile_range = Array[Vector4]([])
+spawn_with_key = false
+metadata/_custom_type_script = "uid://n27twyd57gcb"
+
+[sub_resource type="Resource" id="Resource_uoxtn"]
+script = ExtResource("30_ynj6t")
+enemy_type = 1
+global_spawn_position = Vector2(0, 0)
+relative_grid_position = Vector2(7, -4)
+use_spawn_type = 1
+spawn_delay = 1.0
+zora_movable_tile_range = Array[Vector4]([])
+spawn_with_key = false
+metadata/_custom_type_script = "uid://n27twyd57gcb"
+
+[sub_resource type="Resource" id="Resource_iur1l"]
+script = ExtResource("30_ynj6t")
+enemy_type = 1
+global_spawn_position = Vector2(0, 0)
+relative_grid_position = Vector2(6, -6)
+use_spawn_type = 1
+spawn_delay = 1.5
+zora_movable_tile_range = Array[Vector4]([])
+spawn_with_key = false
+metadata/_custom_type_script = "uid://n27twyd57gcb"
+
+[sub_resource type="Resource" id="Resource_stu2s"]
+script = ExtResource("29_e8xa5")
+enemy_spawns = Array[ExtResource("30_ynj6t")]([SubResource("Resource_6sqys"), SubResource("Resource_0w6tx"), SubResource("Resource_uoxtn"), SubResource("Resource_iur1l")])
+hide_spawn_clouds = true
+metadata/_custom_type_script = "uid://cxolxoq2tj0o6"
+
+[sub_resource type="Resource" id="Resource_qi7qr"]
+script = ExtResource("30_ynj6t")
+enemy_type = 1
+global_spawn_position = Vector2(0, 0)
+relative_grid_position = Vector2(4, -6)
+use_spawn_type = 1
+spawn_delay = 0.0
+zora_movable_tile_range = Array[Vector4]([])
+spawn_with_key = false
+metadata/_custom_type_script = "uid://n27twyd57gcb"
+
+[sub_resource type="Resource" id="Resource_yd82y"]
+script = ExtResource("30_ynj6t")
+enemy_type = 1
+global_spawn_position = Vector2(0, 0)
+relative_grid_position = Vector2(2, -6)
+use_spawn_type = 1
+spawn_delay = 0.5
+zora_movable_tile_range = Array[Vector4]([])
+spawn_with_key = false
+metadata/_custom_type_script = "uid://n27twyd57gcb"
+
+[sub_resource type="Resource" id="Resource_x2akx"]
+script = ExtResource("30_ynj6t")
+enemy_type = 1
+global_spawn_position = Vector2(0, 0)
+relative_grid_position = Vector2(0, -6)
+use_spawn_type = 1
+spawn_delay = 1.0
+zora_movable_tile_range = Array[Vector4]([])
+spawn_with_key = false
+metadata/_custom_type_script = "uid://n27twyd57gcb"
+
+[sub_resource type="Resource" id="Resource_ee1k6"]
+script = ExtResource("30_ynj6t")
+enemy_type = 1
+global_spawn_position = Vector2(0, 0)
+relative_grid_position = Vector2(-1, -6)
+use_spawn_type = 1
+spawn_delay = 1.5
+zora_movable_tile_range = Array[Vector4]([])
+spawn_with_key = false
+metadata/_custom_type_script = "uid://n27twyd57gcb"
+
+[sub_resource type="Resource" id="Resource_oaqrj"]
+script = ExtResource("29_e8xa5")
+enemy_spawns = Array[ExtResource("30_ynj6t")]([SubResource("Resource_qi7qr"), SubResource("Resource_yd82y"), SubResource("Resource_x2akx"), SubResource("Resource_ee1k6")])
+hide_spawn_clouds = true
+metadata/_custom_type_script = "uid://cxolxoq2tj0o6"
+
+[sub_resource type="Resource" id="Resource_cyys0"]
+script = ExtResource("30_ynj6t")
+enemy_type = 1
+global_spawn_position = Vector2(0, 0)
+relative_grid_position = Vector2(-8, -4)
+use_spawn_type = 1
+spawn_delay = 0.0
+zora_movable_tile_range = Array[Vector4]([])
+spawn_with_key = false
+metadata/_custom_type_script = "uid://n27twyd57gcb"
+
+[sub_resource type="Resource" id="Resource_h6r6m"]
+script = ExtResource("30_ynj6t")
+enemy_type = 1
+global_spawn_position = Vector2(0, 0)
+relative_grid_position = Vector2(-8, -2)
+use_spawn_type = 1
+spawn_delay = 0.5
+zora_movable_tile_range = Array[Vector4]([])
+spawn_with_key = false
+metadata/_custom_type_script = "uid://n27twyd57gcb"
+
+[sub_resource type="Resource" id="Resource_sadb1"]
+script = ExtResource("30_ynj6t")
+enemy_type = 1
+global_spawn_position = Vector2(0, 0)
+relative_grid_position = Vector2(-8, 0)
+use_spawn_type = 1
+spawn_delay = 1.0
+zora_movable_tile_range = Array[Vector4]([])
+spawn_with_key = false
+metadata/_custom_type_script = "uid://n27twyd57gcb"
+
+[sub_resource type="Resource" id="Resource_icyax"]
+script = ExtResource("30_ynj6t")
+enemy_type = 1
+global_spawn_position = Vector2(0, 0)
+relative_grid_position = Vector2(-8, 2)
+use_spawn_type = 1
+spawn_delay = 1.5
+zora_movable_tile_range = Array[Vector4]([])
+spawn_with_key = false
+metadata/_custom_type_script = "uid://n27twyd57gcb"
+
+[sub_resource type="Resource" id="Resource_2c5wq"]
+script = ExtResource("29_e8xa5")
+enemy_spawns = Array[ExtResource("30_ynj6t")]([SubResource("Resource_cyys0"), SubResource("Resource_h6r6m"), SubResource("Resource_sadb1"), SubResource("Resource_icyax")])
+hide_spawn_clouds = true
+metadata/_custom_type_script = "uid://cxolxoq2tj0o6"
 
 [sub_resource type="Resource" id="Resource_3ie8h"]
 script = ExtResource("30_ynj6t")
@@ -649,6 +811,7 @@ enemy_type = 1
 global_spawn_position = Vector2(-48, -240)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -658,6 +821,7 @@ enemy_type = 1
 global_spawn_position = Vector2(-32, -208)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -667,6 +831,7 @@ enemy_type = 1
 global_spawn_position = Vector2(-48, -176)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -676,12 +841,14 @@ enemy_type = 1
 global_spawn_position = Vector2(0, -192)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
 [sub_resource type="Resource" id="Resource_e52bc"]
 script = ExtResource("29_e8xa5")
 enemy_spawns = Array[ExtResource("30_ynj6t")]([SubResource("Resource_3ie8h"), SubResource("Resource_xh4se"), SubResource("Resource_lac7t"), SubResource("Resource_vnjxk")])
+hide_spawn_clouds = false
 
 [sub_resource type="Resource" id="Resource_nv3wi"]
 script = ExtResource("30_ynj6t")
@@ -689,6 +856,7 @@ enemy_type = 1
 global_spawn_position = Vector2(-48, -240)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -698,6 +866,7 @@ enemy_type = 1
 global_spawn_position = Vector2(16, -208)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -707,6 +876,7 @@ enemy_type = 1
 global_spawn_position = Vector2(0, -192)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -716,12 +886,14 @@ enemy_type = 1
 global_spawn_position = Vector2(32, -176)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
 [sub_resource type="Resource" id="Resource_upbbl"]
 script = ExtResource("29_e8xa5")
 enemy_spawns = Array[ExtResource("30_ynj6t")]([SubResource("Resource_nv3wi"), SubResource("Resource_5802f"), SubResource("Resource_niwc6"), SubResource("Resource_henhk")])
+hide_spawn_clouds = false
 
 [sub_resource type="Resource" id="Resource_sdn2d"]
 script = ExtResource("30_ynj6t")
@@ -729,6 +901,7 @@ enemy_type = 0
 global_spawn_position = Vector2(-208, -64)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -738,6 +911,7 @@ enemy_type = 0
 global_spawn_position = Vector2(-208, 32)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -747,6 +921,7 @@ enemy_type = 0
 global_spawn_position = Vector2(-256, 0)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -756,12 +931,14 @@ enemy_type = 0
 global_spawn_position = Vector2(-320, -48)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
 [sub_resource type="Resource" id="Resource_xsgac"]
 script = ExtResource("29_e8xa5")
 enemy_spawns = Array[ExtResource("30_ynj6t")]([SubResource("Resource_sdn2d"), SubResource("Resource_6w5ur"), SubResource("Resource_6cptx"), SubResource("Resource_qftlw")])
+hide_spawn_clouds = false
 
 [sub_resource type="Resource" id="Resource_m0krm"]
 script = ExtResource("30_ynj6t")
@@ -769,6 +946,7 @@ enemy_type = 0
 global_spawn_position = Vector2(-320, -48)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -778,6 +956,7 @@ enemy_type = 0
 global_spawn_position = Vector2(-320, 16)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -787,6 +966,7 @@ enemy_type = 0
 global_spawn_position = Vector2(-208, -64)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -796,12 +976,14 @@ enemy_type = 0
 global_spawn_position = Vector2(-208, 32)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
 [sub_resource type="Resource" id="Resource_dtca6"]
 script = ExtResource("29_e8xa5")
 enemy_spawns = Array[ExtResource("30_ynj6t")]([SubResource("Resource_m0krm"), SubResource("Resource_xp038"), SubResource("Resource_yg0m0"), SubResource("Resource_g7k8x")])
+hide_spawn_clouds = false
 
 [sub_resource type="Resource" id="Resource_eopl8"]
 script = ExtResource("30_ynj6t")
@@ -809,6 +991,7 @@ enemy_type = 1
 global_spawn_position = Vector2(-304, -240)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -818,6 +1001,7 @@ enemy_type = 1
 global_spawn_position = Vector2(-256, -192)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -827,6 +1011,7 @@ enemy_type = 1
 global_spawn_position = Vector2(-224, -240)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -836,12 +1021,14 @@ enemy_type = 1
 global_spawn_position = Vector2(-192, -224)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
 [sub_resource type="Resource" id="Resource_31rvh"]
 script = ExtResource("29_e8xa5")
 enemy_spawns = Array[ExtResource("30_ynj6t")]([SubResource("Resource_eopl8"), SubResource("Resource_6eukw"), SubResource("Resource_38mf8"), SubResource("Resource_ob152")])
+hide_spawn_clouds = false
 
 [sub_resource type="Resource" id="Resource_f70oo"]
 script = ExtResource("30_ynj6t")
@@ -849,6 +1036,7 @@ enemy_type = 1
 global_spawn_position = Vector2(-256, -192)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -858,6 +1046,7 @@ enemy_type = 1
 global_spawn_position = Vector2(-304, -176)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -867,6 +1056,7 @@ enemy_type = 1
 global_spawn_position = Vector2(-288, -208)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -876,12 +1066,14 @@ enemy_type = 1
 global_spawn_position = Vector2(-304, -240)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
 [sub_resource type="Resource" id="Resource_qve4g"]
 script = ExtResource("29_e8xa5")
 enemy_spawns = Array[ExtResource("30_ynj6t")]([SubResource("Resource_f70oo"), SubResource("Resource_7igkh"), SubResource("Resource_p8at2"), SubResource("Resource_6hf2j")])
+hide_spawn_clouds = false
 
 [sub_resource type="Resource" id="Resource_oishi"]
 script = ExtResource("30_ynj6t")
@@ -889,6 +1081,7 @@ enemy_type = 1
 global_spawn_position = Vector2(-304, -320)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -898,6 +1091,7 @@ enemy_type = 1
 global_spawn_position = Vector2(-192, -336)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -907,6 +1101,7 @@ enemy_type = 1
 global_spawn_position = Vector2(-176, -368)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -916,6 +1111,7 @@ enemy_type = 1
 global_spawn_position = Vector2(-256, -384)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -925,12 +1121,14 @@ enemy_type = 2
 global_spawn_position = Vector2(-304, -400)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([Vector4(-384, -448, -288, -384)])
 spawn_with_key = false
 
 [sub_resource type="Resource" id="Resource_4u68x"]
 script = ExtResource("29_e8xa5")
 enemy_spawns = Array[ExtResource("30_ynj6t")]([SubResource("Resource_oishi"), SubResource("Resource_nvira"), SubResource("Resource_aiwd8"), SubResource("Resource_53775"), SubResource("Resource_5ca6f")])
+hide_spawn_clouds = false
 
 [sub_resource type="Resource" id="Resource_w5b6w"]
 script = ExtResource("30_ynj6t")
@@ -938,6 +1136,7 @@ enemy_type = 1
 global_spawn_position = Vector2(-256, -352)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -947,6 +1146,7 @@ enemy_type = 1
 global_spawn_position = Vector2(-192, -400)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -956,6 +1156,7 @@ enemy_type = 1
 global_spawn_position = Vector2(-176, -368)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -965,12 +1166,14 @@ enemy_type = 1
 global_spawn_position = Vector2(-192, -336)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
 [sub_resource type="Resource" id="Resource_ld0nw"]
 script = ExtResource("29_e8xa5")
 enemy_spawns = Array[ExtResource("30_ynj6t")]([SubResource("Resource_w5b6w"), SubResource("Resource_ycr3x"), SubResource("Resource_r77kh"), SubResource("Resource_7o3wb"), SubResource("Resource_5ca6f")])
+hide_spawn_clouds = false
 
 [sub_resource type="Resource" id="Resource_whpio"]
 script = ExtResource("30_ynj6t")
@@ -978,6 +1181,7 @@ enemy_type = 2
 global_spawn_position = Vector2(-544, 64)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([Vector4(-560, -96, -544, 64)])
 spawn_with_key = false
 
@@ -987,6 +1191,7 @@ enemy_type = 13
 global_spawn_position = Vector2(-528, -16)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -996,16 +1201,19 @@ enemy_type = 13
 global_spawn_position = Vector2(-480, 32)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
 [sub_resource type="Resource" id="Resource_kslgr"]
 script = ExtResource("29_e8xa5")
 enemy_spawns = Array[ExtResource("30_ynj6t")]([SubResource("Resource_whpio"), SubResource("Resource_mt6un"), SubResource("Resource_dgot1"), SubResource("Resource_mt6un")])
+hide_spawn_clouds = false
 
 [sub_resource type="Resource" id="Resource_y5kei"]
 script = ExtResource("29_e8xa5")
 enemy_spawns = Array[ExtResource("30_ynj6t")]([SubResource("Resource_whpio"), SubResource("Resource_mt6un"), SubResource("Resource_dgot1"), SubResource("Resource_dgot1")])
+hide_spawn_clouds = false
 
 [sub_resource type="Resource" id="Resource_3nc3b"]
 script = ExtResource("30_ynj6t")
@@ -1013,6 +1221,7 @@ enemy_type = 1
 global_spawn_position = Vector2(-448, -160)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -1022,6 +1231,7 @@ enemy_type = 1
 global_spawn_position = Vector2(-496, -176)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -1031,6 +1241,7 @@ enemy_type = 1
 global_spawn_position = Vector2(-528, -192)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -1040,6 +1251,7 @@ enemy_type = 1
 global_spawn_position = Vector2(-592, -160)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -1049,12 +1261,14 @@ enemy_type = 2
 global_spawn_position = Vector2(-560, -160)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([Vector4(-560, -272, -544, -128)])
 spawn_with_key = false
 
 [sub_resource type="Resource" id="Resource_xg18w"]
 script = ExtResource("29_e8xa5")
 enemy_spawns = Array[ExtResource("30_ynj6t")]([SubResource("Resource_3nc3b"), SubResource("Resource_7o348"), SubResource("Resource_6uf4a"), SubResource("Resource_occxc"), SubResource("Resource_fnklv")])
+hide_spawn_clouds = false
 
 [sub_resource type="Resource" id="Resource_eorfl"]
 script = ExtResource("30_ynj6t")
@@ -1062,6 +1276,7 @@ enemy_type = 1
 global_spawn_position = Vector2(-480, -352)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -1071,12 +1286,14 @@ enemy_type = 2
 global_spawn_position = Vector2(-560, -416)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([Vector4(-640, -448, -400, -384), Vector4(-560, -368, -544, -288)])
 spawn_with_key = false
 
 [sub_resource type="Resource" id="Resource_xwqjj"]
 script = ExtResource("29_e8xa5")
 enemy_spawns = Array[ExtResource("30_ynj6t")]([SubResource("Resource_eorfl"), SubResource("Resource_burq3")])
+hide_spawn_clouds = false
 
 [sub_resource type="Resource" id="Resource_lfce6"]
 script = ExtResource("30_ynj6t")
@@ -1084,6 +1301,7 @@ enemy_type = 34
 global_spawn_position = Vector2(3392, -1456)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -1093,6 +1311,7 @@ enemy_type = 34
 global_spawn_position = Vector2(3408, -1424)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -1102,6 +1321,7 @@ enemy_type = 34
 global_spawn_position = Vector2(3392, -1392)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -1111,6 +1331,7 @@ enemy_type = 34
 global_spawn_position = Vector2(3280, -1472)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -1120,12 +1341,14 @@ enemy_type = 34
 global_spawn_position = Vector2(3280, -1376)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = true
 
 [sub_resource type="Resource" id="Resource_vgtn6"]
 script = ExtResource("29_e8xa5")
 enemy_spawns = Array[ExtResource("30_ynj6t")]([SubResource("Resource_lfce6"), SubResource("Resource_a3lft"), SubResource("Resource_62yuc"), SubResource("Resource_2df0y"), SubResource("Resource_7wk3o")])
+hide_spawn_clouds = false
 
 [sub_resource type="Resource" id="Resource_5t5yx"]
 script = ExtResource("30_ynj6t")
@@ -1133,6 +1356,7 @@ enemy_type = 24
 global_spawn_position = Vector2(2848, -1472)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -1142,6 +1366,7 @@ enemy_type = 24
 global_spawn_position = Vector2(2720, -1424)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -1151,12 +1376,14 @@ enemy_type = 24
 global_spawn_position = Vector2(2848, -1376)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
 [sub_resource type="Resource" id="Resource_1s47h"]
 script = ExtResource("29_e8xa5")
 enemy_spawns = Array[ExtResource("30_ynj6t")]([SubResource("Resource_5t5yx"), SubResource("Resource_1aqhb"), SubResource("Resource_u34r5")])
+hide_spawn_clouds = false
 
 [sub_resource type="Resource" id="Resource_cownx"]
 script = ExtResource("30_ynj6t")
@@ -1164,6 +1391,7 @@ enemy_type = 34
 global_spawn_position = Vector2(3104, -1648)
 relative_grid_position = Vector2(-5, -3)
 use_spawn_type = 1
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -1173,6 +1401,7 @@ enemy_type = 34
 global_spawn_position = Vector2(3088, -1616)
 relative_grid_position = Vector2(2, 0)
 use_spawn_type = 1
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -1182,12 +1411,14 @@ enemy_type = 34
 global_spawn_position = Vector2(3040, -1616)
 relative_grid_position = Vector2(4, -3)
 use_spawn_type = 1
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
 [sub_resource type="Resource" id="Resource_tvker"]
 script = ExtResource("29_e8xa5")
 enemy_spawns = Array[ExtResource("30_ynj6t")]([SubResource("Resource_cownx"), SubResource("Resource_2qj2n"), SubResource("Resource_y6r5t")])
+hide_spawn_clouds = false
 
 [sub_resource type="Resource" id="Resource_12iwf"]
 script = ExtResource("30_ynj6t")
@@ -1195,6 +1426,7 @@ enemy_type = 34
 global_spawn_position = Vector2(3104, -1824)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -1204,6 +1436,7 @@ enemy_type = 34
 global_spawn_position = Vector2(3136, -1808)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -1213,6 +1446,7 @@ enemy_type = 34
 global_spawn_position = Vector2(3088, -1792)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -1222,6 +1456,7 @@ enemy_type = 34
 global_spawn_position = Vector2(3072, -1776)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -1231,12 +1466,14 @@ enemy_type = 34
 global_spawn_position = Vector2(3104, -1760)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
 [sub_resource type="Resource" id="Resource_2phxq"]
 script = ExtResource("29_e8xa5")
 enemy_spawns = Array[ExtResource("30_ynj6t")]([SubResource("Resource_12iwf"), SubResource("Resource_0sv1w"), SubResource("Resource_fwkbq"), SubResource("Resource_d3pxs"), SubResource("Resource_m2ofj")])
+hide_spawn_clouds = false
 
 [sub_resource type="Resource" id="Resource_mtn0f"]
 script = ExtResource("30_ynj6t")
@@ -1244,6 +1481,7 @@ enemy_type = 24
 global_spawn_position = Vector2(2736, -1808)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -1253,6 +1491,7 @@ enemy_type = 24
 global_spawn_position = Vector2(2720, -1776)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -1262,6 +1501,7 @@ enemy_type = 24
 global_spawn_position = Vector2(2768, -1792)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -1271,6 +1511,7 @@ enemy_type = 24
 global_spawn_position = Vector2(2768, -1760)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -1280,6 +1521,7 @@ enemy_type = 24
 global_spawn_position = Vector2(2736, -1744)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -1289,12 +1531,14 @@ enemy_type = 24
 global_spawn_position = Vector2(2848, -1728)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
 [sub_resource type="Resource" id="Resource_0nai3"]
 script = ExtResource("29_e8xa5")
 enemy_spawns = Array[ExtResource("30_ynj6t")]([SubResource("Resource_mtn0f"), SubResource("Resource_d8ctj"), SubResource("Resource_kx8wm"), SubResource("Resource_2ibmp"), SubResource("Resource_nv6ee"), SubResource("Resource_3n6ml")])
+hide_spawn_clouds = false
 
 [sub_resource type="Resource" id="Resource_8o4j7"]
 script = ExtResource("30_ynj6t")
@@ -1302,6 +1546,7 @@ enemy_type = 24
 global_spawn_position = Vector2(3392, -1808)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -1311,6 +1556,7 @@ enemy_type = 24
 global_spawn_position = Vector2(3408, -1776)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -1320,6 +1566,7 @@ enemy_type = 24
 global_spawn_position = Vector2(3360, -1792)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -1329,6 +1576,7 @@ enemy_type = 24
 global_spawn_position = Vector2(3328, -1792)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -1338,6 +1586,7 @@ enemy_type = 24
 global_spawn_position = Vector2(3328, -1760)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -1347,6 +1596,7 @@ enemy_type = 24
 global_spawn_position = Vector2(3360, -1760)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -1356,6 +1606,7 @@ enemy_type = 24
 global_spawn_position = Vector2(3280, -1728)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -1365,12 +1616,14 @@ enemy_type = 24
 global_spawn_position = Vector2(3280, -1824)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
 [sub_resource type="Resource" id="Resource_144r3"]
 script = ExtResource("29_e8xa5")
 enemy_spawns = Array[ExtResource("30_ynj6t")]([SubResource("Resource_8o4j7"), SubResource("Resource_ea7bp"), SubResource("Resource_2a037"), SubResource("Resource_l87c0"), SubResource("Resource_fm86x"), SubResource("Resource_sslvx"), SubResource("Resource_q6mxj"), SubResource("Resource_yityn")])
+hide_spawn_clouds = false
 
 [sub_resource type="Resource" id="Resource_c47gf"]
 script = ExtResource("30_ynj6t")
@@ -1378,6 +1631,7 @@ enemy_type = 20
 global_spawn_position = Vector2(2784, -1968)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -1387,6 +1641,7 @@ enemy_type = 20
 global_spawn_position = Vector2(2816, -1952)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -1396,12 +1651,14 @@ enemy_type = 20
 global_spawn_position = Vector2(2768, -1936)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 0
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
 [sub_resource type="Resource" id="Resource_ofpub"]
 script = ExtResource("29_e8xa5")
 enemy_spawns = Array[ExtResource("30_ynj6t")]([SubResource("Resource_c47gf"), SubResource("Resource_ujrdb"), SubResource("Resource_8ndvq")])
+hide_spawn_clouds = false
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1ax37"]
 atlas = ExtResource("23_4k6nb")
@@ -1413,6 +1670,7 @@ enemy_type = 20
 global_spawn_position = Vector2(0, 0)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 1
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -1422,6 +1680,7 @@ enemy_type = 20
 global_spawn_position = Vector2(0, 0)
 relative_grid_position = Vector2(0, -2)
 use_spawn_type = 1
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -1431,6 +1690,7 @@ enemy_type = 20
 global_spawn_position = Vector2(0, 0)
 relative_grid_position = Vector2(2, -2)
 use_spawn_type = 1
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -1440,6 +1700,7 @@ enemy_type = 20
 global_spawn_position = Vector2(0, 0)
 relative_grid_position = Vector2(2, 0)
 use_spawn_type = 1
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -1449,12 +1710,14 @@ enemy_type = 20
 global_spawn_position = Vector2(0, 0)
 relative_grid_position = Vector2(-3, 2)
 use_spawn_type = 1
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
 [sub_resource type="Resource" id="Resource_066er"]
 script = ExtResource("29_e8xa5")
 enemy_spawns = Array[ExtResource("30_ynj6t")]([SubResource("Resource_jwfgh"), SubResource("Resource_7ub1j"), SubResource("Resource_m5oiy"), SubResource("Resource_lfvaf"), SubResource("Resource_klglv")])
+hide_spawn_clouds = false
 
 [sub_resource type="Resource" id="Resource_dty5f"]
 script = ExtResource("30_ynj6t")
@@ -1462,6 +1725,7 @@ enemy_type = 22
 global_spawn_position = Vector2(0, 0)
 relative_grid_position = Vector2(0, 0)
 use_spawn_type = 1
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -1471,6 +1735,7 @@ enemy_type = 22
 global_spawn_position = Vector2(0, 0)
 relative_grid_position = Vector2(2, 0)
 use_spawn_type = 1
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -1480,12 +1745,14 @@ enemy_type = 22
 global_spawn_position = Vector2(0, 0)
 relative_grid_position = Vector2(2, -2)
 use_spawn_type = 1
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
 [sub_resource type="Resource" id="Resource_d7hhs"]
 script = ExtResource("29_e8xa5")
 enemy_spawns = Array[ExtResource("30_ynj6t")]([SubResource("Resource_dty5f"), SubResource("Resource_lkd8i"), SubResource("Resource_pcjto")])
+hide_spawn_clouds = false
 
 [sub_resource type="Resource" id="Resource_loa6u"]
 script = ExtResource("30_ynj6t")
@@ -1493,12 +1760,14 @@ enemy_type = 41
 global_spawn_position = Vector2(0, 0)
 relative_grid_position = Vector2(3, -2)
 use_spawn_type = 1
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
 [sub_resource type="Resource" id="Resource_1ma2u"]
 script = ExtResource("29_e8xa5")
 enemy_spawns = Array[ExtResource("30_ynj6t")]([SubResource("Resource_loa6u")])
+hide_spawn_clouds = false
 
 [sub_resource type="Resource" id="Resource_kkyo2"]
 script = ExtResource("30_ynj6t")
@@ -1506,6 +1775,7 @@ enemy_type = 34
 global_spawn_position = Vector2(0, 0)
 relative_grid_position = Vector2(0, -1)
 use_spawn_type = 1
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -1515,6 +1785,7 @@ enemy_type = 34
 global_spawn_position = Vector2(0, 0)
 relative_grid_position = Vector2(2, 1)
 use_spawn_type = 1
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -1524,12 +1795,14 @@ enemy_type = 34
 global_spawn_position = Vector2(0, 0)
 relative_grid_position = Vector2(4, -3)
 use_spawn_type = 1
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
 [sub_resource type="Resource" id="Resource_q8cyr"]
 script = ExtResource("29_e8xa5")
 enemy_spawns = Array[ExtResource("30_ynj6t")]([SubResource("Resource_kkyo2"), SubResource("Resource_r3400"), SubResource("Resource_2etu7")])
+hide_spawn_clouds = false
 
 [sub_resource type="Resource" id="Resource_8hsh2"]
 script = ExtResource("30_ynj6t")
@@ -1537,6 +1810,7 @@ enemy_type = 22
 global_spawn_position = Vector2(0, 0)
 relative_grid_position = Vector2(1, -2)
 use_spawn_type = 1
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -1546,6 +1820,7 @@ enemy_type = 22
 global_spawn_position = Vector2(0, 0)
 relative_grid_position = Vector2(-2, -2)
 use_spawn_type = 1
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -1555,12 +1830,14 @@ enemy_type = 22
 global_spawn_position = Vector2(0, 0)
 relative_grid_position = Vector2(3, -4)
 use_spawn_type = 1
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
 [sub_resource type="Resource" id="Resource_5nlsk"]
 script = ExtResource("29_e8xa5")
 enemy_spawns = Array[ExtResource("30_ynj6t")]([SubResource("Resource_8hsh2"), SubResource("Resource_iw6gt"), SubResource("Resource_0hcur")])
+hide_spawn_clouds = false
 
 [sub_resource type="Resource" id="Resource_uja0k"]
 script = ExtResource("59_qyt60")
@@ -1575,6 +1852,7 @@ enemy_type = 49
 global_spawn_position = Vector2(0, 0)
 relative_grid_position = Vector2(5, -4)
 use_spawn_type = 1
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 blade_trap_settings = SubResource("Resource_uja0k")
@@ -1592,6 +1870,7 @@ enemy_type = 49
 global_spawn_position = Vector2(0, 0)
 relative_grid_position = Vector2(5, 2)
 use_spawn_type = 1
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 blade_trap_settings = SubResource("Resource_jl5a8")
@@ -1609,6 +1888,7 @@ enemy_type = 49
 global_spawn_position = Vector2(0, 0)
 relative_grid_position = Vector2(-6, -4)
 use_spawn_type = 1
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 blade_trap_settings = SubResource("Resource_3htat")
@@ -1626,6 +1906,7 @@ enemy_type = 49
 global_spawn_position = Vector2(0, 0)
 relative_grid_position = Vector2(-6, 2)
 use_spawn_type = 1
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 blade_trap_settings = SubResource("Resource_lyk7s")
@@ -1633,6 +1914,7 @@ blade_trap_settings = SubResource("Resource_lyk7s")
 [sub_resource type="Resource" id="Resource_dqcmw"]
 script = ExtResource("29_e8xa5")
 enemy_spawns = Array[ExtResource("30_ynj6t")]([SubResource("Resource_loan7"), SubResource("Resource_30irg"), SubResource("Resource_fndlk"), SubResource("Resource_e3l5x")])
+hide_spawn_clouds = false
 
 [sub_resource type="Resource" id="Resource_rp3v7"]
 script = ExtResource("30_ynj6t")
@@ -1640,6 +1922,7 @@ enemy_type = 24
 global_spawn_position = Vector2(0, 0)
 relative_grid_position = Vector2(-6, 0)
 use_spawn_type = 1
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -1649,6 +1932,7 @@ enemy_type = 24
 global_spawn_position = Vector2(0, 0)
 relative_grid_position = Vector2(-2, 0)
 use_spawn_type = 1
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -1658,6 +1942,7 @@ enemy_type = 24
 global_spawn_position = Vector2(0, 0)
 relative_grid_position = Vector2(2, 0)
 use_spawn_type = 1
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
@@ -1667,12 +1952,14 @@ enemy_type = 24
 global_spawn_position = Vector2(0, 0)
 relative_grid_position = Vector2(5, 0)
 use_spawn_type = 1
+spawn_delay = 0.0
 zora_movable_tile_range = Array[Vector4]([])
 spawn_with_key = false
 
 [sub_resource type="Resource" id="Resource_5bsy0"]
 script = ExtResource("29_e8xa5")
 enemy_spawns = Array[ExtResource("30_ynj6t")]([SubResource("Resource_rp3v7"), SubResource("Resource_dc55s"), SubResource("Resource_5jv3u"), SubResource("Resource_r5nka")])
+hide_spawn_clouds = false
 
 [sub_resource type="Resource" id="Resource_h5pme"]
 script = ExtResource("63_sj066")
@@ -2330,13 +2617,9 @@ enemy_blade_trap_scene = ExtResource("59_rlycn")
 enemy_goriya_scene = ExtResource("85_gkfa4")
 boss_aquamentus_scene = ExtResource("62_mm88y")
 current_player_health = 6
-current_rupees = 20
-current_keys = 20
-has_wooden_arrow = true
 hyrule_music = ExtResource("2_7hpxk")
 dungeon_music = ExtResource("36_8um02")
 current_equipped_item_a = 1
-current_equipped_item_b = 10
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_7hpxk")
@@ -2371,6 +2654,7 @@ aquamentus_hurt_sfx = ExtResource("32_jb8rv")
 process_mode = 3
 offset = Vector2(0, -40)
 script = ExtResource("1_xkdoo")
+camera_move_speed = 150.0
 
 [node name="Link" parent="." instance=ExtResource("6_s1nwl")]
 process_mode = 1
@@ -2548,6 +2832,7 @@ centered = false
 [node name="Hyrule Tile (1, 0)" type="Node2D" parent="Level/Tile Areas"]
 position = Vector2(256, 0)
 script = ExtResource("28_17esn")
+random_map_spawns = Array[ExtResource("29_e8xa5")]([SubResource("Resource_stu2s")])
 
 [node name="Scripts" type="Node" parent="Level/Tile Areas/Hyrule Tile (1, 0)"]
 
@@ -2560,6 +2845,34 @@ script = ExtResource("41_ke6pq")
 
 [node name="Burnable Tile" parent="Level/Tile Areas/Hyrule Tile (1, 0)/Entities" instance=ExtResource("68_en6p7")]
 position = Vector2(192, 0)
+
+[node name="Hyrule Tile (1, -1)" type="Node2D" parent="Level/Tile Areas"]
+position = Vector2(256, -176)
+script = ExtResource("28_17esn")
+random_map_spawns = Array[ExtResource("29_e8xa5")]([SubResource("Resource_oaqrj")])
+
+[node name="Scripts" type="Node" parent="Level/Tile Areas/Hyrule Tile (1, -1)"]
+
+[node name="Burnable Secret" type="Node" parent="Level/Tile Areas/Hyrule Tile (1, -1)/Scripts"]
+script = ExtResource("41_ke6pq")
+
+[node name="Spawned Enemies" type="Node" parent="Level/Tile Areas/Hyrule Tile (1, -1)"]
+
+[node name="Entities" type="Node" parent="Level/Tile Areas/Hyrule Tile (1, -1)"]
+
+[node name="Burnable Tile" parent="Level/Tile Areas/Hyrule Tile (1, -1)/Entities" instance=ExtResource("68_en6p7")]
+position = Vector2(160, -176)
+
+[node name="Hyrule Tile (1, -2)" type="Node2D" parent="Level/Tile Areas"]
+position = Vector2(256, -352)
+script = ExtResource("28_17esn")
+random_map_spawns = Array[ExtResource("29_e8xa5")]([SubResource("Resource_2c5wq")])
+
+[node name="Scripts" type="Node" parent="Level/Tile Areas/Hyrule Tile (1, -2)"]
+
+[node name="Spawned Enemies" type="Node" parent="Level/Tile Areas/Hyrule Tile (1, -2)"]
+
+[node name="Entities" type="Node" parent="Level/Tile Areas/Hyrule Tile (1, -2)"]
 
 [node name="Hyrule Tile (0, 0)" type="Node2D" parent="Level/Tile Areas"]
 script = ExtResource("28_17esn")
@@ -2860,6 +3173,7 @@ camera_moveto_position = Vector2(0, -4)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 process_mode = 3
+visible = false
 script = ExtResource("16_sgrtl")
 camera_position_offset = Vector2(-128, -160)
 
@@ -2870,6 +3184,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="pausemenu UI" type="ColorRect" parent="CanvasLayer/Control"]
 layout_mode = 1
@@ -3347,7 +3662,7 @@ position = Vector2(1504, -736)
 
 [node name="SPAWNPOINT" parent="." instance=ExtResource("36_w4qf6")]
 process_mode = 1
-position = Vector2(3523.84, -2117.03)
+position = Vector2(243.696, -374.22)
 
 [node name="RNG_DROPPER" type="Node" parent="."]
 script = ExtResource("38_f8yhx")
@@ -3500,6 +3815,9 @@ link_moveto_position = Vector2(2784, -2272)
 camera_moveto_position = Vector2(11, -13)
 is_staircase = true
 
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(0, 80)
+
 [connection signal="bombs_changed" from="." to="CanvasLayer/Control/ingame UI/bomb" method="_on_game_bombs_changed"]
 [connection signal="equipment_slot_a_changed" from="." to="Link" method="_on_game_equipment_slot_a_changed"]
 [connection signal="equipment_slot_a_changed" from="." to="CanvasLayer/Control/ingame UI/a_select" method="_on_game_equipment_slot_a_changed"]
@@ -3529,6 +3847,7 @@ is_staircase = true
 [connection signal="camera_start_moving" from="Camera2D" to="Level/Eagle Dungeon" method="_on_camera_2d_camera_start_moving"]
 [connection signal="was_pushed" from="Level/Tile Areas/Hyrule Tile (2, 0)/Entities/Pushable Block" to="Level/Tile Areas/Hyrule Tile (2, 0)" method="_on_pushable_block_was_pushed"]
 [connection signal="was_burned" from="Level/Tile Areas/Hyrule Tile (1, 0)/Entities/Burnable Tile" to="Level/Tile Areas/Hyrule Tile (1, 0)/Scripts/Burnable Secret" method="_on_burnable_tile_was_burned"]
+[connection signal="was_burned" from="Level/Tile Areas/Hyrule Tile (1, -1)/Entities/Burnable Tile" to="Level/Tile Areas/Hyrule Tile (1, -1)/Scripts/Burnable Secret" method="_on_burnable_tile_was_burned"]
 [connection signal="was_bombed" from="Level/Tile Areas/Hyrule Tile (0, -1)/Entities/Bombable Tile" to="Level/Tile Areas/Hyrule Tile (0, -1)/Scripts/Bombable Secret" method="_on_bombable_tile_was_bombed"]
 [connection signal="killed_all_enemies" from="Level/Eagle Dungeon/Eagle Dungeon Tile15" to="Level/Eagle Dungeon/Eagle Dungeon Tile15/RoomCompletion" method="room_completion"]
 [connection signal="killed_all_enemies" from="Level/Eagle Dungeon/Eagle Dungeon Tile2" to="Level/Eagle Dungeon/Eagle Dungeon Tile2/RoomCompletion" method="room_completion"]

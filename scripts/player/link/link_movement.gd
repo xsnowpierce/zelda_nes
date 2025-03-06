@@ -41,14 +41,14 @@ func process(delta: float) -> void:
 func keep_player_in_screen() -> void:
 	var camera_position = get_tree().get_first_node_in_group("Camera").position
 	var relative_position = player.position - camera_position
-	if(relative_position.x < GameSettings.screen_boundaries.x):
-		player.position.x = camera_position.x + GameSettings.screen_boundaries.x
-	if(relative_position.x > GameSettings.screen_boundaries.y):
-		player.position.x = camera_position.x + GameSettings.screen_boundaries.y
-	if(relative_position.y < GameSettings.screen_boundaries.z):
-		player.position.y = camera_position.y + GameSettings.screen_boundaries.z
-	if(relative_position.y > GameSettings.screen_boundaries.w):
-		player.position.y = camera_position.y + GameSettings.screen_boundaries.w
+	if(relative_position.x - 8 < GameSettings.screen_boundaries.x):
+		player.position.x = camera_position.x + GameSettings.screen_boundaries.x + 8
+	if(relative_position.x + 8 > GameSettings.screen_boundaries.y):
+		player.position.x = camera_position.x + GameSettings.screen_boundaries.y - 8
+	if(relative_position.y - 8 < GameSettings.screen_boundaries.z):
+		player.position.y = camera_position.y + GameSettings.screen_boundaries.z + 8
+	if(relative_position.y + 8 > GameSettings.screen_boundaries.w):
+		player.position.y = camera_position.y + GameSettings.screen_boundaries.w - 8
 		
 func calculate_movement(ignore_inputs : bool) -> void:
 	if(player.get_player_state().is_position_correcting):
@@ -105,13 +105,13 @@ func can_move() -> bool:
 func check_for_new_screen() -> Vector2:
 	var relative_position = player.position - get_tree().get_first_node_in_group("Camera").position
 	
-	if(relative_position.x < GameSettings.screen_boundaries.x and Input.is_action_pressed("move_left")):
+	if(relative_position.x - 8 < GameSettings.screen_boundaries.x and Input.is_action_pressed("move_left")):
 		return Vector2(-1, 0)
-	elif(relative_position.x > GameSettings.screen_boundaries.y and Input.is_action_pressed("move_right")):
+	elif(relative_position.x + 8 > GameSettings.screen_boundaries.y and Input.is_action_pressed("move_right")):
 		return Vector2(1, 0)
-	elif(relative_position.y < GameSettings.screen_boundaries.z and Input.is_action_pressed("move_up")):
+	elif(relative_position.y - 8 < GameSettings.screen_boundaries.z and Input.is_action_pressed("move_up")):
 		return Vector2(0, -1)
-	elif(relative_position.y > GameSettings.screen_boundaries.w and Input.is_action_pressed("move_down")):
+	elif(relative_position.y + 8 > GameSettings.screen_boundaries.w and Input.is_action_pressed("move_down")):
 		return Vector2(0, 1)
 		
 	return Vector2.ZERO

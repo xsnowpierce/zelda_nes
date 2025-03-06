@@ -9,6 +9,7 @@ enum USE_SPAWN_TYPE {GLOBAL_POSITION, RELATIVE_GRID}
 ##[br]0,0 would be the center of the screen selected.
 @export var relative_grid_position : Vector2
 @export var use_spawn_type : USE_SPAWN_TYPE
+@export var spawn_delay : float = 0.0
 var has_been_killed : bool
 @export_group("Zora Settings")
 @export var zora_movable_tile_range : Array[Vector4]

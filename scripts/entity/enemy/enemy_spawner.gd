@@ -6,6 +6,7 @@ var game_data : GameData
 var enemy_type : ENUM.ENEMY_TYPE
 var enemy_scene
 var should_cloud_be_visible : bool
+var enemy_spawn_delay : float
 var zora_movable_tile_range : Array[Vector4]
 var stalfos_spawn_with_key : bool
 var spawner_id : int
@@ -13,6 +14,8 @@ signal enemy_killed(spawner : EnemySpawner, location : Vector2)
 var dropped_item_scene : PackedScene = load("res://scenes/dropped_item.tscn")
 var key_scene : Node2D
 var blade_trap_settings : BladeTrapSettings
+var override_cloud_visibility : bool
+var overriden_cloud_visibiity : bool
 
 func _ready() -> void:
 	super()
@@ -21,6 +24,9 @@ func _ready() -> void:
 	game_data = get_tree().get_first_node_in_group("GameData")
 
 func set_cloud_visibility() -> void:
+	if(override_cloud_visibility):
+		should_cloud_be_visible = overriden_cloud_visibiity
+		return
 	match enemy_type:
 			ENUM.ENEMY_TYPE.ZORA:
 				should_cloud_be_visible = false
@@ -30,9 +36,14 @@ func set_cloud_visibility() -> void:
 				should_cloud_be_visible = false
 			_:
 				should_cloud_be_visible = true
+	if(enemy_spawn_delay > 0):
+		should_cloud_be_visible = false
 
 func awake():
 	super()
+	await get_tree().create_timer(enemy_spawn_delay).timeout
+	if(!is_awake):
+		return
 	if(stalfos_spawn_with_key):
 		key_scene = dropped_item_scene.instantiate()
 		add_child(key_scene)

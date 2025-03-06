@@ -28,7 +28,7 @@ static func is_out_of_bounds_y(global_position : Vector2, camera : Camera2D, out
 	var y_boundary_bottom = GameSettings.screen_boundaries.w
 	if(outer_ring_is_invalid):
 		y_boundary_top += 16
-		y_boundary_bottom -= 16
+		y_boundary_bottom -= 32
 	
 	if(relative_position.y < y_boundary_top):
 		return true

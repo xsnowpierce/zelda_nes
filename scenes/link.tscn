@@ -541,6 +541,7 @@ script = ExtResource("5_bwarm")
 
 [node name="LinkMovement" type="Node" parent="."]
 script = ExtResource("5_excs0")
+move_speed = 72.0
 
 [node name="LinkCombat" type="Node" parent="."]
 script = ExtResource("6_2h8fc")

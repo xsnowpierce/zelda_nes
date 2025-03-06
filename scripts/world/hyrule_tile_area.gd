@@ -30,6 +30,10 @@ func spawn_enemies(enemies : EnemySpawnGroup) -> void:
 		if(enemy.has_been_killed):
 			continue
 		var enemy_object = enemy_spawner_scene.instantiate()
+		if(enemies.hide_spawn_clouds):
+			enemy_object.override_cloud_visibility = true
+			enemy_object.overriden_cloud_visibiity = false
+		enemy_object.enemy_spawn_delay = enemy.spawn_delay
 		enemy_object.enemy_type = enemy.enemy_type
 		$"Spawned Enemies".add_child(enemy_object)
 		var spawn_position : Vector2 = Vector2.ZERO

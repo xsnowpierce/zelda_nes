@@ -7,12 +7,24 @@ class_name EnemyProjectile
 var current_forward_vector : Vector2 = Vector2.UP
 var camera
 @export var attack_block_level : ENUM.BLOCK_ATTACK_LEVEL
+@export var change_directions : bool = false
 
 func _ready() -> void:
 	camera = get_tree().get_first_node_in_group("Camera")
 
 func set_forward_vector(direction : Vector2) -> void:
 	current_forward_vector = direction
+	if(!change_directions):
+		return
+	match direction:
+		Vector2.RIGHT:
+			$AnimatedSprite2D.play("right")
+		Vector2.LEFT:
+			$AnimatedSprite2D.play("left")
+		Vector2.UP:
+			$AnimatedSprite2D.play("up")
+		Vector2.DOWN:
+			$AnimatedSprite2D.play("down")
 
 func _physics_process(_delta: float) -> void:
 	if(Utils.is_out_of_bounds(global_position, camera, true)):

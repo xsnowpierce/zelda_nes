@@ -1,0 +1,139 @@
+[gd_scene load_steps=20 format=3 uid="uid://bqaeg8eif57bt"]
+
+[ext_resource type="Script" uid="uid://50n3wd7l5cw6" path="res://scripts/entity/enemy/enemy_ai_wander_and_shoot.gd" id="1_6q0wg"]
+[ext_resource type="PackedScene" uid="uid://hkcgj37utwxv" path="res://scenes/enemy_scenes/moblin_arrow.tscn" id="2_q875r"]
+[ext_resource type="Shader" uid="uid://8mq5p4boxc2e" path="res://scenes/link.gdshader" id="3_v7rgq"]
+[ext_resource type="Texture2D" uid="uid://7uv75ywip144" path="res://images/enemies.png" id="4_ps85o"]
+[ext_resource type="Script" uid="uid://cmd4uujjd2kxs" path="res://scripts/entity/enemy/enemy_hit_effect.gd" id="5_r8d8g"]
+[ext_resource type="Resource" uid="uid://4utbqbcejrn4" path="res://colour palettes/hit_effect_1.tres" id="6_got54"]
+[ext_resource type="Resource" uid="uid://k5ei2dg4m6oj" path="res://colour palettes/hit_effect_2.tres" id="7_y2b6w"]
+[ext_resource type="Resource" uid="uid://cggcj5g1dq8du" path="res://colour palettes/hit_effect_3.tres" id="8_4huv5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dh51p"]
+radius = 7.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_stu2s"]
+resource_local_to_scene = true
+shader = ExtResource("3_v7rgq")
+shader_parameter/OLD_COLOUR_1 = Color(0.847059, 0.156863, 0, 1)
+shader_parameter/OLD_COLOUR_2 = Color(0.988235, 0.596078, 0.219608, 1)
+shader_parameter/OLD_COLOUR_3 = Color(0.988235, 0.988235, 0.988235, 1)
+shader_parameter/OLD_COLOUR_4 = Color(0, 0, 0, 1)
+shader_parameter/NEW_COLOUR_1 = Color(0, 0, 0, 1)
+shader_parameter/NEW_COLOUR_2 = Color(0, 0, 0, 1)
+shader_parameter/NEW_COLOUR_3 = Color(0, 0, 0, 1)
+shader_parameter/NEW_COLOUR_4 = Color(0, 0, 0, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1x7f4"]
+atlas = ExtResource("4_ps85o")
+region = Rect2(64, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_11sl4"]
+atlas = ExtResource("4_ps85o")
+region = Rect2(80, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l4tua"]
+atlas = ExtResource("4_ps85o")
+region = Rect2(112, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ofc0"]
+atlas = ExtResource("4_ps85o")
+region = Rect2(96, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wx3nd"]
+atlas = ExtResource("4_ps85o")
+region = Rect2(64, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qcdj5"]
+atlas = ExtResource("4_ps85o")
+region = Rect2(80, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x4i4m"]
+atlas = ExtResource("4_ps85o")
+region = Rect2(96, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0aljb"]
+atlas = ExtResource("4_ps85o")
+region = Rect2(112, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jmjkq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1x7f4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_11sl4")
+}],
+"loop": true,
+"name": &"down",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l4tua")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8ofc0")
+}],
+"loop": true,
+"name": &"left",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wx3nd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qcdj5")
+}],
+"loop": true,
+"name": &"right",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x4i4m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0aljb")
+}],
+"loop": true,
+"name": &"up",
+"speed": 10.0
+}]
+
+[node name="Moblin" type="CharacterBody2D" groups=["Enemy"]]
+collision_layer = 8
+collision_mask = 4099
+script = ExtResource("1_6q0wg")
+projectile_scene = ExtResource("2_q875r")
+enemy_type = 1
+collision_layers_bitmask = 4099
+
+[node name="Area2D" type="Area2D" parent="." groups=["Enemy"]]
+collision_layer = 8
+collision_mask = 20
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(8, 8)
+shape = SubResource("CircleShape2D_dh51p")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+material = SubResource("ShaderMaterial_stu2s")
+sprite_frames = SubResource("SpriteFrames_jmjkq")
+animation = &"down"
+autoplay = "down"
+frame_progress = 0.943785
+centered = false
+script = ExtResource("5_r8d8g")
+hit_effect_palette_1 = ExtResource("6_got54")
+hit_effect_palette_2 = ExtResource("7_y2b6w")
+hit_effect_palette_3 = ExtResource("8_4huv5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(8, 8)
+shape = SubResource("CircleShape2D_dh51p")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_entered"]

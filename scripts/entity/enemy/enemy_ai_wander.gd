@@ -30,7 +30,7 @@ func should_move() -> bool:
 	return !is_moving
 
 func move() -> void:
-	if(is_moving):
+	if(is_moving or !can_move()):
 		return
 	is_moving = true
 	var valid : bool = check_if_move_is_valid(current_forward_vector)
@@ -70,6 +70,9 @@ func move_to_direction(target_direction : Vector2) -> void:
 	
 		# move to position
 	while (global_position.distance_to(target_position) > 1):
+		if(is_attacked_knockback):
+			target_position = global_position
+			break
 		if(!can_move()):
 			await get_tree().process_frame
 			continue
