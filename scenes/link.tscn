@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=3 uid="uid://b2gll84jnyb1u"]
+[gd_scene load_steps=66 format=3 uid="uid://b2gll84jnyb1u"]
 
 [ext_resource type="Script" uid="uid://sj8lq45j0tyk" path="res://scripts/player/link/link_controller.gd" id="1_af1d6"]
 [ext_resource type="Texture2D" uid="uid://cpa11tutqc7h1" path="res://images/Sprite-0001.png" id="2_8jjpd"]
@@ -485,6 +485,14 @@ size = Vector2(16, 16)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_305y3"]
 size = Vector2(12, 12)
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_d5og5"]
+properties/0/path = NodePath("Link Sprite Mask/Link Sprite:animation")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("Link Sprite Mask/Link Sprite:frame")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
 [node name="Link" type="CharacterBody2D" groups=["Player"]]
 texture_filter = 1
 texture_repeat = 1
@@ -515,6 +523,7 @@ offset_bottom = 8.0
 [node name="Link Sprite" type="AnimatedSprite2D" parent="Link Sprite Mask"]
 process_mode = 1
 z_index = 1
+y_sort_enabled = true
 texture_filter = 1
 texture_repeat = 1
 material = SubResource("ShaderMaterial_1hnhe")
@@ -570,6 +579,7 @@ script = ExtResource("8_ryf5n")
 script = ExtResource("10_d33na")
 
 [node name="Link Collision Hitbox Area" type="Area2D" parent="." groups=["Player"]]
+collision_mask = 16513
 
 [node name="Link Collider" type="CollisionShape2D" parent="Link Collision Hitbox Area"]
 position = Vector2(0, 4)
@@ -583,6 +593,9 @@ sprite_frames = ExtResource("13_d5og5")
 animation = &"wooden_sword"
 centered = false
 script = ExtResource("14_ks7w5")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_d5og5")
 
 [connection signal="animation_finished" from="Link Sprite Mask/Link Sprite" to="Link Sprite Mask/Link Sprite" method="_on_animation_finished"]
 [connection signal="animation_looped" from="Link Sprite Mask/Link Sprite" to="Link Sprite Mask/Link Sprite" method="_on_animation_finished"]

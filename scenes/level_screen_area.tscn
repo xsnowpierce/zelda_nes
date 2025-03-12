@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://cujsqroo48xy3"]
+
+[ext_resource type="Script" uid="uid://bbjgoln3xi73e" path="res://scenes/level_screen_area.gd" id="1_ov0yf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1awqb"]
+size = Vector2(256, 176)
+
+[node name="Level Screen Area" type="Node2D" groups=["Level Screen Area"]]
+script = ExtResource("1_ov0yf")
+
+[node name="Area Collider" type="Area2D" parent="." groups=["Level Screen Area"]]
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area Collider" groups=["Level Screen Area"]]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_1awqb")
+debug_color = Color(0, 0.6, 0.701961, 0)

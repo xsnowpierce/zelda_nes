@@ -10,7 +10,6 @@ signal selected_item_type_change(new_item : ENUM.ITEM_TYPE)
 signal item_selection_change_sound()
 
 func _ready() -> void:
-	has_bow = get_tree().get_first_node_in_group("GameData").has_player_flag("obtained_bow")
 	selected_item_index_change.emit(current_selected_index)
 
 func _process(delta: float) -> void:
@@ -78,7 +77,7 @@ func is_item_slot_null(item_slot : int) -> bool:
 	return false
 
 func open_pause_menu() -> void:
-	has_bow = get_tree().get_first_node_in_group("GameData").has_player_flag("obtained_bow")
+	pass
 
 func close_pause_menu() -> void:
 	pass

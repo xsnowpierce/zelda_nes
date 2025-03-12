@@ -2,7 +2,6 @@ extends Entity
 
 class_name EnemySpawner
 
-var game_data : GameData
 @export var enemy_type : ENUM.ENEMY_TYPE
 var enemy_scene
 var should_cloud_be_visible : bool
@@ -17,12 +16,12 @@ var blade_trap_settings : BladeTrapSettings
 var override_cloud_visibility : bool
 var overriden_cloud_visibiity : bool
 var spawn_object_parent : Node
+var spawned_enemy_object : Node2D
 
 func _ready() -> void:
 	super()
 	$Sprite2D.visible = false
 	set_cloud_visibility()
-	game_data = get_tree().get_first_node_in_group("GameData")
 	enemy_scene = get_enemy_scene()
 
 func set_cloud_visibility() -> void:
@@ -59,9 +58,8 @@ func awake():
 	
 func sleep():
 	super()
-	if(is_instance_valid(enemy_scene)):
-		enemy_scene.queue_free()
-		enemy_scene = null
+	if(is_instance_valid(spawned_enemy_object)):
+		spawned_enemy_object.queue_free()
 	$Sprite2D.frame = 0
 	$Sprite2D.visible = should_cloud_be_visible
 
@@ -70,10 +68,10 @@ func _on_sprite_2d_animation_looped() -> void:
 		$Sprite2D.visible = false
 		return
 	
-	var scene = enemy_scene.instantiate()
-	add_child(scene)
-	scene.global_position = global_position
-	scene.enemy_type = enemy_type
+	spawned_enemy_object = enemy_scene.instantiate()
+	add_child(spawned_enemy_object)
+	spawned_enemy_object.global_position = global_position
+	spawned_enemy_object.enemy_type = enemy_type
 		
 	match enemy_type:
 		ENUM.ENEMY_TYPE.ZORA:
@@ -81,44 +79,50 @@ func _on_sprite_2d_animation_looped() -> void:
 		ENUM.ENEMY_TYPE.BLADE_TRAP:
 			enemy_scene.load_blade_trap_settings(blade_trap_settings)
 		
-	if is_instance_valid(key_scene):
-		remove_child(key_scene)
-		scene.add_child(key_scene)
+	if(key_scene != null):
+		get_parent().remove_child(key_scene)
+		spawned_enemy_object.add_child(key_scene)
+		key_scene.position = Vector2.ZERO
 		
-	scene.connect("has_died", Callable(self, "spawned_enemy_has_died"))
+	spawned_enemy_object.connect("has_died", Callable(self, "spawned_enemy_has_died"))
 	$Sprite2D.stop()
 	$Sprite2D.visible = false
 
 func get_enemy_scene() -> PackedScene:
 	match enemy_type:
 		ENUM.ENEMY_TYPE.TEKTITE: 
-			return game_data.enemy_tektite_scene
+			return load("res://scenes/enemy_scenes/tektite.tscn")
 		ENUM.ENEMY_TYPE.OCTOROK: 
-			return game_data.enemy_octorok_scene
+			return load("res://scenes/enemy_scenes/octorok.tscn")
 		ENUM.ENEMY_TYPE.ZORA: 
-			return game_data.enemy_zora_scene
+			return load("res://scenes/enemy_scenes/zora.tscn")
 		ENUM.ENEMY_TYPE.LEEVER: 
-			return game_data.enemy_leever_scene
+			return load("res://scenes/enemy_scenes/leever.tscn")
 		ENUM.ENEMY_TYPE.BLUE_TEKTITE: 
-			return game_data.enemy_blue_tektite_scene
+			return load("res://scenes/enemy_scenes/blue_tektite.tscn")
 		ENUM.ENEMY_TYPE.PEAHAT:
-			return game_data.enemy_peahat_scene
+			return load("res://scenes/enemy_scenes/peahat.tscn")
 		ENUM.ENEMY_TYPE.KEESE: 
-			return game_data.enemy_keese_scene
+			return load("res://scenes/enemy_scenes/keese.tscn")
 		ENUM.ENEMY_TYPE.STALFOS: 
-			return game_data.enemy_stalfos_scene
+			return load("res://scenes/enemy_scenes/stalfos.tscn")
 		ENUM.ENEMY_TYPE.GEL: 
-			return game_data.enemy_gel_scene
+			return load("res://scenes/enemy_scenes/gel.tscn")
 		ENUM.ENEMY_TYPE.BLADE_TRAP: 
-			return game_data.enemy_blade_trap_scene
+			return load("res://scenes/enemy_scenes/blade_trap.tscn")
 		ENUM.ENEMY_TYPE.GORIYA:
-			return game_data.enemy_goriya_scene
+			return load("res://scenes/enemy_scenes/goriya.tscn")
 		ENUM.ENEMY_TYPE.AQUAMENTUS: 
-			return game_data.boss_aquamentus_scene
+			return load("res://scenes/enemy_scenes/aquamentus.tscn")
 		_:
 			printerr("Tried to spawn enemy without a set scene: ", str(enemy_type))
 	return null
 
 func spawned_enemy_has_died() -> void:
-	var killed_location : Vector2 = enemy_scene.global_position
+	var killed_location : Vector2 = spawned_enemy_object.global_position
 	enemy_killed.emit(self, killed_location)
+
+func _notification(notif):
+	if (notif == NOTIFICATION_PREDELETE):
+		if(is_instance_valid(spawned_enemy_object)):
+			spawned_enemy_object.queue_free()

@@ -52,11 +52,11 @@ func loop() -> void:
 		while(is_instance_valid(current_projectile)): # make sure our current ball has despawned before we move
 			await get_tree().process_frame
 
-func attacked(damage : int, from : Vector2) -> void:
+func attacked(damage : int, from : Vector2, authority : PlayerData) -> void:
 	if(current_state == ZORA_STATE.UNDERWATER):
 		return
 	else:
-		super(damage, from)
+		super(damage, from, authority)
 
 func death() -> void:
 	if(is_instance_valid(current_projectile)):

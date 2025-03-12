@@ -1,11 +1,13 @@
 extends Entity
 
+class_name DroppedItem
+
 @export var item_type : ENUM.ITEM_TYPE = ENUM.ITEM_TYPE.NULL
 @export var rupee_value_override : int = -1
 var is_key_item : bool
 signal item_picked_up
 var sfxplayer : SFXPlayer
-var times_picked_up : int
+@export var kill_on_sleep : bool = true
 
 func _ready() -> void:
 	super()
@@ -76,47 +78,6 @@ func set_item_type(type : ENUM.ITEM_TYPE) -> void:
 		ENUM.ITEM_TYPE.WOODEN_SWORD:
 			$"Dropped Item/AnimatedSprite2D".play("wooden_sword")
 
-func _on_area_entered(area: Area2D) -> void:
-	if(area.is_in_group("Player_Bomb")):
-		return
-	if(times_picked_up > 0):
-		return
-	times_picked_up += 1
-	var game_data : GameData = get_tree().get_first_node_in_group("GameData")
-	match item_type:
-		ENUM.ITEM_TYPE.GREEN_RUPEE:
-			if(rupee_value_override != -1):
-				game_data.change_rupees(rupee_value_override)
-			else:
-				game_data.change_rupees(1)
-			sfxplayer.play_sound(SFXPlayer.SFX.RUPEE_PICKUP)
-		ENUM.ITEM_TYPE.BLUE_RUPEE:
-			if(rupee_value_override != -1):
-				game_data.change_rupees(rupee_value_override)
-			else:
-				game_data.change_rupees(5)
-			sfxplayer.play_sound(SFXPlayer.SFX.RUPEE_PICKUP)
-		ENUM.ITEM_TYPE.HEART:
-			game_data.player_gain_heart(2)
-			sfxplayer.play_sound(SFXPlayer.SFX.HEART_PICKUP)
-		ENUM.ITEM_TYPE.DOOR_KEY:
-			game_data.change_keys(1)
-			sfxplayer.play_sound(SFXPlayer.SFX.HEART_PICKUP)
-		ENUM.ITEM_TYPE.COMPASS:
-			game_data.picked_up_dungeon_compass()
-			sfxplayer.play_sound(SFXPlayer.SFX.HEART_PICKUP)
-		ENUM.ITEM_TYPE.HEART_CONTAINER:
-			game_data.change_max_hearts(2)
-			sfxplayer.play_sound(SFXPlayer.SFX.HEART_CONTAINER_PICKUP)
-		ENUM.ITEM_TYPE.TRIFORCE_PIECE:
-			pass
-	if(is_key_item):
-		game_data.add_player_flag(get_obtain_player_flag_from_item_type(item_type))
-		game_data.player_pickup_key_item(item_type)
-	$"Dropped Item/AnimatedSprite2D".visible = false
-	item_picked_up.emit()
-	queue_free()
-
 func get_obtain_player_flag_from_item_type(get_item_type : ENUM.ITEM_TYPE) -> String:
 	match get_item_type:
 		ENUM.ITEM_TYPE.WOODEN_BOOMERANG:
@@ -161,4 +122,6 @@ func awake() -> void:
 	$"Dropped Item/AnimatedSprite2D".visible = true
 
 func sleep() -> void:
+	if(kill_on_sleep):
+		queue_free()
 	$"Dropped Item/AnimatedSprite2D".visible = false

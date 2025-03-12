@@ -24,9 +24,9 @@ func check_attack() -> void:
 	if(!player.get_player_state().is_player_input_allowed()):
 		return
 	if(Input.is_action_just_pressed("attack") and !player.get_player_state().is_attacking):
-		use_weapon(player.game_data.current_equipped_item_a)
+		use_weapon(player.player_data.current_equipped_item_a)
 	if(Input.is_action_just_pressed("alternate_attack") and !player.get_player_state().is_attacking):
-		use_weapon(player.game_data.current_equipped_item_b)
+		use_weapon(player.player_data.current_equipped_item_b)
 
 func use_weapon(item : ENUM.ITEM_TYPE) -> void:
 	if(item == ENUM.ITEM_TYPE.NULL):
@@ -40,7 +40,7 @@ func use_weapon(item : ENUM.ITEM_TYPE) -> void:
 
 func wooden_sword_swing() -> void:
 	player.get_player_state().is_attacking = true
-	if(player.game_data.current_player_health == player.game_data.max_player_health):
+	if(player.player_data.player_stats.current_player_health == player.player_data.player_stats.max_player_health):
 		full_health_sword_swing.emit()
 	sword_swing_attack.emit()
 	play_sword_swing_sound.emit()
@@ -60,7 +60,7 @@ func attacked(damage : int, from : Vector2, attack_block_level : ENUM.BLOCK_ATTA
 	player.get_player_state().is_attacked_knockback = true
 	player.get_sprite().hit_effect()
 	play_attacked_sound.emit()
-	player.game_data.player_took_damage(damage)
+	player.player_data.player_took_damage(damage)
 	var knockback_direction : Vector2 = get_knockback_direction(from)
 	if(abs(knockback_direction.x) > abs(knockback_direction.y)):
 		knockback_direction.y = 0
@@ -99,7 +99,7 @@ func get_knockback_direction(from : Vector2) -> Vector2:
 func try_block_attack(from: Vector2, block_level: ENUM.BLOCK_ATTACK_LEVEL = ENUM.BLOCK_ATTACK_LEVEL.IMPOSSIBLE) -> bool:
 	if block_level == ENUM.BLOCK_ATTACK_LEVEL.IMPOSSIBLE:
 		return false
-	if block_level == ENUM.BLOCK_ATTACK_LEVEL.MAGICAL_SHIELD and not player.game_data.has_player_flag("obtained_magical_shield"):
+	if block_level == ENUM.BLOCK_ATTACK_LEVEL.MAGICAL_SHIELD and not player.player_data.has_player_flag("obtained_magical_shield"):
 		return false
 	
 	var link_centre = player.global_position + Vector2(8, 8)

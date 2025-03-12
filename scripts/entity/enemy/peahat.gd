@@ -146,7 +146,7 @@ func get_random_direction() -> Vector2:
 	var random : Vector2 = directions[randi() % directions.size()]
 	return random
 
-func attacked(damage : int, from : Vector2) -> void:
+func attacked(damage : int, from : Vector2, authority : PlayerData) -> void:
 	if(!can_be_hit_in_flight and current_state != PEAHAT_STATE.STOPPED):
 		return
-	super(damage, from)
+	super(damage, from, authority)

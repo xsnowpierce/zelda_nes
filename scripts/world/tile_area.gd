@@ -11,9 +11,10 @@ signal killed_all_enemies(last_kill_location : Vector2)
 var enemy_spawner_scene : PackedScene = load("res://scenes/enemy_spawner.tscn")
 
 func _ready() -> void:
-	tile_area_position = Vector2(global_position.x / 16 / 16, global_position.y / 16 / 11)
-
-func tile_entered(previous_tile : Vector2) -> void:
+	if(get_node("Entities") != null):
+		for entity in $Entities.get_children():
+			entity.sleep()
+func tile_entered() -> void:
 	tile_is_loaded = true
 	if(get_node("Entities") != null):
 		for entity in $Entities.get_children():
@@ -22,7 +23,7 @@ func tile_entered(previous_tile : Vector2) -> void:
 		var random_spawn : EnemySpawnGroup = random_map_spawns[randi_range(0, random_map_spawns.size() - 1)] 
 		spawn_enemies(random_spawn)
 
-func tile_exited(next_tile : Vector2) -> void:
+func tile_exited() -> void:
 	tile_is_loaded = false
 	if(get_node("Entities") != null):
 		for entity in $Entities.get_children():

@@ -8,6 +8,7 @@ var link : LinkController
 
 func initialize(player : LinkController) -> void:
 	link = player
+	player_authority = player.get_parent()
 
 func set_direction(direction : Vector2, velocity : Vector2) -> void:
 	if(direction == Vector2.ZERO):
@@ -35,7 +36,7 @@ func _on_link_sprite_attack_ended() -> void:
 	set_collider_enabled(false)
 
 func get_attack_damage() -> int:
-	match(link.game_data.current_equipped_item_a):
+	match(link.player_data.current_equipped_item_a):
 		ENUM.ITEM_TYPE.WOODEN_SWORD:
 			return 2
 		ENUM.ITEM_TYPE.WHITE_SWORD:

@@ -3,21 +3,14 @@ extends Node
 @export var move_speed : float = 65
 var movement : Vector2
 var last_velocity : Vector2
-#screen transition variables
-var max_x_until_new_screen : float = 120
-var max_y_until_new_screen : float = 87
-signal call_new_screen(direction : Vector2)
 signal sprite_update(movement : Vector2, velocity : Vector2)
-var current_colliding_enemies : int = 0
 @export var force_walk_tile_distance : float = 2
 
 var player : LinkController
 
 func initialize(parent: LinkController) -> void:
 	player = parent
-	self.connect("call_new_screen", Callable(player.camera, "_on_link_call_new_screen"))
-	
-	
+
 func process(delta: float) -> void:
 	var new_screen_check : Vector2 = check_for_new_screen()
 	if(new_screen_check == Vector2.ZERO):
@@ -31,15 +24,13 @@ func process(delta: float) -> void:
 			sprite_update.emit(movement, player.velocity)
 	else:
 		if(player.get_player_state().is_player_input_allowed()):
-			call_new_screen.emit(new_screen_check)
+			player.call_new_screen(new_screen_check)
 			sprite_update.emit(movement, player.velocity)
-		
-	
 	if(!player.get_player_state().is_player_input_allowed()):
 		keep_player_in_screen()
 
 func keep_player_in_screen() -> void:
-	var camera_position = get_tree().get_first_node_in_group("Camera").position
+	var camera_position = player.player_data.get_camera().position
 	var relative_position = player.position - camera_position
 	if(relative_position.x - 8 < GameSettings.screen_boundaries.x):
 		player.position.x = camera_position.x + GameSettings.screen_boundaries.x + 8
@@ -103,7 +94,7 @@ func can_move() -> bool:
 	return true
 
 func check_for_new_screen() -> Vector2:
-	var relative_position = player.position - get_tree().get_first_node_in_group("Camera").position
+	var relative_position = player.position - player.player_data.get_camera().position
 	
 	if(relative_position.x - 8 < GameSettings.screen_boundaries.x and Input.is_action_pressed("move_left")):
 		return Vector2(-1, 0)

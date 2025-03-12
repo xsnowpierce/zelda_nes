@@ -1,8 +1,20 @@
 extends Node
 
 static var camera_is_moving : bool = false
+static var game_is_paused : bool = false
+## The edges of the screen. 
+## [br][b]X[/b] is the -X of the screen,
+## [br][b]Y[/b] is the +X of the screen,
+## [br][b]Z[/b] is the -Y of the screen,
+## [br]and [b]W[/b] is the +Y of the screen.
 static var screen_boundaries : Vector4 = Vector4(-128, 128, -96, 80)
 static var map_screen_size : Vector2i = Vector2i(256, 176)
+## The edges of the screen in grid coordinates. 
+## [br][b]X[/b] is the -X of the screen,
+## [br][b]Y[/b] is the +X of the screen,
+## [br][b]Z[/b] is the -Y of the screen,
+## [br]and [b]W[/b] is the +Y of the screen.
+static var screen_boundaries_grid : Vector4 = Vector4(-8, 7, -6, 4)
 
 static func is_key_item(item : ENUM.ITEM_TYPE) -> bool:
 	match item:

@@ -57,7 +57,7 @@ static func check_position_for_colliders(target_position : Vector2, collision_la
 	return false
 
 static func get_tile_coordinate_from_global_coordinate(global_position : Vector2) -> Vector2:
-	return Vector2i(roundi(global_position.x / GameSettings.map_screen_size.x), roundi(global_position.y / GameSettings.map_screen_size.y))
+	return Vector2i(floori(global_position.x / GameSettings.map_screen_size.x), floori(global_position.y / GameSettings.map_screen_size.y))
 	
 static func get_global_coordinate_from_tile_coordinate(tile_coordinate : Vector2) -> Vector2:
 	tile_coordinate.x *= 16 * 16

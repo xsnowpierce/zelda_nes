@@ -23,9 +23,9 @@ func new_tile_entered(tile : Vector2) -> void:
 func stall_room_loading(tile_to_load : TileArea) -> void:
 	await get_tree().process_frame
 
-func _on_camera_2d_camera_moved(new_area_position: Vector2) -> void:
-	new_tile_entered(new_area_position)
+func player_tile_entered(new_tile_position : Vector2) -> void:
+	new_tile_entered(new_tile_position)
 
-func _on_camera_2d_camera_start_moving(new_area_position : Vector2) -> void:
+func player_tile_left(new_tile_position : Vector2) -> void:
 	if(tile_dictionary.has(current_tile)):
-			tile_dictionary[current_tile].tile_exited(new_area_position)
+			tile_dictionary[current_tile].tile_exited(new_tile_position)

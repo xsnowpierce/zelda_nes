@@ -30,20 +30,22 @@ func use_alternate_weapon(item : ENUM.ITEM_TYPE) -> void:
 		ENUM.ITEM_TYPE.BOMB:
 			if(is_instance_valid(current_projectile)):
 				return
-			if(player.game_data.current_bombs <= 0):
+			if(player.player_data.player_stats.current_bombs <= 0):
 				return
 			var bomb = bomb_scene.instantiate()
+			bomb.player_authority = player.player_data
 			bomb.global_position = (player.global_position - Vector2(8,8)) + (player.get_look_direction() * (spawn_projectile_distance * 16))
 			current_projectile = bomb
-			player.game_data.add_child(bomb)
-			player.game_data.change_bombs(-1)
+			player.player_data.add_child(bomb)
+			player.player_data.change_bombs(-1)
 			player.use_item_animation()
 		ENUM.ITEM_TYPE.BLUE_CANDLE:
 			if(is_instance_valid(current_projectile)):
 				return
 			var flame = candle_flame_scene.instantiate()
+			flame.player_authority = player.player_data
 			flame.global_position = (player.global_position) + (player.get_look_direction() * (spawn_projectile_distance * 16))
-			player.game_data.add_child(flame)
+			player.player_data.add_child(flame)
 			flame.initialize_fire(player.get_look_direction())
 			current_projectile = flame
 			player.use_item_animation()
@@ -55,30 +57,32 @@ func use_alternate_weapon(item : ENUM.ITEM_TYPE) -> void:
 		ENUM.ITEM_TYPE.WOODEN_ARROW:
 			if(is_instance_valid(current_projectile)):
 				return
-			if(player.game_data.current_rupees <= 0):
+			if(player.player_data.player_stats.current_rupees <= 0):
 				return
 			var arrow = wooden_arrow_scene.instantiate()
+			arrow.player_authority = player.player_data
 			arrow.global_position = (player.global_position) + (player.get_look_direction() * (spawn_projectile_distance * 16))
-			player.game_data.add_child(arrow)
-			arrow.initialize_arrow(player.get_look_direction(), player.camera)
+			player.player_data.add_child(arrow)
+			arrow.initialize_arrow(player.get_look_direction(), player.player_data.get_camera())
 			current_projectile = arrow
 			player.use_item_animation()
-			player.game_data.change_rupees(-1)
+			player.player_data.change_rupees(-1)
 		ENUM.ITEM_TYPE.RECORDER:
-			player.game_data.set_whistle_pause_value(true)
-			get_tree().get_first_node_in_group("SFXPlayer").play_sound(SFXPlayer.SFX.WHISTLE_MUSIC)
+			player.player_data.set_whistle_pause_value(true)
+			player.player_data.get_sfx_player().play_sound(SFXPlayer.SFX.WHISTLE_MUSIC)
 			await get_tree().create_timer(whistle_pause_time).timeout
 			player.played_flute.emit()
-			player.game_data.set_whistle_pause_value(false)
+			player.player_data.set_whistle_pause_value(false)
 		ENUM.ITEM_TYPE.WOODEN_BOOMERANG:
 			if(is_instance_valid(current_projectile)):
 				return
 			if(is_instance_valid(current_food)):
 				current_food.queue_free()
 			var boomerang = boomerang_scene.instantiate()
+			boomerang.player_authority = player.player_data
 			boomerang.global_position = (player.global_position) + (player.get_look_direction() * (spawn_projectile_distance * 16))
-			player.game_data.add_child(boomerang)
-			boomerang.initialize_boomerang(Boomerang.BOOMERANG_TYPE.WOODEN, player.get_look_direction(), player.camera, player, false)
+			player.player_data.add_child(boomerang)
+			boomerang.initialize_boomerang(Boomerang.BOOMERANG_TYPE.WOODEN, player.get_look_direction(), player.player_data.get_camera(), player, false)
 			current_projectile = boomerang
 			boomerang.connect("boomerang_picked_up", Callable(self, "boomerang_pickup"))
 			player.use_item_animation()
@@ -86,9 +90,10 @@ func use_alternate_weapon(item : ENUM.ITEM_TYPE) -> void:
 			if(is_instance_valid(current_projectile)):
 				return
 			var boomerang = boomerang_scene.instantiate()
+			boomerang.player_authority = player.player_data
 			boomerang.global_position = (player.global_position) + (player.get_look_direction() * (spawn_projectile_distance * 16))
-			player.game_data.add_child(boomerang)
-			boomerang.initialize_boomerang(Boomerang.BOOMERANG_TYPE.MAGICAL, player.get_look_direction(), player.camera, player, false)
+			player.player_data.add_child(boomerang)
+			boomerang.initialize_boomerang(Boomerang.BOOMERANG_TYPE.MAGICAL, player.get_look_direction(), player.player_data.get_camera(), player, false)
 			current_projectile = boomerang
 			boomerang.connect("boomerang_picked_up", Callable(self, "boomerang_pickup"))
 			player.use_item_animation()
@@ -96,8 +101,9 @@ func use_alternate_weapon(item : ENUM.ITEM_TYPE) -> void:
 			if(is_instance_valid(current_food)):
 				return
 			var food = food_item_scene.instantiate()
+			food.initialize_food(player.player_data.get_camera())
 			food.global_position = (player.global_position) + (player.get_look_direction() * (spawn_projectile_distance * 16))
-			player.game_data.add_child(food)
+			player.player_data.add_child(food)
 			current_food = food
 			player.food_placed.emit(food.global_position)
 			player.use_item_animation()
@@ -106,10 +112,10 @@ func use_alternate_weapon(item : ENUM.ITEM_TYPE) -> void:
 
 func cast_magical_wand_beam() -> void:
 	var wand_beam = magical_wand_scene.instantiate()
-	get_tree().get_first_node_in_group("SFXPlayer").play_sound(SFXPlayer.SFX.MAGICAL_WAND_SHOOT)
-	player.game_data.add_child(wand_beam)
+	player.player_data.get_sfx_player().play_sound(SFXPlayer.SFX.MAGICAL_WAND_SHOOT)
+	player.player_data.add_child(wand_beam)
 	wand_beam.global_position = (player.global_position) + (player.get_look_direction() * (spawn_projectile_distance * 16))
-	wand_beam.initialize_beam(player.get_look_direction(), player.camera)
+	wand_beam.initialize_beam(player.get_look_direction(), player.player_data.get_camera())
 	current_projectile = wand_beam
 
 func boomerang_pickup() -> void:
@@ -119,9 +125,10 @@ func _on_link_combat_full_health_sword_swing() -> void:
 	if(is_instance_valid(current_projectile) or current_sword_beam_cooldown > 0):
 		return
 	var sword_beam = full_hp_sword_projectile.instantiate()
-	get_tree().get_first_node_in_group("SFXPlayer").play_sound(SFXPlayer.SFX.SWORD_BEAM)
-	player.game_data.add_child(sword_beam)
+	sword_beam.player_authority = player.player_data
+	player.player_data.get_sfx_player().play_sound(SFXPlayer.SFX.SWORD_BEAM)
+	player.player_data.add_child(sword_beam)
 	sword_beam.global_position = (player.global_position) + (player.get_look_direction() * (spawn_projectile_distance * 16))
-	sword_beam.initialize_beam(player.get_look_direction(), player.camera)
+	sword_beam.initialize_beam(player.get_look_direction(), player.player_data.get_camera())
 	current_projectile = sword_beam
 	current_sword_beam_cooldown = full_hp_sword_beam_cooldown

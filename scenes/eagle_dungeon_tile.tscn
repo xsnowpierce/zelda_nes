@@ -8,4 +8,8 @@ script = ExtResource("1_0adkh")
 
 [node name="Spawned Enemies" type="Node" parent="."]
 
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("uid://cmhg4ibk0405j", "uid://3qu0er3g8su", "uid://b62c4urwkwpcw", "uid://d4jus2eb4u32x", "uid://duh3eaxcr5ch8", "uid://bcscnt52yrrvs", "uid://svye2k1mer1i", "uid://tnoirjgjg855", "uid://pg2i4cov640g", "uid://do2mji3lruyq7", "uid://c43ocjbbtan7f", "uid://bqaeg8eif57bt", "uid://hkcgj37utwxv", "uid://c1oxkxiu7tqck", "uid://7qvtpwix4buu", "uid://dmoo6a5lybrpp", "uid://cj75wahsqwoah", "uid://dhxxr225o5tr3")
+spawn_path = NodePath("..")
+
 [node name="Dungeon Walls" parent="." instance=ExtResource("2_fb3xy")]

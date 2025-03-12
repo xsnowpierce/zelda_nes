@@ -2,8 +2,7 @@ extends Node
 
 class_name LinkState
 
-var player : CharacterBody2D
-var game_data : Node
+var player : LinkController
 
 var is_pickup_animation : bool
 var is_position_correcting : bool
@@ -18,9 +17,8 @@ var is_shooting_magical_wand : bool
 var is_entering_new_tile : bool
 var ignore_force_tile_walks : bool
 
-func initialize(parent : CharacterBody2D) -> void:
+func initialize(parent : LinkController) -> void:
 	player = parent
-	game_data = get_tree().get_first_node_in_group("GameData")
 
 func is_player_input_allowed() -> bool:
 	return (!GameSettings.camera_is_moving 
@@ -28,7 +26,7 @@ func is_player_input_allowed() -> bool:
 		and !is_exiting_door 
 		and !has_room_events 
 		and !is_pickup_animation
-		and !game_data.game_is_paused
+		and !GameSettings.game_is_paused
 		and !is_attacked_knockback
 		and !is_placing_item
 		and !is_shooting_magical_wand

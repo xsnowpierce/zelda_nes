@@ -2,16 +2,15 @@ extends CharacterBody2D
 
 class_name LinkController
 
-var game_data : GameData
-var camera : Camera2D
+var player_data : PlayerData
 
 signal played_flute
 signal force_walk_completed
 signal food_placed(place_location : Vector2)
 
 func _ready() -> void:
-	game_data = get_tree().get_first_node_in_group("GameData")
-	camera = get_tree().get_first_node_in_group("Camera")
+	if not is_multiplayer_authority(): return
+	player_data = get_parent()
 	$LinkMovement.initialize(self)
 	$LinkCombat.initialize(self)
 	$LinkInteract.initialize(self)
@@ -22,6 +21,7 @@ func _ready() -> void:
 	$"Link Sprite Mask/Link Sprite".connect("magical_wand_cast_ended", Callable(self, "magical_wand_cast_ended"))
 	
 func _process(delta: float) -> void:
+	if not is_multiplayer_authority(): return
 	$LinkCombat.process(delta)
 	$LinkMovement.process(delta)
 	$LinkInteract.process(delta)
@@ -61,8 +61,8 @@ func magical_wand_cast_ended() -> void:
 
 func new_tile_entered(new_area_position : Vector2) -> void:
 	get_player_state().is_entering_new_tile = true
-	if(game_data.is_inside_dungeon):
-		await $LinkMovement.force_player_walk()
+	#if(player_data.player_stats.is_inside_dungeon):
+		#await $LinkMovement.force_player_walk()
 	get_player_state().is_entering_new_tile = false
 
 func get_player_global_tile_position() -> Vector2:
@@ -73,7 +73,7 @@ func get_player_global_tile_position() -> Vector2:
 
 func get_player_camera_relative_tile_position() -> Vector2:
 	var collider_centre = $"Link Collider".global_position
-	collider_centre -= camera.global_position
+	collider_centre -= player_data.get_camera().global_position
 	collider_centre.x /= 16
 	collider_centre.y /= 11
 	return Vector2(floori(collider_centre.x), floori(collider_centre.y))
@@ -83,3 +83,12 @@ func pickup_key_item_animation(item : ENUM.ITEM_TYPE) -> void:
 
 func get_pickup_item_sprite() -> LinkPickupItemSprite:
 	return $pickup_item_sprite
+
+func call_new_screen(new_screen_check : Vector2) -> void:
+	player_data.call_new_screen.emit(new_screen_check)
+
+func set_look_direction(direction : Vector2) -> void:
+	$"Link Sprite Mask/Link Sprite".set_look_direction(direction)
+
+func force_player_walk() -> void:
+	await $LinkMovement.force_player_walk()

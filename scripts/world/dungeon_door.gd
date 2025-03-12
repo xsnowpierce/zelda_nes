@@ -44,10 +44,9 @@ func block_interact(interacted_from_direction : Vector2) -> void:
 		if(interacting):
 			return
 		interacting = true
-		var game_data : GameData = get_tree().get_first_node_in_group("GameData")
-		if(game_data.current_keys > 0):
+		if(link_area.player_stats.current_keys > 0):
 			get_tree().get_first_node_in_group("SFXPlayer").play_sound(SFXPlayer.SFX.DOOR_OPEN)
 			await get_tree().create_timer(unlock_wait_time).timeout
-			game_data.change_keys(-1)
+			link_area.change_keys(-1)
 			door_unlock.emit()
 			set_door_status(DOOR_STATUS.OPEN)

@@ -4,12 +4,17 @@ extends CanvasLayer
 var camera
 
 func _ready() -> void:
-	visible = true
-	camera = get_tree().get_first_node_in_group("Camera")
+	if(get_parent().has_multiplayer_authority()):
+		visible = true
+	else:
+		hide()
+	camera = get_parent().get_camera()
+	$"Control/pausemenu UI".has_bow = get_parent().player_stats.has_bow
 
 func _on_game_pause_menu_opened() -> void:
 	follow_viewport_enabled = true
 	offset = camera.position + camera_position_offset
+	$"Control/pausemenu UI".has_bow = get_parent().player_stats.has_bow
 
 func _on_game_pause_menu_closed() -> void:
 	await get_tree().process_frame

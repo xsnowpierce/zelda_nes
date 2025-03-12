@@ -72,7 +72,8 @@ func get_max_tiles_from_direction(direction : Vector2) -> int:
 		_:
 			return 0
 
-func attacked(damage : int, from : Vector2) -> void:
+func attacked(damage : int, from : Vector2, authority : PlayerData) -> void:
 	return
+
 func death() -> void:
 	return

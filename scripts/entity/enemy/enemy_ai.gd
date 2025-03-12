@@ -17,6 +17,7 @@ var boomerang_freeze_time : float = 3
 var current_boomerang_freeze_time : float = 0
 var is_boomerang_frozen : bool
 var current_health : int
+var last_player_authority : PlayerData
 @export_flags_2d_physics var collision_layers_bitmask
 
 var link : LinkController
@@ -42,11 +43,12 @@ func _on_area_entered(area: Area2D) -> void:
 		if(area is Boomerang):
 			boomerang_freeze()
 		else:
-			attacked(area.get_attack_damage(), area.global_position)
+			attacked(area.get_attack_damage(), area.global_position, area.get_authority())
 
-func attacked(damage : int, from : Vector2) -> void:
+func attacked(damage : int, from : Vector2, authority : PlayerData) -> void:
 	if(current_attacked_iframes > 0):
 		return
+	last_player_authority = authority
 	current_attacked_iframes = attacked_iframes / 60.0
 	current_health -= damage
 	was_attacked.emit()
@@ -130,9 +132,10 @@ func boomerang_freeze() -> void:
 
 func death() -> void:
 	var death_object = death_scene.instantiate()
-	get_parent().add_child(death_object)
+	get_parent().get_parent().add_child(death_object)
 	death_object.global_position = global_position
-	get_tree().get_first_node_in_group("GameData").add_player_kill(enemy_type, ENUM.KILL_METHOD.OTHER)
+	death_object.set_player_authority(last_player_authority)
+	last_player_authority.add_player_kill(enemy_type, ENUM.KILL_METHOD.OTHER)
 	play_death_sound()
 	has_died.emit()
 	queue_free()

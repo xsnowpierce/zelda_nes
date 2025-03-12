@@ -3,11 +3,11 @@ extends Node2D
 var disable_force_walk_timer : float = 0.1
 var is_tile_active : bool
 
-func tile_entered(previous_tile : Vector2) -> void:
+func tile_entered() -> void:
 	is_tile_active = true
 	$"Dungeon Tile Doors".set_room_active(true)
 
-func tile_exited(next_tile : Vector2) -> void:
+func tile_exited() -> void:
 	is_tile_active = false
 	$"Dungeon Tile Doors".set_room_active(false)
 

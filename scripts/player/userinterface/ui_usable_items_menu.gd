@@ -1,11 +1,11 @@
 extends Control
 
-var game_data : Node
+var player_data : PlayerData
 
 var item_slots : Array[ENUM.ITEM_TYPE]
 
 func _ready() -> void:
-	game_data = get_tree().get_first_node_in_group("GameData")
+	player_data = get_parent().get_parent().get_parent().get_parent().get_parent()
 
 func _on_game_pause_menu_opened() -> void:
 	apply_stats_to_items()
@@ -16,11 +16,11 @@ func _on_game_pause_menu_closed() -> void:
 func apply_stats_to_items() -> void:
 	var item_array : Array[ENUM.ITEM_TYPE]
 	#boomerang
-	if(game_data.has_player_flag("obtained_magical_boomerang")):
+	if(player_data.has_player_flag("obtained_magical_boomerang")):
 		$boomerang_slot/TextureRect.frame = 1
 		$boomerang_slot/TextureRect.visible = true
 		item_array.insert(0, ENUM.ITEM_TYPE.MAGICAL_BOOMERANG)
-	elif(game_data.has_player_flag("obtained_wooden_boomerang")):
+	elif(player_data.has_player_flag("obtained_wooden_boomerang")):
 		$boomerang_slot/TextureRect.frame = 0
 		$boomerang_slot/TextureRect.visible = true
 		item_array.insert(0, ENUM.ITEM_TYPE.WOODEN_BOOMERANG)
@@ -29,7 +29,7 @@ func apply_stats_to_items() -> void:
 		item_array.insert(0, ENUM.ITEM_TYPE.NULL)
 		
 	#bomb
-	if(game_data.has_player_flag("obtained_bomb") and game_data.current_bombs > 0):
+	if(player_data.has_player_flag("obtained_bomb") and player_data.current_bombs > 0):
 		$bomb_slot/TextureRect.frame = 0
 		$bomb_slot/TextureRect.visible = true
 		item_array.insert(1, ENUM.ITEM_TYPE.BOMB)
@@ -38,11 +38,11 @@ func apply_stats_to_items() -> void:
 		item_array.insert(1, ENUM.ITEM_TYPE.NULL)
 		
 	#arrows
-	if(game_data.has_player_flag("obtained_silver_arrows")):
+	if(player_data.has_player_flag("obtained_silver_arrows")):
 		$arrow_slot/TextureRect.frame = 1
 		$arrow_slot/TextureRect.visible = true
 		item_array.insert(2, ENUM.ITEM_TYPE.SILVER_ARROW)
-	elif(game_data.has_player_flag("obtained_wooden_arrows")):
+	elif(player_data.has_player_flag("obtained_wooden_arrows")):
 		$arrow_slot/TextureRect.frame = 0
 		$arrow_slot/TextureRect.visible = true
 		item_array.insert(2, ENUM.ITEM_TYPE.WOODEN_ARROW)
@@ -51,18 +51,18 @@ func apply_stats_to_items() -> void:
 		item_array.insert(2, ENUM.ITEM_TYPE.NULL)
 	
 	#bow
-	if(game_data.has_player_flag("obtained_bow")):
+	if(player_data.has_player_flag("obtained_bow")):
 		$bow_slot/TextureRect.frame = 0
 		$bow_slot/TextureRect.visible = true
 	else:
 		$bow_slot/TextureRect.visible = false
 	
 	#candle
-	if(game_data.has_player_flag("obtained_red_candle")):
+	if(player_data.has_player_flag("obtained_red_candle")):
 		$candle_slot/TextureRect.frame = 1
 		$candle_slot/TextureRect.visible = true
 		item_array.insert(3, ENUM.ITEM_TYPE.RED_CANDLE)
-	elif(game_data.has_player_flag("obtained_blue_candle")):
+	elif(player_data.has_player_flag("obtained_blue_candle")):
 		$candle_slot/TextureRect.frame = 0
 		$candle_slot/TextureRect.visible = true
 		item_array.insert(3, ENUM.ITEM_TYPE.BLUE_CANDLE)
@@ -71,7 +71,7 @@ func apply_stats_to_items() -> void:
 		item_array.insert(3, ENUM.ITEM_TYPE.NULL)
 	
 	#whistle
-	if(game_data.has_player_flag("obtained_whistle")):
+	if(player_data.has_player_flag("obtained_whistle")):
 		$whistle_slot/TextureRect.frame = 0
 		$whistle_slot/TextureRect.visible = true
 		item_array.insert(4, ENUM.ITEM_TYPE.RECORDER)
@@ -80,7 +80,7 @@ func apply_stats_to_items() -> void:
 		item_array.insert(4, ENUM.ITEM_TYPE.NULL)
 		
 	#food
-	if(game_data.has_player_flag("obtained_food")):
+	if(player_data.has_player_flag("obtained_food")):
 		$food_slot/TextureRect.frame = 0
 		$food_slot/TextureRect.visible = true
 		item_array.insert(5, ENUM.ITEM_TYPE.FOOD)
@@ -89,11 +89,11 @@ func apply_stats_to_items() -> void:
 		item_array.insert(5, ENUM.ITEM_TYPE.NULL)
 	
 	#potion
-	if(game_data.has_player_flag("obtained_red_potion")):
+	if(player_data.has_player_flag("obtained_red_potion")):
 		$potion_slot/TextureRect.frame = 1
 		$potion_slot/TextureRect.visible = true
 		item_array.insert(6, ENUM.ITEM_TYPE.RED_POTION)
-	elif(game_data.has_player_flag("obtained_blue_potion")):
+	elif(player_data.has_player_flag("obtained_blue_potion")):
 		$potion_slot/TextureRect.frame = 0
 		$potion_slot/TextureRect.visible = true
 		item_array.insert(6, ENUM.ITEM_TYPE.BLUE_POTION)
@@ -102,7 +102,7 @@ func apply_stats_to_items() -> void:
 		item_array.insert(6, ENUM.ITEM_TYPE.NULL)
 	
 	#magic rod
-	if(game_data.has_player_flag("obtained_magic_rod")):
+	if(player_data.has_player_flag("obtained_magic_rod")):
 		$rod_slot/TextureRect.frame = 0
 		$rod_slot/TextureRect.visible = true
 		item_array.insert(7, ENUM.ITEM_TYPE.MAGICAL_ROD)
