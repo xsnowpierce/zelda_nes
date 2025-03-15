@@ -56,6 +56,9 @@ func attacked(damage : int, from : Vector2, attack_block_level : ENUM.BLOCK_ATTA
 	if(current_attacked_iframes > 0):
 		return
 	
+	if(player.get_player_state().is_pickup_animation):
+		return
+	
 	current_attacked_iframes = (attacked_iframes / 60)
 	player.get_player_state().is_attacked_knockback = true
 	player.get_sprite().hit_effect()

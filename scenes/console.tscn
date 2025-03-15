@@ -1,0 +1,77 @@
+[gd_scene load_steps=4 format=3 uid="uid://c3oladui8vsrp"]
+
+[ext_resource type="Script" uid="uid://b2l5i4hniqmbj" path="res://scenes/console.gd" id="1_xil4p"]
+[ext_resource type="Script" uid="uid://c4a7tognkkyct" path="res://scenes/give_command.gd" id="2_t6k7n"]
+[ext_resource type="Script" uid="uid://bovw0vbny7xc" path="res://scenes/teleport_command.gd" id="3_t6k7n"]
+
+[node name="Console" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_xil4p")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/bold_italics_font_size = 8
+theme_override_font_sizes/italics_font_size = 8
+theme_override_font_sizes/mono_font_size = 8
+theme_override_font_sizes/normal_font_size = 8
+theme_override_font_sizes/bold_font_size = 8
+scroll_active = false
+scroll_following = true
+shortcut_keys_enabled = false
+vertical_alignment = 2
+
+[node name="TextEdit" type="TextEdit" parent="VBoxContainer"]
+process_mode = 3
+custom_minimum_size = Vector2(0, 20.06)
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+placeholder_text = "enter text..."
+context_menu_enabled = false
+emoji_menu_enabled = false
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+virtual_keyboard_enabled = false
+caret_type = 1
+caret_blink = true
+caret_mid_grapheme = true
+caret_multiple = false
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect" type="ColorRect" parent="VBoxContainer/TextEdit"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Control" type="Control" parent="."]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Commands" type="Node" parent="."]
+
+[node name="give" type="Node" parent="Commands"]
+script = ExtResource("2_t6k7n")
+
+[node name="teleport" type="Node" parent="Commands"]
+script = ExtResource("3_t6k7n")

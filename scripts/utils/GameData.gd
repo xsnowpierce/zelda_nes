@@ -130,6 +130,8 @@ signal equipment_slot_a_changed(new_item_type : ENUM.ITEM_TYPE)
 signal equipment_slot_b_changed(new_item_type : ENUM.ITEM_TYPE)
 signal pause_menu_control(given_control : bool)
 
+var key_maximum : int = 99
+
 func _ready() -> void:
 	apply_debug_key_item_list()
 	get_tree().root.get_viewport().canvas_cull_mask = camera_cull_mask
@@ -189,21 +191,22 @@ func player_lose_health(amount : int) -> void:
 	player_health_changed.emit(current_player_health)
 
 func change_max_hearts(amount : int) -> void:
+	max_player_health = min(max_player_health + amount, 32)
 	max_player_health += amount
 	if(current_player_health > max_player_health):
 		current_player_health = max_player_health
 	player_max_health_changed.emit(max_player_health)
 
 func change_rupees(amount : int) -> void:
-	current_rupees += amount
+	current_rupees = min(current_rupees + amount, 255)
 	rupees_changed.emit(current_rupees)
 
 func change_keys(amount : int) -> void:
-	current_keys += amount
+	current_keys = min(current_keys + amount, key_maximum)
 	keys_changed.emit(current_keys)
 
 func change_bombs(amount : int) -> void:
-	current_bombs += amount
+	current_bombs = min(current_bombs + amount, max_bombs)
 	bombs_changed.emit(current_bombs)
 
 func change_max_bombs(amount : int) -> void:
@@ -240,6 +243,80 @@ func player_finish_enter_door(door : Area2D) -> void:
 		if(!($MusicPlayer.stream == dungeon_music and $MusicPlayer.playing)):
 			$MusicPlayer.stream = dungeon_music
 			$MusicPlayer.play(0.0)
+
+func give_player_item(item_type : ENUM.ITEM_TYPE, amount : int = 1) -> void:
+	match item_type:
+		ENUM.ITEM_TYPE.BOMB:
+			change_bombs(amount)
+		ENUM.ITEM_TYPE.BLUE_CANDLE:
+			add_player_flag("obtained_blue_candle")
+			player_pickup_key_item(item_type)
+		ENUM.ITEM_TYPE.BLUE_POTION:
+			add_player_flag("obtained_blue_potion")
+		ENUM.ITEM_TYPE.BLUE_RUPEE:
+			change_rupees(5 * amount)
+		ENUM.ITEM_TYPE.BOW:
+			add_player_flag("obtained_bow")
+			player_pickup_key_item(item_type)
+		ENUM.ITEM_TYPE.COMPASS:
+			pass
+		ENUM.ITEM_TYPE.DOOR_KEY:
+			change_keys(amount)
+		ENUM.ITEM_TYPE.FAIRY:
+			pass
+		ENUM.ITEM_TYPE.FOOD:
+			add_player_flag("obtained_food")
+			player_pickup_key_item(item_type)
+		ENUM.ITEM_TYPE.GREEN_RUPEE:
+			change_rupees(amount)
+		ENUM.ITEM_TYPE.HEART:
+			current_player_health += amount
+		ENUM.ITEM_TYPE.HEART_CONTAINER:
+			change_max_hearts(amount * 2)
+		ENUM.ITEM_TYPE.LETTER:
+			pass
+		ENUM.ITEM_TYPE.MAGICAL_BOOMERANG:
+			add_player_flag("obtained_magical_boomerang")
+			player_pickup_key_item(item_type)
+		ENUM.ITEM_TYPE.MAGICAL_ROD:
+			add_player_flag("obtained_magical_rod")
+			player_pickup_key_item(item_type)
+		ENUM.ITEM_TYPE.MAGICAL_SHIELD:
+			add_player_flag("obtained_magical_shield")
+			player_pickup_key_item(item_type)
+		ENUM.ITEM_TYPE.MAGICAL_SWORD:
+			add_player_flag("obtained_magical_sword")
+			player_pickup_key_item(item_type)
+		ENUM.ITEM_TYPE.ORANGE_MAP:
+			pass
+		ENUM.ITEM_TYPE.RECORDER:
+			add_player_flag("obtained_recorder")
+			player_pickup_key_item(item_type)
+		ENUM.ITEM_TYPE.RED_CANDLE:
+			add_player_flag("obtained_red_candle")
+			player_pickup_key_item(item_type)
+		ENUM.ITEM_TYPE.RED_POTION:
+			add_player_flag("obtained_red_potion")
+		ENUM.ITEM_TYPE.SILVER_ARROW:
+			add_player_flag("obtained_silver_arrows")
+		ENUM.ITEM_TYPE.TIMER:
+			pass
+		ENUM.ITEM_TYPE.TRIFORCE_PIECE:
+			pass
+		ENUM.ITEM_TYPE.WHITE_SWORD:
+			add_player_flag("obtained_white_sword")
+			player_pickup_key_item(item_type)
+		ENUM.ITEM_TYPE.WOODEN_ARROW:
+			add_player_flag("obtained_wooden_arrows")
+		ENUM.ITEM_TYPE.WOODEN_BOOMERANG:
+			add_player_flag("obtained_wooden_boomerang")
+			player_pickup_key_item(item_type)
+		ENUM.ITEM_TYPE.WOODEN_SHIELD:
+			add_player_flag("obtained_wooden_shield")
+			player_pickup_key_item(item_type)
+		ENUM.ITEM_TYPE.WOODEN_SWORD:
+			add_player_flag("obtained_wooden_sword")
+			player_pickup_key_item(item_type)
 
 func player_pickup_key_item(item_type : ENUM.ITEM_TYPE) -> void:
 	link.pickup_key_item_animation(item_type)
@@ -300,3 +377,7 @@ func equipped_b_slot_change(new_item_type : ENUM.ITEM_TYPE) -> void:
 
 func picked_up_dungeon_compass() -> void:
 	has_eagle_compass = true
+
+func teleport_player(coordinate : Vector2) -> void:
+	$Camera2D.set_camera_tile(coordinate)
+	$Link.global_position = $Camera2D.global_position
