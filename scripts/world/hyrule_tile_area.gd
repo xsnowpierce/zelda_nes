@@ -52,7 +52,7 @@ func spawn_enemies(enemies : EnemySpawnGroup) -> void:
 		spawns += 1
 		enemy_object.awake()
 
-func enemy_has_been_killed(enemy_spawner : EnemySpawner) -> void:
+func enemy_has_been_killed(enemy_spawner : EnemySpawner, location : Vector2) -> void:
 	for spawn_group in random_map_spawns:
 		spawn_group.enemy_spawns[enemy_spawner.spawner_id] = null
 	enemy_spawner.queue_free()

@@ -32,4 +32,5 @@ func is_player_input_allowed() -> bool:
 		and !is_attacked_knockback
 		and !is_placing_item
 		and !is_shooting_magical_wand
-		and !is_entering_new_tile)
+		and !is_entering_new_tile
+		and !game_data.console_opened)

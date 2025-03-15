@@ -113,6 +113,7 @@ var link : LinkController
 @export var current_equipped_item_a : ENUM.ITEM_TYPE = ENUM.ITEM_TYPE.NULL
 @export var current_equipped_item_b : ENUM.ITEM_TYPE = ENUM.ITEM_TYPE.NULL
 var game_is_paused : bool
+var console_opened : bool
 var link_using_whistle : bool
 var is_inside_dungeon : bool
 @export var dropped_item_scene : PackedScene = preload("res://scenes/dropped_item.tscn")
@@ -206,6 +207,9 @@ func change_keys(amount : int) -> void:
 	keys_changed.emit(current_keys)
 
 func change_bombs(amount : int) -> void:
+	if(current_bombs == 0 or !player_flags.has("obtained_bomb")):
+		add_player_flag("obtained_bomb")
+		player_pickup_key_item(ENUM.ITEM_TYPE.BOMB)
 	current_bombs = min(current_bombs + amount, max_bombs)
 	bombs_changed.emit(current_bombs)
 

@@ -352,31 +352,36 @@ centered = false
 offset = Vector2(4, 0)
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+visible = false
 texture_filter = 1
 position = Vector2(-14, 0)
 sprite_frames = SubResource("SpriteFrames_5uh7g")
 centered = false
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_5uh7g")
 centered = false
 
 [node name="AnimatedSprite2D5" type="AnimatedSprite2D" parent="."]
+visible = false
 texture_filter = 1
 position = Vector2(14, 0)
 sprite_frames = SubResource("SpriteFrames_5uh7g")
 centered = false
 
 [node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="."]
+visible = false
 texture_filter = 1
 position = Vector2(-7, -13)
 sprite_frames = SubResource("SpriteFrames_5uh7g")
 centered = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+active = false
 libraries = {
-"": SubResource("AnimationLibrary_3mt45")
+&"": SubResource("AnimationLibrary_3mt45")
 }
 speed_scale = 1.4
 movie_quit_on_finish = true
