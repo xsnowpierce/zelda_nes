@@ -13,6 +13,7 @@ var current_state : PEAHAT_STATE
 var time_until_stop : float
 var random_direction_change : int
 @export var can_be_hit_in_flight = false
+@export var outer_rings_invalid : int = 1
 
 func _ready() -> void:
 	await get_tree().process_frame
@@ -73,7 +74,7 @@ func move() -> void:
 func get_target_position_from_direction(target_direction : Vector2) -> Vector2:
 	var target_position = (target_direction * 8) + global_position
 	target_position = Utils.align_to_grid(target_position, 8)
-	if(Utils.is_out_of_bounds(target_position, camera, true)):
+	if(Utils.is_out_of_bounds(target_position, camera, outer_rings_invalid)):
 		target_position = (-target_direction * 8) + global_position
 		current_direction = -current_direction
 		target_position = Utils.align_to_grid(target_position, 8)

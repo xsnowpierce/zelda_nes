@@ -276,7 +276,7 @@ func give_player_item(item_type : ENUM.ITEM_TYPE, amount : int = 1) -> void:
 		ENUM.ITEM_TYPE.HEART:
 			current_player_health += amount
 		ENUM.ITEM_TYPE.HEART_CONTAINER:
-			change_max_hearts(amount * 2)
+			change_max_hearts(amount)
 		ENUM.ITEM_TYPE.LETTER:
 			pass
 		ENUM.ITEM_TYPE.MAGICAL_BOOMERANG:

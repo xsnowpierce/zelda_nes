@@ -96,6 +96,9 @@ func _on_area_entered(area: Area2D) -> void:
 			else:
 				game_data.change_rupees(5)
 			sfxplayer.play_sound(SFXPlayer.SFX.RUPEE_PICKUP)
+		ENUM.ITEM_TYPE.BOMB:
+			game_data.change_bombs(1)
+			sfxplayer.play_sound(SFXPlayer.SFX.HEART_PICKUP)
 		ENUM.ITEM_TYPE.HEART:
 			game_data.player_gain_heart(2)
 			sfxplayer.play_sound(SFXPlayer.SFX.HEART_PICKUP)
@@ -112,7 +115,8 @@ func _on_area_entered(area: Area2D) -> void:
 			pass
 	if(is_key_item):
 		game_data.add_player_flag(get_obtain_player_flag_from_item_type(item_type))
-		game_data.player_pickup_key_item(item_type)
+		if(item_type != ENUM.ITEM_TYPE.BOMB or game_data.current_bombs == 0):
+			game_data.player_pickup_key_item(item_type)
 	$"Dropped Item/AnimatedSprite2D".visible = false
 	item_picked_up.emit()
 	queue_free()

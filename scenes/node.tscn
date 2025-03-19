@@ -3032,7 +3032,6 @@ door_east_status = 3
 [node name="Dropped Item" parent="Level/Eagle Dungeon/Eagle Dungeon Tile4/Entities" instance=ExtResource("79_svs6j")]
 position = Vector2(3392, -1776)
 item_type = 9
-rupee_value_override = -1
 
 [node name="Eagle Dungeon Tile5" parent="Level/Eagle Dungeon" instance=ExtResource("54_bxtwv")]
 position = Vector2(2816, -1936)
@@ -3066,7 +3065,6 @@ door_east_status = 1
 [node name="Dropped Item2" parent="Level/Eagle Dungeon/Eagle Dungeon Tile6/Entities" instance=ExtResource("79_svs6j")]
 position = Vector2(3136, -1952)
 item_type = 7
-rupee_value_override = -1
 
 [node name="Eagle Dungeon Tile7" parent="Level/Eagle Dungeon" instance=ExtResource("54_bxtwv")]
 position = Vector2(3328, -1936)
@@ -3118,7 +3116,6 @@ door_east_status = 3
 [node name="Dropped Item" parent="Level/Eagle Dungeon/Eagle Dungeon Tile10/Entities" instance=ExtResource("79_svs6j")]
 position = Vector2(3832, -2120)
 item_type = 23
-rupee_value_override = -1
 
 [node name="Eagle Dungeon Tile11" parent="Level/Eagle Dungeon" instance=ExtResource("54_bxtwv")]
 position = Vector2(2560, -1936)
@@ -3680,6 +3677,7 @@ position = Vector2(1504, -736)
 
 [node name="SPAWNPOINT" parent="." instance=ExtResource("36_w4qf6")]
 process_mode = 1
+position = Vector2(2772.83, -2275.24)
 
 [node name="RNG_DROPPER" type="Node" parent="."]
 script = ExtResource("38_f8yhx")
@@ -3744,18 +3742,6 @@ sprite_frames = SubResource("SpriteFrames_1pu0c")
 autoplay = "default"
 frame_progress = 0.582271
 
-[node name="purchase_text_price_x" type="Label" parent="INTERIOR_HANDLER/room_centre"]
-texture_filter = 1
-offset_left = -64.0
-offset_top = 14.0
-offset_right = -40.0
-offset_bottom = 22.0
-text = "x"
-label_settings = SubResource("LabelSettings_w7q5k")
-visible_characters = 0
-visible_characters_behavior = 1
-visible_ratio = 0.0
-
 [node name="purchase_text_price_1" type="Label" parent="INTERIOR_HANDLER/room_centre"]
 texture_filter = 1
 offset_left = -48.0
@@ -3794,6 +3780,14 @@ horizontal_alignment = 2
 visible_characters = -3
 visible_characters_behavior = 1
 visible_ratio = -1.0
+
+[node name="purchase_text_price_x" type="Label" parent="INTERIOR_HANDLER/room_centre"]
+offset_left = -64.0
+offset_top = 14.0
+offset_right = -24.0
+offset_bottom = 30.0
+theme_override_font_sizes/font_size = 8
+text = "x"
 
 [node name="take_any_rupee" type="Node2D" parent="INTERIOR_HANDLER"]
 position = Vector2(-512, 352)

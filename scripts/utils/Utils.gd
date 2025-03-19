@@ -4,17 +4,16 @@ class_name Utils
 
 static var map_boundaries : Vector4 = Vector4()
 
-static func is_out_of_bounds(global_position : Vector2, camera : Camera2D, outer_ring_is_invalid : bool = true) -> bool:
-	return is_out_of_bounds_x(global_position, camera, outer_ring_is_invalid) or is_out_of_bounds_y(global_position, camera, outer_ring_is_invalid)
+static func is_out_of_bounds(global_position : Vector2, camera : Camera2D, outer_rings_invalid : int = 1) -> bool:
+	return is_out_of_bounds_x(global_position, camera, outer_rings_invalid) or is_out_of_bounds_y(global_position, camera, outer_rings_invalid)
 	
-static func is_out_of_bounds_x(global_position : Vector2, camera : Camera2D, outer_ring_is_invalid : bool = true) -> bool:
+static func is_out_of_bounds_x(global_position : Vector2, camera : Camera2D, outer_rings_invalid : int = 1) -> bool:
 	var relative_position : Vector2 = global_position - camera.global_position
 	var x_boundary_left = GameSettings.screen_boundaries.x
 	var x_boundary_right = GameSettings.screen_boundaries.y
 	
-	if(outer_ring_is_invalid):
-		x_boundary_left += 16
-		x_boundary_right -= 16
+	x_boundary_left += 16 * outer_rings_invalid
+	x_boundary_right -= 16 * outer_rings_invalid
 	
 	if(relative_position.x < x_boundary_left):
 		return true
@@ -22,13 +21,12 @@ static func is_out_of_bounds_x(global_position : Vector2, camera : Camera2D, out
 		return true
 	return false
 
-static func is_out_of_bounds_y(global_position : Vector2, camera : Camera2D, outer_ring_is_invalid : bool = true) -> bool:
+static func is_out_of_bounds_y(global_position : Vector2, camera : Camera2D, outer_rings_invalid : int = 1) -> bool:
 	var relative_position : Vector2 = global_position - camera.global_position
 	var y_boundary_top = GameSettings.screen_boundaries.z
 	var y_boundary_bottom = GameSettings.screen_boundaries.w
-	if(outer_ring_is_invalid):
-		y_boundary_top += 16
-		y_boundary_bottom -= 32
+	y_boundary_top += 16 * outer_rings_invalid
+	y_boundary_bottom -= 32 * outer_rings_invalid
 	
 	if(relative_position.y < y_boundary_top):
 		return true

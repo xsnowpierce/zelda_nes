@@ -110,4 +110,9 @@ func _on_sprite_2d_animation_looped() -> void:
 
 func spawned_enemy_has_died() -> void:
 	var killed_location : Vector2 = enemy_scene.global_position
+	if(is_instance_valid(key_scene)):
+		var key_position : Vector2 = key_scene.global_position
+		enemy_scene.remove_child(key_scene)
+		parent.call_deferred("add_child", key_scene)
+		key_scene.global_position = key_position
 	enemy_killed.emit(self, killed_location)

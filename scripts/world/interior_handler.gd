@@ -117,7 +117,7 @@ func load_shop_items() -> void:
 		var item_object := dropped_item_scene.instantiate()
 		item_object.item_type = item.item_type
 		add_child(item_object)
-		item_object.global_position = $room_centre.global_position + Vector2(-32, 0)
+		item_object.global_position = $room_centre.global_position + Vector2(-40, -8)
 		item_object.connect("item_picked_up", Callable(self, "key_item_picked_up"))
 		item_objects.append(item_object)
 	if(current_interior_data.shop_item_2 != null):
@@ -126,7 +126,7 @@ func load_shop_items() -> void:
 		var item_object := dropped_item_scene.instantiate()
 		item_object.item_type = item.item_type
 		add_child(item_object)
-		item_object.global_position = $room_centre.global_position + Vector2(0, 0)
+		item_object.global_position = $room_centre.global_position + Vector2(-8, -8)
 		item_object.connect("item_picked_up", Callable(self, "key_item_picked_up"))
 		item_objects.append(item_object)
 	if(current_interior_data.shop_item_3 != null):
@@ -135,7 +135,7 @@ func load_shop_items() -> void:
 		var item_object := dropped_item_scene.instantiate()
 		item_object.item_type = item.item_type
 		add_child(item_object)
-		item_object.global_position = $room_centre.global_position + Vector2(32, 0)
+		item_object.global_position = $room_centre.global_position + Vector2(24, -8)
 		item_object.connect("item_picked_up", Callable(self, "key_item_picked_up"))
 		item_objects.append(item_object)
 	$room_centre.visible = true
@@ -157,11 +157,11 @@ func load_take_any_you_want_items() -> void:
 		add_child(item_object)
 		match item_amount:
 			1:
-				item_object.global_position = $room_centre.global_position + Vector2(0, 0)
+				item_object.global_position = $room_centre.global_position + Vector2(-8, -8)
 			2:
-				item_object.global_position = $room_centre.global_position + Vector2(-32, 0)
+				item_object.global_position = $room_centre.global_position + Vector2(-40, -8)
 			3:
-				item_object.global_position = $room_centre.global_position + Vector2(-32, 0)
+				item_object.global_position = $room_centre.global_position + Vector2(-40, -8)
 		item_object.connect("item_picked_up", Callable(self, "key_item_picked_up"))
 		item_objects.append(item_object)
 		
@@ -172,11 +172,11 @@ func load_take_any_you_want_items() -> void:
 		add_child(item_object)
 		match item_amount:
 			1:
-				item_object.global_position = $room_centre.global_position + Vector2(0, 0)
+				item_object.global_position = $room_centre.global_position + Vector2(-8, -8)
 			2:
-				item_object.global_position = $room_centre.global_position + Vector2(32, 0)
+				item_object.global_position = $room_centre.global_position + Vector2(24, -8)
 			3:
-				item_object.global_position = $room_centre.global_position + Vector2(0, 0)
+				item_object.global_position = $room_centre.global_position + Vector2(-8, -8)
 		item_object.connect("item_picked_up", Callable(self, "key_item_picked_up"))
 		item_objects.append(item_object)
 	if(current_interior_data.take_any_item_choice_3 != ENUM.ITEM_TYPE.NULL):
@@ -186,11 +186,11 @@ func load_take_any_you_want_items() -> void:
 		add_child(item_object)
 		match item_amount:
 			1:
-				item_object.global_position = $room_centre.global_position + Vector2(0, 0)
+				item_object.global_position = $room_centre.global_position + Vector2(-8, -8)
 			2:
-				item_object.global_position = $room_centre.global_position + Vector2(32, 0)
+				item_object.global_position = $room_centre.global_position + Vector2(32, -8)
 			3:
-				item_object.global_position = $room_centre.global_position + Vector2(32, 0)
+				item_object.global_position = $room_centre.global_position + Vector2(32, -8)
 		item_object.connect("item_picked_up", Callable(self, "key_item_picked_up"))
 		item_objects.append(item_object)
 

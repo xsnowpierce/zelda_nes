@@ -139,6 +139,8 @@ func add_kill(type : ENUM.ENEMY_TYPE, kill_method : ENUM.KILL_METHOD) -> void:
 			
 func get_next_drop() -> ENUM.ITEM_TYPE:
 	
+	return ENUM.ITEM_TYPE.BOMB
+	
 	if(last_kill_group == 4):
 		return ENUM.ITEM_TYPE.NULL
 	
